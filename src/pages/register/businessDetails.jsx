@@ -5,7 +5,7 @@ const BusinessDetails = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/info_review');
+        navigate('/tillyehonestproartisans/info_review');
     }
 
     return (

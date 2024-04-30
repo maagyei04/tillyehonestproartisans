@@ -7,7 +7,7 @@ const PersonalInfo = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/payment_method');
+        navigate('/tillyehonestproartisans/payment_method');
     }
 
     const [formData, setFormData] = useState({
@@ -40,7 +40,7 @@ const PersonalInfo = () => {
                 <div className="text-center md:text-left md:w-2/3 flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
                     <div>
                         <div>
-                            <h2 className="font-semibold text-[20px] mb-1">Personal Information<span className="text-white italic">........................................</span></h2>
+                            <h2 className="font-semibold text-[20px] mb-1">Personal Information<span className="text-white italic">.............................</span></h2>
                             <form onSubmit={handleSubmit}>
                                 <div className='flex flex-col mb-4'>
                                     <label className='mb-2' htmlFor="firstName">First Name</label>

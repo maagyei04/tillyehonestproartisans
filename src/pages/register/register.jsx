@@ -6,7 +6,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/personal_info');
+        navigate('/tillyehonestproartisans/personal_info');
     }
 
     return (

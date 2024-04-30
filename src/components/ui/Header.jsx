@@ -25,7 +25,7 @@ const Header = () => {
     };
 
     const register = () => {
-        navigate('/register');
+        navigate('/tillyehonestproartisans/register');
     };
 
     useEffect(() => {

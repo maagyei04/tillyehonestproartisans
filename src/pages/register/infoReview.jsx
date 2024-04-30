@@ -6,7 +6,7 @@ const InfoReview = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/info_review');
+        navigate('/tillyehonestproartisans/info_review');
     }
 
     return (
@@ -63,7 +63,7 @@ const InfoReview = () => {
                             <span>Sample</span>
                         </div>
 
-                        <button onClick={handleClick} className="mt-20 bg-violet-500 text-white py-2 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
+                        <button onClick={handleClick} className="mt-20 bg-violet-500 text-white py-2 px-4 rounded-[10px] hover:bg-green-600 w-full">Submit</button>
                         <p className="font-bold text-[13px] mt-5 ml-5">By continiung you accept & agree with our terms and conditions.<span className="text-green-500 italic"> Learn More</span></p>
 
                     </div>

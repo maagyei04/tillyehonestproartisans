@@ -14,7 +14,7 @@ const PaymentMethod = () => {
     };
 
     const handleClick = () => {
-        navigate('/business_details');
+        navigate('/tillyehonestproartisans/business_details');
     }
 
     return (
