@@ -7,8 +7,8 @@ const BookNowButton = () => {
 
     const handleClick = () => {
         userLoggedIn ?
-            navigate('/explore') :
-            navigate('/home');
+            navigate('/tillyehonestproartisans/explore') :
+            navigate('/tillyehonestproartisans');
     };
 
     return (

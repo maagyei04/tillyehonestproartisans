@@ -19,15 +19,15 @@ function App() {
       < Router >
         <Layout>
           <Routes>
-            <Route exact path="/home" element={<HomePage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/payment_method" element={<PaymentMethod />} />
-            <Route path="/personal_info" element={<PersonalInfo />} />
-            <Route path="/info_review" element={<InfoReview />} />
-            <Route path="/business_details" element={<BusinessDetails />} />
+            <Route exact path="/tillyehonestproartisans/" element={<HomePage />} />
+            <Route path="/tillyehonestproartisans/about" element={<About />} />
+            <Route path="/tillyehonestproartisans/contact" element={<Contact />} />
+            <Route path="/tillyehonestproartisans/explore" element={<Explore />} />
+            <Route path="/tillyehonestproartisans/register" element={<Register />} />
+            <Route path="/tillyehonestproartisans/payment_method" element={<PaymentMethod />} />
+            <Route path="/tillyehonestproartisans/personal_info" element={<PersonalInfo />} />
+            <Route path="/tillyehonestproartisans/info_review" element={<InfoReview />} />
+            <Route path="/tillyehonestproartisans/business_details" element={<BusinessDetails />} />
             <Route element={<NotFound />} />
           </Routes>
         </Layout>
