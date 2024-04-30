@@ -1,7 +1,7 @@
 {
   "name": "tehonestproartisans",
   "version": "0.1.0",
-  "homepage": "https://maagyei04.github.io/tehonestproartisans",
+  "homepage": "https://maagyei04.github.io/tillyehonestproartisans",
   "private": true,
   "dependencies": {
     "@firebase/firestore": "^4.6.1",
