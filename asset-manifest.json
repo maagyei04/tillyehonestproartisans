@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/tehonestproartisans/static/css/main.3d7e8016.css",
+    "main.js": "/tehonestproartisans/static/js/main.4860aae4.js",
+    "static/js/453.76df07f9.chunk.js": "/tehonestproartisans/static/js/453.76df07f9.chunk.js",
+    "static/media/frame2.png": "/tehonestproartisans/static/media/frame2.a97634439e99c9e9993f.png",
+    "static/media/carpentry.png": "/tehonestproartisans/static/media/carpentry.fcc52753a363fda04234.png",
+    "static/media/artisan.png": "/tehonestproartisans/static/media/artisan.9a47a9229ef7b7536efc.png",
+    "static/media/woodworks.png": "/tehonestproartisans/static/media/woodworks.3165dd41388f3d836a57.png",
+    "static/media/plumbing.png": "/tehonestproartisans/static/media/plumbing.547a036b864944a1afed.png",
+    "static/media/exploreframe.png": "/tehonestproartisans/static/media/exploreframe.dff79f9f8c87196ffab1.png",
+    "static/media/frame1.png": "/tehonestproartisans/static/media/frame1.07d2b528d4ca665a764f.png",
+    "index.html": "/tehonestproartisans/index.html",
+    "main.3d7e8016.css.map": "/tehonestproartisans/static/css/main.3d7e8016.css.map",
+    "main.4860aae4.js.map": "/tehonestproartisans/static/js/main.4860aae4.js.map",
+    "453.76df07f9.chunk.js.map": "/tehonestproartisans/static/js/453.76df07f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d7e8016.css",
+    "static/js/main.4860aae4.js"
+  ]
+}
