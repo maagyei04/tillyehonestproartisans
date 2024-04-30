@@ -4,9 +4,9 @@ import logo from '../../assets/images/logo.png';
 
 const Header = () => {
     let Links = [
-        { name: "HOME", link: "/" },
-        { name: "EXPLORE", link: "/explore" },
-        { name: "ABOUT US", link: "/about" },
+        { name: "HOME", link: "/tillyehonestproartisans" },
+        { name: "EXPLORE", link: "/tillyehonestproartisans/explore" },
+        { name: "ABOUT US", link: "/tillyehonestproartisans/about" },
     ];
     let [open, setOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
