@@ -1,5 +1,4 @@
 import RegisterPic4 from '../../assets/images/register4.png';
-import { UserPlusIcon } from '@heroicons/react/24/solid';
 import { useNavigate } from 'react-router-dom';
 
 const BusinessDetails = () => {
