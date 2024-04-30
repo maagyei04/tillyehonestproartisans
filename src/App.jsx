@@ -13,9 +13,9 @@ function App() {
       <Layout>
         <Routes>
           <Route exact path="/tillyehonestproartisans" element={<HomePage />} />
-          <Route path="/tillyehonestproartisans/about" element={<About />} />
-          <Route path="/tillyehonestproartisans/contact" element={<Contact />} />
-          <Route path="/tillyehonestproartisans/explore" element={<Explore />} />
+          <Route exact path="/tillyehonestproartisans/about" element={<About />} />
+          <Route exact path="/tillyehonestproartisans/contact" element={<Contact />} />
+          <Route exact path="/tillyehonestproartisans/explore" element={<Explore />} />
           <Route element={<NotFound />} />
         </Routes>
       </Layout>
