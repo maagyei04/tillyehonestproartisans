@@ -12,10 +12,10 @@ function App() {
     < Router >
       <Layout>
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/explore" element={<Explore />} />
+          <Route exact path="/tillyehonestproartisans" element={<HomePage />} />
+          <Route path="/tillyehonestproartisans/about" element={<About />} />
+          <Route path="/tillyehonestproartisans/contact" element={<Contact />} />
+          <Route path="/tillyehonestproartisans/explore" element={<Explore />} />
           <Route element={<NotFound />} />
         </Routes>
       </Layout>
