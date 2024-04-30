@@ -19,7 +19,7 @@ function App() {
       < Router >
         <Layout>
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/home" element={<HomePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/explore" element={<Explore />} />

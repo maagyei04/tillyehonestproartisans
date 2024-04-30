@@ -12,7 +12,7 @@ const Header = () => {
     const { userLoggedIn } = useAuth();
 
     let Links = [
-        { name: "HOME", link: "/" },
+        { name: "HOME", link: "/home" },
         { name: "EXPLORE", link: "/explore" },
         { name: "ABOUT US", link: "/about" },
     ];

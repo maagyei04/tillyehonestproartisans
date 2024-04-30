@@ -8,7 +8,7 @@ const BookNowButton = () => {
     const handleClick = () => {
         userLoggedIn ?
             navigate('/explore') :
-            navigate('/');
+            navigate('/home');
     };
 
     return (
