@@ -1,15 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Bars3BottomRightIcon, XMarkIcon, DevicePhoneMobileIcon } from '@heroicons/react/24/solid';
+import { Bars3BottomRightIcon, XMarkIcon, DevicePhoneMobileIcon, UserIcon } from '@heroicons/react/24/solid';
 import logo from '../../assets/images/logo.png';
+import { useAuth } from '../../contexts/authContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { LogoutUser } from '../../services/firebase/auth';
 
 const Header = () => {
+
+    const navigate = useNavigate();
+
+    const { userLoggedIn } = useAuth();
+
     let Links = [
-        { name: "HOME", link: "/tillyehonestproartisans" },
-        { name: "EXPLORE", link: "/tillyehonestproartisans/explore" },
-        { name: "ABOUT US", link: "/tillyehonestproartisans/about" },
+        { name: "HOME", link: "/" },
+        { name: "EXPLORE", link: "/explore" },
+        { name: "ABOUT US", link: "/about" },
     ];
+
     let [open, setOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+
+    const handleClick = () => {
+        LogoutUser().then(() => { navigate('/') })
+    };
+
+    const register = () => {
+        navigate('/register');
+    };
 
     useEffect(() => {
         const handleResize = () => {
@@ -37,8 +54,19 @@ const Header = () => {
                     {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
                     <img src={logo} alt="logo" className='h-10 w-10' />
                     {/*<span className="text-black text-lg font-bold">T&E Honest Pro Artisans</span>*/}
-
-                    <button className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 ${isMobile ? 'block' : 'hidden'}`}>Register Now!</button>
+                    {
+                        userLoggedIn ?
+                            <>
+                                <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${isMobile ? 'block' : 'hidden'}`}>
+                                    Hi Mike!
+                                    <UserIcon className='text-white-600 h-5 w-5 ml-1' />
+                                </button>
+                            </>
+                            :
+                            <>
+                                <button onClick={register} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 ${isMobile ? 'block' : 'hidden'}`}>Register Now!</button>
+                            </>
+                    }
                 </div>
                 <div className='cursor-pointer flex items-center gap-1'>
 
@@ -57,7 +85,7 @@ const Header = () => {
                         {
                             Links.map((links) => (
                                 <li className='md:ml-8 md:my-0 my-7 font-semibold' key={links.name}> {/* Added key */}
-                                    <a href={links.link} className='text-gray-800 hover:text-violet-400 duration-500'>{links.name}</a>
+                                    <Link to={links.link} className='text-gray-800 hover:text-violet-400 duration-500'>{links.name}</Link>
                                 </li>))
                         }
                     </ul>
@@ -68,7 +96,19 @@ const Header = () => {
                         <DevicePhoneMobileIcon className='text-green-600 h-5 w-5 mr-1' />
                         Download App
                     </button>
-                    <button className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 ${open ? 'hidden' : 'show'}`}>Register Now!</button>
+                    {
+                        userLoggedIn ?
+                            <>
+                                <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${open ? 'hidden' : 'show'}`}>
+                                    Hi Mike!
+                                    <UserIcon className='text-white-600 h-5 w-5 ml-1' />
+                                </button>
+                            </>
+                            :
+                            <>
+                                <button onClick={register} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 ${open ? 'hidden' : 'show'}`}>Register Now!</button>
+                            </>
+                    }
                 </div>
             </div>
         </div>

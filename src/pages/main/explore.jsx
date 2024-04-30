@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Banner from '../assets/images/exploreframe.png';
-import Person from '../assets/images/carpentry.png';
+import Banner from '../../assets/images/exploreframe.png';
+import Person from '../../assets/images/carpentry.png';
+import BookNowButton from '../../components/common/BookNowButton';
 
 const Explore = () => {
 
@@ -119,7 +120,7 @@ const Explore = () => {
                                         <p className="text-sm text-gray-700 font-semibold">{service.category}</p>
                                         <p className="text-sm">{service.charge}</p>
                                     </div>
-                                    <button className="w-full bg-green-500 text-white py-2 rounded hover:bg-violet-600">Book Now</button>
+                                    <BookNowButton />
                                 </div>
                             </div>
                         </div>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import framePic from '../assets/images/frame2.png';
-import person from '../assets/images/plumbing.png';
-import person2 from '../assets/images/woodworks.png';
-import contentPic from '../assets/images/carpentry.png';
-import verifyImage from '../assets/images/verifyimage.png';
-import artisanPic from '../assets/images/artisan.png';
+import framePic from '../../assets/images/frame2.png';
+import person from '../../assets/images/plumbing.png';
+import person2 from '../../assets/images/woodworks.png';
+import contentPic from '../../assets/images/carpentry.png';
+import verifyImage from '../../assets/images/verifyimage.png';
+import artisanPic from '../../assets/images/artisan.png';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { UserPlusIcon, CreditCardIcon, PaperAirplaneIcon, CurrencyDollarIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
+import BookNowButton from '../../components/common/BookNowButton';
 
 const HomePage = () => {
 
@@ -89,8 +90,7 @@ const HomePage = () => {
                             <p className="text-sm text-gray-700 font-semibold">Plumbing</p>
                             <p className="text-sm">GHc 50</p>
                         </div>
-                        <button className="w-full bg-green-500 text-white py-2 rounded hover:bg-violet-600">Book Now</button>
-                    </div>
+                        <BookNowButton />                    </div>
                 </div>
                 <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
                     <img className="w-full h-auto" src={person} alt="Person" />
@@ -100,8 +100,7 @@ const HomePage = () => {
                             <p className="text-sm text-gray-700 font-semibold">Plumbing</p>
                             <p className="text-sm">GHc 50</p>
                         </div>
-                        <button className="w-full bg-green-500 text-white py-2 rounded hover:bg-violet-600">Book Now</button>
-                    </div>
+                        <BookNowButton />                    </div>
                 </div>
                 <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
                     <img className="w-full h-auto" src={person} alt="Person" />
@@ -111,8 +110,7 @@ const HomePage = () => {
                             <p className="text-sm text-gray-700 font-semibold">Plumbing</p>
                             <p className="text-sm">GHc 50</p>
                         </div>
-                        <button className="w-full bg-green-500 text-white py-2 rounded hover:bg-violet-600">Book Now</button>
-                    </div>
+                        <BookNowButton />                    </div>
                 </div>
                 <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
                     <img className="w-full h-auto" src={person} alt="Person" />
@@ -122,8 +120,7 @@ const HomePage = () => {
                             <p className="text-sm text-gray-700 font-semibold">Plumbing</p>
                             <p className="text-sm">GHc 50</p>
                         </div>
-                        <button className="w-full bg-green-500 text-white py-2 rounded hover:bg-violet-600">Book Now</button>
-                    </div>
+                        <BookNowButton />                    </div>
                 </div>
             </div>
 
@@ -131,7 +128,7 @@ const HomePage = () => {
             {/*How it works*/}
             <div className="flex flex-col md:flex-row items-center">
                 <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={contentPic} alt="content" />
-                <div className="text-center md:text-left md:w-2/3 ml-10 flex flex-col md:flex-row items-center">
+                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">We Bring <span className="text-violet-500 italic">Creativity</span> to your doorstep</h2>
                         <p className="text-sm mb-8">We are on a mission to connect artisans to their clients all over the world</p>
@@ -229,7 +226,7 @@ const HomePage = () => {
             {/*Start Earning*/}
             <div className="flex flex-col md:flex-row items-center">
                 <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={artisanPic} alt="content" />
-                <div className="text-center md:text-left md:w-2/3 ml-10 flex flex-col md:flex-row items-center">
+                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">Start Earning as an <span className="text-violet-500 italic">Artisan</span> today</h2>
                         <p className="text-sm mb-8">We are on a mission to connect artisans to their clients all over the world</p>
