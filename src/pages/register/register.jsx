@@ -1,12 +1,39 @@
+import React, { useState } from 'react';
 import RegisterPic from '../../assets/images/register1.png';
 import { BriefcaseIcon, PaintBrushIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUserType } from '../../stores/reducers/clientReducer';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/tillyehonestproartisans/personal_info');
+        if (selectedCategory) {
+            dispatch(setUserType(selectedCategory));
+            switch (selectedCategory) {
+                case 'artisan':
+                    navigate('/tillyehonestproartisans')
+                    break;
+                case 'client':
+                    navigate('/tillyehonestproartisans/personal_info');
+                    break;
+
+                default:
+                    break;
+            }
+        } else {
+            // Handle error or show a message that a category must be selected
+        }
+    }
+
+    const handleCategoryChange = (value) => {
+        setSelectedCategory(value);
     }
 
     return (
@@ -25,7 +52,7 @@ const Register = () => {
                             <p className="text-lg mb-4">Select your category, whether you want to join as an Artisan or a Client</p>
                             <div className="mb-4">
                                 <label className="flex items-center mb-2">
-                                    <div className="relative rounded-[15px] border border-gray-300 p-4 bg-gray-100">
+                                    <div className={`relative rounded-[15px] border border-gray-300 p-4 bg-gray-100 ${selectedCategory === 'artisan' ? 'border-violet-500' : ''}`} onClick={() => handleCategoryChange('artisan')}>
                                         <div className="absolute top-1 left-0 p-2">
                                             {/* Icon */}
                                             <PaintBrushIcon className='h-5 w-5 ml-5 mr-5' />
@@ -33,7 +60,7 @@ const Register = () => {
                                         <div className="text-lg ml-10 mr-20 font-semibold">Join as an Artisan</div>
                                         <div className="absolute top-1 right-2 p-2">
                                             {/* Radio button */}
-                                            <input type="radio" name="category" value={1} className="mr-2" />
+                                            <input type="radio" name="category" value='artisan' className="mr-2" />
                                         </div>
                                         <div className="text-left mt-4">
                                             <p className="text-sm text-gray-500">Register as an artisan today and unlock endless opportunities to grow your business, expand your network, and inspire others with your creativity and craftsmanship</p>
@@ -42,7 +69,7 @@ const Register = () => {
                                 </label>
 
                                 <label className="flex items-center mt-5 mb-2">
-                                    <div className="relative rounded-[15px] border border-gray-300 p-4 bg-gray-100">
+                                    <div className={`relative rounded-[15px] border border-gray-300 p-4 bg-gray-100 ${selectedCategory === 'client' ? 'border-violet-500' : ''}`} onClick={() => handleCategoryChange('client')}>
                                         <div className="absolute top-1 left-0 p-2">
                                             {/* Icon */}
                                             <BriefcaseIcon className='h-5 w-5 ml-5 mr-5' />
@@ -50,7 +77,7 @@ const Register = () => {
                                         <div className="text-lg ml-10 mr-20 font-semibold">Get Started as a Client</div>
                                         <div className="absolute top-1 right-2 p-2">
                                             {/* Radio button */}
-                                            <input type="radio" name="category" value={2} className="mr-2" />
+                                            <input type="radio" name="category" value='client' className="mr-2" />
                                         </div>
                                         <div className="text-left mt-4">
                                             <p className="text-sm text-gray-500">Register as a client today and gain access to a vibrant community of creative professionals ready to collaborate, customize, and deliver exceptional artistic experiences tailored just for you</p>
@@ -62,7 +89,7 @@ const Register = () => {
                             <button onClick={handleClick} className="bg-violet-500 text-white py-2 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
                         </div>
 
-                        <p className="font-bold text-[13px] mt-5 ml-5 mb-1">Do you have an account already? <span className="text-green-500 italic">Login Now</span></p>
+                        <Link className='font-bold text-[13px] mt-5 ml-5 mb-1' to={'/tillyehonestproartisans/login'}>Do you have an account already? <span className="text-green-500 italic">Login Now</span></Link>
 
                     </div>
                 </div>

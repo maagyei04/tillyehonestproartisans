@@ -4,12 +4,31 @@ import logo from '../../assets/images/logo.png';
 import { useAuth } from '../../contexts/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogoutUser } from '../../services/firebase/auth';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
 
     const navigate = useNavigate();
 
-    const { userLoggedIn } = useAuth();
+    const { userLoggedIn, currentUser } = useAuth();
+
+    const clientData = useSelector((state) => state.clientInfo.clientData);
+
+    const {
+        userType,
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        password,
+        momoNetwork,
+        momoNumber,
+        bank,
+        bankAccountNumber,
+        bankBranch,
+        businessField,
+        businessLocation,
+    } = clientData;
 
     let Links = [
         { name: "HOME", link: "/tillyehonestproartisans/" },
@@ -21,14 +40,16 @@ const Header = () => {
     const [isMobile, setIsMobile] = useState(false);
 
     const handleClick = () => {
-        LogoutUser().then(() => { navigate('/') })
+        LogoutUser().then(() => { navigate('/tillyehonestproartisans') })
     };
 
     const register = () => {
         navigate('/tillyehonestproartisans/register');
     };
 
+
     useEffect(() => {
+
         const handleResize = () => {
             // Check if the screen width is less than or equal to a certain value (e.g., 768 for mobile)
             setIsMobile(window.innerWidth <= 768);
@@ -46,6 +67,7 @@ const Header = () => {
         };
     }, []);
 
+
     return (
         <div className='shadow-md w-full fixed top-0 left-0'>
             <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
@@ -58,7 +80,7 @@ const Header = () => {
                         userLoggedIn ?
                             <>
                                 <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${isMobile ? 'block' : 'hidden'}`}>
-                                    Hi Mike!
+                                    Hi <>{firstName}</>! logout
                                     <UserIcon className='text-white-600 h-5 w-5 ml-1' />
                                 </button>
                             </>
@@ -100,7 +122,7 @@ const Header = () => {
                         userLoggedIn ?
                             <>
                                 <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${open ? 'hidden' : 'show'}`}>
-                                    Hi Mike!
+                                    Hi <>{currentUser.email}</>! logout
                                     <UserIcon className='text-white-600 h-5 w-5 ml-1' />
                                 </button>
                             </>

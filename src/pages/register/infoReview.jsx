@@ -1,12 +1,19 @@
 import RegisterPic5 from '../../assets/images/register5.png';
 import { PencilIcon } from '@heroicons/react/24/solid';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { registerClient } from '../../stores/actions';
 
 const InfoReview = () => {
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
+    const clientData = useSelector((state) => state.client);
+
     const handleClick = () => {
-        navigate('/tillyehonestproartisans/info_review');
+        dispatch(registerClient(clientData));
+        navigate('/tillyehonestproartisans/');
     }
 
     return (
@@ -24,43 +31,50 @@ const InfoReview = () => {
                         </div>
                         <div className="flex justify-between">
                             <span className='text-gray-600'>First Name</span>
-                            <span>Sample</span>
+                            <span className='font-semibold'>{clientData.firstName}</span>
                         </div>
+
                         <div className="flex justify-between">
                             <span className='text-gray-600'>Surname</span>
-                            <span>Sample</span>
+                            <span className='font-semibold'>{clientData.lastName}</span>
                         </div>
+
                         <div className="flex justify-between">
                             <span className='text-gray-600'>Email</span>
-                            <span>Sample</span>
+                            <span className='font-semibold'>{clientData.email}</span>
                         </div>
+
                         <div className="mb-8 flex justify-between">
                             <span className='text-gray-600'>Phone Number</span>
-                            <span>Sample</span>
+                            <span className='font-semibold'>{clientData.phoneNumber}</span>
                         </div>
+
                         <div className="flex justify-between">
                             <span className='font-bold'>Payment Method</span>
                             <span><PencilIcon className='h-4 w-4 ml-5 mr-5' /></span>
                         </div>
                         <div className="flex justify-between">
                             <span className='text-gray-600'>Mobile Network</span>
-                            <span>Sample</span>
+                            <span className='font-semibold'>{clientData.momoNetwork}</span>
                         </div>
+
                         <div className="mb-8 flex justify-between">
                             <span className='text-gray-600'>Phone Number</span>
-                            <span>Sample</span>
+                            <span className='font-semibold'>{clientData.momoNumber}</span>
                         </div>
+
                         <div className="flex justify-between">
                             <span className='font-bold'>Business Details</span>
                             <span><PencilIcon className='h-4 w-4 ml-5 mr-5' /></span>
                         </div>
                         <div className="flex justify-between">
                             <span className='text-gray-600'>Field</span>
-                            <span>Sample</span>
+                            <span className='font-semibold'>{clientData.businessField}</span>
                         </div>
+
                         <div className="flex justify-between">
                             <span className='text-gray-600'>Location</span>
-                            <span>Sample</span>
+                            <span className='font-semibold'>{clientData.businessLocation}</span>
                         </div>
 
                         <button onClick={handleClick} className="mt-20 bg-violet-500 text-white py-2 px-4 rounded-[10px] hover:bg-green-600 w-full">Submit</button>
