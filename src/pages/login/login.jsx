@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import RegisterPic3 from '../../assets/images/register1.png';
 import { useDispatch } from 'react-redux';
 import { loginClient } from '../../stores/actions';
 
 const Login = () => {
-    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -26,7 +24,6 @@ const Login = () => {
         e.preventDefault();
         dispatch(loginClient(formData));
         console.log(formData);
-        navigate('/tillyehonestproartisans/explore');
     };
 
     return (

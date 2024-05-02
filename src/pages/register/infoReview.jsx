@@ -1,11 +1,9 @@
 import RegisterPic5 from '../../assets/images/register5.png';
 import { PencilIcon } from '@heroicons/react/24/solid';
-import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { registerClient } from '../../stores/actions';
 
 const InfoReview = () => {
-    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -13,7 +11,6 @@ const InfoReview = () => {
 
     const handleClick = () => {
         dispatch(registerClient(clientData));
-        navigate('/tillyehonestproartisans/');
     }
 
     return (
