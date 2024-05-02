@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tillyehonestproartisans/static/css/main.c73e7def.css",
-    "main.js": "/tillyehonestproartisans/static/js/main.f8202b6e.js",
+    "main.js": "/tillyehonestproartisans/static/js/main.b1413fe4.js",
     "static/js/453.76df07f9.chunk.js": "/tillyehonestproartisans/static/js/453.76df07f9.chunk.js",
     "static/media/frame2.png": "/tillyehonestproartisans/static/media/frame2.a97634439e99c9e9993f.png",
     "static/media/register4.png": "/tillyehonestproartisans/static/media/register4.ccef31a8552dde5cc595.png",
@@ -17,11 +17,11 @@
     "static/media/frame1.png": "/tillyehonestproartisans/static/media/frame1.07d2b528d4ca665a764f.png",
     "index.html": "/tillyehonestproartisans/index.html",
     "main.c73e7def.css.map": "/tillyehonestproartisans/static/css/main.c73e7def.css.map",
-    "main.f8202b6e.js.map": "/tillyehonestproartisans/static/js/main.f8202b6e.js.map",
+    "main.b1413fe4.js.map": "/tillyehonestproartisans/static/js/main.b1413fe4.js.map",
     "453.76df07f9.chunk.js.map": "/tillyehonestproartisans/static/js/453.76df07f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c73e7def.css",
-    "static/js/main.f8202b6e.js"
+    "static/js/main.b1413fe4.js"
   ]
 }
