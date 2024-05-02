@@ -69,29 +69,29 @@ const HomePage = () => {
                 <input
                     type="text"
                     placeholder="Search For Any Service..."
-                    className="flex-1 border border-gray-300 rounded-[10px] px-2 py-2 mb-2 md:mb-0 md:mr-3 w-[250px] md:w-[400px] focus:outline-none"
+                    className="flex-1 border border-gray-300 rounded-[10px] px-2 py-2 mb-0 md:mb-0 md:mr-3 w-[250px] md:w-[400px] focus:outline-none"
                 />
                 <button className="md:ml-0 ml-2 bg-green-500 rounded-[10px] text-white px-4 py-2 hover:bg-violet-600 focus:outline-none">Search</button>
             </div>
 
             {/* Categories Container */}
-            <div className="rounded p-4 w-full flex md:flex-col flex-row items-center backgroundImage"> {/* Centered content in Categories Container */}
+            <div className="rounded p-4 w-full flex md:flex-col flex-row md:items-center items-start backgroundImage"> {/* Centered content in Categories Container */}
                 <h2 className="font-semibold mb-3 md:text-lg text-[15px]">
                     Popular:
                 </h2>
-                <ul className="flex flex-wrap justify-center"> {/* Centered tags horizontally */}
+                <ul className="flex flex-wrap md:justify-center justify-start ml-5"> {/* Centered tags horizontally */}
                     <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Plumbering</li> {/* Adjusted size for mobile */}
                     <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Electrical Engineering</li> {/* Adjusted size for mobile */}
                     <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Construction</li> {/* Adjusted size for mobile */}
                 </ul>
             </div>
-            <img src={framePic} alt='frame-background' className='' />
+            <img src={framePic} alt='frame-background' className='mb-8' />
 
             {/*Popular Services Header*/}
             <div className="rounded p-4 w-full flex flex-col items-center"> {/* Centered content in Categories Container */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between w-full mb-3">
-                    <div className="mb-2 md:mb-0 md:mr-3">
-                        <h1 className="font-bold text-[15px] md:text-[25px]">Explore Our Popular Services</h1>
+                    <div className="mb-0 md:mb-0 md:mr-3">
+                        <h1 className="font-bold text-xl md:text-[25px]">Explore Our Popular Services</h1>
                         <p className="text-sm">Below are recommended Services for you</p>
                     </div>
                     <a href="#top" className="text-violet-600 flex items-center">
@@ -125,7 +125,7 @@ const HomePage = () => {
 
 
             {/*How it works*/}
-            <div className="flex flex-col md:flex-row items-center">
+            <div className="flex flex-col mt-8 md:flex-row items-center">
                 <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={contentPic} alt="content" />
                 <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
                     <div>
@@ -154,10 +154,10 @@ const HomePage = () => {
 
 
             {/*Category Header*/}
-            <div className="rounded p-4 w-full flex flex-col items-center"> {/* Centered content in Categories Container */}
+            <div className="rounded p-4 w-full flex mt-8 flex-col items-center"> {/* Centered content in Categories Container */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between w-full mb-3">
                     <div className="mb-2 md:mb-0 md:mr-3">
-                        <h1 className="font-bold text-[15px] md:text-[25px]">Explore Our Categories</h1>
+                        <h1 className="font-bold text-xl md:text-[25px]">Explore Our Categories</h1>
                         <p className="text-sm">Below are recommended Categories for you</p>
                     </div>
                     <a href="#top" className="text-violet-600 flex items-center">
@@ -192,7 +192,7 @@ const HomePage = () => {
             </div>
 
             {/*Start Earning*/}
-            <div className="flex flex-col md:flex-row items-center">
+            <div className="flex mt-8 flex-col md:flex-row items-center">
                 <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={artisanPic} alt="content" />
                 <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
                     <div>

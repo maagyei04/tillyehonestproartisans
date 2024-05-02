@@ -94,16 +94,16 @@ const Explore = () => {
             </div>
 
 
-            {/* Popular Container */}
-            <div className="rounded p-4 w-full flex flex-col items-left backgroundImage"> {/* Centered content in Categories Container */}
-                <div className="flex items-center mb-3"> {/* Centered tags horizontally */}
-                    <h2 className="font-semibold md:text-lg text-[15px] mr-2">Popular:</h2>
-                    <ul className="flex flex-wrap justify-center"> {/* Centered tags horizontally */}
-                        <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Plumbering</li> {/* Adjusted size for mobile */}
-                        <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Electrical Engineering</li> {/* Adjusted size for mobile */}
-                        <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Building And Construction</li> {/* Adjusted size for mobile */}
-                    </ul>
-                </div>
+            {/* Categories Container */}
+            <div className="rounded p-4 w-full flex md:flex-col flex-row md:items-center items-start backgroundImage"> {/* Centered content in Categories Container */}
+                <h2 className="font-semibold mb-3 md:text-lg text-[15px]">
+                    Popular:
+                </h2>
+                <ul className="flex flex-wrap md:justify-center justify-start ml-5"> {/* Centered tags horizontally */}
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Plumbering</li> {/* Adjusted size for mobile */}
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Electrical Engineering</li> {/* Adjusted size for mobile */}
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Construction</li> {/* Adjusted size for mobile */}
+                </ul>
             </div>
 
             {/* Explore Content */}
