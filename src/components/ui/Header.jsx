@@ -15,19 +15,7 @@ const Header = () => {
     const clientData = useSelector((state) => state.clientInfo.clientData);
 
     const {
-        userType,
         firstName,
-        lastName,
-        email,
-        phoneNumber,
-        password,
-        momoNetwork,
-        momoNumber,
-        bank,
-        bankAccountNumber,
-        bankBranch,
-        businessField,
-        businessLocation,
     } = clientData;
 
     let Links = [
