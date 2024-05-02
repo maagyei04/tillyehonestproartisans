@@ -2,15 +2,19 @@ import RegisterPic5 from '../../assets/images/register5.png';
 import { PencilIcon } from '@heroicons/react/24/solid';
 import { useSelector, useDispatch } from 'react-redux';
 import { registerClient } from '../../stores/actions';
+import { useNavigate } from 'react-router-dom';
 
 const InfoReview = () => {
 
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+
     const clientData = useSelector((state) => state.client);
 
-    const handleClick = () => {
-        dispatch(registerClient(clientData));
+    const handleClick = async () => {
+        await dispatch(registerClient(clientData));
+        navigate('/tillyehonestproartisans/')
     }
 
     return (

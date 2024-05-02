@@ -2,10 +2,13 @@ import { useState } from 'react';
 import RegisterPic3 from '../../assets/images/register1.png';
 import { useDispatch } from 'react-redux';
 import { loginClient } from '../../stores/actions';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -20,10 +23,11 @@ const Login = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(loginClient(formData));
+        await dispatch(loginClient(formData));
         console.log(formData);
+        navigate('/tillyehonestproartisans')
     };
 
     return (
