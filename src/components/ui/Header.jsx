@@ -64,6 +64,11 @@ const Header = () => {
                     {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
                     <img src={logo} alt="logo" className='h-10 w-10' />
                     {/*<span className="text-black text-lg font-bold">T&E Honest Pro Artisans</span>*/}
+                </div>
+
+
+                {/* Menu icon */}
+                <div className='flex flex-row absolute right-20 top-5'>
                     {
                         userLoggedIn ?
                             <>
@@ -78,12 +83,6 @@ const Header = () => {
                             </>
                     }
                 </div>
-                <div className='cursor-pointer flex items-center gap-1'>
-
-                </div>
-
-
-                {/* Menu icon */}
                 <div onClick={() => setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
                     {
                         open ? <XMarkIcon /> : <Bars3BottomRightIcon />

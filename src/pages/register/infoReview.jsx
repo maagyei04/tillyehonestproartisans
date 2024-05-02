@@ -20,8 +20,8 @@ const InfoReview = () => {
     return (
         <div className="flex flex-col items-center justify-between py-[100px] px-4 w-full">
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={RegisterPic5} alt="content" />
-                <div className="text-center md:text-left md:w-2/3 flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
+                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0 hidden md:block" src={RegisterPic5} alt="content" />
+                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">Summary, <span className="text-violet-500 italic">Terms & Conditions</span></h2>
                         <p className="text-sm mb-8">Confirm and verify your details</p>
@@ -78,7 +78,7 @@ const InfoReview = () => {
                             <span className='font-semibold'>{clientData.businessLocation}</span>
                         </div>
 
-                        <button onClick={handleClick} className="mt-20 bg-violet-500 text-white py-2 px-4 rounded-[10px] hover:bg-green-600 w-full">Submit</button>
+                        <button onClick={handleClick} className="mt-20 bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Submit</button>
                         <p className="font-bold text-[13px] mt-5 ml-5">By continiung you accept & agree with our terms and conditions.<span className="text-green-500 italic"> Learn More</span></p>
 
                     </div>

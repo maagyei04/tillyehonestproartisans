@@ -39,8 +39,8 @@ const Register = () => {
     return (
         <div className="flex flex-col items-center justify-center py-20 px-4">
             <div className="flex flex-col md:flex-row items-center">
-                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={RegisterPic} alt="content" />
-                <div className="text-center md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
+                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0 hidden md:block" src={RegisterPic} alt="content" />
+                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">Discover <span className="text-violet-500 italic">Artisan Excellence</span> One, </h2>
                         <h2 className="font-bold text-[30px] mb-1"><span className="text-green-500 italic">Service</span> at a Time</h2>
@@ -63,7 +63,7 @@ const Register = () => {
                                             <input type="radio" name="category" value='artisan' className="mr-2" />
                                         </div>
                                         <div className="text-left mt-4">
-                                            <p className="text-sm text-gray-500">Register as an artisan today and unlock endless opportunities to grow your business, expand your network, and inspire others with your creativity and craftsmanship</p>
+                                            <p className="text-sm text-gray-700">Register as an artisan today and unlock endless opportunities to grow your business, expand your network, and inspire others with your creativity and craftsmanship</p>
                                         </div>
                                     </div>
                                 </label>
@@ -80,13 +80,13 @@ const Register = () => {
                                             <input type="radio" name="category" value='client' className="mr-2" />
                                         </div>
                                         <div className="text-left mt-4">
-                                            <p className="text-sm text-gray-500">Register as a client today and gain access to a vibrant community of creative professionals ready to collaborate, customize, and deliver exceptional artistic experiences tailored just for you</p>
+                                            <p className="text-sm text-gray-700">Register as a client today and gain access to a vibrant community of creative professionals ready to collaborate, customize, and deliver exceptional artistic experiences tailored just for you</p>
                                         </div>
                                     </div>
                                 </label>
                             </div>
 
-                            <button onClick={handleClick} className="bg-violet-500 text-white py-2 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
+                            <button onClick={handleClick} className="bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
                         </div>
 
                         <Link className='font-bold text-[13px] mt-5 ml-5 mb-1' to={'/tillyehonestproartisans/login'}>Do you have an account already? <span className="text-green-500 italic">Login Now</span></Link>

@@ -31,6 +31,27 @@ const HomePage = () => {
         };
     }, []);
 
+    const servicesData = [
+        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
+        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
+        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
+        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
+    ];
+
+    const categoriesData = [
+        { name: 'John Doe', category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
+        { name: 'John Doe', category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
+        { name: 'John Doe', category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
+        { name: 'John Doe', category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
+    ];
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const servicesPerPage = 8;
+    const totalPages = Math.ceil(servicesData.length / servicesPerPage);
+    const indexOfLastService = currentPage * servicesPerPage;
+    const indexOfFirstService = indexOfLastService - servicesPerPage;
+    const currentServices = servicesData.slice(indexOfFirstService, indexOfLastService);
+    const categoriesServices = categoriesData.slice(indexOfFirstService, indexOfLastService);
 
     return (
         <div className="flex flex-col items-center justify-center py-40 px-4"> {/* Reduced padding for mobile */}
@@ -54,14 +75,14 @@ const HomePage = () => {
             </div>
 
             {/* Categories Container */}
-            <div className="rounded p-4 w-full flex flex-col items-center backgroundImage"> {/* Centered content in Categories Container */}
+            <div className="rounded p-4 w-full flex md:flex-col flex-row items-center backgroundImage"> {/* Centered content in Categories Container */}
                 <h2 className="font-semibold mb-3 md:text-lg text-[15px]">
                     Popular:
                 </h2>
                 <ul className="flex flex-wrap justify-center"> {/* Centered tags horizontally */}
                     <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Plumbering</li> {/* Adjusted size for mobile */}
                     <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Electrical Engineering</li> {/* Adjusted size for mobile */}
-                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Building And Construction</li> {/* Adjusted size for mobile */}
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Construction</li> {/* Adjusted size for mobile */}
                 </ul>
             </div>
             <img src={framePic} alt='frame-background' className='' />
@@ -81,46 +102,24 @@ const HomePage = () => {
             </div>
 
             {/*Popular Services Contents*/}
-            <div className="flex flex-wrap justify-center">
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
-                    <img className="w-full h-auto" src={person} alt="Person" />
-                    <div className="p-4">
-                        <h2 className="font-semibold text-lg mb-2">John Doe</h2>
-                        <div className="flex justify-between mb-2">
-                            <p className="text-sm text-gray-700 font-semibold">Plumbing</p>
-                            <p className="text-sm">GHc 50</p>
+            <div className="flex flex-col items-center justify-center py-2 px-2r">
+                <div className="flex flex-wrap justify-center">
+                    {/* Display services data */}
+                    {currentServices.map((service, index) => (
+                        <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
+                            <div className="rounded overflow-hidden shadow-lg bg-white">
+                                <img className="w-full h-auto" src={person} alt="Person" />
+                                <div className="p-4">
+                                    <h2 className="font-semibold text-lg mb-2">{service.name}</h2>
+                                    <div className="flex justify-between mb-2">
+                                        <p className="text-sm text-gray-700 font-semibold">{service.category}</p>
+                                        <p className="text-sm">{service.charge}</p>
+                                    </div>
+                                    <BookNowButton />
+                                </div>
+                            </div>
                         </div>
-                        <BookNowButton />                    </div>
-                </div>
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
-                    <img className="w-full h-auto" src={person} alt="Person" />
-                    <div className="p-4">
-                        <h2 className="font-semibold text-lg mb-2">John Doe</h2>
-                        <div className="flex justify-between mb-2">
-                            <p className="text-sm text-gray-700 font-semibold">Plumbing</p>
-                            <p className="text-sm">GHc 50</p>
-                        </div>
-                        <BookNowButton />                    </div>
-                </div>
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
-                    <img className="w-full h-auto" src={person} alt="Person" />
-                    <div className="p-4">
-                        <h2 className="font-semibold text-lg mb-2">John Doe</h2>
-                        <div className="flex justify-between mb-2">
-                            <p className="text-sm text-gray-700 font-semibold">Plumbing</p>
-                            <p className="text-sm">GHc 50</p>
-                        </div>
-                        <BookNowButton />                    </div>
-                </div>
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
-                    <img className="w-full h-auto" src={person} alt="Person" />
-                    <div className="p-4">
-                        <h2 className="font-semibold text-lg mb-2">John Doe</h2>
-                        <div className="flex justify-between mb-2">
-                            <p className="text-sm text-gray-700 font-semibold">Plumbing</p>
-                            <p className="text-sm">GHc 50</p>
-                        </div>
-                        <BookNowButton />                    </div>
+                    ))}
                 </div>
             </div>
 
@@ -169,57 +168,26 @@ const HomePage = () => {
             </div>
 
             {/*Category Contents*/}
-            <div className="flex flex-wrap justify-center">
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
-                    <img className="w-full h-auto" src={person2} alt="Person" />
-                    <div className="p-4">
-                        <h2 className="flex font-semibold text-lg mb-2 flex">Building And Construction</h2>
-                        <div className="flex justify-between mb-2">
-                            <p className="font-semibold text-gray-700 mb-1">18 Services</p>
+            <div className="flex flex-col items-center justify-center py-2 px-2r">
+                <div className="flex flex-wrap justify-center">
+                    {/* Display services data */}
+                    {categoriesData.map((category, index) => (
+                        <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
+                            <div className="rounded overflow-hidden shadow-lg bg-white">
+                                <img className="w-full h-auto" src={person2} alt="Person" />
+                                <div className="p-4">
+                                    <h2 className="font-semibold text-lg mb-2">{category.name}</h2>
+                                    <div className="flex justify-between mb-2">
+                                        <p className="font-semibold text-gray-700">{category.numberOfPersonnel}</p>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <p className="text-sm text-gray-700 font-semibold">{ }</p>
+                                        <a href='#top' className='text-sm text-green-500 hover:text-violet-600'>Click to see more</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex justify-between mb-2">
-                            <p className="text-sm text-gray-700 font-semibold">200+ Personnel</p>
-                            <a href='#top' className='text-sm text-green-500 hover:text-violet-600'>Click to see more</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
-                    <img className="w-full h-auto" src={person2} alt="Person" />
-                    <div className="p-4">
-                        <h2 className="font-semibold text-lg mb-2 flex">Masonry</h2>
-                        <div className="flex justify-between mb-2">
-                            <p className="font-semibold text-gray-700 mb-1">18 Services</p>
-                        </div>
-                        <div className="flex justify-between mb-2">
-                            <p className="text-sm text-gray-700 font-semibold">200+ Personnel</p>
-                            <a href='#top' className='text-sm text-green-500 hover:text-violet-600'>Click to see more</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
-                    <img className="w-full h-auto" src={person2} alt="Person" />
-                    <div className="p-4">
-                        <h2 className="font-semibold text-lg mb-2 flex">Electrical Engineering</h2>
-                        <div className="flex justify-between mb-2">
-                            <p className="font-semibold text-gray-700 mb-1">18 Services</p>
-                        </div>
-                        <div className="flex justify-between mb-2">
-                            <p className="text-sm text-gray-700 font-semibold">200+ Personnel</p>
-                            <a href='#top' className='text-sm text-green-500 hover:text-violet-600'>Click to see more</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-md mx-2 mb-4">
-                    <img className="w-full h-auto" src={person2} alt="Person" />
-                    <div className="p-4">
-                        <h2 className="font-semibold text-lg mb-2 flex">Plumbing</h2>
-                        <div className="flex justify-between mb-2">
-                            <p className="font-semibold text-gray-700 mb-1">18 Services</p>
-                        </div>                        <div className="flex justify-between mb-2">
-                            <p className="text-sm text-gray-700 font-semibold">200+ Personnel</p>
-                            <a href='#top' className='text-sm text-green-500 hover:text-violet-600'>Click to see more</a>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
 

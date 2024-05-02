@@ -43,8 +43,8 @@ const PersonalInfo = () => {
     return (
         <div className="flex flex-col items-center justify-between py-20 px-4 w-full">
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                <img className="w-full md:w-2/3 h-auto md:mr-[60px] mb-4 md:mb-0" src={RegisterPic2} alt="content" />
-                <div className="text-center md:text-left md:w-2/3 flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
+                <img className="w-full md:w-2/3 h-auto md:mr-[60px] mb-4 md:mb-0 hidden md:block" src={RegisterPic2} alt="content" />
+                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
                     <div>
                         <div>
                             <h2 className="font-semibold text-[20px] mb-1">Personal Information<span className="text-white italic">.............................</span></h2>
@@ -116,7 +116,7 @@ const PersonalInfo = () => {
                                     />
                                 </div>
 
-                                <button type='submit' className="bg-violet-500 text-white py-2 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
+                                <button type='submit' className="bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
                             </form>
                         </div>
                     </div>

@@ -51,8 +51,8 @@ const PaymentMethod = () => {
     return (
         <div className="flex flex-col items-center justify-between py-20 px-4 w-full">
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={RegisterPic3} alt="content" />
-                <div className="text-center md:text-left md:w-2/3 flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
+                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0 hidden md:block" src={RegisterPic3} alt="content" />
+                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
                     <div>
                         <h2 className="font-semibold text-[15px] mb-1">Hi {firstName}, please Choose Payment Options<span className="text-violet-500 italic"></span></h2>
 
@@ -128,7 +128,7 @@ const PaymentMethod = () => {
                                 onChange={handleChange}
                             />
 
-                            <button type='submit' className="bg-violet-500 text-white py-2 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
+                            <button type='submit' className="bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
                         </form>
                     </div>
 
