@@ -7,7 +7,7 @@ const BookNowButton = () => {
 
     const handleClick = () => {
         userLoggedIn ?
-            navigate('/tillyehonestproartisans/explore') :
+            navigate('/tillyehonestproartisans/booking/service_detail') :
             navigate('/tillyehonestproartisans/register');
     };
 

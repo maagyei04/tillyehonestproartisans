@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    clientId: '',
+    artisanId: '',
     userType: '',
     firstName: '',
     lastName: '',
@@ -15,14 +15,18 @@ const initialState = {
     bankBranch: '',
     businessField: '',
     businessLocation: '',
+    passportImage: '',
+    ghanaCardImage: '',
+    policeReportImage: '',
+    gaurantorNoteImage: '',
 };
 
-export const clientSlice = createSlice({
+export const artisanSlice = createSlice({
     name: 'client',
     initialState,
     reducers: {
-        setClientId: (state, action) => {
-            state.clientId = action.payload;
+        setArtisanId: (state, action) => {
+            state.artisanId = action.payload;
         },
         setUserType: (state, action) => {
             state.userType = action.payload;
@@ -63,11 +67,23 @@ export const clientSlice = createSlice({
         setBusinessLocation: (state, action) => {
             state.businessLocation = action.payload;
         },
+        setPassportImage: (state, action) => {
+            state.passportImage = action.payload;
+        },
+        setGhanaCardImage: (state, action) => {
+            state.ghanaCardImage = action.payload;
+        },
+        setPoliceReportImage: (state, action) => {
+            state.policeReportImage = action.payload;
+        },
+        setGaurantorNoteImage: (state, action) => {
+            state.gaurantorNoteImage = action.payload;
+        },
     },
 });
 
 export const {
-    setClientId,
+    setArtisanId,
     setUserType,
     setFirstName,
     setLastName,
@@ -81,6 +97,10 @@ export const {
     setBankBranch,
     setBusinessField,
     setBusinessLocation,
-} = clientSlice.actions;
+    setGaurantorNoteImage,
+    setGhanaCardImage,
+    setPassportImage,
+    setPoliceReportImage,
+} = artisanSlice.actions;
 
-export default clientSlice.reducer;
+export default artisanSlice.reducer;

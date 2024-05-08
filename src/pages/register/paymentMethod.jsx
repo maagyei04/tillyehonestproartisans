@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RegisterPic3 from '../../assets/images/register3.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMomoNetwork, setMomoNumber, setBank, setBankAccountNumber, setBankBranch } from '../../stores/reducers/clientReducer';
+import { setMomoNetwork, setMomoNumber, setBank, setBankAccountNumber, setBankBranch } from '../../stores/reducers/artisanReducer';
 
 
 const PaymentMethod = () => {
@@ -45,14 +45,16 @@ const PaymentMethod = () => {
         dispatch(setBankBranch(formData.bankBranch),);
 
         console.log(formData);
-        navigate('/tillyehonestproartisans/business_details');
+        navigate('/tillyehonestproartisans/image_upload');
     };
 
     return (
-        <div className="flex flex-col items-center justify-between py-20 px-4 w-full">
-            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0 hidden md:block" src={RegisterPic3} alt="content" />
-                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
+        <div className="flex flex-col items-center justify-center py-20 px-10">
+            <div className="flex flex-col md:flex-row items-start mt-5 justify-between">
+                <div className='md:text-left md:h-4/4 md:w-2/4 mr-10 flex flex-col md:flex-row items-start'>
+                    <img className="md:h-3/4 mb-4 md:mb-0 hidden md:block" src={RegisterPic3} alt="content" />
+                </div>
+                <div className="md:w-2/4">
                     <div>
                         <h2 className="font-semibold text-[15px] mb-1">Hi {firstName}, please Choose Payment Options<span className="text-violet-500 italic"></span></h2>
 
@@ -86,7 +88,7 @@ const PaymentMethod = () => {
 
                         <form onSubmit={handleSubmit}>
                             <p className="text-sm font-semibold mb-2">Mobile Money Number:</p>
-                            <input className='border border-gray-200 rounded-[10px] h-8 w-full mb-5'
+                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5'
                                 type="text"
                                 id="momoNumber"
                                 name="momoNumber"
@@ -102,7 +104,7 @@ const PaymentMethod = () => {
                             </div>
 
                             <p className="text-sm font-semibold mb-2">Bank:</p>
-                            <input className='border border-gray-200 rounded-[10px] h-8 w-full mb-5'
+                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5'
                                 type="text"
                                 id="bank"
                                 name="bank"
@@ -111,7 +113,7 @@ const PaymentMethod = () => {
                             />
 
                             <p className="text-sm font-semibold mb-2">Account Number:</p>
-                            <input className='border border-gray-200 rounded-[10px] h-8 w-full mb-5'
+                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5'
                                 type="text"
                                 id="bankAccountNumber"
                                 name="bankAccountNumber"
@@ -120,7 +122,7 @@ const PaymentMethod = () => {
                             />
 
                             <p className="text-sm font-semibold mb-2">Branch:</p>
-                            <input className='border border-gray-200 rounded-[10px] h-8 w-full mb-5'
+                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5'
                                 type="text"
                                 id="bankBranch"
                                 name="bankBranch"

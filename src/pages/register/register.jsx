@@ -18,7 +18,7 @@ const Register = () => {
             dispatch(setUserType(selectedCategory));
             switch (selectedCategory) {
                 case 'artisan':
-                    navigate('/tillyehonestproartisans')
+                    navigate('/tillyehonestproartisans/personal_info')
                     break;
                 case 'client':
                     navigate('/tillyehonestproartisans/personal_info');
@@ -37,10 +37,12 @@ const Register = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center py-20 px-4">
-            <div className="flex flex-col md:flex-row items-center">
-                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0 hidden md:block" src={RegisterPic} alt="content" />
-                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
+        <div className="flex flex-col items-center justify-center py-20 px-10">
+            <div className="flex flex-col md:flex-row items-start justify-between">
+                <div className='text-center md:text-left md:h-4/4 mt-5 md:w-2/4 flex flex-col md:flex-row items-center'>
+                    <img className="md:h-[520px] mb-4 md:mb-0 hidden md:block" src={RegisterPic} alt="content" />
+                </div>
+                <div className="md:w-2/4">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">Discover <span className="text-violet-500 italic">Artisan Excellence</span> One, </h2>
                         <h2 className="font-bold text-[30px] mb-1"><span className="text-green-500 italic">Service</span> at a Time</h2>

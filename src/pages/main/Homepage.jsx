@@ -57,7 +57,7 @@ const HomePage = () => {
         <div className="flex flex-col items-center justify-center py-40 px-4"> {/* Reduced padding for mobile */}
             {/* Header */}
             <h1 className="text-2xl md:text-4xl font-bold mb-2 text-center">
-                Discover Unique <span className="text-violet-500 italic">Artistic</span> Services
+                Discover Unique <span className="text-violet-500 italic">Problem Solving</span> Services
             </h1>
 
             <p className="text-sm md:text-base mb-6 text-center">
@@ -126,8 +126,8 @@ const HomePage = () => {
 
             {/*How it works*/}
             <div className="flex flex-col mt-8 md:flex-row items-center">
-                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={contentPic} alt="content" />
-                <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
+                <img className="w-full md:w-2/4 h-[520px] md:mr-4 mb-4 md:mb-0" src={contentPic} alt="content" />
+                <div className="text-left md:text-left md:w-2/4 flex flex-col md:flex-row items-center">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">We Bring <span className="text-violet-500 italic">Creativity</span> to your doorstep</h2>
                         <p className="text-sm mb-8">We are on a mission to connect artisans to their clients all over the world</p>
@@ -193,7 +193,7 @@ const HomePage = () => {
 
             {/*Start Earning*/}
             <div className="flex mt-8 flex-col md:flex-row items-center">
-                <img className="w-full md:w-2/3 h-auto md:mr-4 mb-4 md:mb-0" src={artisanPic} alt="content" />
+                <img className="w-full md:w-2/3 h-[520px] md:mr-4 mb-4 md:mb-0" src={artisanPic} alt="content" />
                 <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">Start Earning as an <span className="text-violet-500 italic">Artisan</span> today</h2>

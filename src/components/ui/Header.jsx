@@ -10,13 +10,16 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    const { userLoggedIn, currentUser } = useAuth();
+    const { userLoggedIn } = useAuth();
 
     const clientData = useSelector((state) => state.clientInfo.clientData) ?? '';
+    const artisanData = useSelector((state) => state.artisanInfo.artisanData) ?? '';
+
 
     const {
         firstName,
     } = clientData;
+
 
     let Links = [
         { name: "HOME", link: "/tillyehonestproartisans/" },
@@ -58,11 +61,11 @@ const Header = () => {
 
     return (
         <div className='shadow-md w-full fixed top-0 left-0'>
-            <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
+            <div className='md:flex items-center justify-between bg-white md:px-10 px-7'>
                 {/* logo section */}
                 <div className='font-bold cursor-pointer flex items-center gap-1'>
                     {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
-                    <img src={logo} alt="logo" className='h-10 w-10' />
+                    <img src={logo} alt="logo" className='h-20 w-20' />
                     {/*<span className="text-black text-lg font-bold">T&E Honest Pro Artisans</span>*/}
                 </div>
 
