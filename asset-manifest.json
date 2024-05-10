@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/tillyehonestproartisans/static/css/main.132b513f.css",
-    "main.js": "/tillyehonestproartisans/static/js/main.55899e61.js",
-    "static/js/453.76df07f9.chunk.js": "/tillyehonestproartisans/static/js/453.76df07f9.chunk.js",
+    "main.css": "/tillyehonestproartisans/static/css/main.3ff2537f.css",
+    "main.js": "/tillyehonestproartisans/static/js/main.62bf1746.js",
+    "static/js/453.e6156d21.chunk.js": "/tillyehonestproartisans/static/js/453.e6156d21.chunk.js",
     "static/media/frame2.png": "/tillyehonestproartisans/static/media/frame2.a97634439e99c9e9993f.png",
     "static/media/register4.png": "/tillyehonestproartisans/static/media/register4.ccef31a8552dde5cc595.png",
     "static/media/register2.png": "/tillyehonestproartisans/static/media/register2.27235efb652ed5cf0a3f.png",
@@ -13,15 +13,16 @@
     "static/media/register3.png": "/tillyehonestproartisans/static/media/register3.f9c382ed1a78130f30ce.png",
     "static/media/woodworks.png": "/tillyehonestproartisans/static/media/woodworks.3165dd41388f3d836a57.png",
     "static/media/plumbing.png": "/tillyehonestproartisans/static/media/plumbing.547a036b864944a1afed.png",
+    "static/media/logo.png": "/tillyehonestproartisans/static/media/logo.4b079ca1dd5fd1d63837.png",
     "static/media/exploreframe.png": "/tillyehonestproartisans/static/media/exploreframe.dff79f9f8c87196ffab1.png",
     "static/media/frame1.png": "/tillyehonestproartisans/static/media/frame1.07d2b528d4ca665a764f.png",
     "index.html": "/tillyehonestproartisans/index.html",
-    "main.132b513f.css.map": "/tillyehonestproartisans/static/css/main.132b513f.css.map",
-    "main.55899e61.js.map": "/tillyehonestproartisans/static/js/main.55899e61.js.map",
-    "453.76df07f9.chunk.js.map": "/tillyehonestproartisans/static/js/453.76df07f9.chunk.js.map"
+    "main.3ff2537f.css.map": "/tillyehonestproartisans/static/css/main.3ff2537f.css.map",
+    "main.62bf1746.js.map": "/tillyehonestproartisans/static/js/main.62bf1746.js.map",
+    "453.e6156d21.chunk.js.map": "/tillyehonestproartisans/static/js/453.e6156d21.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.132b513f.css",
-    "static/js/main.55899e61.js"
+    "static/css/main.3ff2537f.css",
+    "static/js/main.62bf1746.js"
   ]
 }
