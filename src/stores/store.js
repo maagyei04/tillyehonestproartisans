@@ -6,6 +6,7 @@ import artisanReducer from './reducers/artisanReducer'
 import artisanInfoReducer from './reducers/artisanInfoReducer'
 import bookingReducer from './reducers/bookingReducer'
 import bookingInfoReducer from './reducers/bookingInfoReducer'
+import messageReducer from './reducers/messageReducer'
 
 export const store = configureStore({
     reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
         artisanInfo: artisanInfoReducer,
         booking: bookingReducer,
         bookingInfo: bookingInfoReducer,
+        message: messageReducer
     },
 })

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { useDispatch } from 'react-redux';
+import { setMessageFirstName, setMessage, setMessageLastName, setMessageEmail } from '../../stores/reducers/messageReducer';
+import { messageUs } from '../../stores/actions';
 
 const Information = ({ isMobile }) => (
     <div className="text-center md:text-left md:w-2/4 md:mr-20 flex flex-col md:flex-row items-center">
@@ -34,7 +37,7 @@ const ContactForm = ({ formData, handleChange, handleSubmit }) => (
         <form onSubmit={handleSubmit}>
             <div className='flex flex-col mb-8 w-full'>
                 <label className='mb-2' htmlFor="firstName">First Name</label>
-                <input className='border border-gray-300 rounded-[10px] h-10'
+                <input className='border border-gray-300 rounded-[10px] h-10 p-2'
                     type="text"
                     id="firstName"
                     name="firstName"
@@ -44,35 +47,36 @@ const ContactForm = ({ formData, handleChange, handleSubmit }) => (
                 />
             </div>
             <div className='flex flex-col mb-8 w-full'>
-                <label className='mb-2' htmlFor="firstName">Last Name</label>
-                <input className='border border-gray-300 rounded-[10px] h-10'
+                <label className='mb-2' htmlFor="lastName">Last Name</label>
+                <input className='border border-gray-300 rounded-[10px] h-10 p-2'
                     type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
+                    id="lastName"
+                    name="lastName"
+                    value={formData.lastName}
                     onChange={handleChange}
                     required
                 />
             </div>
 
             <div className='flex flex-col mb-8 w-full'>
-                <label className='mb-2' htmlFor="firstName">Email</label>
-                <input className='border border-gray-300 rounded-[10px] h-10'
+                <label className='mb-2' htmlFor="email">Email</label>
+                <input className='border border-gray-300 rounded-[10px] h-10 p-2'
                     type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
+                    id="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     required
                 />
             </div>
             <div className='flex flex-col'>
                 <label htmlFor="message">Message</label>
-                <textarea className='border border-gray-300 rounded-[10px]'
+                <textarea className='border border-gray-300 rounded-[10px] p-2'
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    rows={5}
                     required
                 ></textarea>
             </div>
@@ -81,6 +85,8 @@ const ContactForm = ({ formData, handleChange, handleSubmit }) => (
 );
 
 const About = () => {
+    const dispatch = useDispatch();
+
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const [formData, setFormData] = useState({
         firstName: '',
@@ -99,8 +105,15 @@ const About = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        dispatch(setMessage(formData.message));
+        dispatch(setMessageEmail(formData.email));
+        dispatch(setMessageFirstName(formData.firstName));
+        dispatch(setMessageLastName(formData.lastName));
+
+        dispatch(messageUs());
+
         console.log(formData);
-        // Add your form submission logic here
     };
 
     return (

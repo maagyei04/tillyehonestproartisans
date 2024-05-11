@@ -1,5 +1,5 @@
 import { RegisterUserWithEmailAndPassword, LoginUserWithEmailAndPassword } from '../services/firebase/auth';
-import { doc, setDoc, collection, getDoc } from 'firebase/firestore';
+import { doc, setDoc, collection, getDoc, getDocs, query, limit } from 'firebase/firestore';
 import { db, storage } from '../services/firebase/firebase';
 import { setClientData } from './reducers/clientInfoReducer';
 import { setArtisanData } from './reducers/artisanInfoReducer';
@@ -271,7 +271,7 @@ export const bookArtisan = (bookingData) => {
 
             const bookingRef = doc(collectionRef);
 
-            const bookingData1 = getState().client;
+            const bookingData1 = getState().booking;
 
             await setDoc(bookingRef, bookingData1);
 
@@ -279,6 +279,100 @@ export const bookArtisan = (bookingData) => {
 
         } catch (error) {
             console.error('Error booking artisan:', error);
+            dispatch({ type: 'REGISTER_ERROR', payload: error.message });
+        }
+    };
+};
+
+export const fetchAllClientData = async () => {
+    try {
+        const collectionRef = collection(db, 'Clients');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const clientData = [];
+            snapshot.forEach((doc) => {
+                clientData.push(doc.data());
+            });
+            return clientData;
+        } else {
+            throw new Error('No clients found');
+        }
+    } catch (error) {
+        console.error('Error fetching clients data:', error);
+        throw error;
+    }
+};
+
+export const fetchAllArtisanData = async () => {
+    try {
+        const collectionRef = collection(db, 'Artisans');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const artisanData = [];
+            snapshot.forEach((doc) => {
+                artisanData.push(doc.data());
+            });
+            return artisanData;
+        } else {
+            throw new Error('No artisans found');
+        }
+    } catch (error) {
+        console.error('Error fetching artisans data:', error);
+        throw error;
+    }
+};
+
+export const fetchLimitedClientData = async (limitCount) => {
+    try {
+        const collectionRef = collection(db, 'Clients');
+        const querySnapshot = await getDocs(query(collectionRef, limit(limitCount)));
+
+        const clientData = [];
+        querySnapshot.forEach((doc) => {
+            clientData.push(doc.data());
+        });
+
+        return clientData;
+    } catch (error) {
+        console.error('Error fetching client data:', error);
+        throw error;
+    }
+};
+
+export const fetchLimitedArtisanData = async (limitCount) => {
+    try {
+        const collectionRef = collection(db, 'Artisans');
+        const querySnapshot = await getDocs(query(collectionRef, limit(limitCount)));
+
+        const clientData = [];
+        querySnapshot.forEach((doc) => {
+            clientData.push(doc.data());
+        });
+
+        return clientData;
+    } catch (error) {
+        console.error('Error fetching artisans data:', error);
+        throw error;
+    }
+};
+
+export const messageUs = () => {
+    return async (dispatch, getState) => {
+        try {
+            const collectionRef = collection(db, 'Messages');
+
+            const bookingRef = doc(collectionRef);
+
+            const messageData1 = getState().message;
+
+            await setDoc(bookingRef, messageData1);
+
+            console.log('Message Successfully Sent');
+
+        } catch (error) {
+            console.error('Error sending message:', error);
             dispatch({ type: 'REGISTER_ERROR', payload: error.message });
         }
     };

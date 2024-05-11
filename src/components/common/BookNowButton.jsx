@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-const BookNowButton = () => {
+const BookNowButton = ({ artisan }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/tillyehonestproartisans/booking/service_detail');
+        // Navigate to the service detail page and pass the selected artisan's data as state
+        navigate('/tillyehonestproartisans/booking/service_detail', { state: { artisan: artisan } });
     };
 
     return (

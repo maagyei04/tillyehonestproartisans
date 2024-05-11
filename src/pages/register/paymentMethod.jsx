@@ -88,7 +88,7 @@ const PaymentMethod = () => {
 
                         <form onSubmit={handleSubmit}>
                             <p className="text-sm font-semibold mb-2">Mobile Money Number:</p>
-                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5'
+                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5 p-2'
                                 type="text"
                                 id="momoNumber"
                                 name="momoNumber"
@@ -104,7 +104,7 @@ const PaymentMethod = () => {
                             </div>
 
                             <p className="text-sm font-semibold mb-2">Bank:</p>
-                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5'
+                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5 p-2'
                                 type="text"
                                 id="bank"
                                 name="bank"
@@ -113,7 +113,7 @@ const PaymentMethod = () => {
                             />
 
                             <p className="text-sm font-semibold mb-2">Account Number:</p>
-                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5'
+                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5 p-2'
                                 type="text"
                                 id="bankAccountNumber"
                                 name="bankAccountNumber"
@@ -122,7 +122,7 @@ const PaymentMethod = () => {
                             />
 
                             <p className="text-sm font-semibold mb-2">Branch:</p>
-                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5'
+                            <input className='border border-gray-200 rounded-[10px] h-10 w-full mb-5 p-2'
                                 type="text"
                                 id="bankBranch"
                                 name="bankBranch"

@@ -8,12 +8,26 @@ import artisanPic from '../../assets/images/artisan.png';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { UserPlusIcon, CreditCardIcon, PaperAirplaneIcon, CurrencyDollarIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
 import BookNowButton from '../../components/common/BookNowButton';
+import { fetchLimitedArtisanData } from '../../stores/actions';
 
 const HomePage = () => {
+    const [artisans, setArtisans] = useState([]);
 
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+        const fetchArtisans = async () => {
+            try {
+                const artisansData = await fetchLimitedArtisanData(4);
+                setArtisans(artisansData);
+            } catch (error) {
+
+                console.error('Error fetching artisans:', error);
+            }
+        };
+
+        fetchArtisans();
+
         const handleResize = () => {
             // Check if the screen width is less than or equal to a certain value (e.g., 768 for mobile)
             setIsMobile(window.innerWidth <= 768);
@@ -31,26 +45,19 @@ const HomePage = () => {
         };
     }, []);
 
-    const servicesData = [
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-    ];
-
     const categoriesData = [
-        { name: 'John Doe', category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
-        { name: 'John Doe', category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
-        { name: 'John Doe', category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
-        { name: 'John Doe', category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
+        { category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
+        { category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
+        { category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
+        { category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
     ];
 
     const [currentPage, setCurrentPage] = useState(1);
     const servicesPerPage = 8;
-    const totalPages = Math.ceil(servicesData.length / servicesPerPage);
+    const totalPages = Math.ceil(artisans.length / servicesPerPage);
     const indexOfLastService = currentPage * servicesPerPage;
     const indexOfFirstService = indexOfLastService - servicesPerPage;
-    const currentServices = servicesData.slice(indexOfFirstService, indexOfLastService);
+    const currentServices = artisans.slice(indexOfFirstService, indexOfLastService);
     const categoriesServices = categoriesData.slice(indexOfFirstService, indexOfLastService);
 
     return (
@@ -105,17 +112,17 @@ const HomePage = () => {
             <div className="flex flex-col items-center justify-center py-2 px-2r">
                 <div className="flex flex-wrap justify-center">
                     {/* Display services data */}
-                    {currentServices.map((service, index) => (
+                    {currentServices.map((artisan, index) => (
                         <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
                             <div className="rounded overflow-hidden shadow-lg bg-white">
                                 <img className="w-full h-auto" src={person} alt="Person" />
                                 <div className="p-4">
-                                    <h2 className="font-semibold text-lg mb-2">{service.name}</h2>
+                                    <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                     <div className="flex justify-between mb-2">
-                                        <p className="text-sm text-gray-700 font-semibold">{service.category}</p>
-                                        <p className="text-sm">{service.charge}</p>
+                                        <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>
+                                        <p className="text-sm">{artisan.businessLocation}</p>
                                     </div>
-                                    <BookNowButton />
+                                    <BookNowButton artisan={artisan} />
                                 </div>
                             </div>
                         </div>
@@ -176,7 +183,7 @@ const HomePage = () => {
                             <div className="rounded overflow-hidden shadow-lg bg-white">
                                 <img className="w-full h-auto" src={person2} alt="Person" />
                                 <div className="p-4">
-                                    <h2 className="font-semibold text-lg mb-2">{category.name}</h2>
+                                    <h2 className="font-semibold text-lg mb-2">{category.category}</h2>
                                     <div className="flex justify-between mb-2">
                                         <p className="font-semibold text-gray-700">{category.numberOfPersonnel}</p>
                                     </div>

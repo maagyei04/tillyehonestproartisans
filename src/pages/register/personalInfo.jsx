@@ -16,7 +16,7 @@ const InfoForm = ({ formData, handleChange, handleSubmit }) => (
         <form onSubmit={handleSubmit}>
             <div className='flex flex-col mb-8 w-full'>
                 <label className='mb-2' htmlFor="firstName">First Name</label>
-                <input className='border border-gray-200 rounded-[10px] h-10'
+                <input className='border border-gray-200 rounded-[10px] h-10 p-2'
                     type="text"
                     id="firstName"
                     name="firstName"
@@ -27,7 +27,7 @@ const InfoForm = ({ formData, handleChange, handleSubmit }) => (
             </div>
             <div className='flex flex-col mb-8 w-full'>
                 <label className='mb-2' htmlFor="lastName">Surname</label>
-                <input className='border border-gray-200 rounded-[10px] h-10'
+                <input className='border border-gray-200 rounded-[10px] h-10 p-2'
                     type="text"
                     id="lastName"
                     name="lastName"
@@ -38,7 +38,7 @@ const InfoForm = ({ formData, handleChange, handleSubmit }) => (
             </div>
             <div className='flex flex-col mb-8 w-full'>
                 <label className='mb-2' htmlFor="phoneNumber">Phone Number</label>
-                <input className='border border-gray-200 rounded-[10px] h-10'
+                <input className='border border-gray-200 rounded-[10px] h-10 p-2'
                     type="text"
                     id="phoneNumber"
                     name="phoneNumber"
@@ -49,7 +49,7 @@ const InfoForm = ({ formData, handleChange, handleSubmit }) => (
             </div>
             <div className='flex flex-col mb-8 w-full'>
                 <label className='mb-2' htmlFor="email">Email</label>
-                <input className='border border-gray-200 rounded-[10px] h-10'
+                <input className='border border-gray-200 rounded-[10px] h-10 p-2'
                     type="text"
                     id="email"
                     name="email"
@@ -60,7 +60,7 @@ const InfoForm = ({ formData, handleChange, handleSubmit }) => (
             </div>
             <div className='flex flex-col mb-8 w-full'>
                 <label className='mb-2' htmlFor="password">Password</label>
-                <input className='border border-gray-200 rounded-[10px] h-10'
+                <input className='border border-gray-200 rounded-[10px] h-10 p-2'
                     type="text"
                     id="password"
                     name="password"
@@ -71,7 +71,7 @@ const InfoForm = ({ formData, handleChange, handleSubmit }) => (
             </div>
             <div className='flex flex-col mb-8 w-full'>
                 <label className='mb-2' htmlFor="confirmPassword">Confirm Password</label>
-                <input className='border border-gray-200 rounded-[10px] h-10'
+                <input className='border border-gray-200 rounded-[10px] h-10 p-2'
                     type="text"
                     id="confirmPassword"
                     name="password"

@@ -1,55 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Banner from '../../assets/images/exploreframe.png';
 import Person from '../../assets/images/carpentry.png';
 import BookNowButton from '../../components/common/BookNowButton';
+import { fetchAllArtisanData } from '../../stores/actions';
 
 const Explore = () => {
 
-    const servicesData = [
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-        { name: 'John Doe', category: 'Plumbing', charge: 'GHc 50' },
-    ];
+    const [artisans, setArtisans] = useState([]);
+
+    useEffect(() => {
+        const fetchArtisans = async () => {
+            try {
+                const artisansData = await fetchAllArtisanData();
+                setArtisans(artisansData);
+            } catch (error) {
+
+                console.error('Error fetching artisans:', error);
+            }
+        };
+
+        fetchArtisans();
+    }, []);
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const servicesPerPage = 8;
-    const totalPages = Math.ceil(servicesData.length / servicesPerPage);
+    const totalPages = Math.ceil(artisans.length / servicesPerPage);
     const indexOfLastService = currentPage * servicesPerPage;
     const indexOfFirstService = indexOfLastService - servicesPerPage;
-    const currentServices = servicesData.slice(indexOfFirstService, indexOfLastService);
+    const currentServices = artisans.slice(indexOfFirstService, indexOfLastService);
 
     // Pagination handlers
     const nextPage = () => setCurrentPage(currentPage + 1);
@@ -110,17 +89,17 @@ const Explore = () => {
             <div className="flex flex-col items-center justify-center py-2 px-2">
                 <div className="flex flex-wrap justify-center">
                     {/* Display services data */}
-                    {currentServices.map((service, index) => (
+                    {currentServices.map((artisan, index) => (
                         <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
                             <div className="rounded overflow-hidden shadow-lg bg-white">
                                 <img className="w-full h-auto" src={Person} alt="Person" />
                                 <div className="p-4">
-                                    <h2 className="font-semibold text-lg mb-2">{service.name}</h2>
+                                    <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                     <div className="flex justify-between mb-2">
-                                        <p className="text-sm text-gray-700 font-semibold">{service.category}</p>
-                                        <p className="text-sm">{service.charge}</p>
+                                        <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>
+                                        <p className="text-sm">{artisan.businessLocation}</p>
                                     </div>
-                                    <BookNowButton />
+                                    <BookNowButton artisan={artisan} />
                                 </div>
                             </div>
                         </div>
