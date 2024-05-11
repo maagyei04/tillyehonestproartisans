@@ -264,3 +264,22 @@ export const uploadGaurantorNoteImage = async (userId, file, dispatch) => {
     }
 };
 
+export const bookArtisan = (bookingData) => {
+    return async (dispatch, getState) => {
+        try {
+            const collectionRef = collection(db, 'Bookings');
+
+            const bookingRef = doc(collectionRef);
+
+            const bookingData1 = getState().client;
+
+            await setDoc(bookingRef, bookingData1);
+
+            console.log('Artisan Successfully Booked');
+
+        } catch (error) {
+            console.error('Error booking artisan:', error);
+            dispatch({ type: 'REGISTER_ERROR', payload: error.message });
+        }
+    };
+};

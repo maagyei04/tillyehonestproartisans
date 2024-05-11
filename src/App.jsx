@@ -20,35 +20,41 @@ import Layout from './components/layouts/BasicLayout';
 import { AuthProvider } from './contexts/authContext';
 import { store } from './stores/store'
 import { Provider } from 'react-redux'
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 function App() {
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        < Router >
-          <Layout>
-            <Routes>
-              <Route exact path="/tillyehonestproartisans/" element={<HomePage />} />
-              <Route path="/tillyehonestproartisans/about" element={<About />} />
-              <Route path="/tillyehonestproartisans/contact" element={<Contact />} />
-              <Route path="/tillyehonestproartisans/explore" element={<Explore />} />
-              <Route path="/tillyehonestproartisans/register" element={<Register />} />
-              <Route path="/tillyehonestproartisans/payment_method" element={<PaymentMethod />} />
-              <Route path="/tillyehonestproartisans/personal_info" element={<PersonalInfo />} />
-              <Route path="/tillyehonestproartisans/info_review" element={<InfoReview />} />
-              <Route path="/tillyehonestproartisans/business_details" element={<BusinessDetails />} />
-              <Route path="/tillyehonestproartisans/booking/service_detail" element={<BookingServiceDetail />} />
-              <Route path="/tillyehonestproartisans/booking/location_info" element={<BookingLocationInfo />} />
-              <Route path="/tillyehonestproartisans/booking/pick_date" element={<BookingPickDate />} />
-              <Route path="/tillyehonestproartisans/booking/review_info" element={<BookingReview />} />
-              <Route path="/tillyehonestproartisans/image_upload" element={<ImageUpload />} />
-              <Route path="/tillyehonestproartisans/login" element={<Login />} />
-              <Route element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </Router >
-      </AuthProvider>
-    </Provider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+      <Provider store={store}>
+        <AuthProvider>
+          < Router >
+            <Layout>
+              <Routes>
+                <Route exact path="/tillyehonestproartisans/" element={<HomePage />} />
+                <Route path="/tillyehonestproartisans/about" element={<About />} />
+                <Route path="/tillyehonestproartisans/contact" element={<Contact />} />
+                <Route path="/tillyehonestproartisans/explore" element={<Explore />} />
+                <Route path="/tillyehonestproartisans/register" element={<Register />} />
+                <Route path="/tillyehonestproartisans/payment_method" element={<PaymentMethod />} />
+                <Route path="/tillyehonestproartisans/personal_info" element={<PersonalInfo />} />
+                <Route path="/tillyehonestproartisans/info_review" element={<InfoReview />} />
+                <Route path="/tillyehonestproartisans/business_details" element={<BusinessDetails />} />
+                <Route path="/tillyehonestproartisans/booking/service_detail" element={<BookingServiceDetail />} />
+                <Route path="/tillyehonestproartisans/booking/location_info" element={<BookingLocationInfo />} />
+                <Route path="/tillyehonestproartisans/booking/pick_date" element={<BookingPickDate />} />
+                <Route path="/tillyehonestproartisans/booking/review_info" element={<BookingReview />} />
+                <Route path="/tillyehonestproartisans/image_upload" element={<ImageUpload />} />
+                <Route path="/tillyehonestproartisans/login" element={<Login />} />
+                <Route element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </Router >
+        </AuthProvider>
+      </Provider>
+    </LocalizationProvider>
+
   )
 }
 

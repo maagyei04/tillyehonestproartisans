@@ -1,8 +1,12 @@
+import React, { useState } from 'react';
 import userPic from '../../assets/images/register2.png';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setBookingServiceDetail } from '../../stores/reducers/bookingReducer';
 
-const LeftSide = () => (
-    <div className="text-center md:text-left md:w-2/4 mr-20 flex flex-col md:flex-col items-start">
+const RightSide = ({ handleSubmit }) => (
+    <div className="text-center md:text-left md:w-2/4 flex flex-col md:flex-col items-start">
         <h1 className="text-black-700 font-bold text-xl mb-5">Artisan Details</h1>
         <div className='flex flex-row mb-5'>
             <img alt='user_profile' className='h-[90px] w-[90px] rounded-[10px] mr-5' src={userPic} />
@@ -36,27 +40,63 @@ const LeftSide = () => (
         </div>
         <div className='flex flex-row w-full'>
             <button type='submit' className="bg-gray-200 text-black py-3 px-4 rounded-[10px] mr-5 hover:bg-gray-600 w-full">Previous</button>
-            <button type='submit' className="bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
+            <button type='submit' onClick={handleSubmit} className="bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
         </div>
     </div>
 );
 
-const RightSide = () => (
-    <div className='md:w-2/4 w-full mr-10 mt-5'>
+const LeftSide = ({ serviceDetail, handleChange, handleSubmit }) => (
+    <div className='md:w-3/4 w-full mr-10 mt-5 flex flex-col'>
         <h1 className="text-black-700 font-bold text-xl mb-1">Select your appointment specification</h1>
         <p className='text-gray-500 text-sm'>The information here will give the artisan a idea of the service you’d like, better still the artisan would
             have to come to the site to take the estimate</p>
+        <form onSubmit={handleSubmit}>
+            <div className='flex flex-col mb-8 w-full mt-5'>
+                <label className='mb-2' htmlFor="serviceDetail">Enter Service/Problem Details:</label>
+                <textarea
+                    className='border border-gray-200 rounded-[10px] p-2'
+                    type="text"
+                    id="serviceDetail"
+                    name="serviceDetail"
+                    value={serviceDetail}
+                    onChange={handleChange}
+                    placeholder="Give more information about the service please..."
+                    rows={7}
+                    required
+                />
+            </div>
+        </form>
     </div>
 );
 
 const BookingServiceDetail = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [serviceDetail, setServiceDetail] = useState('');
+
+    const handleChange = (event) => {
+        setServiceDetail(event.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        dispatch(setBookingServiceDetail(serviceDetail),);
+
+        console.log(serviceDetail);
+
+        navigate('/tillyehonestproartisans/booking/pick_date')
+
+    };
+
     return (
         <div className="flex flex-col items-start md:justify-center py-[90px] px-5 md:px-10">
             <h1 className="text-black-700 font-bold text-xl mb-1">Booking Process</h1>
             <p className='text-gray-500 text-sm'>Complete the forms provided to finish your booking process</p>
             <div className="flex flex-col md:flex-row items-start md:justify-between">
-                <RightSide />
-                <LeftSide />
+                <LeftSide handleChange={handleChange} serviceDetail={serviceDetail} handleSubmit={handleSubmit} />
+                <RightSide handleSubmit={handleSubmit} />
             </div>
         </div>
     );

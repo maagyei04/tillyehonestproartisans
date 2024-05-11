@@ -1,14 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/authContext';
 
 const BookNowButton = () => {
-    const { userLoggedIn } = useAuth();
     const navigate = useNavigate();
 
     const handleClick = () => {
-        userLoggedIn ?
-            navigate('/tillyehonestproartisans/booking/service_detail') :
-            navigate('/tillyehonestproartisans/register');
+        navigate('/tillyehonestproartisans/booking/service_detail');
     };
 
     return (

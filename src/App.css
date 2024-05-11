@@ -43,3 +43,12 @@
   background-size: cover;
   background-position: center;
 }
+
+.selected {
+  background-color: rgb(102, 0, 192);
+  color: white;
+}
+
+.select:hover {
+  cursor: pointer;
+}
