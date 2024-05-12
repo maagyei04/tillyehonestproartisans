@@ -114,9 +114,12 @@ const HomePage = () => {
                     {/* Display services data */}
                     {currentServices.map((artisan, index) => (
                         <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
-                            <div className="rounded overflow-hidden shadow-lg bg-white">
-                                <img className="w-full h-auto" src={person} alt="Person" />
-                                <div className="p-4">
+                            <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[300px] h-[400px]">
+                                <div className='w-[300px] h-[250px]'>
+                                    <img className="w-full h-full object-cover" src={artisan.passportImage} alt="Person" />
+                                </div>
+
+                                <div className="p-4 w-[300px] h-[200px]">
                                     <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                     <div className="flex justify-between mb-2">
                                         <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>

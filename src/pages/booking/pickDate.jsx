@@ -14,7 +14,9 @@ const RightSide = ({ handleSubmit, userLoggedIn, artisan }) => (
     <div className="text-center md:text-left md:w-2/6 flex flex-col md:flex-col items-start">
         <h1 className="text-black-700 font-bold text-xl mb-5">Artisan Details</h1>
         <div className='flex flex-row mb-5'>
-            <img alt='user_profile' className='h-[90px] w-[90px] rounded-[10px] mr-5' src={userPic} />
+            <div className='h-[90px] w-[160px] mr-5'>
+                <img className="w-full h-full object-cover rounded-[10px]" src={artisan.passportImage} alt="user_profile" />
+            </div>
             <div className='flex flex-col text-left'>
                 <h3 className='font-semibold'>{artisan.firstName} {artisan.lastName}</h3>
                 <div className='flex'>

@@ -75,9 +75,10 @@ const Header = () => {
                     {
                         userLoggedIn ?
                             <>
-                                <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${isMobile ? 'block' : 'hidden'}`}>
-                                    Hi <>{firstName}</>! logout
-                                    <UserIcon className='text-white-600 h-5 w-5 ml-1' />
+                                <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex ${isMobile ? 'block' : 'hidden'}`}>
+                                    <UserIcon className='text-white-600 h-5 w-5 ml-1 mr-2' />
+
+                                    logout
                                 </button>
                             </>
                             :

@@ -7,8 +7,30 @@ import { messageUs } from '../../stores/actions';
 const Information = ({ isMobile }) => (
     <div className="text-center md:text-left md:w-2/4 md:mr-20 flex flex-col md:flex-row items-center">
         <div>
-            <h2 className="font-bold text-[30px] mb-1">Learn More About<span className="text-violet-500 italic"> Tilly&E</span></h2>
-            <p className="text-sm mb-8">Looking to reclaim more time for the things that matter most to you? Look no further than TillY&E. With TillY&E, finding skilled and reliable local service providers is a breeze. Whether you need a plumber, mover, painter, or cleaner, our app connects you with trusted professionals in your area. Easily hire, rate, and review service providers, and effortlessly connect with independent contractors for all your service needs, right where you are.</p>
+            <h2 className="font-bold text-[30px] mb-1">Learn More About<span className="text-violet-500 italic"> Abes job Consult</span></h2>
+            <p className="text-sm mb-8 text-left">Welcome to Abes job Consult, where Honesty, and excellence is born.
+                At Abes Job Consult, we understand that finding the right job or the perfect trained
+                person can be challenging. That's why we have made it our mission to simplify the
+                process, leveraging on technology to have trained personnels to streamline
+                recruitment for both employers and job seekers.
+            </p>
+            <p className="text-sm mb-8 text-left">
+                Our team consists of artisans, shop attendants, accountants, cashiers, web
+                designers, customer service trainers, elderly care, nanny, teachers and many more.
+                With a deep understanding of various job markets, we have a well-equipped, honest
+                and hard working team to support businesses of all sizes, we are here to help build
+                high-performing teams. Finding the right job can be a life-changing experience, and
+                we're here to support you every step of the way. We are committed to empowering
+                you to succeed in the job market.
+            </p>
+            <p className="text-sm mb-8 text-left">
+                We uphold the highest standards of ethics and transparency in all our interactions,
+                ensuring fairness and trustworthiness throughout the recruitment process.
+                At Abes Job Consult, we believe that every individual deserves the opportunity to
+                fulfil their potential, and every business deserves access to top talent, honest and
+                hardworking workers. Join us in shaping the future of recruitment and unleashing the
+                power of human potential. Let's embark on this
+            </p>
 
             <h2 className="font-semibold text-[30px] mb-1">Visit<span className="text-violet-500 italic"> Us</span></h2>
             <p className="text-sm font-semibold mb-4 text-gray-700 flex">Come say hello at our office<br></br>6311 Ivy Lane, Suite 700, Greenbelt, MD 20770</p>
@@ -117,8 +139,8 @@ const About = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center py-40 px-10">
-            <div className="flex flex-col md:flex-row items-center justify-between">
+        <div className="flex flex-col items-center justify-center py-20 px-5">
+            <div className="flex flex-col md:flex-row items-start justify-between">
                 <Information isMobile={isMobile} />
                 <ContactForm formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
             </div>

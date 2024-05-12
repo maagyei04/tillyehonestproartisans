@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
     return (
         <footer class="bg-violet-300 font-sans dark:bg-gray-900">
@@ -19,24 +21,21 @@ const Footer = () => {
                         <p class="font-semibold text-gray-800 dark:text-white">Company</p>
 
                         <div class="flex flex-col items-start mt-5 space-y-2">
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Home</p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Who We Are</p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Blogs</p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Contact Us</p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Our Team</p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/'}>Home</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/about'}>Who We Are</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/explore'}>Explore Artisans</Link></p>
 
 
                         </div>
                     </div>
 
                     <div>
-                        <p class="font-semibold text-gray-800 dark:text-white">Products</p>
+                        <p class="font-semibold text-gray-800 dark:text-white">Views</p>
 
                         <div class="flex flex-col items-start mt-5 space-y-2">
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Employee database</p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Payroll</p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Absences</p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Time Tracking</p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/'}>Admin Dashboard</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/'}>Artisan Dashboard</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/'}>Client Dashboard</Link></p>
                         </div>
                     </div>
                 </div>
@@ -56,7 +55,7 @@ const Footer = () => {
                         <img src="https://www.svgrepo.com/show/28145/linkedin.svg" width="30" height="30" alt="in" />
                     </div>
                 </div>
-                <p class="font-sans p-8 text-start md:text-center md:text-lg md:p-4">© 2023 Tilly & E Honest Pro Artisans. All rights reserved.</p>
+                <p class="font-sans p-8 text-start md:text-center md:text-lg md:p-4">© 2023 Abes job Consult. All rights reserved.</p>
             </div>
         </footer>
     );

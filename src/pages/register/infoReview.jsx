@@ -42,6 +42,8 @@ const InfoReview = () => {
         }
     }
     console.log(artisanData);
+    console.log(clientData);
+
     return (
         <div className="flex flex-col items-center justify-between py-[100px] px-4 w-full">
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
