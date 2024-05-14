@@ -30,11 +30,14 @@ const InfoReview = () => {
 
             if (clientData.userType === 'client') {
                 await dispatch(registerClient(clientData));
+                navigate('/tillyehonestproartisans/');
+
             } else {
                 await dispatch(registerArtisan(artisanData));
+                navigate('/tillyehonestproartisans/register_complete');
+
             }
 
-            navigate('/tillyehonestproartisans/');
         } catch (error) {
             console.error('Error occurred:', error);
         } finally {
