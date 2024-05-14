@@ -26,10 +26,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-
       <Provider store={store}>
         <AuthProvider>
-          < Router >
+          <Router>
             <Layout>
               <Routes>
                 <Route exact path="/tillyehonestproartisans/" element={<HomePage />} />

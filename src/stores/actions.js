@@ -169,98 +169,129 @@ export const loginArtisan = (artisanData) => {
 
 export const uploadPassportImage = async (userId, file, dispatch) => {
     try {
+
+        let blob;
+        if (file instanceof Blob) {
+            blob = file;
+        } else {
+            throw new Error('The provided file is not a Blob or File object');
+        }
+
         const metadata = {
-            contentType: 'image/jpg' // Specify the MIME type here
+            contentType: blob.type || 'image/jpeg'
         };
 
-        const imageRef = ref(storage, `artisan_images/passports/${userId}`)
+        const imageRef = ref(storage, `artisan_images/passports/${userId}`);
 
-        const uploadTask = await uploadBytes(imageRef, file, metadata)
+        const uploadTask = await uploadBytes(imageRef, blob, metadata);
 
-        // Get the download URL for the uploaded image
-        const imageUrl = await getDownloadURL(uploadTask.ref)
+
+        const imageUrl = await getDownloadURL(uploadTask.ref);
 
         console.log('Passport Image successfully uploaded:', imageUrl);
 
-        return imageUrl; // Return the image URL
+        return imageUrl;
     } catch (error) {
         console.error('Error uploading passport image:', error);
         dispatch({ type: 'UPLOAD_IMAGE_ERROR', payload: error.message });
-        throw error; // Rethrow the error to be caught by the component
+        throw error;
     }
 };
 
 export const uploadGhanaCardImage = async (userId, file, dispatch) => {
     try {
+
+        let blob;
+        if (file instanceof Blob) {
+            blob = file;
+        } else {
+            throw new Error('The provided file is not a Blob or File object');
+        }
+
         const metadata = {
-            contentType: 'image/jpg' // Specify the MIME type here
+            contentType: blob.type || 'image/jpeg'
         };
 
-        const imageRef = ref(storage, `artisan_images/ghana_cards/${userId}`)
+        const imageRef = ref(storage, `artisan_images/ghana_cards/${userId}`);
 
-        const uploadTask = await uploadBytes(imageRef, file, metadata)
+        const uploadTask = await uploadBytes(imageRef, blob, metadata);
 
-        // Get the download URL for the uploaded image
-        const imageUrl = await getDownloadURL(uploadTask.ref)
+
+        const imageUrl = await getDownloadURL(uploadTask.ref);
 
         console.log('Ghana Card Image successfully uploaded:', imageUrl);
 
-        return imageUrl; // Return the image URL
+        return imageUrl;
     } catch (error) {
         console.error('Error uploading ghana card image:', error);
         dispatch({ type: 'UPLOAD_IMAGE_ERROR', payload: error.message });
-        throw error; // Rethrow the error to be caught by the component
+        throw error;
     }
+
 };
 
 export const uploadPoliceReportImage = async (userId, file, dispatch) => {
     try {
+
+        let blob;
+        if (file instanceof Blob) {
+            blob = file;
+        } else {
+            throw new Error('The provided file is not a Blob or File object');
+        }
+
         const metadata = {
-            contentType: 'image/jpg' // Specify the MIME type here
+            contentType: blob.type || 'image/jpeg'
         };
 
-        const imageRef = ref(storage, `artisan_images/police_reports/${userId}`)
+        const imageRef = ref(storage, `artisan_images/police_reports/${userId}`);
 
-        const uploadTask = await uploadBytes(imageRef, file, metadata)
+        const uploadTask = await uploadBytes(imageRef, blob, metadata);
 
-        // Get the download URL for the uploaded image
-        const imageUrl = await getDownloadURL(uploadTask.ref)
+
+        const imageUrl = await getDownloadURL(uploadTask.ref);
 
         console.log('Police Report Image successfully uploaded:', imageUrl);
 
-        return imageUrl; // Return the image URL
+        return imageUrl;
     } catch (error) {
         console.error('Error uploading police report image:', error);
         dispatch({ type: 'UPLOAD_IMAGE_ERROR', payload: error.message });
-        throw error; // Rethrow the error to be caught by the component
+        throw error;
     }
 
 };
 
+
 export const uploadGaurantorNoteImage = async (userId, file, dispatch) => {
     try {
 
+        let blob;
+        if (file instanceof Blob) {
+            blob = file;
+        } else {
+            throw new Error('The provided file is not a Blob or File object');
+        }
+
+
         const metadata = {
-            contentType: 'image/jpg' // Specify the MIME type here
+            contentType: blob.type || 'image/jpeg'
         };
 
-        const imageRef = ref(storage, `artisan_images/gaurantor_images/${userId}`)
+        const imageRef = ref(storage, `artisan_images/gaurantor_images/${userId}`);
+
+        const uploadTask = await uploadBytes(imageRef, blob, metadata);
 
 
-        const uploadTask = await uploadBytes(imageRef, file, metadata)
-
-
-        // Get the download URL for the uploaded image
-        const imageUrl = await getDownloadURL(uploadTask.ref)
-
+        const imageUrl = await getDownloadURL(uploadTask.ref);
 
         console.log('Gaurantor Note Image successfully uploaded:', imageUrl);
 
-        return imageUrl; // Return the image URL
+        return imageUrl;
     } catch (error) {
         console.error('Error uploading gaurantor note image:', error);
         dispatch({ type: 'UPLOAD_IMAGE_ERROR', payload: error.message });
-        throw error; // Rethrow the error to be caught by the component
+        throw error;
     }
 };
 

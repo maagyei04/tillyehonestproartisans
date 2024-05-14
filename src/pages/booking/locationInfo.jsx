@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import userPic from '../../assets/images/register2.png';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -16,7 +15,8 @@ import {
     setBookingRegion,
     setBookingTown,
     setBookinglandmark,
-    setBookingClientId
+    setBookingClientId,
+    setBookingArtisanId
 } from '../../stores/reducers/bookingReducer';
 
 const RightSide = ({ handleSubmit, userLoggedIn, artisan }) => (
@@ -257,6 +257,7 @@ const BookingLocationInfo = () => {
         dispatch(setBookingRegion(formData.region));
         dispatch(setBookingTown(formData.cityTown));
         dispatch(setBookinglandmark(formData.landmark));
+        dispatch(setBookingArtisanId(artisan.artisanId));
 
         console.log(formData);
         console.log(userLoggedIn);

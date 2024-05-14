@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
-import userPic from '../../assets/images/register2.png';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { useDispatch } from 'react-redux';
@@ -11,7 +10,7 @@ import { useAuth } from '../../contexts/authContext';
 
 
 const RightSide = ({ handleSubmit, userLoggedIn, artisan }) => (
-    <div className="text-center md:text-left md:w-2/6 flex flex-col md:flex-col items-start">
+    <div className="text-center md:text-left md:w-2/6 flex flex-col md:flex-col items-start px-5">
         <h1 className="text-black-700 font-bold text-xl mb-5">Artisan Details</h1>
         <div className='flex flex-row mb-5'>
             <div className='h-[90px] w-[160px] mr-5'>
@@ -53,19 +52,19 @@ const RightSide = ({ handleSubmit, userLoggedIn, artisan }) => (
 );
 
 const LeftSide = ({ value, setValue, selectedOption, handleOptionClick }) => (
-    <div className='md:w-4/6 w-full mt-5 flex flex-col'>
+    <div className='md:w-4/6 w-full mt-5 flex flex-col md:px-0'>
         <div className="flex flex-col">
-            <div className="flex flex-col md:flex-row items-start">
-                <div className="text-center md:text-left mr-5 md:w-2/4 flex flex-col md:flex-col items-start">
+            <div className="flex flex-col md:flex-row items-center">
+                <div className="text-center md:text-left px-5 md:px-0 md:w-2/4 flex flex-col md:flex-col items-start">
                     <h1 className="text-black-700 font-bold text-lg mb-5">Select Start Date</h1>
-                    <div className='rounded-[10px] border border-gray-300 h-auto w-auto p-5 md:mr-2 mr-0 mb-5'>
+                    <div className='rounded-[10px] border border-gray-300 h-auto w-auto p-2 md:p-5 md:mr-2 mr-0 mb-5'>
                         <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
                     </div>
                 </div>
-                <div className='md:w-2/4 w-full mr-1 flex flex-col'>
+                <div className='md:w-2/4 w-full px-5 md:px-0 mr-1 flex flex-col'>
                     <h1 className="text-black-700 font-bold text-lg mb-5">Expected Start Time</h1>
                     <div className='flex flex-col md:flex-row'>
-                        <div className='rounded-[10px] border border-gray-300 h-auto w-auto p-2 md:mr-5 mb-5'>
+                        <div className='rounded-[10px] border border-gray-300 md:h-auto md:w-auto p-2 md:mr-5 mb-5'>
                             <div className={`option ${selectedOption === '6:00 am' ? 'selected' : ''} rounded-[20px] select border border-gray-300 h-auto w-auto p-2 px-10 mb-2 text-blue-600`} onClick={() => handleOptionClick('6:00 am')}>
                                 6:00 am
                             </div>
@@ -121,7 +120,7 @@ const BookingPickDate = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [value, setValue] = React.useState(dayjs('2024-05-10'));
+    const [value, setValue] = React.useState(dayjs());
 
     const [selectedOption, setSelectedOption] = useState('8:00 am');
 
@@ -143,7 +142,7 @@ const BookingPickDate = () => {
     };
 
     return (
-        <div className="flex flex-col items-center md:justify-center py-[90px] md:px-10 px-5">
+        <div className="flex flex-col items-center md:justify-center py-[90px] md:px-10">
             <div className="flex flex-col md:flex-row items-start md:justify-between">
                 <LeftSide value={value} setValue={setValue} selectedOption={selectedOption} handleOptionClick={handleOptionClick} />
                 <RightSide handleSubmit={handleSubmit} userLoggedIn={userLoggedIn} artisan={artisan} />

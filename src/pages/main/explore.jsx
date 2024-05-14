@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Banner from '../../assets/images/exploreframe.png';
-import Person from '../../assets/images/carpentry.png';
 import BookNowButton from '../../components/common/BookNowButton';
 import { fetchAllArtisanData } from '../../stores/actions';
 
 const Explore = () => {
 
     const [artisans, setArtisans] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const fetchArtisans = async () => {
@@ -21,6 +21,20 @@ const Explore = () => {
 
         fetchArtisans();
     }, []);
+
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+    };
+
+    const filteredArtisans = artisans.filter((artisan) => {
+        const nameMatch = searchQuery && artisan.firstName.toLowerCase().includes(searchQuery.toLowerCase());
+        const categoryMatch = selectedCategory && artisan.businessField.toLowerCase() === selectedCategory.toLowerCase();
+        // Check if both conditions match
+        return (!searchQuery || nameMatch) && (!selectedCategory || categoryMatch);
+    });
+
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +58,9 @@ const Explore = () => {
                 <div className="flex-shrink-0 mb-3 py-2">
                     <input
                         type="text"
-                        placeholder="Search For Any Service..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search for artisans..."
                         className="border border-gray-300 rounded-[10px] px-2 py-2 w-[250px] md:w-[400px] focus:outline-none"
                     />
                     <button className="bg-green-500 rounded-[10px] text-white px-4 py-2 ml-2 hover:bg-violet-600 focus:outline-none">Search</button>
@@ -79,17 +95,17 @@ const Explore = () => {
                     Popular:
                 </h2>
                 <ul className="flex flex-wrap md:justify-center justify-start ml-5"> {/* Centered tags horizontally */}
-                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Plumbering</li> {/* Adjusted size for mobile */}
-                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Electrical Engineering</li> {/* Adjusted size for mobile */}
-                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Construction</li> {/* Adjusted size for mobile */}
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base" onClick={() => handleCategorySelect('plumbing')}>Plumbering</li>
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base" onClick={() => handleCategorySelect('Electrical Engineering')}>Electrical Engineering</li>
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base" onClick={() => handleCategorySelect('Construction')}>Construction</li>
                 </ul>
             </div>
 
             {/* Explore Content */}
             <div className="flex flex-col items-center justify-center py-2 px-2">
-                <div className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-center w-full">
                     {/* Display services data */}
-                    {currentServices.map((artisan, index) => (
+                    {filteredArtisans.map((artisan, index) => (
                         <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
                             <div className="rounded-[10px] overflow-hidden shadow-violet-500 shadow-xl bg-white w-[300px] h-[400px]">
                                 <div className='w-[300px] h-[250px]'>

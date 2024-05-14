@@ -19,6 +19,7 @@ const initialState = {
     ghanaCardImage: '',
     policeReportImage: '',
     gaurantorNoteImage: '',
+    status: false,
 };
 
 export const artisanSlice = createSlice({

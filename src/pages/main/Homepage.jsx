@@ -9,11 +9,18 @@ import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { UserPlusIcon, CreditCardIcon, PaperAirplaneIcon, CurrencyDollarIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
 import BookNowButton from '../../components/common/BookNowButton';
 import { fetchLimitedArtisanData } from '../../stores/actions';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
     const [artisans, setArtisans] = useState([]);
 
     const [isMobile, setIsMobile] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleSearchClick = () => {
+        navigate('/tillyehonestproartisans/explore');
+    }
 
     useEffect(() => {
         const fetchArtisans = async () => {
@@ -74,11 +81,12 @@ const HomePage = () => {
             {/* Search Bar */}
             <div className="flex flex-row md:flex-row md:items-center mb-3"> {/* Adjusted layout for mobile */}
                 <input
+                    onClick={handleSearchClick}
                     type="text"
                     placeholder="Search For Any Service..."
                     className="flex-1 border border-gray-300 rounded-[10px] px-2 py-2 mb-0 md:mb-0 md:mr-3 w-[250px] md:w-[400px] focus:outline-none"
                 />
-                <button className="md:ml-0 ml-2 bg-green-500 rounded-[10px] text-white px-4 py-2 hover:bg-violet-600 focus:outline-none">Search</button>
+                <button onClick={handleSearchClick} className="md:ml-0 ml-2 bg-green-500 rounded-[10px] text-white px-4 py-2 hover:bg-violet-600 focus:outline-none">Search</button>
             </div>
 
             {/* Categories Container */}

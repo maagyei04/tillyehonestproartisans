@@ -16,6 +16,7 @@ const initialState = {
     bookingPhoneNumber: '',
     bookingClientId: '',
     bookingArtisanId: '',
+    completed: false,
 };
 
 export const bookingSlice = createSlice({
