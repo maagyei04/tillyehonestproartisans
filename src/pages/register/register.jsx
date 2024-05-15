@@ -18,10 +18,10 @@ const Register = () => {
             dispatch(setUserType(selectedCategory));
             switch (selectedCategory) {
                 case 'artisan':
-                    navigate('/tillyehonestproartisans/personal_info')
+                    navigate('/register/personal_info')
                     break;
                 case 'client':
-                    navigate('/tillyehonestproartisans/personal_info');
+                    navigate('/register/personal_info');
                     break;
 
                 default:
@@ -91,7 +91,7 @@ const Register = () => {
                             <button onClick={handleClick} className="bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
                         </div>
 
-                        <Link className='font-bold text-[13px] mt-5 ml-5 mb-1' to={'/tillyehonestproartisans/login'}>Do you have an account already? <span className="text-green-500 italic">Login Now</span></Link>
+                        <Link className='font-bold text-[13px] mt-5 ml-5 mb-1' to={'/login'}>Do you have an account already? <span className="text-green-500 italic">Login Now</span></Link>
 
                     </div>
                 </div>

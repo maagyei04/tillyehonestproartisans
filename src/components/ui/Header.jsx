@@ -22,20 +22,20 @@ const Header = () => {
 
 
     let Links = [
-        { name: "HOME", link: "/tillyehonestproartisans/" },
-        { name: "EXPLORE", link: "/tillyehonestproartisans/explore" },
-        { name: "ABOUT US", link: "/tillyehonestproartisans/about" },
+        { name: "HOME", link: "/" },
+        { name: "EXPLORE", link: "explore" },
+        { name: "ABOUT US", link: "about" },
     ];
 
     let [open, setOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
     const handleClick = () => {
-        LogoutUser().then(() => { navigate('/tillyehonestproartisans') })
+        LogoutUser().then(() => { navigate('/') })
     };
 
     const register = () => {
-        navigate('/tillyehonestproartisans/register');
+        navigate('register');
     };
 
 

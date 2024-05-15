@@ -40,7 +40,7 @@ const RightSide = ({ handleSubmit, userLoggedIn, artisan }) => (
             </div>
             <div className={userLoggedIn ? 'hidden' : 'block flex flex-row mb-5'}>
                 <CheckBadgeIcon className='h-[30px] mr-5 text-gray-500' />
-                <p className='text-gray-700'>Sign up and keep track of all your booking appointments<br></br><span className='text-violet-600'><Link to={'/tillyehonestproartisans/register'}>Sign Up Now!</Link></span> </p>
+                <p className='text-gray-700'>Sign up and keep track of all your booking appointments<br></br><span className='text-violet-600'><Link to={'/register'}>Sign Up Now!</Link></span> </p>
             </div>
 
         </div>
@@ -137,7 +137,7 @@ const BookingPickDate = () => {
         console.log(value.format('YYYY-M-D'));
         console.log(selectedOption);
 
-        navigate('/tillyehonestproartisans/booking/location_info', { state: { artisan: artisan } })
+        navigate('/booking/location_info', { state: { artisan: artisan } })
 
     };
 

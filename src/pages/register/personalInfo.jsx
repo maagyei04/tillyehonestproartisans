@@ -123,9 +123,9 @@ const PersonalInfo = () => {
 
         userType === 'client' ?
 
-            navigate('/tillyehonestproartisans/info_review')
+            navigate('/register/info_review')
             :
-            navigate('/tillyehonestproartisans/payment_method');
+            navigate('/register/payment_method');
 
     };
 

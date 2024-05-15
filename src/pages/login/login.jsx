@@ -27,7 +27,7 @@ const Login = () => {
         e.preventDefault();
         await dispatch(loginClient(formData));
         console.log(formData);
-        navigate('/tillyehonestproartisans')
+        navigate('/')
     };
 
     return (

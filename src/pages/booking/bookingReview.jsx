@@ -39,7 +39,7 @@ const RightSide = ({ handleClick, loading, userLoggedIn, artisan }) => (
             </div>
             <div className={userLoggedIn ? 'hidden' : 'block flex flex-row mb-5'}>
                 <CheckBadgeIcon className='h-[30px] mr-5 text-gray-500' />
-                <p className='text-gray-700'>Sign up and keep track of all your booking appointments<br></br><span className='text-violet-600'><Link to={'/tillyehonestproartisans/register'}>Sign Up Now!</Link></span> </p>
+                <p className='text-gray-700'>Sign up and keep track of all your booking appointments<br></br><span className='text-violet-600'><Link to={'/register'}>Sign Up Now!</Link></span> </p>
             </div>
 
         </div>
@@ -58,7 +58,7 @@ const LeftSide = ({ bookingData }) => (
         <div>
             <div className="flex justify-between">
                 <span className='font-bold'>Service Information</span>
-                <Link to={'/tillyehonestproartisans/booking/service_detail'}><span><PencilIcon className='h-3 w-4 ml-5 mr-5' /></span></Link>
+                <Link to={'booking/service_detail'}><span><PencilIcon className='h-3 w-4 ml-5 mr-5' /></span></Link>
             </div>
             <div className="flex flex-col justify-between mb-5">
                 <span className='text-gray-600'>Service Detail</span>
@@ -71,7 +71,7 @@ const LeftSide = ({ bookingData }) => (
 
             <div className="flex justify-between">
                 <span className='font-bold'>Date & Time</span>
-                <Link to={'/tillyehonestproartisans/booking/pick_date'}><span><PencilIcon className='h-3 w-4 ml-5 mr-5' /></span></Link>
+                <Link to={'booking/pick_date'}><span><PencilIcon className='h-3 w-4 ml-5 mr-5' /></span></Link>
             </div>
             <div className="flex justify-between">
                 <span className='text-gray-600'>Estimate Date</span>
@@ -84,7 +84,7 @@ const LeftSide = ({ bookingData }) => (
 
             <div className="flex justify-between">
                 <span className='font-bold'>Location Information</span>
-                <Link to={'/tillyehonestproartisans/booking/location_info'}><span><PencilIcon className='h-3 w-4 ml-5 mr-5' /></span></Link>
+                <Link to={'booking/location_info'}><span><PencilIcon className='h-3 w-4 ml-5 mr-5' /></span></Link>
             </div>
             <div className="flex justify-between">
                 <span className='text-gray-600'>Digital Address</span>
@@ -148,7 +148,7 @@ const BookingReview = () => {
 
             dispatch(bookArtisan(bookingData));
 
-            navigate('/tillyehonestproartisans/explore');
+            navigate('/explore');
         } catch (error) {
             console.error('Error occurred:', error);
         } finally {

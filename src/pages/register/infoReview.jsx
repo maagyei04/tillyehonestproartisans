@@ -30,11 +30,11 @@ const InfoReview = () => {
 
             if (clientData.userType === 'client') {
                 await dispatch(registerClient(clientData));
-                navigate('/tillyehonestproartisans/');
+                navigate('/');
 
             } else {
                 await dispatch(registerArtisan(artisanData));
-                navigate('/tillyehonestproartisans/register_complete');
+                navigate('/register/register_complete');
 
             }
 
@@ -58,7 +58,7 @@ const InfoReview = () => {
 
                         <div className="flex justify-between">
                             <span className='font-bold'>Personal Information</span>
-                            <Link to={'/tillyehonestproartisans/personal_info'}><span><PencilIcon className='h-4 w-4 ml-5 mr-5' /></span></Link>
+                            <Link to={'/register/personal_info'}><span><PencilIcon className='h-4 w-4 ml-5 mr-5' /></span></Link>
                         </div>
                         <div className="flex justify-between">
                             <span className='text-gray-600'>First Name</span>
@@ -85,7 +85,7 @@ const InfoReview = () => {
                                 <>
                                     <div className="flex justify-between">
                                         <span className='font-bold'>Payment Method</span>
-                                        <Link to={'/tillyehonestproartisans/payment_method'}><span><PencilIcon className='h-4 w-4 ml-5 mr-5' /></span></Link>
+                                        <Link to={'/register/payment_method'}><span><PencilIcon className='h-4 w-4 ml-5 mr-5' /></span></Link>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className='text-gray-600'>Mobile Network</span>
@@ -99,7 +99,7 @@ const InfoReview = () => {
 
                                     <div className="flex justify-between">
                                         <span className='font-bold'>Business Details</span>
-                                        <Link to={'/tillyehonestproartisans/business_details'}><span><PencilIcon className='h-4 w-4 ml-5 mr-5' /></span></Link>
+                                        <Link to={'/register/business_details'}><span><PencilIcon className='h-4 w-4 ml-5 mr-5' /></span></Link>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className='text-gray-600'>Field</span>

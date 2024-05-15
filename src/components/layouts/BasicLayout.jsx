@@ -1,12 +1,15 @@
 import React from 'react';
 import Footer from '../ui/Footer';
 import Header from '../ui/Header';
+import { Outlet } from 'react-router-dom';
 
-function Layout({ children }) {
+function Layout() {
     return (
         <div>
             <Header />
-            <main>{children}</main>
+            <main>
+                <Outlet />
+            </main>
             <Footer />
         </div>
     );

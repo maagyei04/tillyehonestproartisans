@@ -7,7 +7,7 @@ const RegisterComplete = () => {
     const navigate = useNavigate();
 
     const handleGoToHomepage = () => {
-        navigate('/tillyehonestproartisans/');
+        navigate('/');
     };
 
     return (

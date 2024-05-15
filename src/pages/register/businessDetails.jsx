@@ -39,7 +39,7 @@ const BusinessDetails = () => {
         dispatch(setBusinessLocation(optionData.businessLocation),);
 
         console.log(optionData);
-        navigate('/tillyehonestproartisans/info_review');
+        navigate('/register/info_review');
     };
 
 

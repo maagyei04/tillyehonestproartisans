@@ -21,9 +21,9 @@ const Footer = () => {
                         <p class="font-semibold text-gray-800 dark:text-white">Company</p>
 
                         <div class="flex flex-col items-start mt-5 space-y-2">
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/'}>Home</Link></p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/about'}>Who We Are</Link></p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/explore'}>Explore Artisans</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/'}>Home</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/about'}>Who We Are</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/explore'}>Explore Artisans</Link></p>
 
 
                         </div>
@@ -33,9 +33,9 @@ const Footer = () => {
                         <p class="font-semibold text-gray-800 dark:text-white">Views</p>
 
                         <div class="flex flex-col items-start mt-5 space-y-2">
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/'}>Admin Dashboard</Link></p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/'}>Artisan Dashboard</Link></p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/tillyehonestproartisans/'}>Client Dashboard</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/artisan_dashboard'}>Admin Dashboard</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/artisan_dashboard'}>Artisan Dashboard</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/client_dashboard'}>Client Dashboard</Link></p>
                         </div>
                     </div>
                 </div>

@@ -81,7 +81,7 @@ const ImageUpload = () => {
 
         e.preventDefault();
 
-        navigate('/tillyehonestproartisans/business_details');
+        navigate('/register/business_details');
         console.log(artisanData);
     };
 

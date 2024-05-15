@@ -7,7 +7,7 @@ const BookingComplete = () => {
     const navigate = useNavigate();
 
     const handleGoToHomepage = () => {
-        navigate('/tillyehonestproartisans/');
+        navigate('/');
     };
 
     return (

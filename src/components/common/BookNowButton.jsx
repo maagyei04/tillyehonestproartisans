@@ -5,7 +5,7 @@ const BookNowButton = ({ artisan }) => {
 
     const handleClick = () => {
         // Navigate to the service detail page and pass the selected artisan's data as state
-        navigate('/tillyehonestproartisans/booking/service_detail', { state: { artisan: artisan } });
+        navigate('/booking/service_detail', { state: { artisan: artisan } });
     };
 
     return (

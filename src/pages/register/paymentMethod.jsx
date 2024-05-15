@@ -45,7 +45,7 @@ const PaymentMethod = () => {
         dispatch(setBankBranch(formData.bankBranch),);
 
         console.log(formData);
-        navigate('/tillyehonestproartisans/image_upload');
+        navigate('/register/image_upload');
     };
 
     return (

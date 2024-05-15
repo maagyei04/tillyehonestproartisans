@@ -19,7 +19,7 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     const handleSearchClick = () => {
-        navigate('/tillyehonestproartisans/explore');
+        navigate('/explore');
     }
 
     useEffect(() => {

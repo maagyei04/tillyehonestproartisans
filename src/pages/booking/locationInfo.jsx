@@ -50,7 +50,7 @@ const RightSide = ({ handleSubmit, userLoggedIn, artisan }) => (
             </div>
             <div className={userLoggedIn ? 'hidden' : 'block flex flex-row mb-5'}>
                 <CheckBadgeIcon className='h-[30px] mr-5 text-gray-500' />
-                <p className='text-gray-700'>Sign up and keep track of all your booking appointments<br></br><span className='text-violet-600'><Link to={'/tillyehonestproartisans/register'}>Sign Up Now!</Link></span> </p>
+                <p className='text-gray-700'>Sign up and keep track of all your booking appointments<br></br><span className='text-violet-600'><Link to={'/register'}>Sign Up Now!</Link></span> </p>
             </div>
 
         </div>
@@ -65,7 +65,7 @@ const LeftSide = ({ formData, handleChange, userLoggedIn }) => (
     <div className='md:w-3/4 w-full mr-10 mt-5 flex flex-col'>
         <div className={userLoggedIn ? 'hidden' : 'block'}>
             <h1 className="text-black-700 font-bold text-xl mb-1">Personal Information</h1>
-            <p className='text-gray-500 text-sm mb-2'>Sign up and keep track of all your booking appointments.  <span className='text-violet-600'><Link to={'/tillyehonestproartisans/register'}>Sign Up Now!</Link></span></p>
+            <p className='text-gray-500 text-sm mb-2'>Sign up and keep track of all your booking appointments.  <span className='text-violet-600'><Link to={'/register'}>Sign Up Now!</Link></span></p>
         </div>
 
         <form>
@@ -262,7 +262,7 @@ const BookingLocationInfo = () => {
         console.log(formData);
         console.log(userLoggedIn);
 
-        navigate('/tillyehonestproartisans/booking/review_info', { state: { artisan: artisan } });
+        navigate('/booking/review_info', { state: { artisan: artisan } });
 
     };
 
