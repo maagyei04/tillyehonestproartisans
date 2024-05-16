@@ -35,14 +35,6 @@ const dashboard = {
       breadcrumbs: false
     },
     {
-      id: 'explore',
-      title: 'Explore',
-      type: 'item',
-      url: '/client_dashboard/explore',
-      icon: icons.SearchOutlined,
-      breadcrumbs: false
-    },
-    {
       id: 'orders',
       title: 'Orders',
       type: 'item',

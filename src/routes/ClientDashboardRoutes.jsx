@@ -3,8 +3,12 @@ import { lazy } from 'react';
 import Loadable from '../components/common/Loadable';
 import Dashboard from '../components/layouts/clientDashboard';
 
-const Color = Loadable(lazy(() => import('../pages/main/About')));
 const DashboardDefault = Loadable(lazy(() => import('../pages/dashboards/client_dashboard/pages')));
+const Orders = Loadable(lazy(() => import('../pages/dashboards/client_dashboard/pages/orders')));
+const Finance = Loadable(lazy(() => import('../pages/dashboards/client_dashboard/pages/financial')));
+const Profile = Loadable(lazy(() => import('../pages/dashboards/client_dashboard/pages/profile')));
+const Appointment = Loadable(lazy(() => import('../pages/dashboards/client_dashboard/pages/appointment')));
+
 
 const ClientDashboardLayout = {
     path: '/client_dashboard/',
@@ -16,24 +20,19 @@ const ClientDashboardLayout = {
         },
         {
             path: '/client_dashboard/appointments',
-            element: <Color />
-        },
-
-        {
-            path: '/client_dashboard/explore',
-            element: <Color />
+            element: <Appointment />
         },
         {
             path: '/client_dashboard/orders',
-            element: <Color />
+            element: <Orders />
         },
         {
             path: '/client_dashboard/financial_history',
-            element: <Color />
+            element: <Finance />
         },
         {
             path: '/client_dashboard/profile',
-            element: <Color />
+            element: <Profile />
         },
         {
             path: '/client_dashboard/',

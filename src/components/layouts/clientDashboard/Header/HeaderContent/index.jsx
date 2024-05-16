@@ -11,7 +11,7 @@ import Notification from './Notification';
 import MobileSection from './MobileSection';
 
 // project import
-import { GithubOutlined } from '@ant-design/icons';
+import { HomeOutlined } from '@ant-design/icons';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
@@ -24,14 +24,14 @@ export default function HeaderContent() {
       {downLG && <Box sx={{ width: '100%', ml: 1 }} />}
       <IconButton
         component={Link}
-        href="https://github.com/codedthemes/mantis-free-react-admin-template"
+        href="/tillyehonestproartisans"
         target="_blank"
         disableRipple
         color="secondary"
-        title="Download Free Version"
+        title="Go To Home"
         sx={{ color: 'text.primary', bgcolor: 'grey.100' }}
       >
-        <GithubOutlined />
+        <HomeOutlined />
       </IconButton>
 
       <Notification />

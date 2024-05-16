@@ -1,240 +1,213 @@
-// material-ui
-import Avatar from '@mui/material/Avatar';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import ListItemText from '@mui/material/ListItemText';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import React from 'react';
+import { Grid, Typography, Box } from '@mui/material';
 
-// project import
-import MainCard from '../../../../components/common/MainCard';
-import AnalyticEcommerce from '../../../../components/common/cards/statistics/AnalyticEcommerce';
-import MonthlyBarChart from '../components/MonthlyBarChart';
-import ReportAreaChart from '../components/ReportAreaChart';
-import UniqueVisitorCard from '../components/UniqueVisitorCard';
-import OrdersTable from '../components/OrdersTable';
-
-// assets
-import GiftOutlined from '@ant-design/icons/GiftOutlined';
-import MessageOutlined from '@ant-design/icons/MessageOutlined';
-import SettingOutlined from '@ant-design/icons/SettingOutlined';
-import avatar1 from '../../../../assets/images/artisan.png';
-import avatar2 from '../../../../assets/images/artisan.png';
-import avatar3 from '../../../../assets/images/artisan.png';
-import avatar4 from '../../../../assets/images/artisan.png';
-
-// avatar style
-const avatarSX = {
-  width: 36,
-  height: 36,
-  fontSize: '1rem'
+const containerStyle = {
+  backgroundColor: 'white',
+  padding: '16px',
+  margin: '8px 0',
+  borderRadius: '10px',
 };
-
-// action style
-const actionSX = {
-  mt: 0.75,
-  ml: 1,
-  top: 'auto',
-  right: 'auto',
-  alignSelf: 'flex-start',
-  transform: 'none'
-};
-
-// ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 export default function DashboardDefault() {
   return (
-    <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-      {/* row 1 */}
-      <Grid item xs={12} sx={{ mb: -2.25 }}>
-        <Typography variant="h5">Dashboard</Typography>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
-      </Grid>
+    <div>
+      <h1 className="font-bold text-2xl">Hi! ...</h1>
+      <Grid container className="flex flex-col md:flex-row">
+        {/* Left Side */}
+        <Grid item xs={12} md={8} className="p-2">
+          <p className="text-sm text-gray-500">
+            Here, you'll find everything you need to manage your bookings and appointments with ease. From scheduling your next consultation to tracking the progress of your project, our platform puts you in control every step of the way.
+          </p>
+          <Box className="flex flex-col h-full">
+            {/* Top three black bordered divs */}
+            <Box className="flex flex-col md:flex-row justify-between mb-2">
+              <Box className="shadow-xl shadow-black-600" sx={{ ...containerStyle, flex: 1, mr: 2 }}>
+                <p className="mb-2">Total Appointments</p>
+                <p className="mb-2 font-bold">24</p>
+                <p className="text-sm text-gray-500">
+                  <span className="text-blue-700">Approved</span> appointments
+                </p>
+              </Box>
+              <Box className="shadow-xl shadow-black-600" sx={{ ...containerStyle, flex: 1, mr: 2 }}>
+                <p className="mb-2">Completed Appointments</p>
+                <p className="mb-2 font-bold">20</p>
+                <p className="text-sm text-gray-500">
+                  Audited and <span className="text-blue-700">paid</span> services
+                </p>
+              </Box>
+              <Box className="shadow-xl shadow-black-600" sx={{ ...containerStyle, flex: 1, mr: 2 }}>
+                <p className="mb-2">Total Amount Paid</p>
+                <p className="text-xl text-gray-500">
+                  <span className="text-green-500">GHC 4000.00</span>
+                </p>
+              </Box>
+            </Box>
+            {/* Large div taking the rest of the height */}
+            <Box className="shadow-xl shadow-black-600 flex-1" sx={containerStyle}>
+              <div className='flex flex-row justify-between'>
+                <div className='flex flex-col'>
+                  <Typography className='text-l font-bold' gutterBottom>
+                    Appointments in Progress
+                  </Typography>
+                  <p className='text-sm text-gray-500 mb-5'>
+                    Approved appointments that the artisan is currently working on
+                  </p>
+                </div>
+                <div>
+                  <p className='text-blue-600'>See All</p>
+                </div>
+              </div>
 
-      <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
-
-      {/* row 2 */}
-
-      <Grid item xs={12} md={7} lg={8}>
-        <Grid container alignItems="center" justifyContent="space-between">
-          <Grid item>
-            <Typography variant="h5">Recent Orders</Typography>
-          </Grid>
-          <Grid item />
-        </Grid>
-        <MainCard sx={{ mt: 2 }} content={false}>
-          <OrdersTable />
-        </MainCard>
-      </Grid>
-      <Grid item xs={12} md={5} lg={4}>
-        <Grid container alignItems="center" justifyContent="space-between">
-          <Grid item>
-            <Typography variant="h5">Income Overview</Typography>
-          </Grid>
-          <Grid item />
-        </Grid>
-        <MainCard sx={{ mt: 2 }} content={false}>
-          <Box sx={{ p: 3, pb: 0 }}>
-            <Stack spacing={2}>
-              <Typography variant="h6" color="text.secondary">
-                This Week Statistics
-              </Typography>
-              <Typography variant="h3">$7,650</Typography>
-            </Stack>
+              <Box className="p-2 rounded-[10px] border border-gray-300 mb-2">
+                <div className='flex justify-between mb-5'>
+                  <div className='flex flex-row'>
+                    <p>Agyei Michael</p>
+                  </div>
+                  <div className='bg-red-300 rounded-[10px] px-4'>
+                    <p className='text-red-700'>Pending</p>
+                  </div>
+                </div>
+                <div className='flex flex-row justify-between text-left'>
+                  <div>
+                    <p className='text-gray-500'>Job Description</p>
+                    <p className='font-bold text-sm'>Kitchen Sink Leakage</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Expected Date</p>
+                    <p className='font-bold text-sm'>24-06-2024</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Total Estimate</p>
+                    <p className='font-bold text-sm'>GHC 500.00</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Location</p>
+                    <p className='font-bold text-sm'>Airport City Accra</p>
+                  </div>
+                  <div>
+                    <p>...</p>
+                    <p className='text-violet-600 text-sm'>See More</p>
+                  </div>
+                </div>
+              </Box>
+              <Box className="p-2 rounded-[10px] border border-gray-300 mb-2">
+                <div className='flex justify-between mb-5'>
+                  <div className='flex flex-row'>
+                    <p>Agyei Michael</p>
+                  </div>
+                  <div className='bg-red-300 rounded-[10px] px-4'>
+                    <p className='text-red-700'>Pending</p>
+                  </div>
+                </div>
+                <div className='flex flex-row justify-between text-left'>
+                  <div>
+                    <p className='text-gray-500'>Job Description</p>
+                    <p className='font-bold text-sm'>Kitchen Sink Leakage</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Expected Date</p>
+                    <p className='font-bold text-sm'>24-06-2024</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Total Estimate</p>
+                    <p className='font-bold text-sm'>GHC 500.00</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Location</p>
+                    <p className='font-bold text-sm'>Airport City Accra</p>
+                  </div>
+                  <div>
+                    <p>...</p>
+                    <p className='text-violet-600 text-sm'>See More</p>
+                  </div>
+                </div>
+              </Box>
+              <Box className="p-2 rounded-[10px] border border-gray-300 mb-2">
+                <div className='flex justify-between mb-5'>
+                  <div className='flex flex-row'>
+                    <p>Agyei Michael</p>
+                  </div>
+                  <div className='bg-red-300 rounded-[10px] px-4'>
+                    <p className='text-red-700'>Pending</p>
+                  </div>
+                </div>
+                <div className='flex flex-row justify-between text-left'>
+                  <div>
+                    <p className='text-gray-500'>Job Description</p>
+                    <p className='font-bold text-sm'>Kitchen Sink Leakage</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Expected Date</p>
+                    <p className='font-bold text-sm'>24-06-2024</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Total Estimate</p>
+                    <p className='font-bold text-sm'>GHC 500.00</p>
+                  </div>
+                  <div>
+                    <p className='text-gray-500'>Location</p>
+                    <p className='font-bold text-sm'>Airport City Accra</p>
+                  </div>
+                  <div>
+                    <p>...</p>
+                    <p className='text-violet-600 text-sm'>See More</p>
+                  </div>
+                </div>
+              </Box>
+            </Box>
           </Box>
-          <MonthlyBarChart />
-        </MainCard>
-      </Grid>
-
-      {/* row 3 */}
-
-      <Grid item xs={12} md={5} lg={4}>
-        <Grid container alignItems="center" justifyContent="space-between">
-          <Grid item>
-            <Typography variant="h5">Analytics Report</Typography>
-          </Grid>
-          <Grid item />
         </Grid>
-        <MainCard sx={{ mt: 2 }} content={false}>
-          <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
-            <ListItemButton divider>
-              <ListItemText primary="Company Finance Growth" />
-              <Typography variant="h5">+45.14%</Typography>
-            </ListItemButton>
-            <ListItemButton divider>
-              <ListItemText primary="Company Expenses Ratio" />
-              <Typography variant="h5">0.58%</Typography>
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText primary="Business Risk Cases" />
-              <Typography variant="h5">Low</Typography>
-            </ListItemButton>
-          </List>
-          <ReportAreaChart />
-        </MainCard>
-      </Grid>
 
-      {/* row 4 */}
-      <Grid item xs={12} md={7} lg={8}>
-      </Grid>
-      <Grid item xs={12} md={5} lg={4}>
-        <Grid container alignItems="center" justifyContent="space-between">
-          <Grid item>
-            <Typography variant="h5">Transaction History</Typography>
-          </Grid>
-          <Grid item />
+        {/* Right Side */}
+        <Grid item xs={12} md={4} className="flex flex-col p-2">
+          <div className='flex flex-row justify-between'>
+            <div>
+              <Typography className='text-l font-bold' gutterBottom>
+                New Appointments
+              </Typography>
+            </div>
+            <div>
+              <p className='text-blue-600'>See All</p>
+            </div>
+          </div>
+
+          <Typography variant="body1" className='text-gray-500' gutterBottom>
+            Latest appointment listing that is yet to be approved. You’re either waiting for an estimate from a artisan or you are ready to make payment.
+          </Typography>
+          <Box className="mb-2 shadow-xl shadow-black-600" sx={containerStyle}>
+            <div className='flex flex-row mb-2'>
+              <p className='text-sm font-semibold'>Agyei Michael</p>
+            </div>
+            <div className='flex flex-col'>
+              <p className='text-gray-500'>Job Description</p>
+              <p className='font-bold text-sm'>Entire House Plumbing Work</p>
+            </div>
+            <div className='flex flex-col mb-2'>
+              <p className='text-gray-500'>Estimated Date</p>
+              <p className='font-bold text-sm'>24-06-2024</p>
+            </div>
+            <div className='bg-gray-300 w-auto text-center rounded p-2'>
+              <p className='text-red-600'>Waiting For Estimate</p>
+            </div>
+          </Box>
+          <Box className="shadow-xl shadow-black-600" sx={containerStyle}>
+            <div className='flex flex-row mb-2'>
+              <p className='text-sm font-semibold'>Agyei Michael</p>
+            </div>
+            <div className='flex flex-col mb-2'>
+              <p className='text-gray-500'>Job Description</p>
+              <p className='font-bold text-sm'>Entire House Plumbing Work</p>
+            </div>
+            <div className='flex flex-col mb-2'>
+              <p className='text-gray-500'>Estimated Date</p>
+              <p className='font-bold text-sm'>24-06-2024</p>
+            </div>
+            <div className='bg-violet-600 w-auto text-white text-center rounded p-2'>
+              <button>View Estimate</button>
+            </div>
+          </Box>
         </Grid>
-        <MainCard sx={{ mt: 2 }} content={false}>
-          <List
-            component="nav"
-            sx={{
-              px: 0,
-              py: 0,
-              '& .MuiListItemButton-root': {
-                py: 1.5,
-                '& .MuiAvatar-root': avatarSX,
-                '& .MuiListItemSecondaryAction-root': { ...actionSX, position: 'relative' }
-              }
-            }}
-          >
-            <ListItemButton divider>
-              <ListItemAvatar>
-                <Avatar sx={{ color: 'success.main', bgcolor: 'success.lighter' }}>
-                  <GiftOutlined />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={<Typography variant="subtitle1">Order #002434</Typography>} secondary="Today, 2:00 AM" />
-              <ListItemSecondaryAction>
-                <Stack alignItems="flex-end">
-                  <Typography variant="subtitle1" noWrap>
-                    + $1,430
-                  </Typography>
-                  <Typography variant="h6" color="secondary" noWrap>
-                    78%
-                  </Typography>
-                </Stack>
-              </ListItemSecondaryAction>
-            </ListItemButton>
-            <ListItemButton divider>
-              <ListItemAvatar>
-                <Avatar sx={{ color: 'primary.main', bgcolor: 'primary.lighter' }}>
-                  <MessageOutlined />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={<Typography variant="subtitle1">Order #984947</Typography>} secondary="5 August, 1:45 PM" />
-              <ListItemSecondaryAction>
-                <Stack alignItems="flex-end">
-                  <Typography variant="subtitle1" noWrap>
-                    + $302
-                  </Typography>
-                  <Typography variant="h6" color="secondary" noWrap>
-                    8%
-                  </Typography>
-                </Stack>
-              </ListItemSecondaryAction>
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemAvatar>
-                <Avatar sx={{ color: 'error.main', bgcolor: 'error.lighter' }}>
-                  <SettingOutlined />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={<Typography variant="subtitle1">Order #988784</Typography>} secondary="7 hours ago" />
-              <ListItemSecondaryAction>
-                <Stack alignItems="flex-end">
-                  <Typography variant="subtitle1" noWrap>
-                    + $682
-                  </Typography>
-                  <Typography variant="h6" color="secondary" noWrap>
-                    16%
-                  </Typography>
-                </Stack>
-              </ListItemSecondaryAction>
-            </ListItemButton>
-          </List>
-        </MainCard>
-        <MainCard sx={{ mt: 2 }}>
-          <Stack spacing={3}>
-            <Grid container justifyContent="space-between" alignItems="center">
-              <Grid item>
-                <Stack>
-                  <Typography variant="h5" noWrap>
-                    Help & Support Chat
-                  </Typography>
-                  <Typography variant="caption" color="secondary" noWrap>
-                    Typical replay within 5 min
-                  </Typography>
-                </Stack>
-              </Grid>
-              <Grid item>
-                <AvatarGroup sx={{ '& .MuiAvatar-root': { width: 32, height: 32 } }}>
-                  <Avatar alt="Remy Sharp" src={avatar1} />
-                  <Avatar alt="Travis Howard" src={avatar2} />
-                  <Avatar alt="Cindy Baker" src={avatar3} />
-                  <Avatar alt="Agnes Walker" src={avatar4} />
-                </AvatarGroup>
-              </Grid>
-            </Grid>
-            <Button size="small" variant="contained" sx={{ textTransform: 'capitalize' }}>
-              Need Help?
-            </Button>
-          </Stack>
-        </MainCard>
       </Grid>
-    </Grid>
+    </div>
   );
 }
