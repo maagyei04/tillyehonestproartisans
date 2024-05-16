@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktehonestproartisans=self.webpackChunktehonestproartisans||[]).push([[463],{9463:(e,s,n)=>{n.r(s),n.d(s,{default:()=>t});var r=n(4414);function t(){return(0,r.jsx)("div",{children:(0,r.jsx)("center",{children:(0,r.jsx)("h1",{children:"Yet To Do..."})})})}}}]);
