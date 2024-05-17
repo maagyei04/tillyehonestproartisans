@@ -20,7 +20,7 @@ const initialState = {
     bookingStatusArtisan: '',
     bookingStatusClient: '',
     bookingEstimateAmount: '0',
-    completed: false,
+    bookingApproved: false,
 };
 
 export const bookingSlice = createSlice({

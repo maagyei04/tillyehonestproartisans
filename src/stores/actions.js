@@ -167,6 +167,31 @@ export const loginArtisan = (artisanData) => {
     };
 };
 
+export const loginAdmin = (adminData) => {
+    return async (dispatch) => {
+        try {
+            const collectionRef = collection(db, 'Admins');
+
+            const user = await LoginUserWithEmailAndPassword(adminData.email, adminData.password);
+
+            const adminRef = doc(collectionRef, user.user.uid);
+
+            const adminDoc = await getDoc(adminRef);
+
+            dispatch({ type: 'LOGIN_SUCCESS', payload: user.user.uid });
+
+            console.log('Admin Successfully Logged In');
+
+            dispatch(setArtisanData(adminDoc.data()));
+
+            return user.user.uid;
+        } catch (error) {
+            console.error('Error Logging in artisan:', error);
+            dispatch({ type: 'LOGIN_ERROR', payload: error.message });
+        }
+    };
+};
+
 export const uploadPassportImage = async (userId, file, dispatch) => {
     try {
 

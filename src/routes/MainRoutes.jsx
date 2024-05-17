@@ -11,7 +11,10 @@ import InfoReview from '../pages/register/infoReview';
 import BusinessDetails from '../pages/register/businessDetails';
 import ImageUpload from '../pages/register/imageUpload';
 import RegisterComplete from '../pages/register/registerComplete';
-import Login from '../pages/login/login';
+import LoginSelection from "../pages/login";
+import ClientLogin from "../pages/login/login";
+import ArtisanLogin from "../pages/login/artisan_login";
+import AdminLogin from "../pages/login/admin_login";
 import BookingServiceDetail from '../pages/booking/serviceDetail';
 import BookingLocationInfo from '../pages/booking/locationInfo';
 import BookingPickDate from '../pages/booking/pickDate';
@@ -89,7 +92,19 @@ const MainRoutes = {
         },
         {
             path: 'login',
-            element: <Login />,
+            element: <LoginSelection />,
+        },
+        {
+            path: 'login_client',
+            element: <ClientLogin />,
+        },
+        {
+            path: 'login_artisan',
+            element: <ArtisanLogin />,
+        },
+        {
+            path: 'login_admin',
+            element: <AdminLogin />,
         },
     ]
 }

@@ -20,7 +20,7 @@ const dashboard = {
   children: [
     {
       id: 'overview',
-      title: 'Overviw',
+      title: 'Overview',
       type: 'item',
       url: '/client_dashboard/',
       icon: icons.DashboardOutlined,

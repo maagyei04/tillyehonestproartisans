@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginClient } from '../../stores/actions';
+import { loginArtisan } from '../../stores/actions';
 import { useNavigate, Link } from 'react-router-dom';
 
-const ClientLogin = () => {
+const ArtisanLogin = () => {
 
     const dispatch = useDispatch();
 
@@ -30,11 +30,11 @@ const ClientLogin = () => {
 
             e.preventDefault();
 
-            await dispatch(loginClient(formData));
+            await dispatch(loginArtisan(formData));
 
             console.log(formData);
 
-            navigate('/client_dashboard')
+            navigate('/artisan_dashboard')
         } catch (error) {
             console.error('Error occurred:', error);
         } finally {
@@ -46,7 +46,7 @@ const ClientLogin = () => {
     return (
         <div className='md:w-4/4 w-full md:px-0 px-5 items-center justify-center shadow shadow-lg flex py-20 md:py-40'>
             <form className='md:w-2/4 w-full bg-white shadow shadow-lg p-5 rounded-[10px]' onSubmit={handleSubmit}>
-                <h1 className='font-bold text-lg text-center'>Client Login</h1>
+                <h1 className='font-bold text-lg text-center'>Artisan Login</h1>
 
                 <div className='flex flex-col mb-8 w-full'>
                     <label className='mb-2' htmlFor="email">Email</label>
@@ -77,4 +77,4 @@ const ClientLogin = () => {
     );
 };
 
-export default ClientLogin;
+export default ArtisanLogin;

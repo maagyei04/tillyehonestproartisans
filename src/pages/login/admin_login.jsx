@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginClient } from '../../stores/actions';
-import { useNavigate, Link } from 'react-router-dom';
+import { loginAdmin } from '../../stores/actions';
+import { useNavigate } from 'react-router-dom';
 
-const ClientLogin = () => {
+const AdminLogin = () => {
 
     const dispatch = useDispatch();
 
@@ -30,11 +30,11 @@ const ClientLogin = () => {
 
             e.preventDefault();
 
-            await dispatch(loginClient(formData));
+            await dispatch(loginAdmin(formData));
 
             console.log(formData);
 
-            navigate('/client_dashboard')
+            navigate('/admin_dashboard')
         } catch (error) {
             console.error('Error occurred:', error);
         } finally {
@@ -46,7 +46,7 @@ const ClientLogin = () => {
     return (
         <div className='md:w-4/4 w-full md:px-0 px-5 items-center justify-center shadow shadow-lg flex py-20 md:py-40'>
             <form className='md:w-2/4 w-full bg-white shadow shadow-lg p-5 rounded-[10px]' onSubmit={handleSubmit}>
-                <h1 className='font-bold text-lg text-center'>Client Login</h1>
+                <h1 className='font-bold text-lg text-center'>Admin Login</h1>
 
                 <div className='flex flex-col mb-8 w-full'>
                     <label className='mb-2' htmlFor="email">Email</label>
@@ -71,10 +71,9 @@ const ClientLogin = () => {
                     />
                 </div>
                 <button type='submit' disabled={loading} className='bg-violet-500 text-white hover:bg-green-500 w-full p-2 rounded mb-3'>{!loading && 'LOGIN'}{loading && 'PLEASE WAIT...'}</button>
-                <p>Don't have an Account yet? <span className='text-green-600 hover:text-gray-300 italic font-bold'><Link to={'/register'}>Register here!</Link></span></p>
             </form>
         </div>
     );
 };
 
-export default ClientLogin;
+export default AdminLogin;

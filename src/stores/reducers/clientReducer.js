@@ -8,6 +8,7 @@ const initialState = {
     email: '',
     phoneNumber: '',
     password: '',
+    profilePic: '',
     momoNetwork: '',
     momoNumber: '',
     bank: '',
