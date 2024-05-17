@@ -5,6 +5,6 @@ import ClientDashboardLayout from "./ClientDashboardRoutes";
 import ArtisanDashboardRoutes from "./ArtisanDashboardRoutes";
 import AdminDashboardRoutes from "./AdminDashboardRoutes";
 
-const router = createBrowserRouter([MainRoutes, ClientDashboardLayout, ArtisanDashboardRoutes, AdminDashboardRoutes], { basename: '/tillyehonestproartisans' });
+const router = createBrowserRouter([MainRoutes, ClientDashboardLayout, ArtisanDashboardRoutes, AdminDashboardRoutes], { basename: '/' });
 
 export default router;
