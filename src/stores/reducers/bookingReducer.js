@@ -16,6 +16,10 @@ const initialState = {
     bookingPhoneNumber: '',
     bookingClientId: '',
     bookingArtisanId: '',
+    bookingPayment: '',
+    bookingStatusArtisan: '',
+    bookingStatusClient: '',
+    bookingEstimateAmount: '0',
     completed: false,
 };
 

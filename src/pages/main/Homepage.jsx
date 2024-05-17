@@ -144,7 +144,7 @@ const HomePage = () => {
 
             {/*How it works*/}
             <div className="flex flex-col mt-8 md:flex-row items-center">
-                <img className="w-full md:w-2/4 h-[520px] md:mr-4 mb-4 md:mb-0" src={contentPic} alt="content" />
+                <img className="w-full md:w-2/4 h-[320px] md:mr-4 mb-4 md:mb-0" src={contentPic} alt="content" />
                 <div className="text-left md:text-left md:w-2/4 flex flex-col md:flex-row items-center">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">We Bring <span className="text-violet-500 italic">Creativity</span> to your doorstep</h2>
@@ -211,7 +211,7 @@ const HomePage = () => {
 
             {/*Start Earning*/}
             <div className="flex mt-8 flex-col md:flex-row items-center">
-                <img className="w-full md:w-2/3 h-[520px] md:mr-4 mb-4 md:mb-0" src={artisanPic} alt="content" />
+                <img className="w-full md:w-2/3 h-[320px] md:mr-4 mb-4 md:mb-0" src={artisanPic} alt="content" />
                 <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
                     <div>
                         <h2 className="font-bold text-[30px] mb-1">Start Earning as an <span className="text-violet-500 italic">Artisan</span> today</h2>

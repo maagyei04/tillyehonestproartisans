@@ -1,14 +1,14 @@
 import { CheckBadgeIcon } from '@heroicons/react/24/solid'
 
-const Estimate = () => {
 
-    const estimate = 'waiting';
+const Payment = () => {
+    const payment = 'waiting';
 
     return (
-        estimate === 'waiting' ?
+        payment === 'waiting' ?
             <>
                 <div className='bg-white shadow shadow-lg p-5 rounded-[10px]'>
-                    <h1 className="mb-2 text-sm font-bold">Estimate Details</h1>
+                    <h1 className="mb-2 text-sm font-bold">Payment Information</h1>
                     <div className='bg-red-100 text-red-600 px-4 rounded-[10px] mb-5'>
                         <p>Waiting for estimate</p>
                     </div>
@@ -16,13 +16,15 @@ const Estimate = () => {
                         <div className="flex flex-row mb-5">
                             <CheckBadgeIcon className="w-5 mr-5" />
                             <p className="text-gray-500 text-sm">
-                                You will be able to go through appointments estimate and make payment for work to begin once the artisan sends the estimate
+                                Client will receive full payment once you confirm that
+                                the entire work has been completed
                             </p>
                         </div>
                         <div className="flex flex-row mb-5">
                             <CheckBadgeIcon className="w-5 mr-5" />
                             <p className="text-gray-500 text-sm">
-                                Appointment will be cancelled if estimate is not ready after the first 2 weeks
+                                Open the completion page to confirm the completion of
+                                the artisan’s work
                             </p>
                         </div>
                     </div>
@@ -31,30 +33,31 @@ const Estimate = () => {
             :
             <>
                 <div className='bg-white shadow shadow-lg p-5 rounded-[10px]'>
-                    <h1 className="mb-2 text-sm font-bold">Estimate Details</h1>
+                    <h1 className="mb-2 text-sm font-bold mb-1">Payment Information</h1>
+
+                    <p className='text-gray-500 text-sm mb-2'>Status</p>
                     <div className='bg-green-100 text-green-600 px-4 rounded-[10px] mb-5'>
-                        <p>Done</p>
+                        <p>Full Payment</p>
                     </div>
 
-                    <h1 className="mb-2 text-sm font-bold">Esimated Budget</h1>
                     <div className='mb-10'>
-                        <p className='text-gray-500'>Total Amount</p>
+                        <p className='text-gray-500'>Total Amount Charged</p>
                         <p>GHc 2000</p>
                     </div>
-
-
 
                     <div className="flex flex-col">
                         <div className="flex flex-row mb-5">
                             <CheckBadgeIcon className="w-5 mr-5" />
                             <p className="text-gray-500 text-sm">
-                                You can continue to next tab, to make payment please
+                                Client will receive full payment once you confirm that
+                                the entire work has been completed
                             </p>
                         </div>
                         <div className="flex flex-row mb-5">
                             <CheckBadgeIcon className="w-5 mr-5" />
                             <p className="text-gray-500 text-sm">
-                                Appointment will be cancelled if estimate is not ready after the first 2 weeks
+                                Open the completion page to confirm the completion of
+                                the artisan’s work
                             </p>
                         </div>
                     </div>
@@ -63,4 +66,4 @@ const Estimate = () => {
     )
 }
 
-export default Estimate;
+export default Payment;

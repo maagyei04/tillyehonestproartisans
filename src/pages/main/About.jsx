@@ -102,7 +102,8 @@ const ContactForm = ({ formData, handleChange, handleSubmit }) => (
                     required
                 ></textarea>
             </div>
-            <button className='my-5 w-full btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500' type="submit">Submit</button>        </form>
+            <button className='my-5 w-full btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500' type="submit">Submit</button>
+        </form>
     </div>
 );
 

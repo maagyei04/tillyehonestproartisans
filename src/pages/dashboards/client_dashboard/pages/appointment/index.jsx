@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/system';
 import Estimate from './estimate';
+import Payment from './payment';
+import Complete from './complete';
 
 // Styled components
 const LeftContainer = styled(Box)({
@@ -190,8 +192,8 @@ export default function Appointment() {
                                     </>
                                 )}
                                 {tabIndex === 1 && <Estimate />}
-                                {tabIndex === 2 && <Typography>Payment Content</Typography>}
-                                {tabIndex === 3 && <Typography>Completion Content</Typography>}
+                                {tabIndex === 2 && <Payment />}
+                                {tabIndex === 3 && <Complete />}
                             </Box>
                         </>
                     ) : (
