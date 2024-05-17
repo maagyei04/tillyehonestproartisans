@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "https://maagyei04.github.io/tillyehonestproartisans/static/css/main.280855b4.css",
-    "main.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/main.847ae22f.js",
+    "main.css": "https://maagyei04.github.io/tillyehonestproartisans/static/css/main.01aa0fb2.css",
+    "main.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/main.1b6e4730.js",
     "static/js/740.8f636367.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/740.8f636367.chunk.js",
     "static/js/669.ea0286db.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/669.ea0286db.chunk.js",
     "static/js/658.085f0673.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/658.085f0673.chunk.js",
-    "static/js/463.3e757f34.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/463.3e757f34.chunk.js",
-    "static/js/13.50759737.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/13.50759737.chunk.js",
+    "static/js/463.c5fc5d87.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/463.c5fc5d87.chunk.js",
+    "static/js/20.0f89f094.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/20.0f89f094.chunk.js",
     "static/js/206.bfb2743e.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/206.bfb2743e.chunk.js",
-    "static/js/614.c88f49fe.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/614.c88f49fe.chunk.js",
+    "static/js/614.8b4d5212.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/614.8b4d5212.chunk.js",
     "static/js/385.28c3de29.chunk.js": "https://maagyei04.github.io/tillyehonestproartisans/static/js/385.28c3de29.chunk.js",
     "static/media/frame2.png": "https://maagyei04.github.io/tillyehonestproartisans/static/media/frame2.a97634439e99c9e9993f.png",
     "static/media/register4.png": "https://maagyei04.github.io/tillyehonestproartisans/static/media/register4.ccef31a8552dde5cc595.png",
@@ -27,7 +27,7 @@
     "index.html": "https://maagyei04.github.io/tillyehonestproartisans/index.html"
   },
   "entrypoints": [
-    "static/css/main.280855b4.css",
-    "static/js/main.847ae22f.js"
+    "static/css/main.01aa0fb2.css",
+    "static/js/main.1b6e4730.js"
   ]
 }
