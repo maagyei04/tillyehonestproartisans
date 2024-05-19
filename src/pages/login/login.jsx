@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginClient } from '../../stores/actions';
 import { useNavigate, Link } from 'react-router-dom';
+import { LogoutUser } from '../../services/firebase/auth';
 
 const ClientLogin = () => {
 
@@ -30,11 +31,20 @@ const ClientLogin = () => {
 
             e.preventDefault();
 
-            await dispatch(loginClient(formData));
+            const clientData = await loginClient(formData) ?? '';
 
-            console.log(formData);
+            console.log(clientData);
 
-            navigate('/client_dashboard')
+            const {
+                userType,
+            } = clientData;
+
+            userType === 'client'
+                ?
+                navigate('/client_dashboard', { state: { clientData: clientData } })
+                :
+                LogoutUser().then(() => { navigate('/login'); console.log('logged out...') })
+
         } catch (error) {
             console.error('Error occurred:', error);
         } finally {

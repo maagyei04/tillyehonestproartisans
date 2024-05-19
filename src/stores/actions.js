@@ -117,79 +117,58 @@ export const fetchArtisanData = async (userId) => {
     }
 };
 
-export const loginClient = (clientData) => {
-    return async (dispatch) => {
-        try {
-            const collectionRef = collection(db, 'Clients');
+export const loginClient = async (clientData) => {
+    try {
+        const collectionRef = collection(db, 'Clients');
 
-            const user = await LoginUserWithEmailAndPassword(clientData.email, clientData.password);
+        const user = await LoginUserWithEmailAndPassword(clientData.email, clientData.password);
 
-            const clientRef = doc(collectionRef, user.user.uid);
+        const clientRef = doc(collectionRef, user.user.uid);
 
-            const clientDoc = await getDoc(clientRef);
+        const clientDoc = await getDoc(clientRef);
 
-            dispatch({ type: 'LOGIN_SUCCESS', payload: user.user.uid });
+        console.log('Client Successfully Logged In');
 
-            console.log('Client Successfully Logged In');
-
-            dispatch(setClientData(clientDoc.data()));
-
-            return user.user.uid;
-        } catch (error) {
-            console.error('Error Logging in client:', error);
-            dispatch({ type: 'LOGIN_ERROR', payload: error.message });
-        }
-    };
+        return clientDoc.data();
+    } catch (error) {
+        console.error('Error Logging in client:', error);
+    }
 };
 
-export const loginArtisan = (artisanData) => {
-    return async (dispatch) => {
-        try {
-            const collectionRef = collection(db, 'Artisans');
+export const loginArtisan = async (artisanData) => {
+    try {
+        const collectionRef = collection(db, 'Artisans');
 
-            const user = await LoginUserWithEmailAndPassword(artisanData.email, artisanData.password);
+        const user = await LoginUserWithEmailAndPassword(artisanData.email, artisanData.password);
 
-            const artisanRef = doc(collectionRef, user.user.uid);
+        const artisanRef = doc(collectionRef, user.user.uid);
 
-            const artisanDoc = await getDoc(artisanRef);
+        const artisanDoc = await getDoc(artisanRef);
 
-            dispatch({ type: 'LOGIN_SUCCESS', payload: user.user.uid });
+        console.log('Artisan Successfully Logged In');
 
-            console.log('Artisan Successfully Logged In');
-
-            dispatch(setArtisanData(artisanDoc.data()));
-
-            return user.user.uid;
-        } catch (error) {
-            console.error('Error Logging in artisan:', error);
-            dispatch({ type: 'LOGIN_ERROR', payload: error.message });
-        }
-    };
+        return artisanDoc.data();
+    } catch (error) {
+        console.error('Error Logging in artisan:', error);
+    }
 };
 
-export const loginAdmin = (adminData) => {
-    return async (dispatch) => {
-        try {
-            const collectionRef = collection(db, 'Admins');
+export const loginAdmin = async (adminData) => {
+    try {
+        const collectionRef = collection(db, 'Admins');
 
-            const user = await LoginUserWithEmailAndPassword(adminData.email, adminData.password);
+        const user = await LoginUserWithEmailAndPassword(adminData.email, adminData.password);
 
-            const adminRef = doc(collectionRef, user.user.uid);
+        const adminRef = doc(collectionRef, user.user.uid);
 
-            const adminDoc = await getDoc(adminRef);
+        const adminDoc = await getDoc(adminRef);
 
-            dispatch({ type: 'LOGIN_SUCCESS', payload: user.user.uid });
+        console.log('Admin Successfully Logged In');
 
-            console.log('Admin Successfully Logged In');
-
-            dispatch(setArtisanData(adminDoc.data()));
-
-            return user.user.uid;
-        } catch (error) {
-            console.error('Error Logging in artisan:', error);
-            dispatch({ type: 'LOGIN_ERROR', payload: error.message });
-        }
-    };
+        return adminDoc.data();
+    } catch (error) {
+        console.error('Error Logging in artisan:', error);
+    }
 };
 
 export const uploadPassportImage = async (userId, file, dispatch) => {
@@ -320,6 +299,38 @@ export const uploadGaurantorNoteImage = async (userId, file, dispatch) => {
     }
 };
 
+export const uploadClientProfileImage = async (userId, file, dispatch) => {
+    try {
+
+        let blob;
+        if (file instanceof Blob) {
+            blob = file;
+        } else {
+            throw new Error('The provided file is not a Blob or File object');
+        }
+
+
+        const metadata = {
+            contentType: blob.type || 'image/jpeg'
+        };
+
+        const imageRef = ref(storage, `client_images/${userId}`);
+
+        const uploadTask = await uploadBytes(imageRef, blob, metadata);
+
+
+        const imageUrl = await getDownloadURL(uploadTask.ref);
+
+        console.log('Client Image successfully uploaded:', imageUrl);
+
+        return imageUrl;
+    } catch (error) {
+        console.error('Error uploading client image:', error);
+        dispatch({ type: 'UPLOAD_IMAGE_ERROR', payload: error.message });
+        throw error;
+    }
+};
+
 export const bookArtisan = (bookingData) => {
     return async (dispatch, getState) => {
         try {
@@ -360,6 +371,23 @@ export const fetchAllClientData = async () => {
     }
 };
 
+export const fetchBusinessFieldsCategories = async () => {
+    try {
+        const docRef = doc(db, 'BusinessFields', 'uLZD4t41lAE2IA1XR95y');
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const categories = docSnap.data().categories;
+            return categories;
+        } else {
+            throw new Error('Document does not exist');
+        }
+    } catch (error) {
+        console.error('Error fetching business fields categories:', error);
+        throw error;
+    }
+};
+
 export const fetchAllArtisanData = async () => {
     try {
         const collectionRef = collection(db, 'Artisans');
@@ -379,6 +407,31 @@ export const fetchAllArtisanData = async () => {
         throw error;
     }
 };
+
+export const fetchAllArtisanDataStatusTrue = async () => {
+    try {
+        const collectionRef = collection(db, 'Artisans');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const artisanData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                // Check if status is true
+                if (data.status === true) {
+                    artisanData.push(data);
+                }
+            });
+            return artisanData;
+        } else {
+            throw new Error('No artisans found');
+        }
+    } catch (error) {
+        console.error('Error fetching artisans data:', error);
+        throw error;
+    }
+};
+
 
 export const fetchLimitedClientData = async (limitCount) => {
     try {
@@ -402,12 +455,16 @@ export const fetchLimitedArtisanData = async (limitCount) => {
         const collectionRef = collection(db, 'Artisans');
         const querySnapshot = await getDocs(query(collectionRef, limit(limitCount)));
 
-        const clientData = [];
+        const artisanData = [];
         querySnapshot.forEach((doc) => {
-            clientData.push(doc.data());
+            const data = doc.data();
+
+            if (data.status === true) {
+                artisanData.push(data);
+            }
         });
 
-        return clientData;
+        return artisanData;
     } catch (error) {
         console.error('Error fetching artisans data:', error);
         throw error;
@@ -432,4 +489,49 @@ export const messageUs = () => {
             dispatch({ type: 'REGISTER_ERROR', payload: error.message });
         }
     };
+};
+
+export const fetchLimitedClientBookings = async (limitCount, userId) => {
+    try {
+        const collectionRef = collection(db, 'Bookings');
+        const querySnapshot = await getDocs(query(collectionRef, limit(limitCount)));
+
+        const bookingData = [];
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+
+            if (data.bookingClientId === userId) {
+                bookingData.push(data);
+            }
+        });
+
+        return bookingData;
+    } catch (error) {
+        console.error('Error fetching bookings data:', error);
+        throw error;
+    }
+};
+
+export const fetchAllClientBookings = async (userId) => {
+    try {
+        const collectionRef = collection(db, 'Bookings');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const bookingData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+
+                if (data.bookingClientId === userId) {
+                    bookingData.push(data);
+                }
+            });
+            return bookingData;
+        } else {
+            throw new Error('No bookings found for this client');
+        }
+    } catch (error) {
+        console.error('Error fetching bookings data for client:', error);
+        throw error;
+    }
 };

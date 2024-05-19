@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RegisterPic4 from '../../assets/images/register4.png';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBusinessField, setBusinessLocation } from '../../stores/reducers/artisanReducer';
+import { fetchBusinessFieldsCategories } from '../../stores/actions';
 
 const BusinessDetails = () => {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const categoriesData = await fetchBusinessFieldsCategories();
+                setCategories(categoriesData);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const { firstName } = useSelector((state) => state.client);
 
@@ -59,56 +75,35 @@ const BusinessDetails = () => {
                             <p className="text-sm font-semibold mb-2">Select your Business field</p>
 
                             <form onSubmit={handleSubmit}>
-                                <select className='border border-gray-200 text-sm font-semibold mb-2 rounded-[10px] h-10 w-full mb-5'
+                                <select
+                                    className='border border-gray-200 text-sm font-semibold mb-2 rounded-[10px] h-10 w-full mb-5'
                                     value={optionData.businessField}
                                     onChange={handleFieldChange}
                                     name='businessField'
                                 >
-                                    <option value="Carpentry">
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-4 h-4 rounded-full bg-blue-500"></div>
-                                            <span>Carpentry</span>
-                                        </div>
-                                    </option>
-                                    <option value="Plumbing">
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-4 h-4 rounded-full bg-green-500"></div>
-                                            <span>Plumbing</span>
-                                        </div>
-                                    </option>
-                                    <option value="Construction">
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-4 h-4 rounded-full bg-yellow-500"></div>
-                                            <span>Construction</span>
-                                        </div>
-                                    </option>
+                                    {categories.map((category, index) => (
+                                        <option key={index} value={category}>
+                                            <div className="flex items-center space-x-2">
+                                                <div className={`w-4 h-4 rounded-full bg-${index % 3 === 0 ? 'blue' : index % 3 === 1 ? 'green' : 'yellow'}-500`}></div>
+                                                <span>{category}</span>
+                                            </div>
+                                        </option>
+                                    ))}
                                 </select>
 
                                 <p className="text-sm font-semibold mb-2">Location</p>
-                                <select className='border border-gray-200 text-sm font-semibold mb-2 rounded-[10px] h-10 w-full mb-5'
-                                    value={optionData.businessLocation}
-                                    onChange={handleLocationChange}
-                                    name='businessLocation'
-                                >
-                                    <option value="Tema">
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-4 h-4 rounded-full bg-blue-500"></div>
-                                            <span>Tema</span>
-                                        </div>
-                                    </option>
-                                    <option value="Accra">
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-4 h-4 rounded-full bg-green-500"></div>
-                                            <span>Accra</span>
-                                        </div>
-                                    </option>
-                                    <option value="Kumasi">
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-4 h-4 rounded-full bg-yellow-500"></div>
-                                            <span>Kumasi</span>
-                                        </div>
-                                    </option>
-                                </select>
+                                <div className='flex flex-col mb-8 w-full'>
+                                    <input
+                                        className='border border-gray-200 font-bold rounded-[10px] h-10 p-2'
+                                        type="text"
+                                        id="businessLocation"
+                                        name="businessLocation"
+                                        value={optionData.businessLocation}
+                                        onChange={handleLocationChange}
+                                        required
+                                    />
+
+                                </div>
 
                                 <button type='submit' className="bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>
                             </form>

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginArtisan } from '../../stores/actions';
 import { useNavigate, Link } from 'react-router-dom';
+import { LogoutUser } from '../../services/firebase/auth';
+
 
 const ArtisanLogin = () => {
 
@@ -30,11 +32,20 @@ const ArtisanLogin = () => {
 
             e.preventDefault();
 
-            await dispatch(loginArtisan(formData));
+            const artisanData = await loginArtisan(formData) ?? '';
 
-            console.log(formData);
+            console.log(artisanData);
 
-            navigate('/artisan_dashboard')
+            const {
+                userType,
+            } = artisanData;
+
+            userType === 'artisan'
+                ?
+                navigate('/artisan_dashboard')
+                :
+                LogoutUser().then(() => { navigate('/login'); console.log('logged out...') })
+
         } catch (error) {
             console.error('Error occurred:', error);
         } finally {

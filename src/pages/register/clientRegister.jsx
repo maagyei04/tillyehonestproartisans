@@ -3,18 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { RiveAnimation } from '../../components/common/RiveAnimation';
 import rive from '../../assets/rives/loading_loop.riv';
 
-const RegisterComplete = () => {
+const RegisterClientComplete = () => {
     const navigate = useNavigate();
 
     const handleGoToHomepage = () => {
-        navigate('/login_artisan');
+        navigate('/login_client');
     };
 
     return (
         <div style={styles.container}>
             <div style={styles.content}>
                 <h1 className='text-xl font-bold text-center'>CONGRATS, REGISTERATION <span className='text-violet-700 italic'>COMPLETE!</span></h1>
-                <p className='text-center'>Admins will have to cross-check your files to verify you,<br></br>After successful verification, you can begin to recieve bookings<br></br>You'll hear from us soon, either via Email or Text....<br></br>You can go ahead and login below, Thank You</p>
+                <p className='text-center'>You can now view your dashboard, and keep track of your bookings, <br></br>Click on below button to login now<br></br><br></br>Thank You</p>
                 <div style={styles.animationContainer}>
                     <RiveAnimation rivelink={rive} />
                 </div>
@@ -57,4 +57,4 @@ const styles = {
     },
 };
 
-export default RegisterComplete;
+export default RegisterClientComplete;

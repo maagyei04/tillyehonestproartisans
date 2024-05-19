@@ -148,7 +148,7 @@ const BookingReview = () => {
 
             dispatch(bookArtisan(bookingData));
 
-            navigate('/explore');
+            navigate('/booking/booking_complete');
         } catch (error) {
             console.error('Error occurred:', error);
         } finally {

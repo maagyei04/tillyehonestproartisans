@@ -65,7 +65,7 @@ const Header = () => {
                 {/* logo section */}
                 <div className='font-bold cursor-pointer flex items-center gap-1'>
                     {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
-                    <img src={logo} alt="logo" className='h-20 w-20' />
+                    <img src={logo} alt="logo" className='h-[60px] w-[60px] rounded-[10px] m-2' />
                     {/*<span className="text-black text-lg font-bold">T&E Honest Pro Artisans</span>*/}
                 </div>
 

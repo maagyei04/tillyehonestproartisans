@@ -136,17 +136,16 @@ export default function Notification() {
                       <ListItemText
                         primary={
                           <Typography variant="h6">
-                            Your Profile is Complete &nbsp;
+                            Thanks for registering for AbesJobConsult &nbsp;
                             <Typography component="span" variant="subtitle1">
-                              60%
+                              Happy Work!
                             </Typography>{' '}
                           </Typography>
                         }
-                        secondary="7 hours ago"
+                        secondary="few mins ago"
                       />
                       <ListItemSecondaryAction>
                         <Typography variant="caption" noWrap>
-                          2:45 PM
                         </Typography>
                       </ListItemSecondaryAction>
                     </ListItemButton>
@@ -155,7 +154,6 @@ export default function Notification() {
                       <ListItemText
                         primary={
                           <Typography variant="h6" color="primary">
-                            View All
                           </Typography>
                         }
                       />

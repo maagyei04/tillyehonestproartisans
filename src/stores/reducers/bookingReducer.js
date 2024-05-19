@@ -19,7 +19,7 @@ const initialState = {
     bookingPayment: '',
     bookingStatusArtisan: '',
     bookingStatusClient: '',
-    bookingEstimateAmount: '0',
+    bookingEstimateAmount: 0,
     bookingApproved: false,
 };
 

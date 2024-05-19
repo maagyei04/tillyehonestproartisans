@@ -19,7 +19,8 @@ const initialState = {
     ghanaCardImage: '',
     policeReportImage: '',
     gaurantorNoteImage: '',
-    status: false,
+    bio: '',
+    status: true,
 };
 
 export const artisanSlice = createSlice({
@@ -80,6 +81,9 @@ export const artisanSlice = createSlice({
         setGaurantorNoteImage: (state, action) => {
             state.gaurantorNoteImage = action.payload;
         },
+        setArtisanBio: (state, action) => {
+            state.bio = action.payload;
+        },
     },
 });
 
@@ -102,6 +106,7 @@ export const {
     setGhanaCardImage,
     setPassportImage,
     setPoliceReportImage,
+    setArtisanBio
 } = artisanSlice.actions;
 
 export default artisanSlice.reducer;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Banner from '../../assets/images/exploreframe.png';
 import BookNowButton from '../../components/common/BookNowButton';
-import { fetchAllArtisanData } from '../../stores/actions';
+import { fetchAllArtisanDataStatusTrue } from '../../stores/actions';
 
 const Explore = () => {
 
@@ -11,7 +11,7 @@ const Explore = () => {
     useEffect(() => {
         const fetchArtisans = async () => {
             try {
-                const artisansData = await fetchAllArtisanData();
+                const artisansData = await fetchAllArtisanDataStatusTrue();
                 setArtisans(artisansData);
             } catch (error) {
 

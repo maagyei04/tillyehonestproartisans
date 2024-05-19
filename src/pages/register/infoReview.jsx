@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { registerClient, registerArtisan } from '../../stores/actions';
 import { useNavigate, Link } from 'react-router-dom';
 import { setFirstName, setLastName, setPhoneNumber, setEmail, setPassword } from '../../stores/reducers/artisanReducer';
+import { LogoutUser } from '../../services/firebase/auth';
 
 const InfoReview = () => {
 
@@ -30,11 +31,11 @@ const InfoReview = () => {
 
             if (clientData.userType === 'client') {
                 await dispatch(registerClient(clientData));
-                navigate('/');
+                LogoutUser().then(() => { navigate('/register/registerClient_complete') });
 
             } else {
                 await dispatch(registerArtisan(artisanData));
-                navigate('/register/register_complete');
+                LogoutUser().then(() => { navigate('/register/register_complete') })
 
             }
 

@@ -20,6 +20,7 @@ import BookingLocationInfo from '../pages/booking/locationInfo';
 import BookingPickDate from '../pages/booking/pickDate';
 import BookingReview from '../pages/booking/bookingReview';
 import BookingComplete from '../pages/booking/bookingComplete';
+import RegisterClientComplete from "../pages/register/clientRegister";
 import NotFound from '../pages/NotFound';
 
 const MainRoutes = {
@@ -65,6 +66,10 @@ const MainRoutes = {
         {
             path: 'register/register_complete',
             element: <RegisterComplete />,
+        },
+        {
+            path: 'register/registerClient_complete',
+            element: <RegisterClientComplete />,
         },
         {
             path: 'booking/service_detail',

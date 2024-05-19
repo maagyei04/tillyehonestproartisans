@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginAdmin } from '../../stores/actions';
 import { useNavigate } from 'react-router-dom';
+import { LogoutUser } from '../../services/firebase/auth';
+
 
 const AdminLogin = () => {
 
@@ -30,11 +32,20 @@ const AdminLogin = () => {
 
             e.preventDefault();
 
-            await dispatch(loginAdmin(formData));
+            const adminData = await loginAdmin(formData) ?? '';
 
-            console.log(formData);
+            console.log(adminData);
 
-            navigate('/admin_dashboard')
+            const {
+                userType,
+            } = adminData;
+
+            userType === 'admin'
+                ?
+                navigate('/admin_dashboard')
+                :
+                LogoutUser().then(() => { navigate('/login'); console.log('logged out...') })
+
         } catch (error) {
             console.error('Error occurred:', error);
         } finally {
