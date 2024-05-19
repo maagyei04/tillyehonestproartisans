@@ -35,7 +35,7 @@ const Header = () => {
     };
 
     const register = () => {
-        navigate('register');
+        navigate('/register');
     };
 
 
