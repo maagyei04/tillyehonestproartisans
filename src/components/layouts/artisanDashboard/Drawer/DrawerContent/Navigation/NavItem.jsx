@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 
 // project import
-import { handlerActiveItem, useGetMenuMaster } from 'api/menu';
+import { handlerActiveItem, useGetMenuMaster } from '../../../../../../api/menu';
 
 export default function NavItem({ item, level }) {
   const theme = useTheme();
@@ -99,11 +99,11 @@ export default function NavItem({ item, level }) {
             }),
             ...(!drawerOpen &&
               isSelected && {
-                bgcolor: 'primary.lighter',
-                '&:hover': {
-                  bgcolor: 'primary.lighter'
-                }
-              })
+              bgcolor: 'primary.lighter',
+              '&:hover': {
+                bgcolor: 'primary.lighter'
+              }
+            })
           }}
         >
           {itemIcon}

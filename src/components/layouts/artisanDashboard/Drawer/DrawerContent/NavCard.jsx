@@ -6,11 +6,11 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 // project import
-import MainCard from 'components/MainCard';
+import MainCard from '../../../../common/MainCard';
 
 // assets
-import avatar from 'assets/images/users/avatar-group.png';
-import AnimateButton from 'components/@extended/AnimateButton';
+import avatar from '../../../../../assets/images/artisan.png';
+import AnimateButton from '../../../../common/@extended/AnimateButton';
 
 // ==============================|| DRAWER CONTENT - NAVIGATION CARD ||============================== //
 

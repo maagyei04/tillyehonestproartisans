@@ -12,7 +12,7 @@ const initialState = {
 export const endpoints = {
   key: 'api/menu',
   master: 'master',
-  dashboard: '/client_dashboard'
+  dashboard: '/client_dashboard',
 };
 
 export function useGetMenuMaster() {

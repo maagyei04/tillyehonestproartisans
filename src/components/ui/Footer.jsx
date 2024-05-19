@@ -36,9 +36,8 @@ const Footer = () => {
                         <p class="font-semibold text-gray-800 dark:text-white">Views</p>
 
                         <div class="flex flex-col items-start mt-5 space-y-2">
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/'}>Admin Dashboard</Link></p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={'/'}>Artisan Dashboard</Link></p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={userLoggedIn ? '/client_dashboard' : '/login'}>Client Dashboard</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={userLoggedIn ? '/artisan_dashboard' : '/login_artisan'}>Artisan Dashboard</Link></p>
+                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={userLoggedIn ? '/client_dashboard' : '/login_client'}>Client Dashboard</Link></p>
                         </div>
                     </div>
                 </div>

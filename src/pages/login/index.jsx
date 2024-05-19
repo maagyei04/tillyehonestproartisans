@@ -22,14 +22,6 @@ const LoginSelection = () => {
             <Typography variant="h4" gutterBottom>Choose Your Login Type</Typography>
             <Button
                 variant="contained"
-                color="primary"
-                onClick={() => navigateTo('/login_admin')}
-                sx={{ mb: 3, width: '200px', padding: '15px' }}
-            >
-                Admin Login
-            </Button>
-            <Button
-                variant="contained"
                 color="secondary"
                 onClick={() => navigateTo('/login_client')}
                 sx={{ mb: 3, width: '200px', padding: '15px' }}
@@ -37,6 +29,7 @@ const LoginSelection = () => {
                 Client Login
             </Button>
             <Button
+
                 variant="contained"
                 color="success"
                 onClick={() => navigateTo('/login_artisan')}

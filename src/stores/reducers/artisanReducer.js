@@ -20,11 +20,11 @@ const initialState = {
     policeReportImage: '',
     gaurantorNoteImage: '',
     bio: '',
-    status: true,
+    status: false,
 };
 
 export const artisanSlice = createSlice({
-    name: 'client',
+    name: 'artisan',
     initialState,
     reducers: {
         setArtisanId: (state, action) => {

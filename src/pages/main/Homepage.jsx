@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import framePic from '../../assets/images/frame2.png';
-import person from '../../assets/images/plumbing.png';
 import person2 from '../../assets/images/woodworks.png';
 import contentPic from '../../assets/images/carpentry.png';
 import verifyImage from '../../assets/images/verifyimage.png';

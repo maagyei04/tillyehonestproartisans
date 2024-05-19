@@ -133,6 +133,20 @@ export const updateClientData = async (userId, updatedData) => {
     }
 };
 
+export const updateArtisanData = async (userId, updatedData) => {
+    try {
+        const collectionRef = collection(db, 'Artisans');
+        const clientRef = doc(collectionRef, userId);
+
+        await setDoc(clientRef, updatedData, { merge: true });
+
+        console.log('Artisan data updated successfully');
+    } catch (error) {
+        console.error('Error updating artisan data:', error);
+        throw error;
+    }
+};
+
 
 export const loginClient = async (clientData) => {
     try {
@@ -549,6 +563,51 @@ export const fetchAllClientBookings = async (userId) => {
         }
     } catch (error) {
         console.error('Error fetching bookings data for client:', error);
+        throw error;
+    }
+};
+
+export const fetchLimitedArtisanAppointments = async (limitCount, userId) => {
+    try {
+        const collectionRef = collection(db, 'Bookings');
+        const querySnapshot = await getDocs(query(collectionRef, limit(limitCount)));
+
+        const bookingData = [];
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+
+            if (data.bookingArtisanId === userId) {
+                bookingData.push(data);
+            }
+        });
+
+        return bookingData;
+    } catch (error) {
+        console.error('Error fetching bookings data:', error);
+        throw error;
+    }
+};
+
+export const fetchAllArtisanAppointments = async (userId) => {
+    try {
+        const collectionRef = collection(db, 'Bookings');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const bookingData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+
+                if (data.bookingArtisanId === userId) {
+                    bookingData.push(data);
+                }
+            });
+            return bookingData;
+        } else {
+            throw new Error('No bookings found for this artisan');
+        }
+    } catch (error) {
+        console.error('Error fetching bookings data for artisan:', error);
         throw error;
     }
 };

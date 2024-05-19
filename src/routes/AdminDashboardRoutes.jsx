@@ -1,9 +1,14 @@
 import { lazy } from 'react';
 
 import Loadable from '../components/common/Loadable';
-import Dashboard from '../components/layouts/clientDashboard';
+import Dashboard from '../components/layouts/adminDashboard';
 
-const Color = Loadable(lazy(() => import('../pages/main/About')));
+const DashboardDefault = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages')));
+const Orders = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/orders')));
+const Finance = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/financial')));
+const Profile = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/profile')));
+const Appointment = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/appointment')));
+
 
 const AdminDashboardRoutes = {
     path: '/admin_dashboard/',
@@ -11,29 +16,33 @@ const AdminDashboardRoutes = {
     children: [
         {
             path: '/admin_dashboard/',
-            element: <Color />
+            element: <DashboardDefault />
         },
         {
-            path: '/admin_dashboard/color',
-            element: <Color />
+            path: '/admin_dashboard/appointments',
+            element: <Appointment />
+        },
+        {
+            path: '/admin_dashboard/orders',
+            element: <Orders />
+        },
+        {
+            path: '/admin_dashboard/financial_history',
+            element: <Finance />
+        },
+        {
+            path: '/admin_dashboard/profile',
+            element: <Profile />
         },
         {
             path: '/admin_dashboard/',
             children: [
                 {
                     path: 'default',
-                    element: <Color />
+                    element: <DashboardDefault />
                 }
             ]
         },
-        {
-            path: '/admin_dashboard/shadow',
-            element: <Color />
-        },
-        {
-            path: '/admin_dashboard/typography',
-            element: <Color />
-        }
     ]
 };
 
