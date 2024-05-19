@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.f9005bf9.css",
-    "main.js": "/static/js/main.30a666e4.js",
-    "static/js/740.195c98a3.chunk.js": "/static/js/740.195c98a3.chunk.js",
+    "main.css": "/static/css/main.03d793b6.css",
+    "main.js": "/static/js/main.98b15bd2.js",
+    "static/js/740.cf2c68fc.chunk.js": "/static/js/740.cf2c68fc.chunk.js",
     "static/js/669.bbba4afd.chunk.js": "/static/js/669.bbba4afd.chunk.js",
     "static/js/658.b69c9a5d.chunk.js": "/static/js/658.b69c9a5d.chunk.js",
     "static/js/463.832757ad.chunk.js": "/static/js/463.832757ad.chunk.js",
-    "static/js/20.025abeb2.chunk.js": "/static/js/20.025abeb2.chunk.js",
+    "static/js/13.9d1c7603.chunk.js": "/static/js/13.9d1c7603.chunk.js",
     "static/js/206.86661986.chunk.js": "/static/js/206.86661986.chunk.js",
-    "static/js/614.a30bb30d.chunk.js": "/static/js/614.a30bb30d.chunk.js",
+    "static/js/614.dfd4deda.chunk.js": "/static/js/614.dfd4deda.chunk.js",
     "static/js/385.42678ab9.chunk.js": "/static/js/385.42678ab9.chunk.js",
+    "static/js/180.45c132e9.chunk.js": "/static/js/180.45c132e9.chunk.js",
     "static/media/frame2.png": "/static/media/frame2.a97634439e99c9e9993f.png",
     "static/media/register4.png": "/static/media/register4.ccef31a8552dde5cc595.png",
     "static/media/register2.png": "/static/media/register2.27235efb652ed5cf0a3f.png",
@@ -20,14 +21,14 @@
     "static/media/register3.png": "/static/media/register3.f9c382ed1a78130f30ce.png",
     "static/media/woodworks.png": "/static/media/woodworks.3165dd41388f3d836a57.png",
     "static/media/plumbing.png": "/static/media/plumbing.547a036b864944a1afed.png",
-    "static/media/logo.png": "/static/media/logo.4b079ca1dd5fd1d63837.png",
     "static/media/exploreframe.png": "/static/media/exploreframe.dff79f9f8c87196ffab1.png",
     "static/media/frame1.png": "/static/media/frame1.07d2b528d4ca665a764f.png",
+    "static/media/logo.png": "/static/media/logo.5c0051fee9d7c8a8ccae.png",
     "static/media/loading_loop.riv": "/static/media/loading_loop.a38f6b69d0356fc62605.riv",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.f9005bf9.css",
-    "static/js/main.30a666e4.js"
+    "static/css/main.03d793b6.css",
+    "static/js/main.98b15bd2.js"
   ]
 }
