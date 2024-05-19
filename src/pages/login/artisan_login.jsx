@@ -42,7 +42,7 @@ const ArtisanLogin = () => {
 
             userType === 'artisan'
                 ?
-                navigate('/artisan_dashboard')
+                navigate('/')
                 :
                 LogoutUser().then(() => { navigate('/login'); console.log('logged out...') })
 

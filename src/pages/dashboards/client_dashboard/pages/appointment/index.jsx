@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Grid,
     Box,
@@ -13,6 +13,10 @@ import { styled } from '@mui/system';
 import Estimate from './estimate';
 import Payment from './payment';
 import Complete from './complete';
+import { fetchAllClientBookings, fetchArtisanData } from '../../../../../stores/actions';
+import { useAuth } from '../../../../../contexts/authContext';
+import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
+
 
 // Styled components
 const LeftContainer = styled(Box)({
@@ -28,15 +32,42 @@ const RightContainer = styled(Box)({
     overflowY: 'auto',
 });
 
-const appointments = [
-    { name: 'George Asiedu', status: 'Pending', description: 'Kitchen Sink Leakage', date: '24th June, 2024', avatar: '../../' },
-    { name: 'Agyei Michael', status: 'In Progress', description: 'Kitchen Sink Leakage', date: '24th June, 2024', avatar: 'path/to/avatar.png' },
-    // More appointments here...
-];
-
 export default function Appointment() {
+    const { userLoggedIn, currentUser } = useAuth();
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [tabIndex, setTabIndex] = useState(0);
+    const [bookingData, setBookingData] = useState([]);
+    const [artisanNames, setArtisanNames] = useState({});
+    const [artisanPics, setArtisanPics] = useState({});
+
+
+    useEffect(() => {
+        const getClientBookings = async () => {
+            if (userLoggedIn && currentUser?.uid) {
+                const bookingData = await fetchAllClientBookings(currentUser.uid);
+                setBookingData(bookingData);
+            }
+        }
+
+        getClientBookings();
+    }, [userLoggedIn, currentUser]);
+
+    useEffect(() => {
+        const fetchArtisanNames = async () => {
+            const names = {};
+            const pics = {};
+            for (const booking of bookingData) {
+                if (!names[booking.bookingArtisanId]) {
+                    const artisanData = await fetchArtisanData(booking.bookingArtisanId);
+                    names[booking.bookingArtisanId] = artisanData.firstName;
+                }
+            }
+            setArtisanNames(names);
+        };
+
+        fetchArtisanNames();
+    }, [bookingData]);
+
 
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
@@ -57,37 +88,45 @@ export default function Appointment() {
                         placeholder='Search Appointments...'
                     />
                     <div>
-                        {appointments.map((appointment, index) => (
-                            <div
-                                key={index}
-                                button
-                                onClick={() => handleClick(appointment)}
-                                selected={selectedAppointment === appointment}
-                                sx={{ mb: 2 }}
-                            >
-                                <div className={`${selectedAppointment === appointment ? 'border border-violet-600' : 'border border-gray-200'} flex flex-col mb-2 p-4 shadow shadow-lg rounded-[10px] bg-white`}>
-                                    <div className='flex flex-row justify-between mb-5'>
-                                        <div className='flex flex-row items-cente'>
-                                            <Avatar className='h-5 w-5 mr-2' src={appointment.avatar} />
-                                            <p className='text-sm'>{appointment.name}</p>
+                        {bookingData.length > 0 ? (
+                            bookingData.map((appointment, index) => (
+                                <div
+                                    key={index}
+                                    button
+                                    onClick={() => handleClick(appointment)}
+                                    selected={selectedAppointment === appointment}
+                                    sx={{ mb: 2 }}
+                                >
+                                    <div className={`${selectedAppointment === appointment ? 'border border-violet-600' : 'border border-gray-200'} flex flex-col mb-2 p-4 shadow shadow-lg rounded-[10px] bg-white`}>
+                                        <div className='flex flex-row justify-between mb-5'>
+                                            <div className='flex flex-row items-cente'>
+                                                <Avatar className='h-5 w-5 mr-2' />
+                                                <p className='text-sm'>{artisanNames[appointment.bookingArtisanId]}</p>
+                                            </div>
+                                            <div className={`${appointment.bookingEstimateAmount === 0 ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
+                                                {appointment.bookingEstimateAmount === 0 ? 'Pending' : ''}
+                                            </div>
                                         </div>
-                                        <div className={`${appointment.status === 'Pending' ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
-                                            {appointment.status}
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-row justify-between'>
-                                        <div className='flex flex-col'>
-                                            <p className='text-gray-500'>Job Description</p>
-                                            {appointment.description}
-                                        </div>
-                                        <div className='flex flex-col'>
-                                            <p className='text-gray-500'>Expected Date</p>
-                                            {appointment.date}
+                                        <div className='flex flex-row justify-between'>
+                                            <div className='flex flex-col'>
+                                                <p className='text-gray-500'>Job Description</p>
+                                                {appointment.bookingServiceDetail}
+                                            </div>
+                                            <div className='flex flex-col'>
+                                                <p className='text-gray-500'>Expected Date</p>
+                                                {appointment.bookingStartDate}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <Box className="flex flex-col items-center justify-center mt-10">
+                                <EmptyIcon className='h-20' style={{ color: 'gray' }} />
+                                <p className='font-bold text-lg'>You’ve not booked any artisan yet</p>
+                                <Typography className="text-gray-500 mt-2 text-center px-2 md:px-20">You're all set! There are currently no booked artisans for you. Enjoy your free time or use it to tackle your next task with peace of mind.</Typography>
+                            </Box>
+                        )}
                     </div>
                 </LeftContainer>
             </Grid>
@@ -100,7 +139,7 @@ export default function Appointment() {
                             <div className='flex flex-row items-center'>
                                 <Typography className='text-sm font-bold mr-2' gutterBottom>Appointment Details</Typography>
                                 <div className='bg-red-100 text-red-600 px-4 rounded-[10px]'>
-                                    <p>Waiting for estimate</p>
+                                    <p>{selectedAppointment.bookingEstimateAmount === 0 ? 'Waiting for estimate' : 'Estimate Done'}</p>
                                 </div>
                             </div>
                             <Tabs value={tabIndex} onChange={handleTabChange}>
@@ -119,7 +158,7 @@ export default function Appointment() {
                                                     <Avatar className='h-10 w-10 mr-2' src={selectedAppointment.avatar} />
                                                 </div>
                                                 <div>
-                                                    <p className='text-sm'>{selectedAppointment.name}</p>
+                                                    <p className='text-sm'>{artisanNames[selectedAppointment.bookingArtisanId]}</p>
                                                     <p className='text-sm text-gray-500'>Accra</p>
                                                 </div>
                                             </div>
@@ -129,7 +168,7 @@ export default function Appointment() {
                                             <Typography variant="subtitle1" gutterBottom>Service Details</Typography>
                                             <Typography variant="body2">Problem Statement</Typography>
                                             <Typography variant="body1" color="textSecondary">
-                                                {selectedAppointment.description}
+                                                {selectedAppointment.bookingServiceDetail}
                                             </Typography>
                                             <Divider sx={{ my: 2 }} />
 
@@ -138,11 +177,11 @@ export default function Appointment() {
                                             <div className='flex flex-row'>
                                                 <div className='mr-10'>
                                                     <p className='text-gray-500'>Estimated Date</p>
-                                                    <p>24-06-24</p>
+                                                    <p>{selectedAppointment.bookingStartDate}</p>
                                                 </div>
                                                 <div>
                                                     <p className='text-gray-500'>Time</p>
-                                                    <p>8 am</p>
+                                                    <p>{selectedAppointment.bookingStartTime}</p>
                                                 </div>
                                             </div>
                                             <Divider sx={{ my: 2 }} />
@@ -151,49 +190,49 @@ export default function Appointment() {
                                             <div className='flex flex-row mb-5'>
                                                 <div className='mr-10'>
                                                     <p className='text-gray-500'>Digital Address:</p>
-                                                    <p>CP - 1254 - 4100</p>
+                                                    <p>{selectedAppointment.bookingDigitalAddress}</p>
                                                 </div>
                                                 <div>
                                                     <p className='text-gray-500'>House Number:</p>
-                                                    <p>AK 124/B</p>
+                                                    <p>{selectedAppointment.bookingHouseNumber}</p>
                                                 </div>
                                             </div>
                                             <div className='flex flex-row mb-5'>
                                                 <div className='mr-10'>
                                                     <p className='text-gray-500'>City/Town:</p>
-                                                    <p>Pokuase</p>
+                                                    <p>{selectedAppointment.bookingTown}</p>
                                                 </div>
                                                 <div className='mr-10'>
                                                     <p className='text-gray-500'>Region:</p>
-                                                    <p>Greater Accra</p>
+                                                    <p>{selectedAppointment.bookingRegion}</p>
                                                 </div>
                                                 <div>
                                                     <p className='text-gray-500'>Country:</p>
-                                                    <p>Ghana</p>
+                                                    <p>{selectedAppointment.bookingCountry}</p>
                                                 </div>
                                             </div>
                                             <div className='flex flex-row mb-5'>
                                                 <div className='mr-10'>
                                                     <p className='text-gray-500'>Neighborhood / Community:</p>
-                                                    <p>Ayaso</p>
+                                                    <p>{selectedAppointment.bookingCommunity}</p>
                                                 </div>
                                                 <div>
                                                     <p className='text-gray-500'>Closest Landmark:</p>
-                                                    <p>Shell Filling Station</p>
+                                                    <p>{selectedAppointment.bookingLandmark}</p>
                                                 </div>
                                             </div>
                                             <div>
                                                 <p className='text-gray-500'>Extra Information about Location</p>
                                                 <p>
-                                                    Perched atop a gentle hillside, the house boasts panoramic views of the sprawling valley below. Surrounded by lush greenery and towering trees, it exudes a sense of tranquility and seclusion. A winding gravel path leads visitors through the verdant gardens, past a bubbling stream, and up to the welcoming front porch adorned with colorful blooms. As the sun sets in the west, casting a warm golden glow across the landscape, the house stands as a beacon of comfort and serenity in its picturesque setting
+                                                    {selectedAppointment.bookingLocationInfo}
                                                 </p>
                                             </div>
                                         </div>
                                     </>
                                 )}
-                                {tabIndex === 1 && <Estimate />}
-                                {tabIndex === 2 && <Payment />}
-                                {tabIndex === 3 && <Complete />}
+                                {tabIndex === 1 && <Estimate bookingData={selectedAppointment} />}
+                                {tabIndex === 2 && <Payment bookingData={selectedAppointment} />}
+                                {tabIndex === 3 && <Complete bookingData={selectedAppointment} />}
                             </Box>
                         </>
                     ) : (

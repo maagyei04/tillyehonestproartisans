@@ -104,7 +104,7 @@ export default function Profile() {
         onClick={handleToggle}
       >
         <Stack direction="row" spacing={1.25} alignItems="center" sx={{ p: 0.5 }}>
-          <Avatar alt="profile user" src={avatar1} size="sm" />
+          <Avatar alt="profile user" src={userData ? userData.profilePic : ''} size="sm" />
           <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
             {userData ? userData.firstName + ' ' + userData.lastName : 'Loading...'}
           </Typography>
@@ -137,7 +137,7 @@ export default function Profile() {
                     <Grid container justifyContent="space-between" alignItems="center">
                       <Grid item>
                         <Stack direction="row" spacing={1.25} alignItems="center">
-                          <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
+                          <Avatar alt="profile user" src={userData ? userData.profilePic : ''} sx={{ width: 32, height: 32 }} />
                           <Stack>
                             <Typography variant="h6">{userData ? userData.firstName + ' ' + userData.lastName : 'Loading...'}</Typography>
                             <Typography variant="body2" color="text.secondary">

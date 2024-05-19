@@ -42,7 +42,7 @@ const AdminLogin = () => {
 
             userType === 'admin'
                 ?
-                navigate('/admin_dashboard')
+                navigate('/')
                 :
                 LogoutUser().then(() => { navigate('/login'); console.log('logged out...') })
 

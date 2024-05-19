@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, TextareaAutosize } from '@mui/material';
 
-const Complete = () => {
+const Complete = ({ bookingData }) => {
     const [open, setOpen] = useState(false);
-    const bookingStatusArtisan = 'waiting';
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -17,14 +16,14 @@ const Complete = () => {
         <>
             <div className='bg-white shadow shadow-lg p-5 rounded-[10px]'>
                 <h1 className="mb-2 text-sm font-bold">Appointment Completion</h1>
-                <div className={bookingStatusArtisan === 'waiting' ? 'bg-red-100 text-red-600 px-4 rounded-[10px] mb-5' : 'bg-green-100 text-green-600 px-4 rounded-[10px] mb-5'}>
-                    <p>{bookingStatusArtisan === 'waiting' ? "Artisan hasn't completed work yet" : "Artisan has completed work"}</p>
+                <div className={bookingData.bookingStatusArtisan === '' ? 'bg-red-100 text-red-600 px-4 rounded-[10px] mb-5' : 'bg-green-100 text-green-600 px-4 rounded-[10px] mb-5'}>
+                    <p>{bookingData.bookingStatusArtisan === '' ? "Artisan hasn't completed work yet" : "Artisan has completed work"}</p>
                 </div>
                 <div className="flex flex-col">
                     <div className="flex flex-col mb-5">
                         <p className='text-gray-500 text-sm mb-2'>Rate the Artisan</p>
                         <Select
-                            value='5'
+                            value=''
                             displayEmpty
                             inputProps={{ 'aria-label': 'Select Rating' }}
                             sx={{ minWidth: 120 }}

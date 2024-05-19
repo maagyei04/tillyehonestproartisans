@@ -1,11 +1,9 @@
 import { CheckBadgeIcon } from '@heroicons/react/24/solid'
 
-const Estimate = () => {
-
-    const estimate = 'waiting';
+const Estimate = ({ bookingData }) => {
 
     return (
-        estimate === 'waiting' ?
+        bookingData.bookingEstimateAmount === 0 ?
             <>
                 <div className='bg-white shadow shadow-lg p-5 rounded-[10px]'>
                     <h1 className="mb-2 text-sm font-bold">Estimate Details</h1>
@@ -39,7 +37,7 @@ const Estimate = () => {
                     <h1 className="mb-2 text-sm font-bold">Esimated Budget</h1>
                     <div className='mb-10'>
                         <p className='text-gray-500'>Total Amount</p>
-                        <p>GHc 2000</p>
+                        <p>{bookingData.bookingEstimateAmount}</p>
                     </div>
 
 

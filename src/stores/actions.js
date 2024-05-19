@@ -90,6 +90,8 @@ export const fetchClientData = async (userId) => {
         const clientDoc = await getDoc(clientRef);
 
         if (clientDoc.exists()) {
+            console.log(clientDoc.data());
+
             return clientDoc.data();
         } else {
             throw new Error('Client not found');
@@ -116,6 +118,21 @@ export const fetchArtisanData = async (userId) => {
         throw error;
     }
 };
+
+export const updateClientData = async (userId, updatedData) => {
+    try {
+        const collectionRef = collection(db, 'Clients');
+        const clientRef = doc(collectionRef, userId);
+
+        await setDoc(clientRef, updatedData, { merge: true });
+
+        console.log('Client data updated successfully');
+    } catch (error) {
+        console.error('Error updating client data:', error);
+        throw error;
+    }
+};
+
 
 export const loginClient = async (clientData) => {
     try {

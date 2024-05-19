@@ -64,6 +64,9 @@ export const clientSlice = createSlice({
         setBusinessLocation: (state, action) => {
             state.businessLocation = action.payload;
         },
+        setProfilePic: (state, action) => {
+            state.profilePic = action.payload;
+        }
     },
 });
 
@@ -82,6 +85,7 @@ export const {
     setBankBranch,
     setBusinessField,
     setBusinessLocation,
+    setProfilePic
 } = clientSlice.actions;
 
 export default clientSlice.reducer;
