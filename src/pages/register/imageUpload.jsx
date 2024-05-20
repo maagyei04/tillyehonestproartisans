@@ -3,7 +3,7 @@ import RegisterPic4 from '../../assets/images/register4.png';
 import ImageIcon from '../../assets/images/image_icon.png';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setGhanaCardImage, setPoliceReportImage, setGaurantorNoteImage, setPassportImage } from '../../stores/reducers/artisanReducer';
+import { setGhanaCardImage, setGaurantorNoteImage, setPassportImage } from '../../stores/reducers/artisanReducer';
 import CustomSnackbar from '../../components/common/SnackBar';
 
 
@@ -20,7 +20,6 @@ const ImageUpload = () => {
     const [selectedImages, setSelectedImages] = useState({
         passport: '',
         ghanaCard: '',
-        policeReport: '',
         guarantorNote: ''
     });
 
@@ -38,6 +37,7 @@ const ImageUpload = () => {
             reader.readAsDataURL(file);
         } else {
             console.log('No file selected');
+            alert('No images has been selected!!, Please do select all images...')
         }
     };
 
@@ -67,17 +67,14 @@ const ImageUpload = () => {
         const passportBlob = dataURLtoBlob(selectedImages.passport);
         const ghanaCardBlob = dataURLtoBlob(selectedImages.ghanaCard);
         const guarantorNoteBlob = dataURLtoBlob(selectedImages.guarantorNote);
-        const policeReportBlob = dataURLtoBlob(selectedImages.policeReport);
 
         console.log('Passport Image:', selectedImages.passport);
         console.log('Ghana Card Image:', selectedImages.ghanaCard);
         console.log('Guarantor Note Image:', selectedImages.guarantorNote);
-        console.log('Police Report Image:', selectedImages.policeReport);
 
         dispatch(setPassportImage(passportBlob));
         dispatch(setGhanaCardImage(ghanaCardBlob));
         dispatch(setGaurantorNoteImage(guarantorNoteBlob));
-        dispatch(setPoliceReportImage(policeReportBlob));
 
         e.preventDefault();
 
@@ -90,7 +87,7 @@ const ImageUpload = () => {
     };
 
     const areAllImagesSelected = () => {
-        if (selectedImages.ghanaCard === '' && selectedImages.guarantorNote === '' && selectedImages.guarantorNote === '' && selectedImages.policeReport === '') {
+        if (selectedImages.ghanaCard === '' && selectedImages.guarantorNote === '' && selectedImages.guarantorNote === '') {
             return false;
         }
         return true;
@@ -136,23 +133,6 @@ const ImageUpload = () => {
                                     </div>
                                 )}
                                 <input name='ghanaCard-upload' type="file" id="ghanaCard-upload" className="hidden" onChange={(e) => handleImageChange('ghanaCard', e)} accept="image/*" />
-                            </div>
-                        </label>
-                    </div>
-                    <div className='mb-5'>
-                        <label htmlFor="policeReport-upload" className="font-semibold text-sm text-gray-500"> Police Clearance Report</label>
-                        <label>
-                            <div className='relative border-dotted border-2 border-gray-400 rounded-lg overflow-hidden cursor-pointer'>
-                                {selectedImages.policeReport ? (
-                                    <img src={selectedImages.policeReport} alt="Selected" className="w-auto h-auto object-cover" />
-                                ) : (
-                                    <div className="flex flex-col items-center justify-center py-4">
-                                        <img src={ImageIcon} alt="Icon" className="w-16 h-16 mb-2" />
-                                        <span className="text-sm text-gray-600">Drop your image here, or <span className='text-violet-600'>Browse</span></span>
-                                        <span className="text-xs text-gray-600">Support PNG, JPG, JPEG, WEBP</span>
-                                    </div>
-                                )}
-                                <input name='policeReport-upload' type="file" id="policeReport-upload" className="hidden" onChange={(e) => handleImageChange('policeReport', e)} accept="image/*" />
                             </div>
                         </label>
                     </div>

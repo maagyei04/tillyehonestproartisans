@@ -1,5 +1,5 @@
 import { RegisterUserWithEmailAndPassword, LoginUserWithEmailAndPassword } from '../services/firebase/auth';
-import { doc, setDoc, collection, getDoc, getDocs, query, limit } from 'firebase/firestore';
+import { doc, setDoc, collection, getDoc, getDocs, query, limit, updateDoc } from 'firebase/firestore';
 import { db, storage } from '../services/firebase/firebase';
 import { setClientData } from './reducers/clientInfoReducer';
 import { setArtisanData } from './reducers/artisanInfoReducer';
@@ -145,6 +145,11 @@ export const updateArtisanData = async (userId, updatedData) => {
         console.error('Error updating artisan data:', error);
         throw error;
     }
+};
+
+export const updateBookingEstimate = async (bookingDocId, newEstimateAmount) => {
+    const bookingDocRef = doc(db, "Bookings", bookingDocId);
+    await updateDoc(bookingDocRef, { bookingEstimateAmount: newEstimateAmount });
 };
 
 

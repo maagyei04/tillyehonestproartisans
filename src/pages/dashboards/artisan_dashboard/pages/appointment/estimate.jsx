@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CheckBadgeIcon } from '@heroicons/react/24/solid'
+import { CheckBadgeIcon } from '@heroicons/react/24/solid';
+import { updateBookingEstimate } from '../../../../../stores/actions';
 
 
 const ArtisanEstimate = ({ bookingData }) => {
@@ -24,12 +25,12 @@ const ArtisanEstimate = ({ bookingData }) => {
 
         try {
 
-            //await updateArtisanData(currentUser.uid, formData);
+            await updateBookingEstimate(bookingData.id, formData.bookingEstimateAmount).then(alert('Updating of appointment estimate has been succesful!'))
 
             alert('Appointment Estimate updated successfully');
         } catch (error) {
-            console.error('Error updating estimate:', error);
-            alert('Error updating estimate');
+            console.error('Error updating appointment estimate:', error);
+            alert('Error updating appointment estimate');
         } finally {
             setLoading(false);
         }
