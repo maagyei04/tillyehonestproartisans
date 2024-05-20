@@ -18,6 +18,7 @@ const ArtisanEstimate = ({ bookingData }) => {
             [name]: value,
         }));
     };
+
     const handleSubmit = async (e) => {
         setLoading(true);
 
@@ -25,7 +26,7 @@ const ArtisanEstimate = ({ bookingData }) => {
 
         try {
 
-            await updateBookingEstimate(bookingData.id, formData.bookingEstimateAmount).then(alert('Updating of appointment estimate has been succesful!'))
+            await updateBookingEstimate(bookingData.id, formData.bookingEstimateAmount);
 
             alert('Appointment Estimate updated successfully');
         } catch (error) {
@@ -61,7 +62,7 @@ const ArtisanEstimate = ({ bookingData }) => {
                         <div className="flex flex-row mb-5">
                             <CheckBadgeIcon className="w-5 mr-5" />
                             <p className="text-gray-500 text-sm">
-                                Kindly go through the estimate thoroughly
+                                Kindly go through the estimate thoroughly, please refresh page after creating estimate
                             </p>
                         </div>
                         <div className="flex flex-row mb-5">
@@ -87,7 +88,7 @@ const ArtisanEstimate = ({ bookingData }) => {
                     <h1 className="mb-2 text-sm font-semibold mb-5">Esimated Budget</h1>
                     <div className='mb-10'>
                         <p className='text-gray-500'>Total Amount</p>
-                        <p>{bookingData.bookingEstimateAmount}</p>
+                        <p>GHC {bookingData.bookingEstimateAmount}.00</p>
                     </div>
 
                     <div className="flex flex-col">

@@ -19,6 +19,8 @@ const initialState = {
     bookingPayment: '',
     bookingStatusArtisan: '',
     bookingStatusClient: '',
+    bookingReview: '',
+    bookingRate: '',
     bookingEstimateAmount: 0,
     bookingApproved: false,
 };

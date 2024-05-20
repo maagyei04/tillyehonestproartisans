@@ -84,14 +84,16 @@ export const registerArtisan = () => {
 };
 
 export const fetchClientData = async (userId) => {
+    if (!userId) {
+        throw new Error('Invalid userId');
+    }
+
     try {
         const collectionRef = collection(db, 'Clients');
         const clientRef = doc(collectionRef, userId);
         const clientDoc = await getDoc(clientRef);
 
         if (clientDoc.exists()) {
-            console.log(clientDoc.data());
-
             return clientDoc.data();
         } else {
             throw new Error('Client not found');
@@ -150,6 +152,26 @@ export const updateArtisanData = async (userId, updatedData) => {
 export const updateBookingEstimate = async (bookingDocId, newEstimateAmount) => {
     const bookingDocRef = doc(db, "Bookings", bookingDocId);
     await updateDoc(bookingDocRef, { bookingEstimateAmount: newEstimateAmount });
+};
+
+export const updateBookingReview = async (bookingDocId, newBookingReview) => {
+    const bookingDocRef = doc(db, "Bookings", bookingDocId);
+    await updateDoc(bookingDocRef, { bookingReview: newBookingReview });
+};
+
+export const updateBookingRate = async (bookingDocId, newBookingRate) => {
+    const bookingDocRef = doc(db, "Bookings", bookingDocId);
+    await updateDoc(bookingDocRef, { bookingRate: newBookingRate });
+};
+
+export const updateBookingStatusArtisan = async (bookingDocId, newbookingStatusArtisan) => {
+    const bookingDocRef = doc(db, "Bookings", bookingDocId);
+    await updateDoc(bookingDocRef, { bookingStatusArtisan: newbookingStatusArtisan });
+};
+
+export const updateBookingStatusClient = async (bookingDocId, newbookingStatusClient) => {
+    const bookingDocRef = doc(db, "Bookings", bookingDocId);
+    await updateDoc(bookingDocRef, { bookingStatusClient: newbookingStatusClient });
 };
 
 
@@ -537,7 +559,10 @@ export const fetchLimitedClientBookings = async (limitCount, userId) => {
             const data = doc.data();
 
             if (data.bookingClientId === userId) {
-                bookingData.push(data);
+                bookingData.push({
+                    id: doc.id,  // Document ID
+                    ...data      // Document Data
+                });
             }
         });
 
@@ -559,7 +584,10 @@ export const fetchAllClientBookings = async (userId) => {
                 const data = doc.data();
 
                 if (data.bookingClientId === userId) {
-                    bookingData.push(data);
+                    bookingData.push({
+                        id: doc.id,  // Document ID
+                        ...data      // Document Data
+                    });
                 }
             });
             return bookingData;
@@ -582,7 +610,10 @@ export const fetchLimitedArtisanAppointments = async (limitCount, userId) => {
             const data = doc.data();
 
             if (data.bookingArtisanId === userId) {
-                bookingData.push(data);
+                bookingData.push({
+                    id: doc.id,  // Document ID
+                    ...data      // Document Data
+                });
             }
         });
 
@@ -604,7 +635,10 @@ export const fetchAllArtisanAppointments = async (userId) => {
                 const data = doc.data();
 
                 if (data.bookingArtisanId === userId) {
-                    bookingData.push(data);
+                    bookingData.push({
+                        id: doc.id,  // Document ID
+                        ...data      // Document Data
+                    });
                 }
             });
             return bookingData;

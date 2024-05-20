@@ -4,7 +4,7 @@ import { CheckBadgeIcon } from '@heroicons/react/24/solid'
 const Payment = ({ bookingData }) => {
 
     return (
-        bookingData.bookingEstimateAmount !== 0 ?
+        bookingData.bookingEstimateAmount !== 0 && bookingData.bookingPayment === 'complete' ?
             <>
                 <div className='bg-white shadow shadow-lg p-5 rounded-[10px]'>
                     <h1 className="mb-2 text-sm font-bold mb-1">Payment Information</h1>
@@ -42,7 +42,7 @@ const Payment = ({ bookingData }) => {
                 <div className='bg-white shadow shadow-lg p-5 rounded-[10px]'>
                     <h1 className="mb-2 text-sm font-bold">Payment Information</h1>
                     <div className='bg-red-100 text-red-600 px-4 rounded-[10px] mb-5'>
-                        <p>Waiting for estimate</p>
+                        <p>{bookingData.bookingEstimateAmount === 0 ? 'waiting for Estimate' : 'yet to make full payment'}</p>
                     </div>
                     <div className="flex flex-col">
                         <div className="flex flex-row mb-5">

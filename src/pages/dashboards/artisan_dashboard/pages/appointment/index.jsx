@@ -45,16 +45,25 @@ export default function ArtisanAppointment() {
             if (userLoggedIn && currentUser?.uid) {
                 const bookingData = await fetchAllArtisanAppointments(currentUser.uid);
                 setBookingData(bookingData);
+                console.log(bookingData);
             }
         }
 
         getArtisansBookings();
     }, [userLoggedIn, currentUser]);
 
+
+    const handleTabChange = (event, newValue) => {
+        setTabIndex(newValue);
+    };
+
+    const handleClick = (appointment) => {
+        setSelectedAppointment(appointment);
+    }
+
     useEffect(() => {
         const fetchClientNames = async () => {
             const names = {};
-            const pics = {};
             for (const booking of bookingData) {
                 if (!names[booking.bookingClientId]) {
                     const clientData = await fetchClientData(booking.bookingClientId);
@@ -66,15 +75,6 @@ export default function ArtisanAppointment() {
 
         fetchClientNames();
     }, [bookingData]);
-
-
-    const handleTabChange = (event, newValue) => {
-        setTabIndex(newValue);
-    };
-
-    const handleClick = (appointment) => {
-        setSelectedAppointment(appointment);
-    }
 
     return (
         <Grid container>
@@ -103,7 +103,7 @@ export default function ArtisanAppointment() {
                                                 <p className='text-sm'>{clientNames[appointment.bookingClientId]}</p>
                                             </div>
                                             <div className={`${appointment.bookingEstimateAmount === 0 ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
-                                                {appointment.bookingEstimateAmount === 0 ? 'Pending' : ''}
+                                                {appointment.bookingEstimateAmount === 0 ? 'Pending' : 'Estimate Done'}
                                             </div>
                                         </div>
                                         <div className='flex flex-row justify-between'>

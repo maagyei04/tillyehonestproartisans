@@ -104,7 +104,7 @@ export default function Appointment() {
                                                 <p className='text-sm'>{artisanNames[appointment.bookingArtisanId]}</p>
                                             </div>
                                             <div className={`${appointment.bookingEstimateAmount === 0 ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
-                                                {appointment.bookingEstimateAmount === 0 ? 'Pending' : ''}
+                                                {appointment.bookingEstimateAmount === 0 ? 'Pending' : 'Estimate Done'}
                                             </div>
                                         </div>
                                         <div className='flex flex-row justify-between'>

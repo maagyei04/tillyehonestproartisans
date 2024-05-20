@@ -16,7 +16,7 @@ const ArtisanPayment = ({ bookingData }) => {
 
                     <div className='mb-5'>
                         <p className='text-gray-500'>Total Amount Charged</p>
-                        <p>{bookingData.bookingEstimateAmount === 0 ? 'Create Estimate in previous page' : bookingData.bookingEstimateAmount}</p>
+                        <p>{bookingData.bookingEstimateAmount === 0 ? 'Create Estimate in previous page' : 'GHC ' + bookingData.bookingEstimateAmount + '.00'}</p>
                     </div>
 
                     <div className="flex flex-col">

@@ -80,7 +80,7 @@ export default function ArtisanDashboardDefault() {
   });
 
   bookingLimitData.forEach((i) => {
-    if (i.bookingEstimateAmount === 0) {
+    if (i.bookingEstimateAmount !== 0) {
       bookingsWithEstimate.push(i);
     }
   });
