@@ -5,12 +5,13 @@ import { useAuth } from '../../contexts/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogoutUser } from '../../services/firebase/auth';
 import { useSelector } from 'react-redux';
+import { fetchClientData, fetchArtisanData } from '../../stores/actions';
 
 const Header = () => {
 
     const navigate = useNavigate();
 
-    const { userLoggedIn } = useAuth();
+    const { userLoggedIn, currentUser } = useAuth();
 
     const clientData = useSelector((state) => state.clientInfo.clientData) ?? '';
     const artisanData = useSelector((state) => state.artisanInfo.artisanData) ?? '';
@@ -29,9 +30,16 @@ const Header = () => {
 
     let [open, setOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [userData, setUserData] = useState([]);
 
     const handleClick = () => {
-        LogoutUser().then(() => { navigate('/') })
+        userLoggedIn &&
+            userData.userType === 'client' &&
+            navigate('/client_dashboard')
+
+        userLoggedIn &&
+            userData.userType === 'artisan' &&
+            navigate('/artisan_dashboard')
     };
 
     const register = () => {
@@ -56,7 +64,34 @@ const Header = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+
+
     }, []);
+
+
+    useEffect(() => {
+        const getUserData = async () => {
+            if (userLoggedIn && currentUser?.uid) {
+                try {
+                    // Try to fetch client data
+                    const clientData = await fetchClientData(currentUser.uid);
+                    setUserData(clientData);
+                } catch (clientError) {
+                    console.error('Error fetching client data:', clientError);
+
+                    try {
+                        // If client data fetch fails, try to fetch artisan data
+                        const artisanData = await fetchArtisanData(currentUser.uid);
+                        setUserData(artisanData);
+                    } catch (artisanError) {
+                        console.error('Error fetching artisan data:', artisanError);
+                    }
+                }
+            }
+        };
+
+        getUserData();
+    }, [userLoggedIn, currentUser]);
 
 
     return (
@@ -77,8 +112,7 @@ const Header = () => {
                             <>
                                 <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex ${isMobile ? 'block' : 'hidden'}`}>
                                     <UserIcon className='text-white-600 h-5 w-5 ml-1 mr-2' />
-
-                                    logout
+                                    Dashboard
                                 </button>
                             </>
                             :
@@ -113,7 +147,7 @@ const Header = () => {
                         userLoggedIn ?
                             <>
                                 <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${open ? 'hidden' : 'show'}`}>
-                                    Hi <>{firstName}</>! logout
+                                    Dashboard
                                     <UserIcon className='text-white-600 h-5 w-5 ml-1' />
                                 </button>
                             </>

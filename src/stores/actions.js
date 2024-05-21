@@ -429,6 +429,7 @@ export const fetchAllClientData = async () => {
     }
 };
 
+
 export const fetchBusinessFieldsCategories = async () => {
     try {
         const docRef = doc(db, 'BusinessFields', 'uLZD4t41lAE2IA1XR95y');

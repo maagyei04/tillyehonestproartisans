@@ -7,13 +7,16 @@ import artisanPic from '../../assets/images/artisan.png';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { UserPlusIcon, CreditCardIcon, PaperAirplaneIcon, CurrencyDollarIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
 import BookNowButton from '../../components/common/BookNowButton';
-import { fetchLimitedArtisanData } from '../../stores/actions';
-import { useNavigate } from 'react-router-dom';
+import { fetchLimitedArtisanData, fetchBusinessFieldsCategories } from '../../stores/actions';
+import { useNavigate, Link } from 'react-router-dom';
 
 const HomePage = () => {
     const [artisans, setArtisans] = useState([]);
 
     const [isMobile, setIsMobile] = useState(false);
+
+    const [categories, setCategories] = useState([]);
+
 
     const navigate = useNavigate();
 
@@ -32,7 +35,18 @@ const HomePage = () => {
             }
         };
 
+
+        const fetchCategories = async () => {
+            try {
+                const categoriesData = await fetchBusinessFieldsCategories();
+                setCategories(categoriesData);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+
         fetchArtisans();
+        fetchCategories();
 
         const handleResize = () => {
             // Check if the screen width is less than or equal to a certain value (e.g., 768 for mobile)
@@ -89,14 +103,14 @@ const HomePage = () => {
             </div>
 
             {/* Categories Container */}
-            <div className="rounded p-4 w-full flex md:flex-col flex-row md:items-center items-start backgroundImage"> {/* Centered content in Categories Container */}
+            <div className="rounded p-4 w-full flex md:flex-col flex-row md:items-center items-start backgroundImage">
                 <h2 className="font-semibold mb-3 md:text-lg text-[15px]">
                     Popular:
                 </h2>
-                <ul className="flex flex-wrap md:justify-center justify-start ml-5"> {/* Centered tags horizontally */}
-                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Plumbering</li> {/* Adjusted size for mobile */}
-                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Electrical Engineering</li> {/* Adjusted size for mobile */}
-                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base">Construction</li> {/* Adjusted size for mobile */}
+                <ul className="flex flex-wrap md:justify-center justify-start ml-5">
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base"><Link to={'/explore'}>Plumbering</Link></li>
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base"><Link to={'/explore'}>Welding</Link></li>
+                    <li className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base"><Link to={'/explore'}>Construction</Link></li>
                 </ul>
             </div>
             <img src={framePic} alt='frame-background' className='mb-8' />
@@ -116,17 +130,17 @@ const HomePage = () => {
             </div>
 
             {/*Popular Services Contents*/}
-            <div className="flex flex-col items-center justify-center py-2 px-2r">
+            <div className="flex flex-col items-center justify-center py-2 p-0 md:px-2">
                 <div className="flex flex-wrap justify-center">
                     {/* Display services data */}
                     {currentServices.map((artisan, index) => (
-                        <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
-                            <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[300px] h-[400px]">
-                                <div className='w-[300px] h-[250px]'>
+                        <div key={index} className="md:w-1/2 lg:w-1/4 p-2">
+                            <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[350px] md:w-[300px] h-[400px]">
+                                <div className='w-[350px] md:w-[300px] h-[250px]'>
                                     <img className="w-full h-full object-cover" src={artisan.passportImage} alt="Person" />
                                 </div>
 
-                                <div className="p-4 w-[300px] h-[200px]">
+                                <div className="p-4 w-[350px] md:w-[300px] h-[200px]">
                                     <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                     <div className="flex justify-between mb-2">
                                         <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>
@@ -175,12 +189,13 @@ const HomePage = () => {
                 <div className="flex flex-col md:flex-row md:items-center justify-between w-full mb-3">
                     <div className="mb-2 md:mb-0 md:mr-3">
                         <h1 className="font-bold text-xl md:text-[25px]">Explore Our Categories</h1>
-                        <p className="text-sm">Below are recommended Categories for you</p>
+                        <p className="text-sm">Below are some Categories we offer</p>
                     </div>
-                    <a href="#top" className="text-violet-600 flex items-center">
+
+                    <Link to={'/explore'}><p href="#top" className="text-violet-600 flex items-center">
                         See more
                         <ArrowRightIcon className='h-5 w-5 text-violet-600 ml-3' />
-                    </a>
+                    </p></Link>
                 </div>
             </div>
 
@@ -188,19 +203,12 @@ const HomePage = () => {
             <div className="flex flex-col items-center justify-center py-2 px-2r">
                 <div className="flex flex-wrap justify-center">
                     {/* Display services data */}
-                    {categoriesData.map((category, index) => (
+                    {categories.slice(0, 4).map((category, index) => (
                         <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
                             <div className="rounded overflow-hidden shadow-lg bg-white">
                                 <img className="w-full h-auto" src={person2} alt="Person" />
                                 <div className="p-4">
-                                    <h2 className="font-semibold text-lg mb-2">{category.category}</h2>
-                                    <div className="flex justify-between mb-2">
-                                        <p className="font-semibold text-gray-700">{category.numberOfPersonnel}</p>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <p className="text-sm text-gray-700 font-semibold">{ }</p>
-                                        <a href='#top' className='text-sm text-green-500 hover:text-violet-600'>Click to see more</a>
-                                    </div>
+                                    <h2 className="font-semibold text-lg mb-2">{category}</h2>
                                 </div>
                             </div>
                         </div>

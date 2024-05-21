@@ -49,7 +49,7 @@ export default function ArtisanOrdersTable() {
                             <TableCell>Date Started</TableCell>
                             <TableCell>Time</TableCell>
                             <TableCell>Location</TableCell>
-                            <TableCell>Amount</TableCell>
+                            <TableCell>Estimated Amount</TableCell>
                             <TableCell>Service</TableCell>
                         </TableRow>
                     </TableHead>

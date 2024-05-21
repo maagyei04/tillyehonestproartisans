@@ -32,22 +32,22 @@ const Information = ({ isMobile }) => (
                 power of human potential. Let's embark on this
             </p>
 
-            <h2 className="font-semibold text-[30px] mb-1">Visit<span className="text-violet-500 italic"> Us</span></h2>
-            <p className="text-sm font-semibold mb-4 text-gray-700 flex">Come say hello at our office<br></br>6311 Ivy Lane, Suite 700, Greenbelt, MD 20770</p>
+            <h2 className="font-semibold text-[30px] mb-1">WhatsApp<span className="text-violet-500 italic"> Us On</span></h2>
+            <p className="text-sm font-semibold mb-4 text-gray-700 flex">+1 (914) 602-3701<br></br>+44 7385 630981</p>
+
 
             <h2 className="font-semibold text-[30px] mb-1">Reach Out<span className="text-violet-500 italic"> to Us</span></h2>
             <p className={`text-sm font-semibold mb-4 text-gray-700 ${isMobile ? 'text-center' : 'flex'}`}>
                 Reach out to us on<br />
-                +12024864895<br />
-                aadwumapa@gmail.com
+                info.abesjobconsult@gmail.com
             </p>
 
             <h2 className={`font-semibold text-[30px] mb-1 ${isMobile ? 'justify-center' : 'flex'}`}>Social<span className="text-violet-500 italic"> Media</span></h2>
             <div class="flex gap-4 hover:cursor-pointer mb-9">
-                <img src="https://www.svgrepo.com/show/303114/facebook-3-logo.svg" width="30" height="30" alt="fb" />
-                <img src="https://www.svgrepo.com/show/303115/twitter-3-logo.svg" width="30" height="30" alt="tw" />
-                <img src="https://www.svgrepo.com/show/303145/instagram-2-1-logo.svg" width="30" height="30" alt="inst" />
-                <img src="https://www.svgrepo.com/show/28145/linkedin.svg" width="30" height="30" alt="in" />
+                <a href='#top'><img src="https://www.svgrepo.com/show/303114/facebook-3-logo.svg" width="30" height="30" alt="fb" /></a>
+                <a href='#top'><img src="https://www.svgrepo.com/show/303115/twitter-3-logo.svg" width="30" height="30" alt="tw" /></a>
+                <a href='https://www.instagram.com/abesjobconsult/'><img src="https://www.svgrepo.com/show/303145/instagram-2-1-logo.svg" width="30" height="30" alt="inst" /></a>
+                <a href='https://www.linkedin.com/company/abes-job-consult'><img src="https://www.svgrepo.com/show/28145/linkedin.svg" width="30" height="30" alt="in" /></a>
             </div>
         </div>
     </div>

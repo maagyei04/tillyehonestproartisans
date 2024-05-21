@@ -31,15 +31,6 @@ const Footer = () => {
 
                         </div>
                     </div>
-
-                    <div>
-                        <p class="font-semibold text-gray-800 dark:text-white">Views</p>
-
-                        <div class="flex flex-col items-start mt-5 space-y-2">
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={userLoggedIn ? '/artisan_dashboard' : '/login_artisan'}>Artisan Dashboard</Link></p>
-                            <p class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"><Link to={userLoggedIn ? '/client_dashboard' : '/login_client'}>Client Dashboard</Link></p>
-                        </div>
-                    </div>
                 </div>
 
                 <hr class="my-6 border-gray-200 md:my-8 dark:border-gray-700 h-2" />
@@ -53,11 +44,11 @@ const Footer = () => {
                     <div class="flex gap-4 hover:cursor-pointer">
                         <img src="https://www.svgrepo.com/show/303114/facebook-3-logo.svg" width="30" height="30" alt="fb" />
                         <img src="https://www.svgrepo.com/show/303115/twitter-3-logo.svg" width="30" height="30" alt="tw" />
-                        <img src="https://www.svgrepo.com/show/303145/instagram-2-1-logo.svg" width="30" height="30" alt="inst" />
-                        <img src="https://www.svgrepo.com/show/28145/linkedin.svg" width="30" height="30" alt="in" />
+                        <a href='https://www.instagram.com/abesjobconsult/'><img src="https://www.svgrepo.com/show/303145/instagram-2-1-logo.svg" width="30" height="30" alt="inst" /></a>
+                        <a href='https://www.linkedin.com/company/abes-job-consult'><img src="https://www.svgrepo.com/show/28145/linkedin.svg" width="30" height="30" alt="in" /></a>
                     </div>
                 </div>
-                <p class="font-sans p-8 text-start md:text-center md:text-lg md:p-4">© 2023 Abes job Consult. All rights reserved.</p>
+                <p class="font-sans p-8 text-start md:text-center md:text-lg md:p-4">© 2024 Abes job Consult. All rights reserved.</p>
             </div>
         </footer>
     );
