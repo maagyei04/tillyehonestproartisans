@@ -7,13 +7,12 @@ import {
     Divider,
     Tabs,
     Tab,
-    Button
 } from '@mui/material';
 import { styled } from '@mui/system';
 import Estimate from './estimate';
 import Payment from './payment';
 import Complete from './complete';
-import { fetchAllClientBookings, fetchArtisanData } from '../../../../../stores/actions';
+import { fetchAllArtisanAppointments, fetchClientData } from '../../../../../stores/actions';
 import { useAuth } from '../../../../../contexts/authContext';
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
 
@@ -32,41 +31,26 @@ const RightContainer = styled(Box)({
     overflowY: 'auto',
 });
 
-export default function Appointment() {
+export default function ArtisanAppointment() {
     const { userLoggedIn, currentUser } = useAuth();
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [tabIndex, setTabIndex] = useState(0);
     const [bookingData, setBookingData] = useState([]);
-    const [artisanNames, setArtisanNames] = useState({});
-    const [artisanPics, setArtisanPics] = useState({});
+    const [clientNames, setClientNames] = useState({});
+    const [clientPics, setClientsPics] = useState({});
 
 
     useEffect(() => {
-        const getClientBookings = async () => {
+        const getArtisansBookings = async () => {
             if (userLoggedIn && currentUser?.uid) {
-                const bookingData = await fetchAllClientBookings(currentUser.uid);
+                const bookingData = await fetchAllArtisanAppointments(currentUser.uid);
                 setBookingData(bookingData);
+                console.log(bookingData);
             }
         }
 
-        getClientBookings();
+        getArtisansBookings();
     }, [userLoggedIn, currentUser]);
-
-    useEffect(() => {
-        const fetchArtisanNames = async () => {
-            const names = {};
-            const pics = {};
-            for (const booking of bookingData) {
-                if (!names[booking.bookingArtisanId]) {
-                    const artisanData = await fetchArtisanData(booking.bookingArtisanId);
-                    names[booking.bookingArtisanId] = artisanData.firstName;
-                }
-            }
-            setArtisanNames(names);
-        };
-
-        fetchArtisanNames();
-    }, [bookingData]);
 
 
     const handleTabChange = (event, newValue) => {
@@ -76,6 +60,21 @@ export default function Appointment() {
     const handleClick = (appointment) => {
         setSelectedAppointment(appointment);
     }
+
+    useEffect(() => {
+        const fetchClientNames = async () => {
+            const names = {};
+            for (const booking of bookingData) {
+                if (!names[booking.bookingClientId]) {
+                    const clientData = await fetchClientData(booking.bookingClientId);
+                    names[booking.bookingClientId] = clientData.firstName;
+                }
+            }
+            setClientNames(names);
+        };
+
+        fetchClientNames();
+    }, [bookingData]);
 
     return (
         <Grid container>
@@ -101,10 +100,10 @@ export default function Appointment() {
                                         <div className='flex flex-row justify-between mb-5'>
                                             <div className='flex flex-row items-cente'>
                                                 <Avatar className='h-5 w-5 mr-2' />
-                                                <p className='text-sm'>{artisanNames[appointment.bookingArtisanId]}</p>
+                                                <p className='text-sm'>{clientNames[appointment.bookingClientId]}</p>
                                             </div>
                                             <div className={`${appointment.bookingEstimateAmount === 0 ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
-                                                {appointment.bookingEstimateAmount === 0 ? 'Pending' : ''}
+                                                {appointment.bookingEstimateAmount === 0 ? 'Pending' : 'Estimate Done'}
                                             </div>
                                         </div>
                                         <div className='flex flex-row justify-between'>
@@ -123,8 +122,8 @@ export default function Appointment() {
                         ) : (
                             <Box className="flex flex-col items-center justify-center mt-10">
                                 <EmptyIcon className='h-20' style={{ color: 'gray' }} />
-                                <p className='font-bold text-lg'>You’ve not booked any artisan yet</p>
-                                <Typography className="text-gray-500 mt-2 text-center px-2 md:px-20">You're all set! There are currently no booked artisans for you. Enjoy your free time or use it to tackle your next task with peace of mind.</Typography>
+                                <p className='font-bold text-lg'>You’ve not been booked yet</p>
+                                <Typography className="text-gray-500 mt-2 text-center px-2 md:px-20">You're all set! There are currently no booked appointments for you. Enjoy your free time or use it to tackle your next task with peace of mind.</Typography>
                             </Box>
                         )}
                     </div>
@@ -158,8 +157,8 @@ export default function Appointment() {
                                                     <Avatar className='h-10 w-10 mr-2' src={selectedAppointment.avatar} />
                                                 </div>
                                                 <div>
-                                                    <p className='text-sm'>{artisanNames[selectedAppointment.bookingArtisanId]}</p>
-                                                    <p className='text-sm text-gray-500'>Accra</p>
+                                                    <p className='text-sm'>{clientNames[selectedAppointment.bookingClientId]}</p>
+                                                    <p className='text-sm text-gray-500'>--</p>
                                                 </div>
                                             </div>
                                             <Divider sx={{ my: 2 }} />

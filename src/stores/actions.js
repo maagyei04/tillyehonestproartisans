@@ -1,5 +1,5 @@
 import { RegisterUserWithEmailAndPassword, LoginUserWithEmailAndPassword } from '../services/firebase/auth';
-import { doc, setDoc, collection, getDoc, getDocs, query, limit, updateDoc } from 'firebase/firestore';
+import { doc, setDoc, collection, getDoc, getDocs, query, limit, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { db, storage } from '../services/firebase/firebase';
 import { setClientData } from './reducers/clientInfoReducer';
 import { setArtisanData } from './reducers/artisanInfoReducer';
@@ -174,6 +174,16 @@ export const updateBookingStatusClient = async (bookingDocId, newbookingStatusCl
     await updateDoc(bookingDocRef, { bookingStatusClient: newbookingStatusClient });
 };
 
+export const updateClientStatus = async (bookingDocId, newStatus) => {
+    const clientDocRef = doc(db, "Clients", bookingDocId);
+    await updateDoc(clientDocRef, { status: newStatus });
+};
+
+export const updateArtisanStatus = async (bookingDocId, newStatus) => {
+    const artisanDocRef = doc(db, "Artisans", bookingDocId);
+    await updateDoc(artisanDocRef, { status: newStatus });
+};
+
 
 export const loginClient = async (clientData) => {
     try {
@@ -213,19 +223,13 @@ export const loginArtisan = async (artisanData) => {
 
 export const loginAdmin = async (adminData) => {
     try {
-        const collectionRef = collection(db, 'Admins');
-
         const user = await LoginUserWithEmailAndPassword(adminData.email, adminData.password);
-
-        const adminRef = doc(collectionRef, user.user.uid);
-
-        const adminDoc = await getDoc(adminRef);
 
         console.log('Admin Successfully Logged In');
 
-        return adminDoc.data();
+        return user;
     } catch (error) {
-        console.error('Error Logging in artisan:', error);
+        console.error('Error Logging in admin:', error);
     }
 };
 
@@ -447,6 +451,38 @@ export const fetchBusinessFieldsCategories = async () => {
     }
 };
 
+export const addBusinessFieldCategory = async (category) => {
+    try {
+        const docRef = doc(db, 'BusinessFields', 'uLZD4t41lAE2IA1XR95y');
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            await updateDoc(docRef, {
+                categories: arrayUnion(category)
+            });
+            console.log('Category added successfully');
+        } else {
+            throw new Error('Document does not exist');
+        }
+    } catch (error) {
+        console.error('Error adding business field category:', error);
+        throw error;
+    }
+};
+
+export const removeBusinessFieldCategory = async (category) => {
+    try {
+        const docRef = doc(db, 'BusinessFields', 'uLZD4t41lAE2IA1XR95y');
+        await updateDoc(docRef, {
+            categories: arrayRemove(category)
+        });
+        console.log('Category removed successfully');
+    } catch (error) {
+        console.error('Error removing category:', error);
+        throw error;
+    }
+};
+
 export const fetchAllArtisanData = async () => {
     try {
         const collectionRef = collection(db, 'Artisans');
@@ -648,6 +684,82 @@ export const fetchAllArtisanAppointments = async (userId) => {
         }
     } catch (error) {
         console.error('Error fetching bookings data for artisan:', error);
+        throw error;
+    }
+};
+
+
+export const fetchAllArtisanAppointmentsNoId = async () => {
+    try {
+        const collectionRef = collection(db, 'Bookings');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const bookingData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+
+                bookingData.push({
+                    id: doc.id,  // Document ID
+                    ...data      // Document Data
+                });
+            });
+            return bookingData;
+        } else {
+            throw new Error('No bookings found');
+        }
+    } catch (error) {
+        console.error('Error fetching bookings data:', error);
+        throw error;
+    }
+};
+
+export const fetchAllBookings = async () => {
+    try {
+        const collectionRef = collection(db, 'Bookings');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const bookingData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+
+                bookingData.push({
+                    id: doc.id,  // Document ID
+                    ...data      // Document Data
+                });
+            });
+            return bookingData;
+        } else {
+            throw new Error('No bookings found');
+        }
+    } catch (error) {
+        console.error('Error fetching bookings', error);
+        throw error;
+    }
+};
+
+export const fetchAllBookingsLimited = async (limitCount) => {
+    try {
+        const collectionRef = collection(db, 'Bookings');
+        const snapshot = await getDocs(query(collectionRef, limit(limitCount)));
+
+        if (!snapshot.empty) {
+            const bookingData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+
+                bookingData.push({
+                    id: doc.id,  // Document ID
+                    ...data      // Document Data
+                });
+            });
+            return bookingData;
+        } else {
+            throw new Error('No bookings found');
+        }
+    } catch (error) {
+        console.error('Error fetching bookings', error);
         throw error;
     }
 };

@@ -8,6 +8,8 @@ const Orders = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/p
 const Finance = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/financial')));
 const Profile = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/profile')));
 const Appointment = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/appointment')));
+const Clients = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/clients')));
+const Artisans = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/artisans')));
 
 
 const AdminDashboardRoutes = {
@@ -29,6 +31,14 @@ const AdminDashboardRoutes = {
         {
             path: '/admin_dashboard/financial_history',
             element: <Finance />
+        },
+        {
+            path: '/admin_dashboard/clients',
+            element: <Clients />
+        },
+        {
+            path: '/admin_dashboard/artisans',
+            element: <Artisans />
         },
         {
             path: '/admin_dashboard/profile',

@@ -136,7 +136,7 @@ export default function Notification() {
                       <ListItemText
                         primary={
                           <Typography variant="h6">
-                            Thanks for registering for AbesJobConsult &nbsp;
+                            Welcome Back Admin &nbsp;
                             <Typography component="span" variant="subtitle1">
                               Happy Work!
                             </Typography>{' '}

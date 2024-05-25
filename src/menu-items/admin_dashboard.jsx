@@ -51,6 +51,22 @@ const adminDashboard = {
       breadcrumbs: false
     },
     {
+      id: 'clients',
+      title: 'Clients',
+      type: 'item',
+      url: '/admin_dashboard/clients',
+      icon: icons.CreditCardOutlined,
+      breadcrumbs: false
+    },
+    {
+      id: 'artisans',
+      title: 'Artisans',
+      type: 'item',
+      url: '/admin_dashboard/artisans',
+      icon: icons.CreditCardOutlined,
+      breadcrumbs: false
+    },
+    {
       id: 'profile',
       title: 'Profile',
       type: 'item',

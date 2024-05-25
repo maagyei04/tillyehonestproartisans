@@ -4,15 +4,11 @@ import { loginArtisan } from '../../stores/actions';
 import { useNavigate, Link } from 'react-router-dom';
 import { LogoutUser } from '../../services/firebase/auth';
 
-
 const ArtisanLogin = () => {
-
     const dispatch = useDispatch();
-
     const navigate = useNavigate();
-
     const [loading, setLoading] = useState(false);
-
+    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -27,31 +23,26 @@ const ArtisanLogin = () => {
     };
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
         try {
-            setLoading(true);
-
-            e.preventDefault();
-
             const artisanData = await loginArtisan(formData) ?? '';
 
-            console.log(artisanData);
-
-            const {
-                userType,
-            } = artisanData;
-
-            userType === 'artisan'
-                ?
-                navigate('/artisan_dashboard')
-                :
-                LogoutUser().then(() => { navigate('/login'); console.log('logged out...') })
-
+            if (artisanData.userType === 'artisan') {
+                navigate('/artisan_dashboard');
+            } else {
+                await LogoutUser();
+                navigate('/login');
+                console.log('logged out...');
+            }
         } catch (error) {
+            setError('Wrong email or password');
             console.error('Error occurred:', error);
         } finally {
             setLoading(false);
         }
-
     };
 
     return (
@@ -59,10 +50,12 @@ const ArtisanLogin = () => {
             <form className='md:w-2/4 w-full bg-white shadow shadow-lg p-5 rounded-[10px]' onSubmit={handleSubmit}>
                 <h1 className='font-bold text-lg text-center'>Artisan Login</h1>
 
+                {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+
                 <div className='flex flex-col mb-8 w-full'>
                     <label className='mb-2' htmlFor="email">Email</label>
                     <input className='border border-gray-300 rounded-[10px] h-10 p-2'
-                        type="text"
+                        type="email"
                         id="email"
                         name="email"
                         value={formData.email}
@@ -73,7 +66,7 @@ const ArtisanLogin = () => {
                 <div className='flex flex-col mb-8 w-full'>
                     <label className='mb-2' htmlFor="password">Password</label>
                     <input className='border border-gray-300 rounded-[10px] h-10 p-2'
-                        type="text"
+                        type="password"
                         id="password"
                         name="password"
                         value={formData.password}
@@ -81,7 +74,9 @@ const ArtisanLogin = () => {
                         required
                     />
                 </div>
-                <button type='submit' disabled={loading} className='bg-violet-500 text-white hover:bg-green-500 w-full p-2 rounded mb-3'>{!loading && 'LOGIN'}{loading && 'PLEASE WAIT...'}</button>
+                <button type='submit' disabled={loading} className='bg-violet-500 text-white hover:bg-green-500 w-full p-2 rounded mb-3'>
+                    {loading ? 'PLEASE WAIT...' : 'LOGIN'}
+                </button>
                 <p>Don't have an Account yet? <span className='text-green-600 hover:text-gray-300 italic font-bold'><Link to={'/register'}>Register here!</Link></span></p>
             </form>
         </div>

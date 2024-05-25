@@ -1,68 +1,91 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Box } from '@mui/material';
-import { useAuth } from '../../../../contexts/authContext';
-import { fetchAllClientBookings, fetchArtisanData } from '../../../../stores/actions';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
+import { fetchClientData, fetchArtisanData, fetchAllBookings } from '../../../../stores/actions';
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
 
-export default function OrdersTable() {
-    const { userLoggedIn, currentUser } = useAuth();
+export default function AdminOrdersTable() {
     const [bookingData, setBookingData] = useState([]);
-    const [artisanNames, setArtisanNames] = useState({});
+    const [clientDetails, setClientDetails] = useState({});
+    const [artisanDetails, setArtisanDetails] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getClientBookings = async () => {
-            if (userLoggedIn && currentUser?.uid) {
-                const bookingData = await fetchAllClientBookings(currentUser.uid);
-                setBookingData(bookingData);
-            }
-        }
-
-        getClientBookings();
-    }, [userLoggedIn, currentUser]);
-
-    useEffect(() => {
-        const fetchArtisanNames = async () => {
-            const names = {};
-            for (const booking of bookingData) {
-                if (!names[booking.bookingArtisanId]) {
-                    const artisanData = await fetchArtisanData(booking.bookingArtisanId);
-                    names[booking.bookingArtisanId] = artisanData.firstName;
-                }
-            }
-            setArtisanNames(names);
+        const getAllBookings = async () => {
+            const bookingData = await fetchAllBookings();
+            setBookingData(bookingData);
+            setLoading(false);
         };
 
-        fetchArtisanNames();
+        getAllBookings();
+    }, []);
+
+    useEffect(() => {
+        const fetchClientDetails = async () => {
+            const details = {};
+            for (const booking of bookingData) {
+                if (!details[booking.bookingClientId]) {
+                    const clientData = await fetchClientData(booking.bookingClientId);
+                    details[booking.bookingClientId] = {
+                        firstName: clientData?.firstName || '',
+                        lastName: clientData?.lastName || '',
+                    };
+                }
+            }
+            setClientDetails(details);
+        };
+
+        const fetchArtisanDetails = async () => {
+            const details = {};
+            for (const booking of bookingData) {
+                if (!details[booking.bookingArtisanId]) {
+                    const artisanData = await fetchArtisanData(booking.bookingArtisanId);
+                    details[booking.bookingArtisanId] = {
+                        firstName: artisanData?.firstName || '',
+                        lastName: artisanData?.lastName || '',
+                    };
+                }
+            }
+            setArtisanDetails(details);
+        };
+
+        if (bookingData.length > 0) {
+            fetchClientDetails();
+            fetchArtisanDetails();
+        }
     }, [bookingData]);
 
     return (
-        <div className="">
+        <div>
             <Typography variant="h4" gutterBottom className="font-bold text-xl">History Of Completed Appointments</Typography>
-            <Typography variant="body1" gutterBottom>
-                Welcome to your Orders Page. Here you can see the latest updates and insights on all artisan bookings.
-            </Typography>
+
             <TableContainer component={Paper} sx={{ marginTop: 4, overflowX: 'auto' }}>
                 <Table aria-label="responsive table">
                     <TableHead className='bg-gray-200'>
                         <TableRow>
-                            <TableCell>Artisan Name</TableCell>
+                            <TableCell>Client Name</TableCell>
                             <TableCell>Date Started</TableCell>
-                            <TableCell>Time</TableCell>
                             <TableCell>Location</TableCell>
-                            <TableCell>Amount</TableCell>
-                            <TableCell>Service</TableCell>
+                            <TableCell>Estimated Amount</TableCell>
+                            <TableCell>Artisan Name</TableCell>
+                            <TableCell>Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {bookingData.length > 0 ? (
-                            bookingData.map((row, index) => (
+                            bookingData.map((booking, index) => (
                                 <TableRow key={index}>
-                                    <TableCell className='text-gray-500'>{artisanNames[row.bookingArtisanId]}</TableCell>
-                                    <TableCell className='text-gray-500'>{row.bookingStartDate}</TableCell>
-                                    <TableCell className='text-gray-500'>{row.bookingStartTime}</TableCell>
-                                    <TableCell className='text-gray-500'>{row.bookingTown}</TableCell>
-                                    <TableCell className='text-green-500'>{row.bookingEstimateAmount}</TableCell>
-                                    <TableCell className='text-gray-500'>{row.bookingServiceDetail}</TableCell>
+                                    <TableCell className='text-gray-500 font-semibold'>
+                                        {clientDetails[booking.bookingClientId]?.firstName} {clientDetails[booking.bookingClientId]?.lastName}
+                                    </TableCell>
+                                    <TableCell className='text-gray-500'>{booking.bookingStartDate}</TableCell>
+                                    <TableCell className='text-gray-500'>{booking.bookingTown}</TableCell>
+                                    <TableCell className='text-gray-500'>GHC {booking.bookingEstimateAmount}.00</TableCell>
+                                    <TableCell className='font-semibold text-gray-500'>
+                                        {artisanDetails[booking.bookingArtisanId]?.firstName} {artisanDetails[booking.bookingArtisanId]?.lastName}
+                                    </TableCell>
+                                    <TableCell>
+                                        <button className="bg-blue-500 text-white px-2 py-1 rounded"></button>
+                                    </TableCell>
                                 </TableRow>
                             ))
                         ) : (

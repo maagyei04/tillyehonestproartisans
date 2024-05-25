@@ -108,7 +108,7 @@ export default function ArtisanAppointment() {
                                         </div>
                                         <div className='flex flex-row justify-between'>
                                             <div className='flex flex-col'>
-                                                <p className='text-gray-500'>Job Description</p>
+                                                <p className='text-gray-500 truncate max-w-full'>Job Description</p>
                                                 {appointment.bookingServiceDetail}
                                             </div>
                                             <div className='flex flex-col'>
@@ -166,7 +166,7 @@ export default function ArtisanAppointment() {
 
                                             <Typography variant="subtitle1" gutterBottom>Service Details</Typography>
                                             <Typography variant="body2">Problem Statement</Typography>
-                                            <Typography variant="body1" color="textSecondary">
+                                            <Typography variant="body1" className='truncate max-w-full' color="textSecondary">
                                                 {selectedAppointment.bookingServiceDetail}
                                             </Typography>
                                             <Divider sx={{ my: 2 }} />

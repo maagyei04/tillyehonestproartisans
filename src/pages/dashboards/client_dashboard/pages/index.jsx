@@ -153,7 +153,7 @@ export default function DashboardDefault() {
                     <div className='flex flex-row justify-between text-left'>
                       <div>
                         <p className='text-gray-500'>Job Description</p>
-                        <p className='font-bold text-sm'>{booking.bookingServiceDetail}</p>
+                        <p className='font-bold text-sm truncate max-w-full'>{booking.bookingServiceDetail}</p>
                       </div>
                       <div>
                         <p className='text-gray-500'>Expected Date</p>
@@ -205,7 +205,7 @@ export default function DashboardDefault() {
                 </div>
                 <div className='flex flex-col'>
                   <p className='text-gray-500'>Job Description</p>
-                  <p className='font-bold text-sm'>{booking.bookingServiceDetail}</p>
+                  <p className='font-bold text-sm truncate max-w-full'>{booking.bookingServiceDetail}</p>
                 </div>
                 <div className='flex flex-col mb-2'>
                   <p className='text-gray-500'>Estimated Date</p>

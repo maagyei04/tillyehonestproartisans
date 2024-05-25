@@ -62,7 +62,7 @@ export default function ArtisanOrdersTable() {
                                     <TableCell className='text-gray-500'>{row.bookingStartTime}</TableCell>
                                     <TableCell className='text-gray-500'>{row.bookingTown}</TableCell>
                                     <TableCell className='text-green-500'>GHC {row.bookingEstimateAmount}.00</TableCell>
-                                    <TableCell className='text-gray-500'>{row.bookingServiceDetail}</TableCell>
+                                    <TableCell className='text-gray-500 truncate max-w-full'>{row.bookingServiceDetail}</TableCell>
                                 </TableRow>
                             ))
                         ) : (
