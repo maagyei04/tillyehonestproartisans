@@ -35,14 +35,9 @@ const ClientDashboardLayout = {
             element: <Profile />
         },
         {
-            path: '/client_dashboard/',
-            children: [
-                {
-                    path: 'default',
-                    element: <DashboardDefault />
-                }
-            ]
-        },
+            path: 'default',
+            element: <DashboardDefault />
+        }
     ]
 };
 

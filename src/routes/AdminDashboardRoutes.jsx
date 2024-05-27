@@ -40,14 +40,9 @@ const AdminDashboardRoutes = {
             element: <Artisans />
         },
         {
-            path: '/admin_dashboard/',
-            children: [
-                {
-                    path: 'default',
-                    element: <DashboardDefault />
-                }
-            ]
-        },
+            path: 'default',
+            element: <DashboardDefault />
+        }
     ]
 };
 

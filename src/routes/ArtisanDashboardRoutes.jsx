@@ -34,14 +34,11 @@ const ArtisanDashboardRoutes = {
             element: <Profile />
         },
         {
-            path: '/artisan_dashboard/',
-            children: [
-                {
-                    path: 'default',
-                    element: <DashboardDefault />
-                }
-            ]
-        },
+            path: 'default',
+            element: <DashboardDefault />
+        }
+
+
     ]
 };
 

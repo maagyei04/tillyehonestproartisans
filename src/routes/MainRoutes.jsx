@@ -111,6 +111,10 @@ const MainRoutes = {
             path: 'login_admin',
             element: <AdminLogin />,
         },
+        {
+            path: 'default',
+            element: <HomePage />,
+        },
     ]
 }
 
