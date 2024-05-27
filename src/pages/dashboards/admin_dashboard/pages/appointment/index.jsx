@@ -12,8 +12,7 @@ import { styled } from '@mui/system';
 import Estimate from './estimate';
 import Payment from './payment';
 import Complete from './complete';
-import { fetchAllArtisanAppointments, fetchClientData } from '../../../../../stores/actions';
-import { useAuth } from '../../../../../contexts/authContext';
+import { fetchArtisanData, fetchClientData, fetchAllBookings } from '../../../../../stores/actions';
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
 
 
@@ -32,25 +31,23 @@ const RightContainer = styled(Box)({
 });
 
 export default function ArtisanAppointment() {
-    const { userLoggedIn, currentUser } = useAuth();
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [tabIndex, setTabIndex] = useState(0);
-    const [bookingData, setBookingData] = useState([]);
-    const [clientNames, setClientNames] = useState({});
-    const [clientPics, setClientsPics] = useState({});
+    const [allBookings, setAllBookings] = useState([])
+    const [clientDetails, setClientDetails] = useState({});
+    const [artisanDetails, setArtisanDetails] = useState({});
 
 
     useEffect(() => {
-        const getArtisansBookings = async () => {
-            if (userLoggedIn && currentUser?.uid) {
-                const bookingData = await fetchAllArtisanAppointments(currentUser.uid);
-                setBookingData(bookingData);
-                console.log(bookingData);
-            }
+
+        const getAllBookings = async () => {
+            const allBookigs = await fetchAllBookings();
+            setAllBookings(allBookigs);
+            console.log(allBookigs);
         }
 
-        getArtisansBookings();
-    }, [userLoggedIn, currentUser]);
+        getAllBookings();
+    }, []);
 
 
     const handleTabChange = (event, newValue) => {
@@ -62,19 +59,43 @@ export default function ArtisanAppointment() {
     }
 
     useEffect(() => {
-        const fetchClientNames = async () => {
-            const names = {};
-            for (const booking of bookingData) {
-                if (!names[booking.bookingClientId]) {
+        const fetchClientDetails = async () => {
+            const details = {};
+            for (const booking of allBookings) {
+                if (!details[booking.bookingClientId]) {
                     const clientData = await fetchClientData(booking.bookingClientId);
-                    names[booking.bookingClientId] = clientData.firstName;
+                    details[booking.bookingClientId] = {
+                        firstName: clientData.firstName,
+                        lastName: clientData.lastName,
+                        profilePic: clientData.profilePic,
+                        email: clientData.email,
+                        phoneNumber: clientData.phoneNumber,
+                    };
                 }
             }
-            setClientNames(names);
+            setClientDetails(details);
         };
 
-        fetchClientNames();
-    }, [bookingData]);
+        const fetchArtisanDetails = async () => {
+            const details = {};
+            for (const booking of allBookings) {
+                if (!details[booking.bookingArtisanId]) {
+                    const artisanData = await fetchArtisanData(booking.bookingArtisanId);
+                    details[booking.bookingArtisanId] = {
+                        firstName: artisanData.firstName,
+                        lastName: artisanData.lastName,
+                        passportImage: artisanData.passportImage,
+                        email: artisanData.email,
+                        phoneNumber: artisanData.phoneNumber,
+                    };
+                }
+            }
+            setArtisanDetails(details);
+        };
+
+        fetchClientDetails();
+        fetchArtisanDetails();
+    }, [allBookings]);
 
     return (
         <Grid container>
@@ -87,33 +108,37 @@ export default function ArtisanAppointment() {
                         placeholder='Search Appointments...'
                     />
                     <div>
-                        {bookingData.length > 0 ? (
-                            bookingData.map((appointment, index) => (
+                        {allBookings.length > 0 ? (
+                            allBookings.map((booking, index) => (
                                 <div
                                     key={index}
                                     button
-                                    onClick={() => handleClick(appointment)}
-                                    selected={selectedAppointment === appointment}
+                                    onClick={() => handleClick(booking)}
+                                    selected={selectedAppointment === booking}
                                     sx={{ mb: 2 }}
                                 >
-                                    <div className={`${selectedAppointment === appointment ? 'border border-violet-600' : 'border border-gray-200'} flex flex-col mb-2 p-4 shadow shadow-lg rounded-[10px] bg-white`}>
-                                        <div className='flex flex-row justify-between mb-5'>
-                                            <div className='flex flex-row items-cente'>
-                                                <Avatar className='h-5 w-5 mr-2' />
-                                                <p className='text-sm'>{clientNames[appointment.bookingClientId]}</p>
+                                    <div className={`${selectedAppointment === booking ? 'border border-violet-600' : 'border border-gray-200'} flex flex-col mb-2 p-4 shadow shadow-lg rounded-[10px] bg-white`}>
+                                        {clientDetails[booking.bookingClientId] ? (
+                                            <div className='flex flex-row justify-between mb-5'>
+                                                <div className='flex flex-row items-cente'>
+                                                    <Avatar src={clientDetails[booking.bookingClientId].profilePic} className='h-5 w-5 mr-2' />
+                                                    <p className='text-sm'>{clientDetails[booking.bookingClientId].firstName} {clientDetails[booking.bookingClientId].lastName}</p>
+                                                </div>
+                                                <div className={`${booking.bookingEstimateAmount === 0 ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
+                                                    {booking.bookingEstimateAmount === 0 ? 'Pending' : 'Estimate Done'}
+                                                </div>
                                             </div>
-                                            <div className={`${appointment.bookingEstimateAmount === 0 ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
-                                                {appointment.bookingEstimateAmount === 0 ? 'Pending' : 'Estimate Done'}
-                                            </div>
-                                        </div>
+                                        ) : (
+                                            <p>Loading client details...</p>
+                                        )}
                                         <div className='flex flex-row justify-between'>
-                                            <div className='flex flex-col'>
+                                            <div className='flex flex-col truncate w-2/4'>
                                                 <p className='text-gray-500'>Job Description</p>
-                                                {appointment.bookingServiceDetail}
+                                                <p className=''>{booking.bookingServiceDetail}</p>
                                             </div>
                                             <div className='flex flex-col'>
                                                 <p className='text-gray-500'>Expected Date</p>
-                                                {appointment.bookingStartDate}
+                                                {booking.bookingStartDate}
                                             </div>
                                         </div>
                                     </div>
@@ -154,21 +179,37 @@ export default function ArtisanAppointment() {
                                             <Typography variant="subtitle1" gutterBottom>Client Information</Typography>
                                             <div className='flex flex-row'>
                                                 <div className='mr-2'>
-                                                    <Avatar className='h-10 w-10 mr-2' src={selectedAppointment.avatar} />
+                                                    <Avatar className='h-10 w-10 mr-2' src={clientDetails[selectedAppointment.bookingClientId].profilePic} />
                                                 </div>
                                                 <div>
-                                                    <p className='text-sm'>{clientNames[selectedAppointment.bookingClientId]}</p>
-                                                    <p className='text-sm text-gray-500'>--</p>
+                                                    <p className='text-sm'>{clientDetails[selectedAppointment.bookingClientId].firstName} {clientDetails[selectedAppointment.bookingClientId].lastName}</p>
+                                                    <p className='text-sm text-gray-500'>{clientDetails[selectedAppointment.bookingClientId].phoneNumber}</p>
                                                 </div>
                                             </div>
                                             <Divider sx={{ my: 2 }} />
 
+                                            <div className='flex flex-col mb-2'>
+                                                <p className='text-gray-500'>Artisan</p>
+                                            </div>
+                                            {artisanDetails[selectedAppointment.bookingArtisanId] ? (
+                                                <div className='flex flex-row mb-3'>
+                                                    <Avatar className='h-10 w-10' src={artisanDetails[selectedAppointment.bookingArtisanId].passportImage} />
+                                                    <div className='flex flex-col mb-2 ml-2'>
+                                                        <p className='text-sm font-semibold'>{artisanDetails[selectedAppointment.bookingArtisanId].firstName} {artisanDetails[selectedAppointment.bookingArtisanId].lastName}</p>
+                                                        <p className='text-sm text-gray-500'>{artisanDetails[selectedAppointment.bookingArtisanId].email}</p>
+                                                        <p className='text-sm text-gray-500'>{artisanDetails[selectedAppointment.bookingArtisanId].phoneNumber}</p>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <p>Loading artisan details...</p>
+                                            )}
 
                                             <Typography variant="subtitle1" gutterBottom>Service Details</Typography>
                                             <Typography variant="body2">Problem Statement</Typography>
-                                            <Typography variant="body1" color="textSecondary">
-                                                {selectedAppointment.bookingServiceDetail}
-                                            </Typography>
+                                            <span className='text-sm text-gray-500'>
+                                                <textarea contentEditable="false" value={selectedAppointment.bookingServiceDetail} rows={4} className='w-full'>
+                                                </textarea>
+                                            </span>
                                             <Divider sx={{ my: 2 }} />
 
 
@@ -222,9 +263,10 @@ export default function ArtisanAppointment() {
                                             </div>
                                             <div>
                                                 <p className='text-gray-500'>Extra Information about Location</p>
-                                                <p>
-                                                    {selectedAppointment.bookingLocationInfo}
-                                                </p>
+                                                <span className='text-sm'>
+                                                    <textarea contentEditable="false" value={selectedAppointment.bookingLocationInfo} rows={4} className='w-full'>
+                                                    </textarea>
+                                                </span>
                                             </div>
                                         </div>
                                     </>

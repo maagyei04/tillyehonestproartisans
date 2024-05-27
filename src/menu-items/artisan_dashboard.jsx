@@ -14,7 +14,7 @@ const icons = {
 // ==============================|| MENU ITEMS - ARTISAN DASHBOARD ||============================== //
 
 const artisanDashboard = {
-  id: 'group-dashboard',
+  id: 'artisan-dashboard',
   title: 'Navigation',
   type: 'group2',
   children: [

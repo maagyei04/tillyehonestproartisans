@@ -149,6 +149,11 @@ export const updateArtisanData = async (userId, updatedData) => {
     }
 };
 
+export const updateBookingPayment = async (bookingDocId, newPaymentStatus) => {
+    const bookingDocRef = doc(db, "Bookings", bookingDocId);
+    await updateDoc(bookingDocRef, { bookingPayment: newPaymentStatus });
+};
+
 export const updateBookingEstimate = async (bookingDocId, newEstimateAmount) => {
     const bookingDocRef = doc(db, "Bookings", bookingDocId);
     await updateDoc(bookingDocRef, { bookingEstimateAmount: newEstimateAmount });

@@ -6,7 +6,6 @@ import Dashboard from '../components/layouts/adminDashboard';
 const DashboardDefault = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages')));
 const Orders = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/orders')));
 const Finance = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/financial')));
-const Profile = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/profile')));
 const Appointment = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/appointment')));
 const Clients = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/clients')));
 const Artisans = Loadable(lazy(() => import('../pages/dashboards/admin_dashboard/pages/artisans')));
@@ -39,10 +38,6 @@ const AdminDashboardRoutes = {
         {
             path: '/admin_dashboard/artisans',
             element: <Artisans />
-        },
-        {
-            path: '/admin_dashboard/profile',
-            element: <Profile />
         },
         {
             path: '/admin_dashboard/',

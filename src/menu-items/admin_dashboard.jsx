@@ -14,7 +14,7 @@ const icons = {
 // ==============================|| MENU ITEMS - ADMIN DASHBOARD ||============================== //
 
 const adminDashboard = {
-  id: 'group-dashboard',
+  id: 'admin-dashboard',
   title: 'Navigation',
   type: 'group3',
   children: [
@@ -66,14 +66,6 @@ const adminDashboard = {
       icon: icons.CreditCardOutlined,
       breadcrumbs: false
     },
-    {
-      id: 'profile',
-      title: 'Profile',
-      type: 'item',
-      url: '/admin_dashboard/profile',
-      icon: icons.UserOutlined,
-      breadcrumbs: false
-    }
   ]
 };
 

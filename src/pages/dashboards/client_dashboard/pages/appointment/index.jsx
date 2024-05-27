@@ -108,8 +108,8 @@ export default function Appointment() {
                                             </div>
                                         </div>
                                         <div className='flex flex-row justify-between'>
-                                            <div className='flex flex-col'>
-                                                <p className='text-gray-500 truncate max-w-full'>Job Description</p>
+                                            <div className='flex flex-col truncate w-2/4'>
+                                                <p className='text-gray-500'>Job Description</p>
                                                 {appointment.bookingServiceDetail}
                                             </div>
                                             <div className='flex flex-col'>
@@ -167,8 +167,11 @@ export default function Appointment() {
 
                                             <Typography variant="subtitle1" gutterBottom>Service Details</Typography>
                                             <Typography variant="body2">Problem Statement</Typography>
-                                            <Typography variant="body1" className='truncate max-w-full' color="textSecondary">
-                                                {selectedAppointment.bookingServiceDetail}
+                                            <Typography variant="body1" color="textSecondary">
+                                                <span className='text-sm text-gray-500'>
+                                                    <textarea contentEditable="false" value={selectedAppointment.bookingServiceDetail} rows={4} className='w-full'>
+                                                    </textarea>
+                                                </span>
                                             </Typography>
                                             <Divider sx={{ my: 2 }} />
 
@@ -223,9 +226,10 @@ export default function Appointment() {
                                             </div>
                                             <div>
                                                 <p className='text-gray-500'>Extra Information about Location</p>
-                                                <p>
-                                                    {selectedAppointment.bookingLocationInfo}
-                                                </p>
+                                                <span className='text-sm='>
+                                                    <textarea contentEditable="false" value={selectedAppointment.bookingLocationInfo} rows={4} className='w-full'>
+                                                    </textarea>
+                                                </span>
                                             </div>
                                         </div>
                                     </>

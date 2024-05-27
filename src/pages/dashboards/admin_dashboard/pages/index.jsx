@@ -154,8 +154,10 @@ export default function ArtisanDashboardDefault() {
     e.preventDefault();
     try {
       await addBusinessFieldCategory(formData.category);
+      setOpen(false);
       alert('Category added successfully, please refresh page');
       setFormData({ category: '' }); // Reset form data
+
     } catch (error) {
       console.error('Error adding category:', error);
       alert('Error adding category');

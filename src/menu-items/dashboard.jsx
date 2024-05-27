@@ -14,7 +14,7 @@ const icons = {
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
 
 const dashboard = {
-  id: 'group-dashboard',
+  id: 'client-dashboard',
   title: 'Navigation',
   type: 'group',
   children: [

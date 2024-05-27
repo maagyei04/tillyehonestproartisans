@@ -80,7 +80,7 @@ export default function ArtisanDashboardDefault() {
   });
 
   bookingLimitData.forEach((i) => {
-    if (i.bookingEstimateAmount !== 0) {
+    if (i.bookingEstimateAmount !== 0 && i.bookingPayment === '') {
       bookingsWithEstimate.push(i);
     }
   });
@@ -151,6 +151,7 @@ export default function ArtisanDashboardDefault() {
                           || booking.bookingPayment !== 'complete' ? 'waiting for payment' : ''
                             || booking.bookingStatusArtisan !== 'complete' ? 'waiting your completion' : ''
                               || booking.bookingStatusClient !== 'complete' ? 'waiting client completion' : ''
+                                || booking.bookingPayment === 'complete' ? 'Full payment' : ''
                         }</p>
                       </div>
                     </div>
