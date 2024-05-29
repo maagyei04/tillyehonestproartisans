@@ -1,37 +1,10 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
-import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import { updateBookingStatusArtisan } from '../../../../../stores/actions';
 
 
 const ArtisanComplete = ({ bookingData }) => {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = async (e) => {
-        setOpen(false);
-
-        setLoading(true);
-
-        e.preventDefault();
-
-        try {
-
-            await updateBookingStatusArtisan(bookingData.id, 'complete');
-
-            alert('Booking has been marked as completed!');
-        } catch (error) {
-            console.error('Error marking booking as completed:', error);
-            alert('Error marking booking as completed:');
-        } finally {
-            setLoading(false);
-        }
-    };
 
     return (
         <>
@@ -43,6 +16,10 @@ const ArtisanComplete = ({ bookingData }) => {
                 <div className='mb-5'>
                     <p className='text-sm text-gray-500'>Artisan's Work Review</p>
                     <p>{bookingData.bookingStatusClient === 'complete' ? bookingData.bookingReview : 'Client yet to drop a review for Artisan'}</p>
+                </div>
+                <div className='mb-5'>
+                    <p className='text-sm text-gray-500'>Artisan's Review Start</p>
+                    <p>{bookingData.bookingStatusClient === 'complete' ? bookingData.bookingRate + ' stars' : 'Client hasn\'t giving you any stars yet...'}</p>
                 </div>
 
 

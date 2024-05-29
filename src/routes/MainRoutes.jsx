@@ -14,7 +14,6 @@ import RegisterComplete from '../pages/register/registerComplete';
 import LoginSelection from "../pages/login";
 import ClientLogin from "../pages/login/login";
 import ArtisanLogin from "../pages/login/artisan_login";
-import AdminLogin from "../pages/login/admin_login";
 import BookingServiceDetail from '../pages/booking/serviceDetail';
 import BookingLocationInfo from '../pages/booking/locationInfo';
 import BookingPickDate from '../pages/booking/pickDate';
@@ -106,10 +105,6 @@ const MainRoutes = {
         {
             path: 'login_artisan',
             element: <ArtisanLogin />,
-        },
-        {
-            path: 'login_admin',
-            element: <AdminLogin />,
         },
         {
             path: 'default',

@@ -47,6 +47,9 @@ const Footer = () => {
                         <a href='https://www.instagram.com/abesjobconsult/'><img src="https://www.svgrepo.com/show/303145/instagram-2-1-logo.svg" width="30" height="30" alt="inst" /></a>
                         <a href='https://www.linkedin.com/company/abes-job-consult'><img src="https://www.svgrepo.com/show/28145/linkedin.svg" width="30" height="30" alt="in" /></a>
                     </div>
+                    <div className='mt-5'>
+                        <p className='font-bold text-sm text-gray-500'><Link to={'/login_admin'}>...Admin...</Link></p>
+                    </div>
                 </div>
                 <p class="font-sans p-8 text-start md:text-center md:text-lg md:p-4">© 2024 Abes job Consult. All rights reserved.</p>
             </div>

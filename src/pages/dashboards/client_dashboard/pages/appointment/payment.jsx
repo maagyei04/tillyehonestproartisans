@@ -59,6 +59,27 @@ const Payment = ({ bookingData }) => {
                                 the artisan’s work
                             </p>
                         </div>
+                        <div className="flex flex-row mb-5 mt-5">
+                            <CheckBadgeIcon className="w-5 mr-5" />
+                            <p className="text-gray-500 text-sm">
+                                You are required to make 70% payment to the Administrator's number below before work, and 30% later after work completion.
+                                <br></br>
+                                <span className='font-bold text-sm'>MTN MoMo</span>
+                                <br></br>
+                                <span className='font-bold text-sm'>Name: Esi Gyatowa Sam</span>
+                                <br></br>
+                                <span className='font-bold text-sm'>Number: +233531293686</span>
+                                <br></br>
+                                <span>Please use your Name as reference..</span>
+                            </p>
+                        </div>
+                        <div className="flex flex-row mb-5">
+                            <CheckBadgeIcon className="w-5 mr-5" />
+                            <p className="text-gray-500 text-sm">
+                                Please reach out to the Administrators after Payment, for them to confirm your payment.
+                            </p>
+                        </div>
+
                     </div>
                 </div>
             </>
