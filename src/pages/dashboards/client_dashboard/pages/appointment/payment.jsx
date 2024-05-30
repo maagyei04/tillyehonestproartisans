@@ -34,6 +34,7 @@ const Payment = ({ bookingData }) => {
                                 the artisan’s work
                             </p>
                         </div>
+
                     </div>
                 </div>
             </>
