@@ -51,7 +51,7 @@ const Footer = () => {
                         <p className='font-bold text-sm text-gray-500'><Link to={'/login_admin'}>...Admin...</Link></p>
                     </div>
                 </div>
-                <p class="font-sans p-8 text-start md:text-center md:text-lg md:p-4">© 2024 Abes job Consult. All rights reserved.</p>
+                <p class="font-sans p-8 text-start md:text-center md:text-lg md:p-4">© 2024 Tilly and E Honest Pro Artisans. All rights reserved.</p>
             </div>
         </footer>
     );

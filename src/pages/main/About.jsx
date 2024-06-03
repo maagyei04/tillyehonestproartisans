@@ -7,9 +7,9 @@ import { messageUs } from '../../stores/actions';
 const Information = ({ isMobile }) => (
     <div className="text-center md:text-left md:w-2/4 md:mr-20 flex flex-col md:flex-row items-center">
         <div>
-            <h2 className="font-bold text-[30px] mb-1">Learn More About<span className="text-violet-500 italic"> Abes job Consult</span></h2>
-            <p className="text-sm mb-8 text-left">Welcome to Abes job Consult, where Honesty, and excellence is born.
-                At Abes Job Consult, we understand that finding the right job or the perfect trained
+            <h2 className="font-bold text-[30px] mb-1">Learn More About<span className="text-violet-500 italic"> Tilly and E Honest Pro Artisans</span></h2>
+            <p className="text-sm mb-8 text-left">Welcome to Tilly and E Honest Pro Artisans, where Honesty, and excellence is born.
+                At Tilly and E Honest Pro Artisans, we understand that finding the right job or the perfect trained
                 person can be challenging. That's why we have made it our mission to simplify the
                 process, leveraging on technology to have trained personnels to streamline
                 recruitment for both employers and job seekers.
@@ -26,7 +26,7 @@ const Information = ({ isMobile }) => (
             <p className="text-sm mb-8 text-left">
                 We uphold the highest standards of ethics and transparency in all our interactions,
                 ensuring fairness and trustworthiness throughout the recruitment process.
-                At Abes Job Consult, we believe that every individual deserves the opportunity to
+                At Tilly and E Honest Pro Artisans, we believe that every individual deserves the opportunity to
                 fulfil their potential, and every business deserves access to top talent, honest and
                 hardworking workers. Join us in shaping the future of recruitment and unleashing the
                 power of human potential. Let's embark on this
@@ -39,7 +39,7 @@ const Information = ({ isMobile }) => (
             <h2 className="font-semibold text-[30px] mb-1">Reach Out<span className="text-violet-500 italic"> to Us</span></h2>
             <p className={`text-sm font-semibold mb-4 text-gray-700 ${isMobile ? 'text-center' : 'flex'}`}>
                 Reach out to us on<br />
-                info.abesjobconsult@gmail.com
+                info.tillyehonestproartisans@gmail.com
             </p>
 
             <h2 className={`font-semibold text-[30px] mb-1 ${isMobile ? 'justify-center' : 'flex'}`}>Social<span className="text-violet-500 italic"> Media</span></h2>
