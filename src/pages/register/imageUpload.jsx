@@ -53,10 +53,6 @@ const ImageUpload = () => {
         return new Blob([u8arr], { type: mime });
     };
 
-
-
-
-
     const handleSubmit = (e) => {
 
         if (!areAllImagesSelected()) {

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     artisanId: '',
-    userType: '',
+    userType: 'artisan',
     firstName: '',
     lastName: '',
     email: '',
@@ -17,7 +17,6 @@ const initialState = {
     businessLocation: '',
     passportImage: '',
     ghanaCardImage: '',
-    policeReportImage: '',
     gaurantorNoteImage: '',
     bio: '',
     status: false,
@@ -74,9 +73,6 @@ export const artisanSlice = createSlice({
         },
         setGhanaCardImage: (state, action) => {
             state.ghanaCardImage = action.payload;
-        },
-        setPoliceReportImage: (state, action) => {
-            state.policeReportImage = action.payload;
         },
         setGaurantorNoteImage: (state, action) => {
             state.gaurantorNoteImage = action.payload;

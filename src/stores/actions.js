@@ -51,13 +51,11 @@ export const registerArtisan = () => {
             const gaurantorImageUrl = await uploadGaurantorNoteImage(user.user.uid, artisanData.gaurantorNoteImage, dispatch);
             const ghanaCardImageUrl = await uploadGhanaCardImage(user.user.uid, artisanData.ghanaCardImage, dispatch);
             const passportImageUrl = await uploadPassportImage(user.user.uid, artisanData.passportImage, dispatch);
-            const policeImageUrl = await uploadPoliceReportImage(user.user.uid, artisanData.policeReportImage, dispatch);
 
             dispatch(setArtisanId(user.user.uid));
             dispatch(setGaurantorNoteImage(gaurantorImageUrl));
             dispatch(setGhanaCardImage(ghanaCardImageUrl));
             dispatch(setPassportImage(passportImageUrl));
-            dispatch(setPoliceReportImage(policeImageUrl));
 
             const artsianRef = doc(collectionRef, user.user.uid);
 
@@ -558,7 +556,6 @@ export const fetchLimitedArtisanData = async (limitCount) => {
         const artisanData = [];
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-
             if (data.status === true) {
                 artisanData.push(data);
             }
