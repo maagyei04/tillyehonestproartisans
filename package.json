@@ -1,7 +1,7 @@
 {
-  "name": "abesjobconsult",
-  "version": "0.1.0",
-  "homepage": "www.abesjobconsult.com",
+  "name": "tillyehonestproartisans",
+  "version": "1.0.0",
+  "homepage": "www.tillyehonestproartisans.com",
   "private": true,
   "dependencies": {
     "@ant-design/colors": "^7.0.2",
