@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.9c99fb91.css",
-    "main.js": "/static/js/main.7c90c212.js",
+    "main.js": "/static/js/main.a17a604d.js",
     "static/js/740.853d30d3.chunk.js": "/static/js/740.853d30d3.chunk.js",
     "static/js/669.1f3f1da3.chunk.js": "/static/js/669.1f3f1da3.chunk.js",
     "static/js/349.0bc76a19.chunk.js": "/static/js/349.0bc76a19.chunk.js",
@@ -35,12 +35,11 @@
     "static/media/woodworks.png": "/static/media/woodworks.3165dd41388f3d836a57.png",
     "static/media/exploreframe.png": "/static/media/exploreframe.dff79f9f8c87196ffab1.png",
     "static/media/frame1.png": "/static/media/frame1.07d2b528d4ca665a764f.png",
-    "static/media/logo.png": "/static/media/logo.5c0051fee9d7c8a8ccae.png",
     "static/media/loading_loop.riv": "/static/media/loading_loop.a38f6b69d0356fc62605.riv",
     "index.html": "/index.html"
   },
   "entrypoints": [
     "static/css/main.9c99fb91.css",
-    "static/js/main.7c90c212.js"
+    "static/js/main.a17a604d.js"
   ]
 }
