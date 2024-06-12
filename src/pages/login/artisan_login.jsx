@@ -14,6 +14,12 @@ const ArtisanLogin = () => {
         password: '',
     });
 
+    const [passwordVisible, setPasswordVisible] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(prevState => !prevState);
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -65,14 +71,23 @@ const ArtisanLogin = () => {
                 </div>
                 <div className='flex flex-col mb-8 w-full'>
                     <label className='mb-2' htmlFor="password">Password</label>
-                    <input className='border border-gray-300 rounded-[10px] h-10 p-2'
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div className='relative'>
+                        <input className='border border-gray-300 rounded-[10px] h-10 p-2 w-full'
+                            type={passwordVisible ? 'text' : 'password'}
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        <button
+                            type="button"
+                            className='absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5'
+                            onClick={togglePasswordVisibility}
+                        >
+                            {passwordVisible ? 'Hide' : 'Show'}
+                        </button>
+                    </div>
                 </div>
                 <button type='submit' disabled={loading} className='bg-violet-500 text-white hover:bg-green-500 w-full p-2 rounded mb-3'>
                     {loading ? 'PLEASE WAIT...' : 'LOGIN'}
