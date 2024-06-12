@@ -20,7 +20,7 @@ const RightSide = ({ handleSubmit, userLoggedIn, artisan }) => (
                     <p className='text-gray-600 text-[15px] mr-5'>{artisan.businessField}</p>
                     <p className='text-gray-600'>{artisan.businessLocation}</p>
                 </div>
-                <p className='text-gray-500 text-sm'>I have excellent customer service skills and work prudently to bring my work to completion. I offer excellent value for low cost.</p>
+                <p className='text-gray-500 text-sm'>{artisan.bio !== "" ? artisan.bio : 'I have excellent customer service skills and work prudently to bring my work to completion. I offer excellent value for low cost.'}</p>
             </div>
         </div>
         <div className='flex flex-col text-left'>

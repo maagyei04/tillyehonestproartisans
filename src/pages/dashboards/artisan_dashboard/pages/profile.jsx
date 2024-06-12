@@ -2,7 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Avatar } from '@mui/material';
 import { useAuth } from '../../../../contexts/authContext';
 import { useDispatch } from 'react-redux';
-import { fetchArtisanData, uploadPassportImage, updateArtisanData, fetchBusinessFieldsCategories } from '../../../../stores/actions';
+import { fetchArtisanData, uploadPassportImage, updateArtisanData, fetchBusinessFieldsCategories, updateGaurantorNoteImage } from '../../../../stores/actions';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -31,6 +45,22 @@ export default function Profile() {
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
+
+    const [selectedGuarantorFile, setSelectedGuarantorFile] = useState(null);
+    const [previewGuarantorImage, setPreviewGuarantorImage] = useState(null);
+
+    const [openModal, setOpenModal] = useState(false);
+    const [openModal2, setOpenModal2] = useState(false);
+    const [openModal3, setOpenModal3] = useState(false);
+
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
+
+    const handleOpenModal2 = () => setOpenModal2(true);
+    const handleCloseModal2 = () => setOpenModal2(false);
+
+    const handleOpenModal3 = () => setOpenModal3(true);
+    const handleCloseModal3 = () => setOpenModal3(false);
 
     useEffect(() => {
         const getArtisanData = async () => {
@@ -63,7 +93,6 @@ export default function Profile() {
         fetchData();
     }, [userLoggedIn, currentUser]);
 
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
@@ -82,6 +111,11 @@ export default function Profile() {
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
         setPreviewImage(URL.createObjectURL(e.target.files[0])); // Set preview image
+    };
+
+    const handleGuarantorFileChange = (e) => {
+        setSelectedGuarantorFile(e.target.files[0]);
+        setPreviewGuarantorImage(URL.createObjectURL(e.target.files[0])); // Set preview image
     };
 
     const handleSubmit = async (e) => {
@@ -103,6 +137,29 @@ export default function Profile() {
         } catch (error) {
             console.error('Error updating profile:', error);
             alert('Error updating profile');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleUpdateGuarantorNoteImage = async () => {
+        setLoading(true);
+
+        try {
+            if (selectedGuarantorFile) {
+                const guarantorNoteUrl = await updateGaurantorNoteImage(currentUser.uid, selectedGuarantorFile, dispatch);
+                setUserData((prevData) => ({
+                    ...prevData,
+                    gaurantorNoteImage: guarantorNoteUrl,
+                }));
+                setPreviewGuarantorImage(null);
+                setSelectedGuarantorFile(null);
+                alert('Guarantor note updated successfully');
+                handleCloseModal();
+            }
+        } catch (error) {
+            console.error('Error updating guarantor note image:', error);
+            alert('Error updating guarantor note image');
         } finally {
             setLoading(false);
         }
@@ -223,7 +280,7 @@ export default function Profile() {
                 <h1 className="text-lg font-bold mb-2">Payment Information</h1>
                 <p className='text-gray-500 font-bold text-sm mb-2'>Adding your mobile money details can help you autofill during the payment process</p>
                 <div className="mb-4 flex-col justify-between items-center bg-gray-200 shadow shadow-lg p-4 rounded-[10px]">
-                    <di className='flex flex-row justify-between mb-2'>
+                    <div className='flex flex-row justify-between mb-2'>
                         <div>
                             <p className='text-black text-sm font-bold'>{userData.firstName} {userData.lastName}</p>
                             <p className="text-gray-600">{userData.momoNetwork} Mobile Money - {userData.momoNumber}</p>
@@ -236,20 +293,39 @@ export default function Profile() {
                                 <i className="material-icons">delete</i>
                             </button>
                         </div>
-                    </di>
+                    </div>
                 </div>
             </div>
             <div className="border border-gray-200 rounded-lg p-6 bg-white shadow shadow-lg">
                 <h1 className="text-lg font-bold mb-4">Images</h1>
                 <ul className="space-y-2">
                     <li>
-                        <a href={userData.passportImage} className="text-blue-600 hover:underline">PassportPicture</a>
+                        <a href={userData.passportImage} className="text-blue-600 hover:underline"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleOpenModal2();
+                            }}
+                        >PassportPicture</a>
                     </li>
                     <li>
-                        <a href={userData.ghanaCardImage} className="text-blue-600 hover:underline">GhanaCard</a>
+                        <a href={userData.ghanaCardImage} className="text-blue-600 hover:underline"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleOpenModal3();
+                            }}
+                        >GhanaCard</a>
                     </li>
                     <li>
-                        <a href={userData.gaurantorNoteImage} className="text-blue-600 hover:underline">Guarantor note</a>
+                        <a
+                            href={userData.gaurantorNoteImage}
+                            className="text-blue-600 hover:underline"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleOpenModal();
+                            }}
+                        >
+                            Guarantor note
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -288,6 +364,62 @@ export default function Profile() {
                 </form>
             </div>
 
+            {/* Modal for displaying and updating the Guarantor note */}
+            <Modal
+                open={openModal}
+                onClose={handleCloseModal}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+                <Box sx={style}>
+                    <h2 id="modal-title" className="text-lg font-bold mb-4">Guarantor Note</h2>
+                    {previewGuarantorImage ? (
+                        <img src={previewGuarantorImage} alt="Guarantor Note Preview" className="w-full h-auto mb-4" />
+                    ) : (
+                        <img src={userData.gaurantorNoteImage} alt="Guarantor Note" className="w-full h-auto mb-4" />
+                    )}
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleGuarantorFileChange}
+                        className="mt-2 mb-4"
+                    />
+                    <div className="flex justify-end space-x-2">
+                        <button onClick={handleCloseModal} className="bg-gray-300 text-gray-700 px-4 py-2 rounded">Close</button>
+                        <button onClick={handleUpdateGuarantorNoteImage} className="bg-blue-600 text-white px-4 py-2 rounded">{loading ? 'Please wait...' : 'Update'}</button>
+                    </div>
+                </Box>
+            </Modal>
+
+            <Modal
+                open={openModal2}
+                onClose={handleCloseModal2}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+                <Box sx={style}>
+                    <h2 id="modal-title" className="text-lg font-bold mb-4">Passport Image</h2>
+                    <img src={userData.passportImage} alt="Passport Preview" className="w-full h-auto mb-4" />
+                    <div className="flex justify-end space-x-2">
+                        <button onClick={handleCloseModal2} className="bg-gray-300 text-gray-700 px-4 py-2 rounded">Close</button>
+                    </div>
+                </Box>
+            </Modal>
+
+            <Modal
+                open={openModal3}
+                onClose={handleCloseModal3}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+                <Box sx={style}>
+                    <h2 id="modal-title" className="text-lg font-bold mb-4">Ghana Card</h2>
+                    <img src={userData.ghanaCardImage} alt="Ghana Card Preview" className="w-full h-auto mb-4" />
+                    <div className="flex justify-end space-x-2">
+                        <button onClick={handleCloseModal3} className="bg-gray-300 text-gray-700 px-4 py-2 rounded">Close</button>
+                    </div>
+                </Box>
+            </Modal>
         </div>
     );
 }

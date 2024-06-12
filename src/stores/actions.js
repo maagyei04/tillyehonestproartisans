@@ -364,6 +364,38 @@ export const uploadGaurantorNoteImage = async (userId, file, dispatch) => {
     }
 };
 
+export const updateGaurantorNoteImage = async (userId, file, dispatch) => {
+    try {
+
+        let blob;
+        if (file instanceof Blob) {
+            blob = file;
+        } else {
+            throw new Error('The provided file is not a Blob or File object');
+        }
+
+
+        const metadata = {
+            contentType: blob.type || 'image/jpeg'
+        };
+
+        const imageRef = ref(storage, `artisan_images/gaurantor_images/${userId}`);
+
+        const uploadTask = await uploadBytes(imageRef, blob, metadata);
+
+
+        const imageUrl = await getDownloadURL(uploadTask.ref);
+
+        console.log('Artisan Image successfully updated:', imageUrl);
+
+        return imageUrl;
+    } catch (error) {
+        console.error('Error updating artisan image:', error);
+        dispatch({ type: 'UPLOAD_IMAGE_ERROR', payload: error.message });
+        throw error;
+    }
+};
+
 export const uploadClientProfileImage = async (userId, file, dispatch) => {
     try {
 
