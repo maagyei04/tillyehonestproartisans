@@ -551,7 +551,11 @@ export const fetchLimitedClientData = async (limitCount) => {
 export const fetchLimitedArtisanData = async (limitCount) => {
     try {
         const collectionRef = collection(db, 'Artisans');
-        const querySnapshot = await getDocs(query(collectionRef, limit(limitCount)));
+        // Fetch more documents initially to ensure enough data for filtering
+        const initialLimit = limitCount * 2;
+        const artisanQuery = query(collectionRef, limit(initialLimit));
+
+        const querySnapshot = await getDocs(artisanQuery);
 
         const artisanData = [];
         querySnapshot.forEach((doc) => {
@@ -561,12 +565,16 @@ export const fetchLimitedArtisanData = async (limitCount) => {
             }
         });
 
-        return artisanData;
+        // Apply limit after filtering
+        const limitedArtisanData = artisanData.slice(0, limitCount);
+
+        return limitedArtisanData;
     } catch (error) {
         console.error('Error fetching artisans data:', error);
         throw error;
     }
 };
+
 
 export const messageUs = () => {
     return async (dispatch, getState) => {

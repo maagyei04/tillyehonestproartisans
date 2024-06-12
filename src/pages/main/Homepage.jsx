@@ -27,18 +27,18 @@ const HomePage = () => {
     useEffect(() => {
         const fetchArtisans = async () => {
             try {
-                const artisansData = await fetchLimitedArtisanData(4);
+                const artisansData = await fetchLimitedArtisanData(4.5);
+                console.log('Fetched artisans:', artisansData); // Log fetched data
                 setArtisans(artisansData);
             } catch (error) {
-
                 console.error('Error fetching artisans:', error);
             }
         };
 
-
         const fetchCategories = async () => {
             try {
                 const categoriesData = await fetchBusinessFieldsCategories();
+                console.log('Fetched categories:', categoriesData); // Log fetched data
                 setCategories(categoriesData);
             } catch (error) {
                 console.error('Error fetching categories:', error);
@@ -49,21 +49,19 @@ const HomePage = () => {
         fetchCategories();
 
         const handleResize = () => {
-            // Check if the screen width is less than or equal to a certain value (e.g., 768 for mobile)
             setIsMobile(window.innerWidth <= 768);
         };
 
-        // Add event listener to handle window resize
         window.addEventListener('resize', handleResize);
-
-        // Initial call to handleResize to set the initial state
         handleResize();
 
-        // Remove event listener on component unmount
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+
+    console.log(artisans);
 
     const categoriesData = [
         { category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
@@ -133,7 +131,7 @@ const HomePage = () => {
             <div className="flex flex-col items-center justify-center py-2 p-0 md:px-2">
                 <div className="flex flex-wrap justify-center">
                     {/* Display services data */}
-                    {currentServices.map((artisan, index) => (
+                    {artisans.map((artisan, index) => (
                         <div key={index} className="md:w-1/2 lg:w-1/4 p-2">
                             <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[350px] md:w-[300px] h-[400px]">
                                 <div className='w-[350px] md:w-[300px] h-[250px]'>
