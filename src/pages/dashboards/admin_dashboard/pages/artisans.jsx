@@ -1,5 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Avatar, Dialog, DialogTitle, DialogContent, DialogActions, Button, Menu, MenuItem } from '@mui/material';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Typography,
+    Avatar,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    Button,
+    Menu,
+    MenuItem
+} from '@mui/material';
 import { fetchAllArtisanData, fetchAllClientBookings, updateArtisanStatus } from '../../../../stores/actions';
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
@@ -12,6 +29,7 @@ export default function ArtisanArtisansTable() {
     const [open2, setOpen2] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedArtisan, setSelectedArtisan] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
 
     useEffect(() => {
         const getAllArtisans = async () => {
@@ -85,6 +103,14 @@ export default function ArtisanArtisansTable() {
         }
     };
 
+    const handleImageClick = (imageSrc) => {
+        setImagePreview(imageSrc);
+    };
+
+    const handleCloseImagePreview = () => {
+        setImagePreview(null);
+    };
+
     return (
         <div>
             <Typography variant="h4" gutterBottom className="font-bold text-xl">Artisans (Users)</Typography>
@@ -114,9 +140,9 @@ export default function ArtisanArtisansTable() {
                                     <TableCell className='text-gray-500'>{artisan?.phoneNumber}</TableCell>
                                     <TableCell className='text-gray-500'>{artisan?.email}</TableCell>
                                     <TableCell className={artisan?.status === true ? 'text-gray-500 font-semibold' : 'text-gray-500 font-semibold'}>{artisan?.status === true ? 'Active' : 'Blocked'}</TableCell>
-                                    <TableCell className='text-violet-500'><a href={artisan?.passportImage}> Passport Image</a></TableCell>
-                                    <TableCell className='text-violet-500'><a href={artisan?.ghanaCardImage}>Ghana Card</a></TableCell>
-                                    <TableCell className='text-violet-500'><a href={artisan?.gaurantorNoteImage}>Gaurantor Note</a></TableCell>
+                                    <TableCell className='text-violet-500'><span onClick={() => handleImageClick(artisan?.passportImage)} style={{ cursor: 'pointer' }}>Passport Image</span></TableCell>
+                                    <TableCell className='text-violet-500'><span onClick={() => handleImageClick(artisan?.ghanaCardImage)} style={{ cursor: 'pointer' }}>Ghana Card</span></TableCell>
+                                    <TableCell className='text-violet-500'><span onClick={() => handleImageClick(artisan?.gaurantorNoteImage)} style={{ cursor: 'pointer' }}>Gaurantor Note</span></TableCell>
                                     <TableCell>
                                         <Button
                                             aria-controls="simple-menu"
@@ -197,6 +223,19 @@ export default function ArtisanArtisansTable() {
                     </Button>
                     <Button onClick={handleClose2} disabled={loading} className='w-full btn bg-violet-600 text-white hover:bg-green-600 hover:text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>
                         {loading ? 'Please wait...' : 'Confirm'}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Image Preview Modal */}
+            <Dialog className='rounded-[20px]' open={Boolean(imagePreview)} onClose={handleCloseImagePreview}>
+                <DialogTitle className='font-bold text-sm'>Image Preview</DialogTitle>
+                <DialogContent>
+                    {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: '100%', height: 'auto' }} />}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseImagePreview} className='w-full btn bg-gray-300 hover:bg-gray-500 hover:text-white text-black md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>
+                        Close
                     </Button>
                 </DialogActions>
             </Dialog>

@@ -16,6 +16,7 @@ const initialState = {
     bankBranch: '',
     businessField: '',
     businessLocation: '',
+    status: true,
 };
 
 export const clientSlice = createSlice({
