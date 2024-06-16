@@ -1,11 +1,13 @@
 import { RegisterUserWithEmailAndPassword, LoginUserWithEmailAndPassword } from '../services/firebase/auth';
-import { doc, setDoc, collection, getDoc, getDocs, query, limit, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
-import { db, storage } from '../services/firebase/firebase';
+import { doc, setDoc, collection, getDoc, getDocs, query, limit, updateDoc, arrayUnion, arrayRemove, deleteDoc } from 'firebase/firestore';
+import { db, storage, auth } from '../services/firebase/firebase';
 import { setClientData } from './reducers/clientInfoReducer';
 import { setArtisanData } from './reducers/artisanInfoReducer';
 import { setClientId } from './reducers/clientReducer';
 import { setPoliceReportImage, setGhanaCardImage, setPassportImage, setGaurantorNoteImage, setArtisanId } from './reducers/artisanReducer';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
+import { deleteUser } from 'firebase/auth';
 
 export const registerClient = (clientData) => {
     return async (dispatch, getState) => {
@@ -803,5 +805,110 @@ export const fetchAllBookingsLimited = async (limitCount) => {
     } catch (error) {
         console.error('Error fetching bookings', error);
         throw error;
+    }
+};
+
+export const fetchAllArtisanPortfolio = async (userId) => {
+    try {
+        const collectionRef = collection(db, 'Portfolios');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const portfolioData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                // Check if status is true
+                if (data.artisan_id === userId) {
+                    // Include the document ID along with the data
+                    portfolioData.push({
+                        id: doc.id,
+                        ...data
+                    });
+                }
+            });
+            return portfolioData;
+        } else {
+            throw new Error('No artisan portfolio found');
+        }
+    } catch (error) {
+        console.error('Error fetching artisan portfolio data:', error);
+        throw error;
+    }
+};
+
+
+export const addArtisanPortfolio = (portfolio) => {
+    return async (dispatch) => {
+        try {
+            const collectionRef = collection(db, 'Portfolios');
+
+            const portfolioRef = doc(collectionRef);
+
+            await setDoc(portfolioRef, portfolio);
+
+            console.log('Portfolio Successfully Added');
+
+            dispatch({ type: 'ADD_PORTFOLIO_SUCCESS', payload: portfolio });
+        } catch (error) {
+            console.error('Error adding portfolio:', error);
+            dispatch({ type: 'ADD_PORTFOLIO_ERROR', payload: error.message });
+        }
+    };
+};
+
+export const uploadPortfolioImage = async (file, dispatch) => {
+    try {
+        let blob;
+        if (file instanceof Blob) {
+            blob = file;
+        } else {
+            throw new Error('The provided file is not a Blob or File object');
+        }
+
+        const metadata = {
+            contentType: blob.type || 'image/jpeg'
+        };
+
+        // Generate a unique filename or path for each upload
+        const uniqueId = uuidv4(); // Generate a unique identifier (UUID)
+        const imageRef = ref(storage, `portfolio_images/${uniqueId}`);
+
+        const uploadTask = await uploadBytes(imageRef, blob, metadata);
+
+        const imageUrl = await getDownloadURL(uploadTask.ref);
+
+        console.log('Portfolio Image successfully uploaded:', imageUrl);
+
+        return imageUrl;
+    } catch (error) {
+        console.error('Error uploading portfolio image:', error);
+        dispatch({ type: 'UPLOAD_IMAGE_ERROR', payload: error.message });
+        throw error;
+    }
+};
+
+export const deleteArtisanPortfolio = (id) => async (dispatch) => {
+    try {
+
+        const portfolioDoc = doc(db, 'Portfolios', id);
+
+        await deleteDoc(portfolioDoc);
+
+    } catch (error) {
+        console.error('Error deleting portfolio:', error);
+        throw error;
+    }
+};
+
+export const deleteUserNow = async (userId) => {
+    try {
+        //Delete user document from Firestore
+        const userRef = db.collection('Users').doc(userId);
+        await userRef.delete();
+        console.log(`Successfully deleted user document with ID: ${userId}`);
+        return true; // Return true or handle success
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        throw error; // Throw error or handle accordingly
     }
 };

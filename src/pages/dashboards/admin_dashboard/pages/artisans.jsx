@@ -17,9 +17,9 @@ import {
     Menu,
     MenuItem
 } from '@mui/material';
-import { fetchAllArtisanData, fetchAllClientBookings, updateArtisanStatus } from '../../../../stores/actions';
+import { fetchAllArtisanData, fetchAllClientBookings, updateArtisanStatus, deleteUserNow } from '../../../../stores/actions';
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
+import { CheckCircleIcon, XCircleIcon, UserMinusIcon } from '@heroicons/react/24/solid';
 
 export default function ArtisanArtisansTable() {
     const [artisanData, setArtisanData] = useState([]);
@@ -27,6 +27,7 @@ export default function ArtisanArtisansTable() {
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
+    const [open3, setOpen3] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedArtisan, setSelectedArtisan] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
@@ -88,6 +89,11 @@ export default function ArtisanArtisansTable() {
         handleCloseMenu();
     };
 
+    const handleClickOpen3 = () => {
+        setOpen3(true);
+        handleCloseMenu();
+    };
+
     const handleClose2 = async (e) => {
         setOpen2(false);
         setLoading(true);
@@ -110,6 +116,28 @@ export default function ArtisanArtisansTable() {
     const handleCloseImagePreview = () => {
         setImagePreview(null);
     };
+
+    const handleUserDelete = async (e) => {
+        if (!selectedArtisan) {
+            console.error('No artisan selected for deletion');
+            return;
+        }
+
+        setOpen3(false);
+        setLoading(true);
+        e.preventDefault();
+        try {
+            await deleteUserNow(selectedArtisan.artisanId);
+            console.log(`User deletion process completed successfully.`);
+            alert(`User deletion process completed successfully.`);
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            alert(`Error deleting user: ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     return (
         <div>
@@ -170,6 +198,12 @@ export default function ArtisanArtisansTable() {
                                                 <div className='flex flex-row'>
                                                     <CheckCircleIcon className='h-5 w-5 mr-2 text-green-600' />
                                                     <p className='font-semibold'>Approve</p>
+                                                </div>
+                                            </MenuItem>
+                                            <MenuItem onClick={handleClickOpen3} className='bg-gray-200 m-1 rounded'>
+                                                <div className='flex flex-row'>
+                                                    <UserMinusIcon className='h-5 w-5 mr-2 text-red-600' />
+                                                    <p className='font-semibold'>Delete User</p>
                                                 </div>
                                             </MenuItem>
                                         </Menu>
@@ -236,6 +270,24 @@ export default function ArtisanArtisansTable() {
                 <DialogActions>
                     <Button onClick={handleCloseImagePreview} className='w-full btn bg-gray-300 hover:bg-gray-500 hover:text-white text-black md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>
                         Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Delete Artisan Modal */}
+            <Dialog className='rounded-[20px]' open={open3} onClose={() => setOpen3(false)}>
+                <DialogTitle className='font-bold text-sm'>Are you sure you want to delete this Artisan ?</DialogTitle>
+                <DialogContent>
+                    <Typography className='text-gray-500 text-sm'>
+                        Artisan will be removed from this platform 🎊.
+                    </Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setOpen3(false)} className='w-full btn bg-gray-300 hover:bg-gray-500 hover:text-white text-black md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>
+                        Cancel
+                    </Button>
+                    <Button onClick={handleUserDelete} disabled={loading} className='w-full btn bg-violet-600 text-white hover:bg-green-600 hover:text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>
+                        {loading ? 'Please wait...' : 'Confirm'}
                     </Button>
                 </DialogActions>
             </Dialog>

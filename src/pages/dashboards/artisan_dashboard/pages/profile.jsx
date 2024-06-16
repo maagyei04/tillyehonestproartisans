@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Avatar } from '@mui/material';
 import { useAuth } from '../../../../contexts/authContext';
 import { useDispatch } from 'react-redux';
-import { fetchArtisanData, uploadPassportImage, updateArtisanData, fetchBusinessFieldsCategories, updateGaurantorNoteImage } from '../../../../stores/actions';
+import { fetchArtisanData, uploadPassportImage, updateArtisanData, fetchBusinessFieldsCategories, updateGaurantorNoteImage, fetchAllArtisanPortfolio, addArtisanPortfolio, uploadPortfolioImage, deleteArtisanPortfolio } from '../../../../stores/actions';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
@@ -23,6 +23,7 @@ export default function Profile() {
     const [loading, setLoading] = useState(false);
     const { userLoggedIn, currentUser } = useAuth();
     const [userData, setUserData] = useState(null);
+    const [userPortfolioData, setUserPortfolioData] = useState([]);
     const [categories, setCategories] = useState([]);
 
     const [editMode, setEditMode] = useState({
@@ -43,8 +44,17 @@ export default function Profile() {
         passportImage: ''
     });
 
+    const [portfolioData, setPortfolioData] = useState({
+        artisan_id: currentUser?.uid,
+        title: '',
+        image_url: '',
+    })
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
+
+    const [selectedPortfolioImage, setSelectedPortfolioImage] = useState(null);
+    const [previewImagePortfolio, setPreviewImagePortfolio] = useState(null);
 
     const [selectedGuarantorFile, setSelectedGuarantorFile] = useState(null);
     const [previewGuarantorImage, setPreviewGuarantorImage] = useState(null);
@@ -80,6 +90,13 @@ export default function Profile() {
             }
         };
 
+        const getArtisanPortfolio = async () => {
+            if (userLoggedIn && currentUser?.uid) {
+                const portfolioData = await fetchAllArtisanPortfolio(currentUser.uid);
+                setUserPortfolioData(portfolioData);
+            }
+        };
+
         const fetchData = async () => {
             try {
                 const categoriesData = await fetchBusinessFieldsCategories();
@@ -90,12 +107,21 @@ export default function Profile() {
         };
 
         getArtisanData();
+        getArtisanPortfolio();
         fetchData();
     }, [userLoggedIn, currentUser]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleChange2 = (e) => {
+        const { name, value } = e.target;
+        setPortfolioData((prevState) => ({
             ...prevState,
             [name]: value,
         }));
@@ -113,9 +139,51 @@ export default function Profile() {
         setPreviewImage(URL.createObjectURL(e.target.files[0])); // Set preview image
     };
 
+    const handlePortfolioImageChange = (e) => {
+        setSelectedPortfolioImage(e.target.files[0]);
+        setPreviewImagePortfolio(URL.createObjectURL(e.target.files[0])); // Set preview image
+    };
+
     const handleGuarantorFileChange = (e) => {
         setSelectedGuarantorFile(e.target.files[0]);
         setPreviewGuarantorImage(URL.createObjectURL(e.target.files[0])); // Set preview image
+    };
+
+    const handleAddPortfolio = async (e) => {
+        setLoading(true);
+
+        e.preventDefault();
+
+        try {
+            let updatedData = { ...portfolioData };
+
+            if (selectedPortfolioImage) {
+                const portfolioImageUrl = await uploadPortfolioImage(selectedPortfolioImage, dispatch);
+                updatedData.image_url = portfolioImageUrl;
+            }
+
+            await dispatch(addArtisanPortfolio(updatedData));
+
+            alert('Portfolio added successfully');
+        } catch (error) {
+            console.error('Error adding portfolio:', error);
+            alert('Error adding portfolio');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDeletePortfolio = async (id) => {
+        setLoading(true);
+        try {
+            await dispatch(deleteArtisanPortfolio(id));
+            alert('Portfolio deleted successfully');
+        } catch (error) {
+            console.error('Error deleting portfolio:', error);
+            alert('Error deleting portfolio');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -277,6 +345,49 @@ export default function Profile() {
                 </div>
             </form>
             <div className="border border-gray-200 rounded-lg p-6 bg-white shadow shadow-lg">
+                <form onSubmit={handleAddPortfolio}>
+                    <h1 className="text-lg font-bold mb-4">Your Portfolio</h1>
+                    <div className="portfolio-list mb-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                        {userPortfolioData.map((portfolio, index) => (
+                            <div key={index} className="mb-4 flex-col justify-between items-center bg-gray-200 shadow shadow-lg p-4 rounded-[10px]">
+                                <div className='flex flex-row justify-between mb-2'>
+                                    <div>
+                                        <p className='text-black text-sm font-bold'>{portfolio.title}</p>
+                                        <img src={portfolio.image_url} height={50} width={50} alt='portfolio' />
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <div onClick={() => handleDeletePortfolio(portfolio.id)} className="text-red-600 cursor-pointer">
+                                            <i className="material-icons">delete</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">Title</label>
+                        <input
+                            type="title"
+                            name="title"
+                            onChange={handleChange2}
+                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">Image</label>
+                        <input
+                            type="file"
+                            name="image_url"
+                            alt='image_url'
+                            accept='image/*'
+                            onChange={handlePortfolioImageChange}
+                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                        />
+                    </div>
+                    <button disabled={loading} type='submit' className="w-full bg-purple-600 hover:bg-green-600 text-white py-2 rounded-md">{!loading && 'Add To Portfolio'}{loading && 'Please wait...'}</button>
+                </form>
+            </div>
+            <div className="border border-gray-200 rounded-lg p-6 bg-white shadow shadow-lg">
                 <h1 className="text-lg font-bold mb-2">Payment Information</h1>
                 <p className='text-gray-500 font-bold text-sm mb-2'>Adding your mobile money details can help you autofill during the payment process</p>
                 <div className="mb-4 flex-col justify-between items-center bg-gray-200 shadow shadow-lg p-4 rounded-[10px]">
@@ -329,6 +440,7 @@ export default function Profile() {
                     </li>
                 </ul>
             </div>
+
             <div className="border border-gray-200 rounded-lg p-6 bg-white shadow shadow-lg">
                 <form onSubmit={handleSubmit}>
                     <h1 className="text-lg font-bold mb-4">Business Info</h1>
