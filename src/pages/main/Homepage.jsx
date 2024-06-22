@@ -68,8 +68,9 @@ const HomePage = () => {
         };
     }, []);
 
-
-    console.log(artisans);
+    const handlePortfolio = (artisan) => {
+        navigate('/portfolio', { state: { artisan } });
+    }
 
     const categoriesData = [
         { category: 'Plumbing', numberOfPersonnel: '200+ Personnels' },
@@ -80,7 +81,6 @@ const HomePage = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const servicesPerPage = 8;
-    const totalPages = Math.ceil(artisans.length / servicesPerPage);
     const indexOfLastService = currentPage * servicesPerPage;
     const indexOfFirstService = indexOfLastService - servicesPerPage;
     const currentServices = artisans.slice(indexOfFirstService, indexOfLastService);
@@ -141,7 +141,7 @@ const HomePage = () => {
                     {/* Display services data */}
                     {artisans.map((artisan, index) => (
                         <div key={index} className="md:w-1/2 lg:w-1/4 p-2">
-                            <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[350px] md:w-[300px] h-[400px]">
+                            <div onClick={() => handlePortfolio(artisan)} className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[350px] md:w-[300px] h-[400px]">
                                 <div className='w-[350px] md:w-[300px] h-[250px]'>
                                     <img className="w-full h-full object-cover" src={artisan.passportImage} alt="Person" />
                                 </div>

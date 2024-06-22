@@ -4,6 +4,7 @@ import HomePage from '../pages/main/Homepage';
 import About from '../pages/main/About';
 import Explore from '../pages/main/explore';
 import Contact from '../pages/main/contact';
+import ArtisanPortfolio from "../pages/main/ArtisanPortfolio";
 import Register from '../pages/register/register';
 import PaymentMethod from '../pages/register/paymentMethod';
 import PersonalInfo from '../pages/register/personalInfo';
@@ -41,6 +42,10 @@ const MainRoutes = {
         {
             path: 'explore',
             element: <Explore />,
+        },
+        {
+            path: 'portfolio',
+            element: <ArtisanPortfolio />,
         },
         {
             path: 'register',

@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Banner from '../../assets/images/exploreframe.png';
 import BookNowButton from '../../components/common/BookNowButton';
 import { fetchAllArtisanDataStatusTrue, fetchBusinessFieldsCategories } from '../../stores/actions';
+import { useNavigate } from 'react-router-dom';
 
 const Explore = () => {
+    const navigate = useNavigate();
+
     const [artisans, setArtisans] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [categories, setCategories] = useState([]);
@@ -53,6 +56,11 @@ const Explore = () => {
 
     const nextPage = () => setCurrentPage(currentPage + 1);
     const prevPage = () => setCurrentPage(currentPage - 1);
+
+    const handlePortfolio = (artisan) => {
+        navigate('/portfolio', { state: { artisan } });
+    }
+
 
     return (
         <div className="flex flex-col items-center justify-center py-20 px-2">
@@ -104,7 +112,7 @@ const Explore = () => {
                     {currentServices.map((artisan, index) => (
                         <div key={index} className="md:w-1/2 lg:w-1/4 p-2">
                             <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[350px] md:w-[300px] h-[400px]">
-                                <div className='w-[350px] md:w-[300px] h-[250px]'>
+                                <div onClick={() => handlePortfolio(artisan)} className='w-[350px] md:w-[300px] h-[250px]'>
                                     <img className="w-full h-full object-cover" src={artisan.passportImage} alt="Person" />
                                 </div>
                                 <div className="p-4 w-[350px] md:w-[300px] h-[200px]">
