@@ -15,7 +15,8 @@ import {
     DialogActions,
     Button,
     Menu,
-    MenuItem
+    MenuItem,
+    Select,
 } from '@mui/material';
 import { fetchAllArtisanData, fetchAllClientBookings, updateArtisanStatus, deleteUserNow } from '../../../../stores/actions';
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
@@ -31,6 +32,7 @@ export default function ArtisanArtisansTable() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedArtisan, setSelectedArtisan] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
+    const [filterOption, setFilterOption] = useState('All'); // State for filter option
 
     useEffect(() => {
         const getAllArtisans = async () => {
@@ -100,7 +102,7 @@ export default function ArtisanArtisansTable() {
         e.preventDefault();
         try {
             await updateArtisanStatus(selectedArtisan?.artisanId, true);
-            alert('Artisan has been successfully approve!');
+            alert('Artisan has been successfully approved!');
         } catch (error) {
             console.error('Error approve artisan:', error);
             alert('Error approve client');
@@ -138,10 +140,42 @@ export default function ArtisanArtisansTable() {
         }
     };
 
+    const handleFilterChange = (event) => {
+        setFilterOption(event.target.value);
+    };
+
+    const filteredArtisans = artisanData.filter((artisan) => {
+        if (filterOption === 'All') {
+            return true; // Show all artisans
+        } else if (filterOption === 'Blocked') {
+            return !artisan.status; // Show blocked artisans
+        } else if (filterOption === 'Active') {
+            return artisan.status; // Show active artisans
+        }
+        return true;
+    });
 
     return (
         <div>
             <Typography variant="h4" gutterBottom className="font-bold text-xl">Artisans (Users)</Typography>
+
+            {/* Filter Select */}
+            <div style={{ marginBottom: '16px' }}>
+                <div htmlFor="filter-select">Filter</div>
+                <Select
+                    native
+                    value={filterOption}
+                    onChange={handleFilterChange}
+                    inputProps={{
+                        name: 'filter',
+                        id: 'filter-select',
+                    }}
+                >
+                    <option value="All">All</option>
+                    <option value="Blocked">Blocked</option>
+                    <option value="Active">Active</option>
+                </Select>
+            </div>
 
             <TableContainer component={Paper} sx={{ marginTop: 4, overflowX: 'auto' }}>
                 <Table aria-label="responsive table">
@@ -158,8 +192,8 @@ export default function ArtisanArtisansTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {artisanData.length > 0 ? (
-                            artisanData.map((artisan, index) => (
+                        {filteredArtisans.length > 0 ? (
+                            filteredArtisans.map((artisan, index) => (
                                 <TableRow key={index}>
                                     <TableCell className='text-gray-500 flex flex-row font-semibold'>
                                         <Avatar src={artisan?.passportImage} className='mr-2 h-10 w-10' />
@@ -167,7 +201,7 @@ export default function ArtisanArtisansTable() {
                                     </TableCell>
                                     <TableCell className='text-gray-500'>{artisan?.phoneNumber}</TableCell>
                                     <TableCell className='text-gray-500'>{artisan?.email}</TableCell>
-                                    <TableCell className={artisan?.status === true ? 'text-gray-500 font-semibold' : 'text-gray-500 font-semibold'}>{artisan?.status === true ? 'Active' : 'Blocked'}</TableCell>
+                                    <TableCell className={artisan?.status ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{artisan?.status ? 'Active' : 'Blocked'}</TableCell>
                                     <TableCell className='text-violet-500'><span onClick={() => handleImageClick(artisan?.passportImage)} style={{ cursor: 'pointer' }}>Passport Image</span></TableCell>
                                     <TableCell className='text-violet-500'><span onClick={() => handleImageClick(artisan?.ghanaCardImage)} style={{ cursor: 'pointer' }}>Ghana Card</span></TableCell>
                                     <TableCell className='text-violet-500'><span onClick={() => handleImageClick(artisan?.gaurantorNoteImage)} style={{ cursor: 'pointer' }}>Gaurantor Note</span></TableCell>
@@ -215,8 +249,8 @@ export default function ArtisanArtisansTable() {
                                 <TableCell colSpan={6}>
                                     <div className="flex flex-col items-center justify-center mt-10">
                                         <EmptyIcon className='h-10' style={{ color: 'gray' }} />
-                                        <p className='font-bold text-lg'>No artisan has registered yet</p>
-                                        <Typography className="text-gray-500 mt-2 text-center px-2 md:px-20">You're all set! There are currently no artisans yet. Enjoy your free time or use it to tackle your next task with peace of mind.</Typography>
+                                        <p className='font-bold text-lg'>No artisans match the current filter</p>
+                                        <Typography className="text-gray-500 mt-2 text-center px-2 md:px-20">Adjust your filter criteria or wait for new artisans to register.</Typography>
                                     </div>
                                 </TableCell>
                             </TableRow>
@@ -225,6 +259,7 @@ export default function ArtisanArtisansTable() {
                 </Table>
             </TableContainer>
 
+            {/* Modals (Dialogs) */}
             {/* Block Client Modal */}
             <Dialog className='rounded-[20px]' open={open} onClose={() => setOpen(false)}>
                 <DialogTitle className='font-bold text-sm'>Are you sure you want to block this Artisan ?</DialogTitle>
@@ -248,7 +283,7 @@ export default function ArtisanArtisansTable() {
                 <DialogTitle className='font-bold text-sm'>Are you sure you want to approve this Artisan ?</DialogTitle>
                 <DialogContent>
                     <Typography className='text-gray-500 text-sm'>
-                        Artisan will now be able to recieve bookings on this platform 🎊. Remember to refresh page after!
+                        Artisan will now be able to receive bookings on this platform 🎊. Remember to refresh page after!
                     </Typography>
                 </DialogContent>
                 <DialogActions>

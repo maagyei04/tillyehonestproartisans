@@ -61,7 +61,7 @@ const RightSide = ({ handleSubmit, userLoggedIn, artisan }) => (
     </div>
 );
 
-const LeftSide = ({ formData, handleChange, userLoggedIn }) => (
+const LeftSide = ({ formData, handleChange, userLoggedIn, errors }) => (
     <div className='md:w-3/4 w-full mr-10 mt-5 flex flex-col'>
         <div className={userLoggedIn ? 'hidden' : 'block'}>
             <h1 className="text-black-700 font-bold text-xl mb-1">Personal Information</h1>
@@ -81,6 +81,7 @@ const LeftSide = ({ formData, handleChange, userLoggedIn }) => (
                         onChange={handleChange}
                         required
                     />
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                 </div>
                 <div className='flex flex-col mb-4 w-full'>
                     <label className='mb-2 text-sm text-gray-500' htmlFor="phoneNumber">Phone Number</label>
@@ -93,6 +94,7 @@ const LeftSide = ({ formData, handleChange, userLoggedIn }) => (
                         onChange={handleChange}
                         required
                     />
+                    {errors.phoneNumber && <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>}
                 </div>
             </div>
             <h1 className="text-black-700 font-bold text-xl mb-1">Work location Information</h1>
@@ -133,6 +135,7 @@ const LeftSide = ({ formData, handleChange, userLoggedIn }) => (
                         onChange={handleChange}
                         required
                     />
+                    {errors.cityTown && <p className="text-red-500 text-sm mt-1">{errors.cityTown}</p>}
                 </div>
                 <div className='flex flex-col mb-4 w-full mr-5'>
                     <label className='mb-2 text-sm text-gray-500' htmlFor="region">Region</label>
@@ -223,6 +226,8 @@ const BookingLocationInfo = () => {
         locationInfo: ''
     });
 
+    const [errors, setErrors] = useState({});
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -231,8 +236,29 @@ const BookingLocationInfo = () => {
         }));
     };
 
+    const validate = () => {
+        const newErrors = {};
+
+        if (!userLoggedIn && !formData.email) {
+            newErrors.email = 'Email is required';
+        }
+        if (!userLoggedIn && !formData.phoneNumber) {
+            newErrors.phoneNumber = 'Phone number is required';
+        }
+        if (!formData.cityTown) {
+            newErrors.cityTown = 'Town is required';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!validate()) {
+            return;
+        }
 
         if (userLoggedIn) {
             const userId = currentUser.uid;
@@ -263,14 +289,12 @@ const BookingLocationInfo = () => {
         console.log(userLoggedIn);
 
         navigate('/booking/review_info', { state: { artisan: artisan } });
-
     };
-
 
     return (
         <div className="flex flex-col items-center md:justify-center py-[90px] md:px-10 px-5">
             <div className="flex flex-col md:flex-row items-start md:justify-between">
-                <LeftSide formData={formData} handleChange={handleChange} userLoggedIn={userLoggedIn} />
+                <LeftSide formData={formData} handleChange={handleChange} userLoggedIn={userLoggedIn} errors={errors} />
                 <RightSide handleSubmit={handleSubmit} userLoggedIn={userLoggedIn} artisan={artisan} />
             </div>
         </div>

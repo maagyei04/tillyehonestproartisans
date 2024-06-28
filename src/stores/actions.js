@@ -912,3 +912,37 @@ export const deleteUserNow = async (userId) => {
         throw error; // Throw error or handle accordingly
     }
 };
+
+export const deleteClientDoc = async (id) => {
+    try {
+        const clientDocRef = doc(db, 'Clients', id);
+        await deleteDoc(clientDocRef);
+        console.log(`Client document with ID ${id} deleted successfully.`);
+    } catch (error) {
+        console.error('Error deleting client document:', error);
+        throw error;
+    }
+};
+
+export const switchClientToArtisan = (artisanData) => {
+    return async (dispatch) => {
+        try {
+            const collectionRef = collection(db, 'Artisans');
+            const artisanRef = doc(collectionRef, artisanData.artisanId);
+
+            await setDoc(artisanRef, artisanData);
+
+            console.log('Client Successfully Switched to Artisan');
+
+            await deleteClientDoc(artisanData.artisanId);
+
+            const artisanInfo = await fetchArtisanData(artisanData.artisanId);
+            console.log(artisanInfo);
+
+            return artisanData.artisanId;
+        } catch (error) {
+            console.error('Error switching client to artisan:', error);
+            throw error;
+        }
+    };
+};

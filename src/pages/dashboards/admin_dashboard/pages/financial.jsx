@@ -23,7 +23,7 @@ export default function ArtisanFinancialTable() {
         const fetchClientDetails = async () => {
             const details = {};
             for (const booking of bookingData) {
-                if (!details[booking.bookingClientId]) {
+                if (booking.bookingClientId && !details[booking.bookingClientId]) {
                     const clientData = await fetchClientData(booking.bookingClientId);
                     details[booking.bookingClientId] = {
                         firstName: clientData?.firstName || '',
@@ -37,7 +37,7 @@ export default function ArtisanFinancialTable() {
         const fetchArtisanDetails = async () => {
             const details = {};
             for (const booking of bookingData) {
-                if (!details[booking.bookingArtisanId]) {
+                if (booking.bookingArtisanId && !details[booking.bookingArtisanId]) {
                     const artisanData = await fetchArtisanData(booking.bookingArtisanId);
                     details[booking.bookingArtisanId] = {
                         firstName: artisanData?.firstName || '',
@@ -83,7 +83,7 @@ export default function ArtisanFinancialTable() {
                             paymentCompleteBookings.map((booking, index) => (
                                 <TableRow key={index}>
                                     <TableCell className='text-gray-500 font-semibold'>
-                                        {clientDetails[booking.bookingClientId]?.firstName} {clientDetails[booking.bookingClientId]?.lastName}
+                                        {clientDetails[booking.bookingClientId]?.firstName ?? booking.bookingEmail} {clientDetails[booking.bookingClientId]?.lastName ?? ""}
                                     </TableCell>
                                     <TableCell className='text-gray-500'>{booking.bookingStartDate}</TableCell>
                                     <TableCell className='text-gray-500'>GHC {booking.bookingEstimateAmount}.00</TableCell>

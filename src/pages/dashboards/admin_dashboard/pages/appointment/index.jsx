@@ -62,15 +62,19 @@ export default function ArtisanAppointment() {
         const fetchClientDetails = async () => {
             const details = {};
             for (const booking of allBookings) {
-                if (!details[booking.bookingClientId]) {
-                    const clientData = await fetchClientData(booking.bookingClientId);
-                    details[booking.bookingClientId] = {
-                        firstName: clientData.firstName,
-                        lastName: clientData.lastName,
-                        profilePic: clientData.profilePic,
-                        email: clientData.email,
-                        phoneNumber: clientData.phoneNumber,
-                    };
+                if (booking.bookingClientId && !details[booking.bookingClientId]) {
+                    try {
+                        const clientData = await fetchClientData(booking.bookingClientId);
+                        details[booking.bookingClientId] = {
+                            firstName: clientData.firstName,
+                            lastName: clientData.lastName,
+                            profilePic: clientData.profilePic,
+                            email: clientData.email,
+                            phoneNumber: clientData.phoneNumber,
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching client data for ID ${booking.bookingClientId}:`, error);
+                    }
                 }
             }
             setClientDetails(details);
@@ -79,15 +83,19 @@ export default function ArtisanAppointment() {
         const fetchArtisanDetails = async () => {
             const details = {};
             for (const booking of allBookings) {
-                if (!details[booking.bookingArtisanId]) {
-                    const artisanData = await fetchArtisanData(booking.bookingArtisanId);
-                    details[booking.bookingArtisanId] = {
-                        firstName: artisanData.firstName,
-                        lastName: artisanData.lastName,
-                        passportImage: artisanData.passportImage,
-                        email: artisanData.email,
-                        phoneNumber: artisanData.phoneNumber,
-                    };
+                if (booking.bookingArtisanId && !details[booking.bookingArtisanId]) {
+                    try {
+                        const artisanData = await fetchArtisanData(booking.bookingArtisanId);
+                        details[booking.bookingArtisanId] = {
+                            firstName: artisanData.firstName,
+                            lastName: artisanData.lastName,
+                            passportImage: artisanData.passportImage,
+                            email: artisanData.email,
+                            phoneNumber: artisanData.phoneNumber,
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching artisan data for ID ${booking.bookingArtisanId}:`, error);
+                    }
                 }
             }
             setArtisanDetails(details);
@@ -96,6 +104,7 @@ export default function ArtisanAppointment() {
         fetchClientDetails();
         fetchArtisanDetails();
     }, [allBookings]);
+
 
     return (
         <Grid container>
@@ -118,11 +127,11 @@ export default function ArtisanAppointment() {
                                     sx={{ mb: 2 }}
                                 >
                                     <div className={`${selectedAppointment === booking ? 'border border-violet-600' : 'border border-gray-200'} flex flex-col mb-2 p-4 shadow shadow-lg rounded-[10px] bg-white`}>
-                                        {clientDetails[booking.bookingClientId] ? (
+                                        {clientDetails[booking.bookingClientId] || booking.bookingEmail ? (
                                             <div className='flex flex-row justify-between mb-5'>
                                                 <div className='flex flex-row items-cente'>
-                                                    <Avatar src={clientDetails[booking.bookingClientId].profilePic} className='h-5 w-5 mr-2' />
-                                                    <p className='text-sm'>{clientDetails[booking.bookingClientId].firstName} {clientDetails[booking.bookingClientId].lastName}</p>
+                                                    <Avatar src={clientDetails[booking.bookingClientId]?.profilePic ?? ""} className='h-7 w-7 mr-2' />
+                                                    <p className='text-sm'>{clientDetails[booking.bookingClientId]?.firstName ?? booking.bookingEmail} {clientDetails[booking.bookingClientId]?.lastName ?? ""}</p>
                                                 </div>
                                                 <div className={`${booking.bookingEstimateAmount === 0 ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
                                                     {booking.bookingEstimateAmount === 0 ? 'Pending' : 'Estimate Done'}
@@ -179,11 +188,11 @@ export default function ArtisanAppointment() {
                                             <Typography variant="subtitle1" gutterBottom>Client Information</Typography>
                                             <div className='flex flex-row'>
                                                 <div className='mr-2'>
-                                                    <Avatar className='h-10 w-10 mr-2' src={clientDetails[selectedAppointment.bookingClientId].profilePic} />
+                                                    <Avatar className='h-10 w-10 mr-2' src={clientDetails[selectedAppointment.bookingClientId]?.profilePic ?? ""} />
                                                 </div>
                                                 <div>
-                                                    <p className='text-sm'>{clientDetails[selectedAppointment.bookingClientId].firstName} {clientDetails[selectedAppointment.bookingClientId].lastName}</p>
-                                                    <p className='text-sm text-gray-500'>{clientDetails[selectedAppointment.bookingClientId].phoneNumber}</p>
+                                                    <p className='text-sm'>{clientDetails[selectedAppointment.bookingClientId]?.firstName ?? selectedAppointment.bookingEmail} {clientDetails[selectedAppointment.bookingClientId]?.lastName ?? ""}</p>
+                                                    <p className='text-sm text-gray-500'>{clientDetails[selectedAppointment.bookingClientId]?.phoneNumber ?? selectedAppointment.bookingPhoneNumber}</p>
                                                 </div>
                                             </div>
                                             <Divider sx={{ my: 2 }} />

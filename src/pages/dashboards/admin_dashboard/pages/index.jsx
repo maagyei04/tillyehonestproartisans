@@ -93,7 +93,7 @@ export default function ArtisanDashboardDefault() {
     const fetchClientDetails = async () => {
       const details = {};
       for (const booking of allClientsBookings) {
-        if (!details[booking.bookingClientId]) {
+        if (booking.bookingClientId && !details[booking.bookingClientId]) {
           const clientData = await fetchClientData(booking.bookingClientId);
           details[booking.bookingClientId] = {
             firstName: clientData.firstName,
@@ -110,7 +110,7 @@ export default function ArtisanDashboardDefault() {
     const fetchArtisanDetails = async () => {
       const details = {};
       for (const booking of allClientsBookings) {
-        if (!details[booking.bookingArtisanId]) {
+        if (booking.bookingArtisanId && !details[booking.bookingArtisanId]) {
           const artisanData = await fetchArtisanData(booking.bookingArtisanId);
           details[booking.bookingArtisanId] = {
             firstName: artisanData.firstName,
@@ -263,13 +263,13 @@ export default function ArtisanDashboardDefault() {
           {bookingsWithNoEstimate.length > 0 ? (
             bookingsWithNoEstimate.map((booking, index) => (
               <Box key={index} className="mb-2 shadow-xl shadow-black-600" sx={containerStyle}>
-                {clientDetails[booking.bookingClientId] ? (
+                {clientDetails[booking.bookingClientId] || booking.bookingEmail ? (
                   <div className='flex flex-row'>
-                    <Avatar src={clientDetails[booking.bookingClientId].profilePic} />
+                    <Avatar src={clientDetails[booking.bookingClientId]?.profilePic ?? ""} />
                     <div className='flex flex-col mb-2 ml-2'>
-                      <p className='text-sm font-semibold'>{clientDetails[booking.bookingClientId].firstName} {clientDetails[booking.bookingClientId].lastName}</p>
-                      <p className='text-sm text-gray-500'>{clientDetails[booking.bookingClientId].email}</p>
-                      <p className='text-sm text-gray-500'>{clientDetails[booking.bookingClientId].phoneNumber}</p>
+                      <p className='text-sm font-semibold'>{clientDetails[booking.bookingClientId]?.firstName ?? booking.bookingEmail} {clientDetails[booking.bookingClientId]?.lastName ?? ""}</p>
+                      <p className='text-sm text-gray-500'>{clientDetails[booking.bookingClientId]?.email ?? booking.bookingEmail}</p>
+                      <p className='text-sm text-gray-500'>{clientDetails[booking.bookingClientId]?.phoneNumber ?? booking.bookingPhoneNumber}</p>
                     </div>
                   </div>
                 ) : (

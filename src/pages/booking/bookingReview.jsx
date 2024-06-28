@@ -49,13 +49,28 @@ const RightSide = ({ handleClick, loading, userLoggedIn, artisan }) => (
     </div>
 );
 
-const LeftSide = ({ bookingData }) => (
+const LeftSide = ({ bookingData, userLoggedIn }) => (
     <div className='md:w-3/4 w-full mr-10 mt-5 flex flex-col'>
         <div>
             <h1 className="text-black-700 font-bold text-xl mb-1">Confirmation and Verification</h1>
             <p className='text-gray-500 text-sm mb-5'>Confirm and verify your details</p>
         </div>
         <div>
+            <div className={userLoggedIn ? 'hidden' : 'block'}>
+                <div className="flex justify-between">
+                    <span className='font-bold'>Personal Information</span>
+                    <Link to={'booking/pick_date'}><span><PencilIcon className='h-3 w-4 ml-5 mr-5' /></span></Link>
+                </div>
+                <div className="flex justify-between">
+                    <span className='text-gray-600'>Email</span>
+                    <span className='font-semibold'>{bookingData.bookingEmail}</span>
+                </div>
+                <div className="flex justify-between mb-5">
+                    <span className='text-gray-600'>Phone Number</span>
+                    <span className='font-semibold'>{bookingData.bookingPhoneNumber}</span>
+                </div>
+            </div>
+
             <div className="flex justify-between">
                 <span className='font-bold'>Service Information</span>
                 <Link to={'booking/service_detail'}><span><PencilIcon className='h-3 w-4 ml-5 mr-5' /></span></Link>
