@@ -46,7 +46,7 @@ const ArtisanPortfolio = () => {
         const fetchClientDetails = async () => {
             const details = {};
             for (const booking of bookingsDetails) {
-                if (!details[booking.bookingClientId]) {
+                if (booking.bookingClientId && !details[booking.bookingClientId]) {
                     const clientData = await fetchClientData(booking.bookingClientId);
                     details[booking.bookingClientId] = {
                         firstName: clientData.firstName,
@@ -77,7 +77,7 @@ const ArtisanPortfolio = () => {
                         <img src={artisan.passportImage} alt='profile pic' className="w-full h-full object-cover" />
                     </div>
                 </div>
-                <div className="bg-white rounded shadow-md flex-grow w-[350px] md:w-[600px]">
+                <div className="bg-white rounded shadow-md flex-grow w-full md:w-full">
                     <Tabs
                         value={tabIndex}
                         onChange={handleTabChange}
@@ -111,7 +111,7 @@ const TabPanel = ({ children, value, index }) => {
     return (
         <div>
             {value === index && (
-                <Box p={3}>
+                <Box p={2}>
                     <div>{children}</div>
                 </Box>
             )}
@@ -170,13 +170,13 @@ const WorkItem = ({ title, date, imageUrl }) => (
 
 const Reviews = ({ bookingsDetails, clientData }) => (
     <div>
-        {bookingsDetails && bookingsDetails.length > 0 ? (
+        {Array.isArray(bookingsDetails) && bookingsDetails.length > 0 && bookingsDetails.every(booking => booking.bookingReview !== '' || booking.bookingRate !== '') ? (
             bookingsDetails.map((booking, index) => (
                 <ReviewItem
                     key={index}
-                    firstName={clientData[booking.bookingClientId]?.firstName}
-                    lastName={clientData[booking.bookingClientId]?.lastName}
-                    pic={clientData[booking.bookingClientId]?.profilePic}
+                    firstName={clientData[booking.bookingClientId]?.firstName ?? booking.bookingEmail}
+                    lastName={clientData[booking.bookingClientId]?.lastName ?? ''}
+                    pic={clientData[booking.bookingClientId]?.profilePic ?? ''}
                     review={booking.bookingReview}
                     rating={booking.bookingRate}
                     date={'...moments ago'}
@@ -187,6 +187,7 @@ const Reviews = ({ bookingsDetails, clientData }) => (
                 This artisan doesn't have any reviews yet.
             </div>
         )}
+
     </div>
 );
 

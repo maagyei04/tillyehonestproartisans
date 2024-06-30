@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, Box } from '@mui/material';
+import { Grid, Typography, Box, Avatar } from '@mui/material';
 import { fetchArtisanData, fetchAllArtisanAppointments, fetchLimitedArtisanAppointments, fetchClientData } from '../../../../stores/actions';
 import { useAuth } from '../../../../contexts/authContext';
 import { Link } from 'react-router-dom';
@@ -19,6 +19,7 @@ export default function ArtisanDashboardDefault() {
   const [bookingData, setBookingData] = useState([]);
   const [bookingLimitData, setBookingLimitData] = useState([]);
   const [clientNames, setClientNames] = useState({});
+  const [clientPics, setClientPics] = useState({});
 
   useEffect(() => {
     const getArtisanData = async () => {
@@ -50,13 +51,18 @@ export default function ArtisanDashboardDefault() {
   useEffect(() => {
     const fetchClientNames = async () => {
       const names = {};
+      const pics = {};
+
       for (const booking of bookingLimitData) {
-        if (!names[booking.bookingClientId]) {
+        if (booking.bookingClientId && !names[booking.bookingClientId]) {
           const clientData = await fetchClientData(booking.bookingClientId);
           names[booking.bookingClientId] = clientData.firstName;
+          pics[booking.bookingClientId] = clientData.profilePic;
         }
       }
+
       setClientNames(names);
+      setClientPics(pics);
     };
 
     fetchClientNames();
@@ -74,13 +80,17 @@ export default function ArtisanDashboardDefault() {
       completedBookings.push(data);
     }
 
-    if (data.bookingPayment === 'complete' && data.bookingEstimateAmount !== '0') {
+    if (data.bookingPayment === 'complete' && data.bookingEstimateAmount !== 0) {
       totalRecieved += data.bookingEstimateAmount;
     }
   });
 
+
   bookingLimitData.forEach((i) => {
-    if (i.bookingEstimateAmount !== 0 && i.bookingPayment === '') {
+    if (
+      i.bookingEstimateAmount !== 0 ||
+      (i.bookingStatusArtisan === '' || i.bookingStatusClient === '')
+    ) {
       bookingsWithEstimate.push(i);
     }
   });
@@ -129,7 +139,7 @@ export default function ArtisanDashboardDefault() {
               <div className='flex flex-row justify-between'>
                 <div className='flex flex-col'>
                   <Typography className='text-l font-bold' gutterBottom>
-                    Pending Appointments
+                    Pending/Completed Appointments
                   </Typography>
                   <p className='text-sm text-gray-500 mb-5'>
                     Approved appointments that you are supposed to complete at the due date
@@ -144,13 +154,14 @@ export default function ArtisanDashboardDefault() {
                   <Box key={index} className="p-2 rounded-[10px] border border-gray-300 mb-2">
                     <div className='flex justify-between mb-5'>
                       <div className='flex flex-row'>
-                        <p className='font-bold'>{clientNames[booking.bookingClientId]}</p>
+                        <Avatar className='h-7 w-7 mr-2' src={clientPics[booking?.bookingClientId] ?? ''} />
+                        <p className='font-bold'>{clientNames[booking?.bookingClientId] ?? booking?.bookingEmail}</p>
                       </div>
                       <div className='bg-red-300 rounded-[10px] px-4'>
                         <p className='text-red-700'>{booking.bookingEstimateAmount === 0 ? 'waiting for estimate' : ''
                           || booking.bookingPayment !== 'complete' ? 'waiting for payment' : ''
                             || booking.bookingStatusArtisan !== 'complete' ? 'waiting your completion' : ''
-                              || booking.bookingStatusClient !== 'complete' ? 'waiting client completion' : ''
+                              || booking.bookingStatusClient !== 'complete' ? 'waiting client confirmation' : ''
                                 || booking.bookingPayment === 'complete' ? 'Full payment' : ''
                         }</p>
                       </div>
@@ -178,7 +189,7 @@ export default function ArtisanDashboardDefault() {
                       <p className='font-bold text-sm'>
                         {booking.bookingEstimateAmount === 0 ? 'Client is waiting for estimate' : ''
                           || booking.bookingPayment !== 'complete' ? 'Client is expected to make full payment' : ''
-                            || booking.bookingStatusArtisan !== 'complete' ? 'Confirm when the entire is completed to recieve full payment' : ''
+                            || booking.bookingStatusArtisan !== 'complete' ? 'Confirm when the entire work is completed to recieve full payment' : ''
                               || booking.bookingStatusClient !== 'complete' ? 'Waiting for client work complete confirmation' : ''
                         }
                       </p>
@@ -215,7 +226,8 @@ export default function ArtisanDashboardDefault() {
             bookingsWithNoEstimate.map((booking, index) => (
               <Box className="mb-2 shadow-xl shadow-black-600" sx={containerStyle}>
                 <div className='flex flex-row mb-2'>
-                  <p className='text-sm font-semibold'>{clientNames[booking.bookingClientId]}</p>
+                  <Avatar className='h-7 w-7 mr-2' src={clientPics[booking?.bookingClientId] ?? ''} />
+                  <p className='text-sm font-semibold'>{clientNames[booking?.bookingClientId] ?? booking?.bookingEmail}</p>
                 </div>
                 <div className='flex flex-col mb-2'>
                   <p className='text-gray-500'>Job Description</p>

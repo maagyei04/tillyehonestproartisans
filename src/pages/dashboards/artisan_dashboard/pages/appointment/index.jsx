@@ -37,6 +37,7 @@ export default function ArtisanAppointment() {
     const [tabIndex, setTabIndex] = useState(0);
     const [bookingData, setBookingData] = useState([]);
     const [clientNames, setClientNames] = useState({});
+    const [clientPhoneNumbers, setClientPhoneNumbers] = useState({});
     const [clientPics, setClientsPics] = useState({});
 
 
@@ -64,13 +65,21 @@ export default function ArtisanAppointment() {
     useEffect(() => {
         const fetchClientNames = async () => {
             const names = {};
+            const phoneNumbers = {};
+            const pics = {};
+
             for (const booking of bookingData) {
-                if (!names[booking.bookingClientId]) {
+                if (booking.bookingClientId && !names[booking.bookingClientId]) {
                     const clientData = await fetchClientData(booking.bookingClientId);
                     names[booking.bookingClientId] = clientData.firstName;
+                    phoneNumbers[booking.bookingClientId] = clientData.phoneNumber;
+                    pics[booking.bookingClientId] = clientData.profilePic;
                 }
             }
+
             setClientNames(names);
+            setClientPhoneNumbers(phoneNumbers);
+            setClientsPics(pics);
         };
 
         fetchClientNames();
@@ -99,8 +108,8 @@ export default function ArtisanAppointment() {
                                     <div className={`${selectedAppointment === appointment ? 'border border-violet-600' : 'border border-gray-200'} flex flex-col mb-2 p-4 shadow shadow-lg rounded-[10px] bg-white`}>
                                         <div className='flex flex-row justify-between mb-5'>
                                             <div className='flex flex-row items-cente'>
-                                                <Avatar className='h-5 w-5 mr-2' />
-                                                <p className='text-sm'>{clientNames[appointment.bookingClientId]}</p>
+                                                <Avatar className='h-7 w-7 mr-2' src={clientPics[appointment?.bookingClientId] ?? ''} />
+                                                <p className='text-sm'>{clientNames[appointment?.bookingClientId] ?? appointment?.bookingEmail}</p>
                                             </div>
                                             <div className={`${appointment.bookingEstimateAmount === 0 ? 'bg-red-100 text-red-600' : 'bg-gray-200 text-green-500'} px-4 rounded-[10px]`}>
                                                 {appointment.bookingEstimateAmount === 0 ? 'Pending' : 'Estimate Done'}
@@ -154,11 +163,11 @@ export default function ArtisanAppointment() {
                                             <Typography variant="subtitle1" gutterBottom>Client Information</Typography>
                                             <div className='flex flex-row'>
                                                 <div className='mr-2'>
-                                                    <Avatar className='h-10 w-10 mr-2' src={selectedAppointment.avatar} />
+                                                    <Avatar className='h-10 w-10 mr-2' src={clientPics[selectedAppointment?.bookingClientId] ?? ''} />
                                                 </div>
                                                 <div>
-                                                    <p className='text-sm'>{clientNames[selectedAppointment.bookingClientId]}</p>
-                                                    <p className='text-sm text-gray-500'>--</p>
+                                                    <p className='text-sm'>{clientNames[selectedAppointment?.bookingClientId] ?? selectedAppointment?.bookingEmail}</p>
+                                                    <p className='text-sm text-gray-500'>{clientPhoneNumbers[selectedAppointment?.bookingClientId] ?? selectedAppointment?.bookingPhoneNumber}</p>
                                                 </div>
                                             </div>
                                             <Divider sx={{ my: 2 }} />

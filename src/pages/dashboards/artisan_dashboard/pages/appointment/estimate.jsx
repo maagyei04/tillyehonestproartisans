@@ -8,7 +8,7 @@ const ArtisanEstimate = ({ bookingData }) => {
 
 
     const [formData, setFormData] = useState({
-        bookingEstimateAmount: '',
+        bookingEstimateAmount: 0,
     });
 
     const handleChange = (e) => {
@@ -25,8 +25,9 @@ const ArtisanEstimate = ({ bookingData }) => {
         e.preventDefault();
 
         try {
+            const newEstimateAmount = parseFloat(formData.bookingEstimateAmount);
 
-            await updateBookingEstimate(bookingData.id, formData.bookingEstimateAmount);
+            await updateBookingEstimate(bookingData.id, newEstimateAmount);
 
             alert('Appointment Estimate updated successfully');
         } catch (error) {
@@ -46,7 +47,7 @@ const ArtisanEstimate = ({ bookingData }) => {
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Appointment Total Estimate</label>
                             <input
-                                type="tel"
+                                type='number'
                                 name="bookingEstimateAmount"
                                 value={formData.bookingEstimateAmount}
                                 onChange={handleChange}

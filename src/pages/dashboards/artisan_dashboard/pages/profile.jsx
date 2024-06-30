@@ -337,7 +337,7 @@ export default function Profile() {
                             name="bio"
                             value={formData.bio}
                             onChange={handleChange}
-                            placeholder="Talk about yourself and your work"
+                            placeholder={formData.bio ? formData.bio : "Talk about yourself and your work"}
                             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                         />
                     </div>

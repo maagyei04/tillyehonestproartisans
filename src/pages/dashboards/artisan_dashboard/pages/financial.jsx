@@ -24,7 +24,7 @@ export default function ArtisanFinancialHistory() {
         const fetchClientNames = async () => {
             const names = {};
             for (const booking of bookingData) {
-                if (!names[booking.bokkingClientId]) {
+                if (booking.bookingClientId && !names[booking.bookingClientId]) {
                     const clientData = await fetchClientData(booking.bookingClientId);
                     names[booking.bookingClientId] = clientData.firstName;
                 }
@@ -55,7 +55,7 @@ export default function ArtisanFinancialHistory() {
                         {bookingData.bookingPayment === 'complete' ? (
                             bookingData.map((row, index) => (
                                 <TableRow key={index}>
-                                    <TableCell className='text-gray-500'>{clientNames[row.bookingClientId]}</TableCell>
+                                    <TableCell className='text-gray-500'>{clientNames[row?.bookingClientId] ?? row?.bookingEmail}</TableCell>
                                     <TableCell className='text-gray-500'>{row.bookingStartDate}</TableCell>
                                     <TableCell className='text-gray-500'>Mobile Money</TableCell>
                                     <TableCell className='text-gray-500'>GHC {row.bookingEstimateAmount}.00</TableCell>

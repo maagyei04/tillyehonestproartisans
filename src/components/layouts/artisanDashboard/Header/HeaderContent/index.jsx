@@ -34,7 +34,6 @@ export default function HeaderContent() {
         <HomeOutlined />
       </IconButton>
 
-      <Notification />
       {!downLG && <Profile />}
       {downLG && <MobileSection />}
     </>

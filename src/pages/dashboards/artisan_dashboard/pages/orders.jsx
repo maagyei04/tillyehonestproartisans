@@ -24,7 +24,7 @@ export default function ArtisanOrdersTable() {
         const fetchClientNames = async () => {
             const names = {};
             for (const booking of bookingData) {
-                if (!names[booking.bookingArtisanId]) {
+                if (booking.bookingClientId && !names[booking.bookingClientId]) {
                     const clientData = await fetchClientData(booking.bookingClientId);
                     names[booking.bookingClientId] = clientData.firstName;
                 }
@@ -57,7 +57,7 @@ export default function ArtisanOrdersTable() {
                         {bookingData.length > 0 ? (
                             bookingData.map((row, index) => (
                                 <TableRow key={index}>
-                                    <TableCell className='text-gray-500'>{clientNames[row.bookingClientId]}</TableCell>
+                                    <TableCell className='text-gray-500'>{clientNames[row?.bookingClientId] ?? row?.bookingEmail}</TableCell>
                                     <TableCell className='text-gray-500'>{row.bookingStartDate}</TableCell>
                                     <TableCell className='text-gray-500'>{row.bookingStartTime}</TableCell>
                                     <TableCell className='text-gray-500'>{row.bookingTown}</TableCell>
