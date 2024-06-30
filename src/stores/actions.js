@@ -946,3 +946,28 @@ export const switchClientToArtisan = (artisanData) => {
         }
     };
 };
+
+export const fetchAllArtisanPortfolios = async () => {
+    try {
+        const collectionRef = collection(db, 'Portfolios');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const portfolioData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                // Include the document ID along with the data
+                portfolioData.push({
+                    id: doc.id,
+                    ...data
+                });
+            });
+            return portfolioData;
+        } else {
+            throw new Error('No artisan portfolios found');
+        }
+    } catch (error) {
+        console.error('Error fetching artisan portfolios data:', error);
+        throw error;
+    }
+};

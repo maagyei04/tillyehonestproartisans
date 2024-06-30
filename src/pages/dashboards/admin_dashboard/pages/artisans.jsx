@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
     Table,
     TableBody,
@@ -18,11 +19,13 @@ import {
     MenuItem,
     Select,
 } from '@mui/material';
-import { fetchAllArtisanData, fetchAllClientBookings, updateArtisanStatus, deleteUserNow } from '../../../../stores/actions';
+import { fetchAllArtisanData, fetchAllClientBookings, updateArtisanStatus, deleteUserNow, fetchAllArtisanPortfolios, uploadPortfolioImage, addArtisanPortfolio, deleteArtisanPortfolio } from '../../../../stores/actions';
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
 import { CheckCircleIcon, XCircleIcon, UserMinusIcon } from '@heroicons/react/24/solid';
 
 export default function ArtisanArtisansTable() {
+    const dispatch = useDispatch();
+
     const [artisanData, setArtisanData] = useState([]);
     const [bookingsDetails, setBookingsDetails] = useState({});
     const [loading, setLoading] = useState(true);
@@ -32,7 +35,18 @@ export default function ArtisanArtisansTable() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedArtisan, setSelectedArtisan] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
-    const [filterOption, setFilterOption] = useState('All'); // State for filter option
+    const [filterOption, setFilterOption] = useState('All');
+    const [openPortfolio, setOpenPortfolio] = useState(false);
+    const [artisansPortfolioData, setArtisansPortfolioData] = useState([]);
+    const [sArtisansPortfolioData, setSArtisansPortfolioData] = useState([]);
+    const [selectedPortfolioImage, setSelectedPortfolioImage] = useState(null);
+
+
+    const [portfolioData, setPortfolioData] = useState({
+        artisan_id: '',
+        title: '',
+        image_url: '',
+    })
 
     useEffect(() => {
         const getAllArtisans = async () => {
@@ -41,7 +55,14 @@ export default function ArtisanArtisansTable() {
             setLoading(false);
         };
 
+        const getArtisanPortfolios = async () => {
+            const portfolioData = await fetchAllArtisanPortfolios();
+            setArtisansPortfolioData(portfolioData);
+        };
+
+
         getAllArtisans();
+        getArtisanPortfolios();
     }, []);
 
     useEffect(() => {
@@ -56,6 +77,31 @@ export default function ArtisanArtisansTable() {
             fetchBookingDetails();
         }
     }, [artisanData]);
+
+    const handlePortfolioChange = (e) => {
+        const { name, value } = e.target;
+        setPortfolioData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleDeletePortfolio = async (id) => {
+        setLoading(true);
+        try {
+            await dispatch(deleteArtisanPortfolio(id));
+            alert('Portfolio deleted successfully for artisan');
+        } catch (error) {
+            console.error('Error deleting portfolio for artisan:', error);
+            alert('Error deleting portfolio for artisan');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handlePortfolioImageChange = (e) => {
+        setSelectedPortfolioImage(e.target.files[0]);
+    };
 
     const handleMenuClick = (event, client) => {
         setAnchorEl(event.currentTarget);
@@ -94,6 +140,53 @@ export default function ArtisanArtisansTable() {
     const handleClickOpen3 = () => {
         setOpen3(true);
         handleCloseMenu();
+    };
+
+    const handleClickOpenPortfolio = () => {
+        const artisanDataWithId = [];
+
+        artisansPortfolioData.forEach((i) => {
+            if (i.artisan_id === selectedArtisan?.artisanId) {
+                artisanDataWithId.push(i);
+                setSArtisansPortfolioData(artisanDataWithId);
+            }
+        });
+
+        setOpenPortfolio(true);
+        handleCloseMenu();
+    };
+
+    const handlePortfolioExit = () => {
+        setOpenPortfolio(false);
+        setSArtisansPortfolioData([]);
+    }
+
+    const handleClosePortfolio = async (e) => {
+        setOpenPortfolio(false);
+        setSArtisansPortfolioData([]);
+        setLoading(true);
+        e.preventDefault();
+
+        try {
+            let updatedData = { ...portfolioData };
+
+            if (selectedPortfolioImage) {
+                const portfolioImageUrl = await uploadPortfolioImage(selectedPortfolioImage, dispatch);
+                updatedData.image_url = portfolioImageUrl;
+                updatedData.artisan_id = selectedArtisan?.artisanId;
+            }
+
+            console.log(updatedData);
+
+            await dispatch(addArtisanPortfolio(updatedData));
+
+            alert('Portfolio added successfully for artisan');
+        } catch (error) {
+            console.error('Error adding portfolio for artisan:', error);
+            alert('Error adding portfolio for artisan');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleClose2 = async (e) => {
@@ -234,10 +327,10 @@ export default function ArtisanArtisansTable() {
                                                     <p className='font-semibold'>Approve</p>
                                                 </div>
                                             </MenuItem>
-                                            <MenuItem onClick={handleClickOpen3} className='bg-gray-200 m-1 rounded'>
+                                            <MenuItem onClick={handleClickOpenPortfolio} className='bg-gray-200 m-1 rounded'>
                                                 <div className='flex flex-row'>
                                                     <UserMinusIcon className='h-5 w-5 mr-2 text-red-600' />
-                                                    <p className='font-semibold'>Delete User</p>
+                                                    <p className='font-semibold'>Portfolio</p>
                                                 </div>
                                             </MenuItem>
                                         </Menu>
@@ -260,6 +353,7 @@ export default function ArtisanArtisansTable() {
             </TableContainer>
 
             {/* Modals (Dialogs) */}
+
             {/* Block Client Modal */}
             <Dialog className='rounded-[20px]' open={open} onClose={() => setOpen(false)}>
                 <DialogTitle className='font-bold text-sm'>Are you sure you want to block this Artisan ?</DialogTitle>
@@ -323,6 +417,61 @@ export default function ArtisanArtisansTable() {
                     </Button>
                     <Button onClick={handleUserDelete} disabled={loading} className='w-full btn bg-violet-600 text-white hover:bg-green-600 hover:text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>
                         {loading ? 'Please wait...' : 'Confirm'}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Add Artisan Portfolio */}
+            <Dialog className='rounded-[20px]' open={openPortfolio} onClose={handlePortfolioExit}>
+                <DialogTitle className='font-bold text-sm'>Add/Delete Portfolio</DialogTitle>
+                <DialogContent>
+                    <form>
+                        <h1 className="text-lg font-bold mb-4">{selectedArtisan?.firstName}'s Portfolio</h1>
+                        <div className="portfolio-list mb-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                            {sArtisansPortfolioData.map((portfolio, index) => (
+                                <div key={index} className="mb-4 flex-col justify-between items-center bg-gray-200 shadow shadow-lg p-4 rounded-[10px]">
+                                    <div className='flex flex-row justify-between mb-2'>
+                                        <div>
+                                            <p className='text-black text-sm font-bold'>{portfolio.title}</p>
+                                            <img src={portfolio.image_url} height={50} width={50} alt='portfolio' />
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            <div onClick={() => handleDeletePortfolio(portfolio.id)} className="text-red-600 cursor-pointer">
+                                                <i className="material-icons">delete</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Title</label>
+                            <input
+                                type="title"
+                                name="title"
+                                onChange={handlePortfolioChange}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Image</label>
+                            <input
+                                type="file"
+                                name="image_url"
+                                alt='image_url'
+                                accept='image/*'
+                                onChange={handlePortfolioImageChange}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
+                        </div>
+                    </form>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handlePortfolioExit} className='w-full btn bg-gray-300 hover:bg-gray-500 hover:text-white text-black md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>
+                        Cancel
+                    </Button>
+                    <Button onClick={handleClosePortfolio} disabled={loading} className='w-full btn bg-violet-600 text-white hover:bg-green-600 hover:text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>
+                        {!loading && 'Add To Portfolio'}{loading && 'Please wait...'}
                     </Button>
                 </DialogActions>
             </Dialog>
