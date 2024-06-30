@@ -18,7 +18,6 @@ export default function ArtisanClientsTable() {
     const [filterOption, setFilterOption] = useState('All'); // State for filter option
 
     const dispatch = useDispatch();
-    const artisanData = useSelector((state) => state.artisan);
 
     useEffect(() => {
         const getAllClients = async () => {
@@ -102,18 +101,32 @@ export default function ArtisanClientsTable() {
         setLoading(true);
         e.preventDefault();
 
-        dispatch(setArtisanId(selectedClient?.clientId));
-        dispatch(setEmail(selectedClient?.email));
-        dispatch(setFirstName(selectedClient?.firstName));
-        dispatch(setLastName(selectedClient?.lastName));
-        dispatch(setMomoNetwork('MTN'));
-        dispatch(setMomoNumber(selectedClient?.phoneNumber));
-        dispatch(setPassportImage(selectedClient?.profilePic));
-        dispatch(setPassword(selectedClient?.password));
-        dispatch(setPhoneNumber(selectedClient?.phoneNumber));
-
         try {
-            await dispatch(switchClientToArtisan(artisanData));
+            console.log(selectedClient?.clientId);
+
+            await dispatch(switchClientToArtisan(
+                {
+                    artisanId: selectedClient?.clientId,
+                    userType: 'artisan',
+                    firstName: selectedClient?.firstName,
+                    lastName: selectedClient?.lastName,
+                    email: selectedClient?.email,
+                    phoneNumber: selectedClient?.phoneNumber,
+                    password: selectedClient?.password,
+                    momoNetwork: 'MTN',
+                    momoNumber: '',
+                    bank: '',
+                    bankAccountNumber: selectedClient?.phoneNumber,
+                    bankBranch: '',
+                    businessField: '',
+                    businessLocation: '',
+                    passportImage: selectedClient?.profilePic,
+                    ghanaCardImage: '',
+                    gaurantorNoteImage: '',
+                    bio: '',
+                    status: false,
+                }
+            ));
 
             alert('Client has been successfully switched to Artisan!');
         } catch (error) {
