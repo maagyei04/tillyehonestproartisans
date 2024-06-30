@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 import { fetchAllArtisanData, fetchAllClientBookings, updateArtisanStatus, deleteUserNow, fetchAllArtisanPortfolios, uploadPortfolioImage, addArtisanPortfolio, deleteArtisanPortfolio } from '../../../../stores/actions';
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
-import { CheckCircleIcon, XCircleIcon, UserMinusIcon } from '@heroicons/react/24/solid';
+import { CheckCircleIcon, XCircleIcon, BriefcaseIcon } from '@heroicons/react/24/solid';
 
 export default function ArtisanArtisansTable() {
     const dispatch = useDispatch();
@@ -118,7 +118,6 @@ export default function ArtisanArtisansTable() {
     };
 
     const handleClose = async (e) => {
-        setOpen(false);
         setLoading(true);
         e.preventDefault();
         try {
@@ -129,6 +128,7 @@ export default function ArtisanArtisansTable() {
             alert('Error blocking artisan');
         } finally {
             setLoading(false);
+            setOpen(false);
         }
     };
 
@@ -162,7 +162,6 @@ export default function ArtisanArtisansTable() {
     }
 
     const handleClosePortfolio = async (e) => {
-        setOpenPortfolio(false);
         setSArtisansPortfolioData([]);
         setLoading(true);
         e.preventDefault();
@@ -186,11 +185,11 @@ export default function ArtisanArtisansTable() {
             alert('Error adding portfolio for artisan');
         } finally {
             setLoading(false);
+            setOpenPortfolio(false);
         }
     };
 
     const handleClose2 = async (e) => {
-        setOpen2(false);
         setLoading(true);
         e.preventDefault();
         try {
@@ -201,6 +200,7 @@ export default function ArtisanArtisansTable() {
             alert('Error approve client');
         } finally {
             setLoading(false);
+            setOpen2(false);
         }
     };
 
@@ -329,7 +329,7 @@ export default function ArtisanArtisansTable() {
                                             </MenuItem>
                                             <MenuItem onClick={handleClickOpenPortfolio} className='bg-gray-200 m-1 rounded'>
                                                 <div className='flex flex-row'>
-                                                    <UserMinusIcon className='h-5 w-5 mr-2 text-red-600' />
+                                                    <BriefcaseIcon className='h-5 w-5 mr-2 text-brown-600' />
                                                     <p className='font-semibold'>Portfolio</p>
                                                 </div>
                                             </MenuItem>
