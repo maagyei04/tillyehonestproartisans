@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Tabs, Tab, Box } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import BookNowButton from '../../components/common/BookNowButton';
 import { fetchAllArtisanPortfolio, fetchAllArtisanAppointments, fetchClientData } from '../../stores/actions';
 import { Avatar } from '@mui/material';
@@ -68,7 +68,7 @@ const ArtisanPortfolio = () => {
     return (
         <div className="min-h-screen bg-gray-100 py-20">
             <header className="bg-white p-4 shadow-md">
-                <div className="text-sm font-sm">Home / Portfolio</div>
+                <div className="text-sm font-sm"><Link to={'/'}>Home</Link> / Portfolio</div>
                 <div className="text-lg font-bold">Artisan's Portfolio</div>
             </header>
             <div className="flex flex-col md:flex-row justify-center items-center md:items-start p-5">
@@ -125,7 +125,7 @@ const Overview = ({ artisan, bookingsDetails }) => (
         <div className="text-yellow-500">
             <span className="font-bold">{bookingsDetails?.bookingRate}</span>
             {Array.from({ length: 5 }, (_, i) => (
-                <span key={i}>{i < Math.floor(bookingsDetails?.bookingRate ? bookingsDetails?.bookingRate : 4) ? '★' : '☆'}</span>
+                <span key={i}>{i < Math.floor(bookingsDetails?.bookingRate ? bookingsDetails?.bookingRate : 0) ? '★' : '☆'}</span>
             ))}
         </div>
         <div className="mt-2">

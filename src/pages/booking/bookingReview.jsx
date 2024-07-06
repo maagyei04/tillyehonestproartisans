@@ -31,7 +31,7 @@ const RightSide = ({ handleClick, loading, userLoggedIn, artisan }) => (
             </div>
             <div className='flex flex-row mb-5'>
                 <CheckBadgeIcon className='h-[30px] mr-5 text-gray-500' />
-                <p className='text-gray-700'>You have to an average GHC 50 transportation Fee for {artisan.firstName} to make the estimate</p>
+                <p className='text-gray-700'>Transportation Fee will be made available by you for {artisan.firstName} to make the estimate</p>
             </div>
             <div className='flex flex-row mb-5'>
                 <CheckBadgeIcon className='h-[30px] mr-5 text-gray-500' />

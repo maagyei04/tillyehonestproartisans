@@ -41,10 +41,10 @@ const Explore = () => {
 
     const filteredArtisans = artisans.filter((artisan) => {
         const locationMatch = searchQuery && artisan.businessLocation.toLowerCase().includes(searchQuery.toLowerCase());
-        const nameMatch = searchQuery && artisan.firstName.toLowerCase().includes(searchQuery.toLowerCase());
         const categoryMatch = selectedCategory && artisan.businessField.toLowerCase() === selectedCategory.toLowerCase();
+        const catMatch = searchQuery && artisan.businessField.toLowerCase().includes(searchQuery.toLowerCase());
 
-        return (!searchQuery || locationMatch || nameMatch) && (!selectedCategory || categoryMatch);
+        return (!searchQuery || locationMatch || catMatch) && (!selectedCategory || categoryMatch);
     });
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -75,20 +75,8 @@ const Explore = () => {
                         placeholder="Search for artisans..."
                         className="border border-gray-300 rounded-[10px] px-2 py-2 w-[250px] md:w-[400px] focus:outline-none"
                     />
-                    <button className="bg-green-500 rounded-[10px] text-white px-4 py-2 ml-2 hover:bg-violet-600 focus:outline-none">Search</button>
                 </div>
 
-                <div className="flex flex-row md:flex-row items-center">
-                    <select className="mr-2 mb-2 md:mb-0 border border-gray-300 rounded px-2 py-1">
-                        <option>5 star rating</option>
-                    </select>
-                    <select className="mr-2 mb-2 md:mb-0 border border-gray-300 rounded px-2 py-1">
-                        <option>All Fields</option>
-                    </select>
-                    <select className="border border-gray-300 rounded px-2 py-1">
-                        <option>Near You</option>
-                    </select>
-                </div>
             </div>
 
             <h2 className="font-semibold mb-1 md:text-lg text-[15px]">Categories:</h2>

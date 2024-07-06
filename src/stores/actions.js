@@ -582,6 +582,28 @@ export const fetchLimitedClientData = async (limitCount) => {
     }
 };
 
+export const fetchBusinessFieldsCategoriesLimit = async (limitCount) => {
+    try {
+        const docRef = doc(db, 'BusinessFields', 'uLZD4t41lAE2IA1XR95y');
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const categories = docSnap.data().categories;
+            if (categories && categories.length > 0) {
+                return categories.slice(0, limitCount);
+            } else {
+                console.log('No categories found in document');
+                return [];
+            }
+        } else {
+            throw new Error('Document does not exist');
+        }
+    } catch (error) {
+        console.error('Error fetching business fields categories:', error);
+        throw error;
+    }
+};
+
 export const fetchLimitedArtisanData = async (limitCount) => {
     try {
         const collectionRef = collection(db, 'Artisans');
