@@ -102,7 +102,7 @@ const Header = () => {
                 {isMobile && <p>Contact Us On<a href='tel:+447385630981' className='font-bold text-black'> +44 7385 630981</a></p>}
             </div>
             <div className='shadow-md w-full fixed top-5 left-0'>
-                <div className='md:flex items-center justify-between bg-white md:px-10 px-7'>
+                <div className='md:flex items-center justify-between bg-white md:px-10 px-7 md:py-0 py-1'>
                     {/* logo section */}
                     <div className='font-bold cursor-pointer flex items-center gap-1'>
                         {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
@@ -148,7 +148,7 @@ const Header = () => {
                     </div>
                     {/* buttons */}
                     <div className={`md:flex md:items-center items-left md:pb-0 md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'block' : 'hidden'}`}> {/* Adjusted classes */}
-                        <button className='btn bg-gray-200 border-gray-400 border-[1px] text-black md:ml-8 font-bold ml-20 md:ml-0 px-3 py-2 rounded-[10px] duration-500 md:static flex items-center '>
+                        <button className='btn bg-gray-200 border-gray-400 border-[1px] text-black md:ml-8 font-bold ml-20 md:ml-0 px-3 py-2 rounded-[10px] duration-500 md:static flex items-center'>
                             <DevicePhoneMobileIcon className='text-green-600 h-5 w-5 mr-1' />
                             Download App
                         </button>
