@@ -3,6 +3,7 @@ import Banner from '../../assets/images/exploreframe.png';
 import BookNowButton from '../../components/common/BookNowButton';
 import { fetchAllArtisanDataStatusTrue, fetchBusinessFieldsCategories } from '../../stores/actions';
 import { useNavigate } from 'react-router-dom';
+import ScrollToTop from '../../components/common/ScrollToTop';
 
 const Explore = () => {
     const navigate = useNavigate();
@@ -54,8 +55,15 @@ const Explore = () => {
     const indexOfFirstService = indexOfLastService - servicesPerPage;
     const currentServices = filteredArtisans.slice(indexOfFirstService, indexOfLastService);
 
-    const nextPage = () => setCurrentPage(currentPage + 1);
-    const prevPage = () => setCurrentPage(currentPage - 1);
+    const nextPage = () => {
+        window.scrollTo(0, 0);
+        setCurrentPage(currentPage + 1);
+    }
+
+    const prevPage = () => {
+        window.scrollTo(0, 0);
+        setCurrentPage(currentPage - 1);
+    }
 
     const handlePortfolio = (artisan) => {
         navigate('/portfolio', { state: { artisan } });
@@ -63,17 +71,17 @@ const Explore = () => {
 
 
     return (
-        <div className="flex flex-col items-center justify-center py-20 px-2">
+        <div className="flex flex-col items-center justify-center py-[100px] px-2">
             <img className="w-full md:w-full" src={Banner} alt="banner" />
 
-            <div className="flex flex-col md:flex-row justify-between items-center w-full">
+            <div className="flex flex-col md:flex-row justify-center items-center w-full">
                 <div className="flex-shrink-0 mb-3 py-2">
                     <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search for artisans..."
-                        className="border border-gray-300 rounded-[10px] px-2 py-2 w-[250px] md:w-[400px] focus:outline-none"
+                        className="border border-gray-300 rounded-[10px] px-8 py-2 w-[400px] md:w-[800px] focus:outline-none"
                     />
                 </div>
 

@@ -98,15 +98,18 @@ const Header = () => {
     return (
         <div>
             <div className='w-full fixed top-0 left-0 justify-center text-center bg-[#FFDB15]'>
-                {!isMobile && <p>Are you having an issue or challenge? Contact or WhatsApp Us On<span className='font-bold text-black'>+12024864895</span></p>}
-                {isMobile && <p>Contact or WhatsApp Us On<span className='font-bold text-black'>+12024864895</span></p>}
+                {!isMobile && <p>Are you having an issue or challenge? Contact Us On<a href='tel:+447385630981' className='font-bold text-black'> +44 7385 630981</a></p>}
+                {isMobile && <p>Contact Us On<a href='tel:+447385630981' className='font-bold text-black'> +44 7385 630981</a></p>}
             </div>
             <div className='shadow-md w-full fixed top-5 left-0'>
                 <div className='md:flex items-center justify-between bg-white md:px-10 px-7'>
                     {/* logo section */}
                     <div className='font-bold cursor-pointer flex items-center gap-1'>
                         {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
-                        <img src={logo} alt="logo" className='h-[60px] w-[60px] rounded-[10px] m-2' />
+                        <Link to={'/'}>
+                            <img src={logo} alt="logo" className='h-[60px] w-[60px] rounded-[10px] m-2' />
+
+                        </Link>
                         {/*<span className="text-black text-lg font-bold">T&E Honest Pro Artisans</span>*/}
                     </div>
 

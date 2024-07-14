@@ -178,7 +178,7 @@ const HomePage = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search For Any Service..."
-                    className="flex-1 border border-gray-300 rounded-[10px] px-2 py-2 mb-0 md:mb-0 md:mr-3 w-[250px] md:w-[400px] focus:outline-none"
+                    className="flex-1 border border-gray-300 rounded-[10px] px-8 py-2 mb-0 md:mb-0 md:mr-3 w-[350px] md:w-[700px] focus:outline-none"
                 />
             </div>
 

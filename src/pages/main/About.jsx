@@ -140,7 +140,7 @@ const About = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center py-20 px-5">
+        <div className="flex flex-col items-center justify-center py-[120px] px-5">
             <div className="flex flex-col md:flex-row items-start justify-between">
                 <Information isMobile={isMobile} />
                 <ContactForm formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
