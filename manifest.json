@@ -1,6 +1,6 @@
 {
   "short_name": "Tilly and E Honest Pro Artisans",
-  "name": "Welcome Tilly and E Honest Pro Artisans, where Honesty, and excellence is born.",
+  "name": "Welcome to Tilly and E Honest Pro Artisans, where Honesty, and excellence is born.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "tillye_logo.jpg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "tillye_logo.jpg",
       "type": "image/png",
       "sizes": "512x512"
     }
