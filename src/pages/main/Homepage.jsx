@@ -11,6 +11,7 @@ import { fetchLimitedArtisanData, fetchBusinessFieldsCategories, fetchBusinessFi
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserType } from '../../stores/reducers/clientReducer';
+import axios from 'axios';
 
 const HomePage = () => {
     const [artisans, setArtisans] = useState([]);
@@ -92,6 +93,47 @@ const HomePage = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    const sendSMS = async () => {
+        try {
+            const response = await axios.get(
+                'https://smsc.hubtel.com/v1/messages/send',
+                {
+                    params: {
+                        clientid: 'nknaoaig',
+                        clientsecret: 'japkqsfe',
+                        from: 'TillyAndE',
+                        to: '0541190955',
+                        content: 'sample sms test!!!',
+                    },
+                }
+            );
+            console.log('Response:', response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    var defaultCategoryImage = person2;
+
+    var categoryImage = (category) => {
+        switch (category) {
+            case category === 'Construction':
+                defaultCategoryImage = contentPic;
+                break;
+            case category === 'Plumbing':
+                defaultCategoryImage = artisanPic;
+                break;
+            case category === 'Welding':
+                defaultCategoryImage = verifyImage;
+                break;
+            case category === 'Carpentry':
+                defaultCategoryImage = person2;
+                break;
+            default:
+                break;
+        }
+    }
 
     const handlePortfolio = (artisan) => {
         navigate('/portfolio', { state: { artisan } });
@@ -253,7 +295,7 @@ const HomePage = () => {
                 <img className="w-full md:w-2/4 h-[320px] md:mr-4 mb-4 md:mb-0" src={contentPic} alt="content" />
                 <div className="text-left md:text-left md:w-2/4 flex flex-col md:flex-row items-center">
                     <div>
-                        <h2 className="font-bold text-[30px] mb-1">We Bring <span className="text-violet-500 italic">Creativity</span> to your doorstep</h2>
+                        <h2 className="font-bold text-[30px] mb-1">We Bring <span className="text-[#FFDB15] italic">Creativity</span> to your doorstep</h2>
                         <p className="text-sm mb-8">We are on a mission to connect artisans to their clients all over the world</p>
 
                         <h2 className="font-semibold text-lg mb-2">How does Tilly&E Work ?</h2>
@@ -299,7 +341,7 @@ const HomePage = () => {
                     {categories.slice(0, 4).map((category, index) => (
                         <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2">
                             <div className="rounded overflow-hidden shadow-lg bg-white">
-                                <img className="w-full h-auto" src={person2} alt="Person" />
+                                <img className="w-full h-auto" onClick={() => categoryImage(category)} src={defaultCategoryImage} alt="Person" />
                                 <div className="p-4">
                                     <h2 className="font-semibold text-lg mb-2">{category}</h2>
                                 </div>
@@ -318,7 +360,7 @@ const HomePage = () => {
                         <button onClick={handleClick} className='btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500'>Register Now As Artisan!</button>
                         <p className="text-sm mb-8">We are on a mission to connect artisans to their clients all over the world</p>
 
-                        <p className="text-sm font-semibold mb-4 text-gray-700 flex"><UserPlusIcon className='h-5 w-5 ml-5 mr-5' /> Provide your details to sign up.<br></br>Login if you already have an account.</p>
+                        <p onClick={sendSMS} className="text-sm font-semibold mb-4 text-gray-700 flex"><UserPlusIcon className='h-5 w-5 ml-5 mr-5' /> Provide your details to sign up.<br></br>Login if you already have an account.</p>
 
                         <p className="text-sm font-semibold mb-4 text-gray-700 flex"><CreditCardIcon className='h-5 w-5 ml-5 mr-5' />Provide your payment method.<br></br>or details</p>
 

@@ -5,18 +5,14 @@ import { useNavigate, Link } from 'react-router-dom';
 import { LogoutUser } from '../../services/firebase/auth';
 
 const ClientLogin = () => {
-
     const dispatch = useDispatch();
-
     const navigate = useNavigate();
-
     const [loading, setLoading] = useState(false);
-
+    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
-
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -32,15 +28,13 @@ const ClientLogin = () => {
     };
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
         try {
-            setLoading(true);
-
-            e.preventDefault();
-
             const clientData = await loginClient(formData) ?? '';
-
             console.log(clientData);
-
             const {
                 userType,
             } = clientData;
@@ -49,7 +43,7 @@ const ClientLogin = () => {
                 ?
                 navigate('/client_dashboard', { state: { clientData: clientData } })
                 :
-                LogoutUser().then(() => { navigate('/login'); console.log('logged out...') })
+                LogoutUser().then(() => { setError('Wrong email or password'); console.log('logged out...') })
 
         } catch (error) {
             console.error('Error occurred:', error);
@@ -63,6 +57,8 @@ const ClientLogin = () => {
         <div className='md:w-4/4 w-full md:px-0 px-5 items-center justify-center shadow shadow-lg flex py-20 md:py-40'>
             <form className='md:w-2/4 w-full bg-white shadow shadow-lg p-5 rounded-[10px]' onSubmit={handleSubmit}>
                 <h1 className='font-bold text-lg text-center'>Client Login</h1>
+
+                {error && <div className="text-red-500 text-center mb-4">{error}</div>}
 
                 <div className='flex flex-col mb-8 w-full'>
                     <label className='mb-2' htmlFor="email">Email</label>

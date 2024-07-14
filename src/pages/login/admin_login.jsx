@@ -30,9 +30,7 @@ const AdminLogin = () => {
 
         try {
             const adminData = await loginAdmin(formData);
-            console.log('Admin data 1:', adminData);
             if (adminData) {
-                console.log('Admin data:', adminData);
                 navigate('/admin_dashboard');
             } else {
                 setError('Wrong email or password');

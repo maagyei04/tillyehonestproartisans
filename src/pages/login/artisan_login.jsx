@@ -40,11 +40,11 @@ const ArtisanLogin = () => {
                 navigate('/artisan_dashboard');
             } else {
                 await LogoutUser();
-                navigate('/login');
+                setError('Wrong email or password');
                 console.log('logged out...');
             }
         } catch (error) {
-            setError('Wrong email or password');
+            setError('Error logging in. Please try again.');
             console.error('Error occurred:', error);
         } finally {
             setLoading(false);

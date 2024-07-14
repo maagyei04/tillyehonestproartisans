@@ -19,6 +19,7 @@
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.49.1",
     "autoprefixer": "^10.4.19",
+    "axios": "^1.7.2",
     "dayjs": "^1.11.11",
     "firebase": "^10.11.1",
     "firebase-admin": "^12.1.1",
