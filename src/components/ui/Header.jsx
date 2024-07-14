@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bars3BottomRightIcon, XMarkIcon, DevicePhoneMobileIcon, UserIcon } from '@heroicons/react/24/solid';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/tillye_logo.jpg';
 import { useAuth } from '../../contexts/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogoutUser } from '../../services/firebase/auth';
@@ -97,7 +97,7 @@ const Header = () => {
 
     return (
         <div>
-            <div className='w-full fixed top-0 left-0 justify-center text-center bg-[#FFDB15]'>
+            <div className='w-full fixed top-0 left-0 justify-center text-center bg-yellow-500'>
                 {!isMobile && <p>Are you having an issue or challenge? Contact Us On<a href='tel:+447385630981' className='font-bold text-black'> +44 7385 630981</a></p>}
                 {isMobile && <p>Contact Us On<a href='tel:+447385630981' className='font-bold text-black'> +44 7385 630981</a></p>}
             </div>
@@ -107,7 +107,7 @@ const Header = () => {
                     <div className='font-bold cursor-pointer flex items-center gap-1'>
                         {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
                         <Link to={'/'}>
-                            <img src={logo} alt="logo" className='h-[60px] w-[60px] rounded-[10px] m-2' />
+                            <img src={logo} alt="logo" className='h-[70px] w-[70px] rounded-[10px] m-2' />
 
                         </Link>
                         {/*<span className="text-black text-lg font-bold">T&E Honest Pro Artisans</span>*/}
@@ -120,13 +120,13 @@ const Header = () => {
                             userLoggedIn ?
                                 <>
                                     <button onClick={handleClick} className={`btn bg-yellow text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex ${isMobile ? 'block' : 'hidden'}`}>
-                                        <UserIcon className='text-white-600 h-5 w-5 ml-1 mr-2' />
+                                        <UserIcon className='h-5 w-5 ml-1 mr-2' />
                                         Dashboard
                                     </button>
                                 </>
                                 :
                                 <>
-                                    <button onClick={register} className={`btn bg-[#FFDB15] md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 ${isMobile ? 'block' : 'hidden'}`}>Register Now!</button>
+                                    <button onClick={register} className={`btn bg-yellow-500 md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 ${isMobile ? 'block' : 'hidden'}`}>Register Now!</button>
                                 </>
                         }
                     </div>
@@ -140,8 +140,8 @@ const Header = () => {
                         <ul className={`md:flex md:items-center md:pb-0 md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'block' : 'hidden'}`}> {/* Adjusted classes */}
                             {
                                 Links.map((links) => (
-                                    <li className='md:ml-8 md:my-0 my-7 font-semibold' key={links.name}> {/* Added key */}
-                                        <Link to={links.link} className='text-gray-800 hover:text-violet-400 duration-500'>{links.name}</Link>
+                                    <li onClick={() => setOpen(!open)} className='md:ml-8 md:my-0 my-7 font-semibold' key={links.name}> {/* Added key */}
+                                        <Link to={links.link} className='text-gray-800 hover:text-violet-400 duration-500 text-lg'>{links.name}</Link>
                                     </li>))
                             }
                         </ul>
@@ -157,12 +157,12 @@ const Header = () => {
                                 <>
                                     <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${open ? 'hidden' : 'show'}`}>
                                         Dashboard
-                                        <UserIcon className='text-white-600 h-5 w-5 ml-1' />
+                                        <UserIcon className='h-5 w-5 ml-1' />
                                     </button>
                                 </>
                                 :
                                 <>
-                                    <button onClick={register} className={`btn bg-[#FFDB15] md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 ${open ? 'hidden' : 'show'}`}>Register Now!</button>
+                                    <button onClick={register} className={`btn bg-yellow-500 md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 ${open ? 'hidden' : 'show'}`}>Register Now!</button>
                                 </>
                         }
                     </div>

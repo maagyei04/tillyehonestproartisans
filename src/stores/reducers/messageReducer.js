@@ -4,7 +4,7 @@ const initialState = {
     userType: 'visitor',
     firstName: '',
     lastName: '',
-    email: '',
+    phoneNumber: '',
     message: '',
 };
 
@@ -18,8 +18,8 @@ export const messageSlice = createSlice({
         setMessageLastName: (state, action) => {
             state.lastName = action.payload;
         },
-        setMessageEmail: (state, action) => {
-            state.email = action.payload;
+        setMessagePhoneNumber: (state, action) => {
+            state.phoneNumber = action.payload;
         },
         setMessage: (state, action) => {
             state.message = action.payload;
@@ -30,7 +30,7 @@ export const messageSlice = createSlice({
 export const {
     setMessageFirstName,
     setMessageLastName,
-    setMessageEmail,
+    setMessagePhoneNumber,
     setMessage,
 } = messageSlice.actions;
 

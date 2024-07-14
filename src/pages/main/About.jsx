@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useDispatch } from 'react-redux';
-import { setMessageFirstName, setMessage, setMessageLastName, setMessageEmail } from '../../stores/reducers/messageReducer';
+import { setMessageFirstName, setMessage, setMessageLastName, setMessagePhoneNumber } from '../../stores/reducers/messageReducer';
 import { messageUs } from '../../stores/actions';
 
 const Information = ({ isMobile }) => (
@@ -33,7 +33,7 @@ const Information = ({ isMobile }) => (
             </p>
 
             <h2 className="font-semibold text-[30px] mb-1">WhatsApp<span className="text-violet-500 italic"> Us On</span></h2>
-            <p className="text-sm font-semibold mb-4 text-gray-700 flex">+1 (914) 602-3701<br></br>+44 7385 630981</p>
+            <p className={`${isMobile ? 'justify-center' : ''} text-sm font-semibold mb-4 text-gray-700 flex`}>+1 (914) 602-3701<br></br>+44 7385 630981</p>
 
 
             <h2 className="font-semibold text-[30px] mb-1">Reach Out<span className="text-violet-500 italic"> to Us</span></h2>
@@ -43,7 +43,7 @@ const Information = ({ isMobile }) => (
             </p>
 
             <h2 className={`font-semibold text-[30px] mb-1 ${isMobile ? 'justify-center' : 'flex'}`}>Social<span className="text-violet-500 italic"> Media</span></h2>
-            <div class="flex gap-4 hover:cursor-pointer mb-9">
+            <div className={`${isMobile ? 'justify-center' : ''} flex gap-4 hover:cursor-pointer mb-9`}>
                 <a href='#top'><img src="https://www.svgrepo.com/show/303114/facebook-3-logo.svg" width="30" height="30" alt="fb" /></a>
                 <a href='#top'><img src="https://www.svgrepo.com/show/303115/twitter-3-logo.svg" width="30" height="30" alt="tw" /></a>
                 <a href='https://www.instagram.com/abesjobconsult/'><img src="https://www.svgrepo.com/show/303145/instagram-2-1-logo.svg" width="30" height="30" alt="inst" /></a>
@@ -54,7 +54,7 @@ const Information = ({ isMobile }) => (
 );
 
 const ContactForm = ({ formData, handleChange, handleSubmit }) => (
-    <div className='md:w-2/4'>
+    <div className='md:w-2/4 w-full'>
         <h2 className="font-bold text-[30px] mb-1">Get In Touch With Us<span className="text-violet-500 italic"></span></h2>
         <form onSubmit={handleSubmit}>
             <div className='flex flex-col mb-8 w-full'>
@@ -81,12 +81,12 @@ const ContactForm = ({ formData, handleChange, handleSubmit }) => (
             </div>
 
             <div className='flex flex-col mb-8 w-full'>
-                <label className='mb-2' htmlFor="email">Email</label>
+                <label className='mb-2' htmlFor="phoneNumber">Phone Number</label>
                 <input className='border border-gray-300 rounded-[10px] h-10 p-2'
                     type="text"
-                    id="email"
-                    name="email"
-                    value={formData.email}
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
                     onChange={handleChange}
                     required
                 />
@@ -114,7 +114,7 @@ const About = () => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
-        email: '',
+        phoneNumber: '',
         message: ''
     });
 
@@ -130,13 +130,18 @@ const About = () => {
         e.preventDefault();
 
         dispatch(setMessage(formData.message));
-        dispatch(setMessageEmail(formData.email));
+        dispatch(setMessagePhoneNumber(formData.phoneNumber));
         dispatch(setMessageFirstName(formData.firstName));
         dispatch(setMessageLastName(formData.lastName));
 
         dispatch(messageUs());
 
-        console.log(formData);
+        setFormData({
+            message: '',
+            phoneNumber: '',
+            firstName: '',
+            lastName: ''
+        });
     };
 
     return (

@@ -44,6 +44,12 @@
   background-position: center;
 }
 
+.backgroundImage2 {
+  background-image: url("/src/assets/images/HeroSectionImage1.png");
+  background-size: cover;
+  background-position: center;
+}
+
 .selected {
   background-color: rgb(102, 0, 192);
   color: white;

@@ -4,7 +4,7 @@ import person2 from '../../assets/images/woodworks.png';
 import contentPic from '../../assets/images/carpentry.png';
 import verifyImage from '../../assets/images/verifyimage.png';
 import artisanPic from '../../assets/images/artisan.png';
-import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import { ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { UserPlusIcon, CreditCardIcon, PaperAirplaneIcon, CurrencyDollarIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
 import BookNowButton from '../../components/common/BookNowButton';
 import { fetchLimitedArtisanData, fetchBusinessFieldsCategories, fetchBusinessFieldsCategoriesLimit, fetchAllArtisanDataStatusTrue } from '../../stores/actions';
@@ -12,6 +12,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserType } from '../../stores/reducers/clientReducer';
 import axios from 'axios';
+
 
 const HomePage = () => {
     const [artisans, setArtisans] = useState([]);
@@ -159,51 +160,57 @@ const HomePage = () => {
     const currentServices = filteredArtisans.slice(indexOfFirstService, indexOfLastService);
 
     return (
-        <div className="flex flex-col items-center justify-center py-40 px-4"> {/* Reduced padding for mobile */}
-            {/* Header */}
-            <div onClick={() => setIsClicked(false)}>
-                <h1 className="text-2xl md:text-4xl font-bold mb-2 text-center">
-                    Discover Unique <span className="text-violet-500 italic">Problem Solving</span> Services
-                </h1>
+        <div className="flex flex-col items-center justify-center py-[97px]">
+            {/*Hero Section*/}
+            <div className='backgroundImage2 text-white w-full inset-0 py-20'>
+                <div className="z-10 flex flex-col items-center justify-center">
+                    {/* Header */}
+                    <div onClick={() => setIsClicked(false)}>
+                        <h1 className="text-2xl md:text-4xl font-bold mb-2">
+                            Welcome to <span className="text-yellow-500">Tilly E Pro Artisans</span> 🎊
+                        </h1>
 
-                <p className="text-sm md:text-base mb-6 text-center">
-                    Connect with Talents Artisans and Find the Perfect Service for Your Needs
-                </p>
-            </div>
-
-            {/* Search Bar */}
-            <div onClick={() => setIsClicked(true)} className="flex flex-row md:flex-row md:items-center mb-3"> {/* Adjusted layout for mobile */}
-                <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search For Any Service..."
-                    className="flex-1 border border-gray-300 rounded-[10px] px-8 py-2 mb-0 md:mb-0 md:mr-3 w-[350px] md:w-[700px] focus:outline-none"
-                />
-            </div>
-
-            {/* Categories Container */}
-            {!isClicked &&
-                <div className="rounded p-4 w-full flex md:flex-col flex-row md:items-center items-start backgroundImage">
-                    <h2 className="font-semibold mb-3 md:text-lg text-[15px]">
-                        Popular:
-                    </h2>
-                    <div className="flex flex-wrap md:justify-center justify-start ml-5">
-                        {categoriesSection.map((category, index) => (
-                            <div
-                                key={index}
-                                className="bg-gray-300 px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base"
-                                onClick={() => { handleCategorySelect(category); setIsClicked(true) }}
-                            >
-                                {category}
-                            </div>
-                        ))}
+                        <p className="text-sm md:text-base mb-6 text-center font-bold">
+                            <span className="text-blue-500">Honesty</span> and <span className="text-green-500">Trust</span> is our Goal !
+                        </p>
                     </div>
+
+                    {/* Search Bar */}
+                    <div onClick={() => setIsClicked(true)} className="flex flex-row md:flex-row md:items-center mb-3 justify-center"> {/* Adjusted layout for mobile */}
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search For Any Service..."
+                            className="text-white placeholder-white bg-white bg-opacity-40 border border-gray-300 rounded-[10px] px-8 py-4 mb-0 md:mb-0 md:mr-3 w-[350px] md:w-[700px] focus:outline-none"
+                        />
+                    </div>
+
+
+                    {/* Categories Container */}
+                    {!isClicked &&
+                        <div className="rounded p-4 w-full flex md:flex-col flex-row md:items-center justify-center backgroundImage">
+                            <h2 className="font-semibold mb-3 md:text-lg text-[15px]">
+                                Popular:
+                            </h2>
+                            <div className="flex flex-wrap md:justify-center justify-start ml-5">
+                                {categoriesSection.map((category, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-white text-black px-2 py-1 mr-2 mb-2 rounded-[10px] cursor-pointer hover:bg-gray-200 text-xs md:text-base"
+                                        onClick={() => { handleCategorySelect(category); setIsClicked(true) }}
+                                    >
+                                        {category}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    }
                 </div>
-            }
+            </div>
 
             {!isClicked &&
-                <img src={framePic} alt='frame-background' className='mb-8' />
+                <img src={framePic} alt='frame-background' className='mb-8 px-4 mt-10' />
             }
 
             {/*Popular Services Header*/}
@@ -221,6 +228,8 @@ const HomePage = () => {
                     </div>
                 </div>
             }
+
+
 
             {isClicked &&
                 <div className="rounded p-4 w-full flex flex-col items-center"> {/* Centered content in Categories Container */}
@@ -243,12 +252,12 @@ const HomePage = () => {
                         {/* Display services data */}
                         {artisans.map((artisan, index) => (
                             <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2 flex justify-center">
-                                <div onClick={() => handlePortfolio(artisan)} className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[350px] md:w-[300px] h-[400px]">
-                                    <div className='w-[350px] md:w-[300px] h-[250px]'>
+                                <div onClick={() => handlePortfolio(artisan)} className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[375px] md:w-[300px] h-[400px]">
+                                    <div className='w-[375px] md:w-[300px] h-[250px]'>
                                         <img className="w-full h-full object-cover" src={artisan.passportImage} alt="Person" />
                                     </div>
 
-                                    <div className="p-4 w-[350px] md:w-[300px] h-[200px]">
+                                    <div className="p-4 w-[375px] md:w-[300px] h-[200px]">
                                         <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                         <div className="flex justify-between mb-2">
                                             <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>
@@ -291,11 +300,11 @@ const HomePage = () => {
 
 
             {/*How it works*/}
-            <div className="flex flex-col mt-8 md:flex-row items-center">
+            <div className="flex flex-col mt-8 md:flex-row items-center px-4">
                 <img className="w-full md:w-2/4 h-[320px] md:mr-4 mb-4 md:mb-0" src={contentPic} alt="content" />
                 <div className="text-left md:text-left md:w-2/4 flex flex-col md:flex-row items-center">
                     <div>
-                        <h2 className="font-bold text-[30px] mb-1">We Bring <span className="text-[#FFDB15] italic">Creativity</span> to your doorstep</h2>
+                        <h2 className="font-bold text-[30px] mb-1">We Bring <span className="text-yellow-500 italic">Creativity</span> to your doorstep</h2>
                         <p className="text-sm mb-8">We are on a mission to connect artisans to their clients all over the world</p>
 
                         <h2 className="font-semibold text-lg mb-2">How does Tilly&E Work ?</h2>
@@ -320,7 +329,7 @@ const HomePage = () => {
 
 
             {/*Category Header*/}
-            <div className="rounded p-4 w-full flex mt-8 flex-col items-center"> {/* Centered content in Categories Container */}
+            <div className="rounded p-4 w-full flex mt-8 flex-col items-center px-4"> {/* Centered content in Categories Container */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between w-full mb-3">
                     <div className="mb-2 md:mb-0 md:mr-3">
                         <h1 className="font-bold text-xl md:text-[25px]">Explore Our Categories</h1>
@@ -335,7 +344,7 @@ const HomePage = () => {
             </div>
 
             {/*Category Contents*/}
-            <div className="flex flex-col items-center justify-center py-2 px-2r">
+            <div className="flex flex-col items-center justify-center py-2 px-4">
                 <div className="flex flex-wrap justify-center">
                     {/* Display services data */}
                     {categories.slice(0, 4).map((category, index) => (
@@ -352,7 +361,7 @@ const HomePage = () => {
             </div>
 
             {/*Start Earning*/}
-            <div className="flex mt-8 flex-col md:flex-row items-center">
+            <div className="flex mt-8 flex-col md:flex-row items-center px-4">
                 <img className="w-full md:w-2/3 h-[320px] md:mr-4 mb-4 md:mb-0" src={artisanPic} alt="content" />
                 <div className="text-left md:text-left md:w-2/3 flex flex-col md:flex-row items-center">
                     <div>

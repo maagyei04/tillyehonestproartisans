@@ -643,7 +643,7 @@ export const messageUs = () => {
 
             await setDoc(bookingRef, messageData1);
 
-            console.log('Message Successfully Sent');
+            alert('Message Successfully Sent');
 
         } catch (error) {
             console.error('Error sending message:', error);

@@ -81,7 +81,7 @@ const Explore = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search for artisans..."
-                        className="border border-gray-300 rounded-[10px] px-8 py-2 w-[400px] md:w-[800px] focus:outline-none"
+                        className="border border-gray-300 rounded-[10px] px-8 py-2 w-[350px] md:w-[800px] focus:outline-none"
                     />
                 </div>
 
@@ -107,11 +107,11 @@ const Explore = () => {
                 <div className="flex flex-wrap justify-center w-full">
                     {currentServices.map((artisan, index) => (
                         <div key={index} className="md:w-1/2 lg:w-1/4 p-2">
-                            <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[350px] md:w-[300px] h-[400px]">
-                                <div onClick={() => handlePortfolio(artisan)} className='w-[350px] md:w-[300px] h-[250px]'>
+                            <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[375px] md:w-[300px] h-[400px]">
+                                <div onClick={() => handlePortfolio(artisan)} className='w-[375px] md:w-[300px] h-[250px]'>
                                     <img className="w-full h-full object-cover" src={artisan.passportImage} alt="Person" />
                                 </div>
-                                <div className="p-4 w-[350px] md:w-[300px] h-[200px]">
+                                <div className="p-4 w-[375px] md:w-[300px] h-[200px]">
                                     <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                     <div className="flex justify-between mb-2">
                                         <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>
