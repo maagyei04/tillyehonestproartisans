@@ -107,7 +107,7 @@ const Header = () => {
                     <div className='font-bold cursor-pointer flex items-center gap-1'>
                         {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
                         <Link to={'/'}>
-                            <img src={logo} alt="logo" className='h-[70px] w-[70px] rounded-[10px] m-2' />
+                            <img src={logo} alt="logo" className='h-[60px] w-[60px] rounded-[10px] m-2' />
 
                         </Link>
                         {/*<span className="text-black text-lg font-bold">T&E Honest Pro Artisans</span>*/}

@@ -104,14 +104,14 @@ const Explore = () => {
             </div>
 
             <div className="flex flex-col items-center justify-center py-2 px-2">
-                <div className="flex flex-wrap justify-center w-full">
+                <div className="flex flex-wrap justify-center w-full px-2">
                     {currentServices.map((artisan, index) => (
                         <div key={index} className="md:w-1/2 lg:w-1/4 p-2">
-                            <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[375px] md:w-[300px] h-[400px]">
-                                <div onClick={() => handlePortfolio(artisan)} className='w-[375px] md:w-[300px] h-[250px]'>
+                            <div className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[365px] md:w-[300px] h-[400px]">
+                                <div onClick={() => handlePortfolio(artisan)} className='w-[365px] md:w-[300px] h-[250px]'>
                                     <img className="w-full h-full object-cover" src={artisan.passportImage} alt="Person" />
                                 </div>
-                                <div className="p-4 w-[375px] md:w-[300px] h-[200px]">
+                                <div className="p-4 w-[365px] md:w-[300px] h-[200px]">
                                     <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                     <div className="flex justify-between mb-2">
                                         <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>

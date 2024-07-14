@@ -162,11 +162,11 @@ const HomePage = () => {
     return (
         <div className="flex flex-col items-center justify-center py-[97px]">
             {/*Hero Section*/}
-            <div className='backgroundImage2 text-white w-full inset-0 py-20'>
-                <div className="z-10 flex flex-col items-center justify-center">
+            <div className='backgroundImage2 text-white w-full py-20'>
+                <div className="z-10 flex flex-col items-center justify-center w-full">
                     {/* Header */}
                     <div onClick={() => setIsClicked(false)}>
-                        <h1 className="text-2xl md:text-4xl font-bold mb-2">
+                        <h1 className="text-xl md:text-4xl font-bold mb-2 text-center">
                             Welcome to <span className="text-yellow-500">Tilly E Pro Artisans</span> 🎊
                         </h1>
 
@@ -182,7 +182,7 @@ const HomePage = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search For Any Service..."
-                            className="text-white placeholder-white bg-white bg-opacity-40 border border-gray-300 rounded-[10px] px-8 py-4 mb-0 md:mb-0 md:mr-3 w-[350px] md:w-[700px] focus:outline-none"
+                            className="text-white placeholder-white bg-white bg-opacity-40 border border-gray-300 rounded-[10px] px-8 py-4 mb-0 md:mb-0 md:mr-3 w-[300px] md:w-[700px] focus:outline-none"
                         />
                     </div>
 
@@ -247,17 +247,17 @@ const HomePage = () => {
 
             {/*Popular Services Contents*/}
             {!isClicked &&
-                <div className="flex flex-col items-center justify-center py-2">
+                <div className="flex flex-col items-center justify-center py-2 px-2">
                     <div className="flex flex-wrap justify-center">
                         {/* Display services data */}
                         {artisans.map((artisan, index) => (
                             <div key={index} className="w-full md:w-1/2 lg:w-1/4 p-2 flex justify-center">
-                                <div onClick={() => handlePortfolio(artisan)} className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[375px] md:w-[300px] h-[400px]">
-                                    <div className='w-[375px] md:w-[300px] h-[250px]'>
+                                <div onClick={() => handlePortfolio(artisan)} className="rounded-[10px] overflow-hidden shadow-violet-400 shadow-xl bg-white w-[365px] md:w-[300px] h-[400px]">
+                                    <div className='w-[365px] md:w-[300px] h-[250px]'>
                                         <img className="w-full h-full object-cover" src={artisan.passportImage} alt="Person" />
                                     </div>
 
-                                    <div className="p-4 w-[375px] md:w-[300px] h-[200px]">
+                                    <div className="p-4 w-[365px] md:w-[300px] h-[200px]">
                                         <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                         <div className="flex justify-between mb-2">
                                             <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>

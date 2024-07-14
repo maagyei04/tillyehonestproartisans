@@ -45,11 +45,36 @@ const ArtisanEstimate = ({ bookingData }) => {
                     <div className='bg-red-100 text-red-600 px-4 rounded-[10px] mb-5'>
                         <p>Waiting for estimate</p>
                     </div>
+                    <div className='bg-white shadow shadow-lg p-5 rounded-[10px]'>
+                        <h1 className="mb-2 text-sm font-bold">Create Estimate</h1>
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-4">
+                                <label className="block text-sm font-medium text-gray-700">Appointment Total Estimate</label>
+                                <input
+                                    type='number'
+                                    name="bookingEstimateAmount"
+                                    value={formData.bookingEstimateAmount}
+                                    onChange={handleChange}
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                                />
+                            </div>
+                            <div>
+                                <button disabled={loading} type='submit' className="w-full bg-purple-600 hover:bg-green-600 text-white py-2 rounded-md">{!loading && 'Create Estimate For Artisan'}{loading && 'Please wait...'}</button>
+
+                            </div>
+                        </form>
+                    </div>
                     <div className="flex flex-col mt-5">
                         <div className="flex flex-row mb-5">
                             <CheckBadgeIcon className="w-5 mr-5" />
                             <p className="text-gray-500 text-sm">
                                 Estimate will be forwarded to client immediately after creation by artisan
+                            </p>
+                        </div>
+                        <div className="flex flex-row mb-5">
+                            <CheckBadgeIcon className="w-5 mr-5" />
+                            <p className="text-gray-500 text-sm">
+                                You can also create the estimate. Estimate will be forwarded to client and artisan immediately.
                             </p>
                         </div>
                     </div>
