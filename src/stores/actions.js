@@ -32,7 +32,7 @@ export const sendSMS = async (firstName, lastName, phoneNumber) => {
     const message = `${firstName} ${lastName} has successfully registered as an Artisan with Tilly and E Honest Pro Artisans with the number ${phoneNumber}`;
     const recipients = [
         '+233541190955',
-        '+19146023701',
+        '+233596227724',
         '+233531293686',
     ];
 
@@ -51,6 +51,7 @@ export const sendBookingSMS = async (artisanFirstName, artisanLastName, date, ar
     const recipients = [
         '+233541190955',
         '+233531293686',
+        '+233596227724',
     ];
 
     try {
