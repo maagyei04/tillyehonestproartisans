@@ -5,8 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { bookArtisan } from '../../stores/actions';
 import { useAuth } from '../../contexts/authContext';
-import axios from 'axios';
-
 
 
 const RightSide = ({ handleClick, loading, userLoggedIn, artisan }) => (
@@ -157,34 +155,11 @@ const BookingReview = () => {
 
     const [loading, setLoading] = useState(false);
 
-
-    const sendSMS = async () => {
-        try {
-            const response = await axios.get(
-                'https://smsc.hubtel.com/v1/messages/send',
-                {
-                    params: {
-                        clientid: 'nknaoaig',
-                        clientsecret: 'japkqsfe',
-                        from: 'TillyAndE',
-                        to: '233541190955',
-                        content: 'sample sms test!!!',
-                    },
-                }
-            );
-            console.log('Response:', response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
     const handleClick = async () => {
         try {
             setLoading(true);
 
             dispatch(bookArtisan(bookingData));
-
-            sendSMS();
 
             navigate('/booking/booking_complete');
         } catch (error) {

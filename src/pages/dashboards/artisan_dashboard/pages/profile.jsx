@@ -445,7 +445,25 @@ export default function Profile() {
                 <form onSubmit={handleSubmit}>
                     <h1 className="text-lg font-bold mb-4">Business Info</h1>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Update your Business field</label>
+                        <label className="block text-sm font-medium text-gray-700">Update your Business field (Primary)</label>
+                        <select
+                            name="businessField"
+                            value={formData.businessField}
+                            onChange={handleChange}
+                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                        >
+                            {categories.map((category, index) => (
+                                <option key={index} value={category}>
+                                    <div className="flex items-center space-x-2">
+                                        <div className={`w-4 h-4 rounded-full bg-${index % 3 === 0 ? 'blue' : index % 3 === 1 ? 'green' : 'yellow'}-500`}></div>
+                                        <span>{category}</span>
+                                    </div>
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">Update your Business field (Secondary)</label>
                         <select
                             name="businessField"
                             value={formData.businessField}

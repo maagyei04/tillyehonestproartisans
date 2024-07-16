@@ -95,6 +95,7 @@ const Header = () => {
     }, [userLoggedIn, currentUser]);
 
 
+
     return (
         <div>
             <div className='w-full fixed top-0 left-0 justify-center text-center bg-yellow-500'>
@@ -119,7 +120,7 @@ const Header = () => {
                         {
                             userLoggedIn ?
                                 <>
-                                    <button onClick={handleClick} className={`btn bg-yellow text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex ${isMobile ? 'block' : 'hidden'}`}>
+                                    <button onClick={handleClick} className={`btn bg-yellow-500 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex ${isMobile ? 'block' : 'hidden'}`}>
                                         <UserIcon className='h-5 w-5 ml-1 mr-2' />
                                         Dashboard
                                     </button>
@@ -155,7 +156,7 @@ const Header = () => {
                         {
                             userLoggedIn ?
                                 <>
-                                    <button onClick={handleClick} className={`btn bg-violet-600 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${open ? 'hidden' : 'show'}`}>
+                                    <button onClick={handleClick} className={`btn bg-yellow-500 text-white md:ml-4 font-semibold px-3 py-2 rounded-[10px] duration-500 flex items-center ${open ? 'hidden' : 'show'}`}>
                                         Dashboard
                                         <UserIcon className='h-5 w-5 ml-1' />
                                     </button>

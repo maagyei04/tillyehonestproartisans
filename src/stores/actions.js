@@ -7,7 +7,61 @@ import { setClientId } from './reducers/clientReducer';
 import { setPoliceReportImage, setGhanaCardImage, setPassportImage, setGaurantorNoteImage, setArtisanId } from './reducers/artisanReducer';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
-import { deleteUser } from 'firebase/auth';
+import axios from 'axios';
+
+const sendSingleSMS = async (to, content) => {
+    try {
+        const response = await axios.get('https://smsc.hubtel.com/v1/messages/send', {
+            params: {
+                clientid: 'nknaoaig',
+                clientsecret: 'japkqsfe',
+                from: 'TillyAndE',
+                to,
+                content,
+            },
+        });
+        console.log('Response:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error sending SMS:', error);
+        throw error;
+    }
+};
+
+export const sendSMS = async (firstName, lastName, phoneNumber) => {
+    const message = `${firstName} ${lastName} has successfully registered as an Artisan with Tilly and E Honest Pro Artisans with the number ${phoneNumber}`;
+    const recipients = [
+        '+233541190955',
+        '+19146023701',
+        '+233531293686',
+    ];
+
+    try {
+        await Promise.all(
+            recipients.map((recipient) => sendSingleSMS(recipient, message))
+        );
+        console.log('All SMS sent successfully');
+    } catch (error) {
+        console.error('Error sending one or more SMS:', error);
+    }
+};
+
+export const sendBookingSMS = async (artisanFirstName, artisanLastName, date, artisanNumber) => {
+    const message = `A Client has booked Artisan, ${artisanFirstName} ${artisanLastName} with number ${artisanNumber} for a service with a expected date being ${date}, please alert the artisan by clicking on the number in this message to call.`;
+    const recipients = [
+        '+233541190955',
+        '+233531293686',
+    ];
+
+    try {
+        await Promise.all(
+            recipients.map((recipient) => sendSingleSMS(recipient, message))
+        );
+        console.log('All SMS sent successfully');
+    } catch (error) {
+        console.error('Error sending one or more SMS:', error);
+    }
+};
 
 export const registerClient = (clientData) => {
     return async (dispatch, getState) => {
@@ -64,7 +118,9 @@ export const registerArtisan = () => {
             const artisanData1 = getState().artisan;
 
 
-            await setDoc(artsianRef, artisanData1);
+            await setDoc(artsianRef, artisanData1).then(
+                () => sendSMS(artisanData1.firstName, artisanData1.lastName, artisanData1.phoneNumber)
+            );
 
             dispatch({ type: 'REGISTER_SUCCESS', payload: user.user.uid });
 
@@ -439,7 +495,17 @@ export const bookArtisan = (bookingData) => {
 
             const bookingData1 = getState().booking;
 
-            await setDoc(bookingRef, bookingData1);
+            const artisanData = await fetchArtisanData(bookingData1.bookingArtisanId);
+
+            const {
+                firstName,
+                lastName,
+                phoneNumber
+            } = artisanData;
+
+            await setDoc(bookingRef, bookingData1).then(
+                () => sendBookingSMS(firstName, lastName, bookingData1.bookingStartDate, phoneNumber)
+            );
 
             console.log('Artisan Successfully Booked');
 
