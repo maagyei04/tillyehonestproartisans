@@ -41,7 +41,8 @@ export default function Profile() {
         bio: '',
         businessField: '',
         businessLocation: '',
-        passportImage: ''
+        passportImage: '',
+        businessFieldSecondary: '',
     });
 
     const [portfolioData, setPortfolioData] = useState({
@@ -86,6 +87,7 @@ export default function Profile() {
                     businessField: artisanData.businessField || '',
                     businessLocation: artisanData.businessLocation || '',
                     bio: artisanData.bio || '',
+                    businessFieldSecondary: artisanData.businessFieldSecondary || '',
                 });
             }
         };
@@ -465,8 +467,8 @@ export default function Profile() {
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Update your Business field (Secondary)</label>
                         <select
-                            name="businessField"
-                            value={formData.businessField}
+                            name="businessFieldSecondary"
+                            value={formData.businessFieldSecondary}
                             onChange={handleChange}
                             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                         >

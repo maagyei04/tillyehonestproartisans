@@ -44,8 +44,10 @@ const Explore = () => {
         const locationMatch = searchQuery && artisan.businessLocation.toLowerCase().includes(searchQuery.toLowerCase());
         const categoryMatch = selectedCategory && artisan.businessField.toLowerCase() === selectedCategory.toLowerCase();
         const catMatch = searchQuery && artisan.businessField.toLowerCase().includes(searchQuery.toLowerCase());
+        const catMatch2 = searchQuery && artisan.businessFieldSecondary.toLowerCase().includes(searchQuery.toLowerCase());
 
-        return (!searchQuery || locationMatch || catMatch) && (!selectedCategory || categoryMatch);
+
+        return (!searchQuery || locationMatch || catMatch || catMatch2) && (!selectedCategory || categoryMatch);
     });
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -114,7 +116,7 @@ const Explore = () => {
                                 <div className="p-4 w-[365px] md:w-[300px] h-[200px]">
                                     <h2 className="font-semibold text-lg mb-2">{artisan.firstName}</h2>
                                     <div className="flex justify-between mb-2">
-                                        <p className="text-sm text-gray-700 font-semibold">{artisan.businessField}</p>
+                                        <p className="text-sm text-gray-700 font-semibold">{artisan.businessField} / {artisan?.businessFieldSecondary}</p>
                                         <p className="text-sm">{artisan.businessLocation}</p>
                                     </div>
                                     <BookNowButton artisan={artisan} />

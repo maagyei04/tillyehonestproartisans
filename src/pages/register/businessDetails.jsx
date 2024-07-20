@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import RegisterPic4 from '../../assets/images/register4.png';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setBusinessField, setBusinessLocation } from '../../stores/reducers/artisanReducer';
+import { setBusinessField, setBusinessLocation, setBusinessFieldSecondary } from '../../stores/reducers/artisanReducer';
 import { fetchBusinessFieldsCategories } from '../../stores/actions';
 
 const BusinessDetails = () => {
@@ -30,6 +30,7 @@ const BusinessDetails = () => {
     const [optionData, setOptinData] = useState({
         businessField: '',
         businessLocation: '',
+        businessFieldSecondary: '',
     });
 
     const handleFieldChange = (e) => {
@@ -53,6 +54,7 @@ const BusinessDetails = () => {
 
         dispatch(setBusinessField(optionData.businessField),);
         dispatch(setBusinessLocation(optionData.businessLocation),);
+        dispatch(setBusinessFieldSecondary(optionData.businessFieldSecondary),);
 
         console.log(optionData);
         navigate('/register/info_review');
@@ -72,14 +74,34 @@ const BusinessDetails = () => {
 
                             <h2 className="font-bold text-[20px] mb-3">Select <span className="text-violet-500 italic">type of Business</span> below:</h2>
 
-                            <p className="text-sm font-semibold mb-2">Select your Business field</p>
+                            <p className="text-sm font-semibold mb-2">Select your Business field (Primary & Secondary)</p>
 
                             <form onSubmit={handleSubmit}>
+                                <p className="text-sm font-semibold mb-2">Primary Business Field</p>
                                 <select
                                     className='border border-gray-200 text-sm font-semibold mb-2 rounded-[10px] h-10 w-full mb-5'
                                     value={optionData.businessField}
                                     onChange={handleFieldChange}
                                     name='businessField'
+                                    required
+                                >
+                                    {categories.map((category, index) => (
+                                        <option key={index} value={category}>
+                                            <div className="flex items-center space-x-2">
+                                                <div className={`w-4 h-4 rounded-full bg-${index % 3 === 0 ? 'blue' : index % 3 === 1 ? 'green' : 'yellow'}-500`}></div>
+                                                <span>{category}</span>
+                                            </div>
+                                        </option>
+                                    ))}
+                                </select>
+
+                                <p className="text-sm font-semibold mb-2">Secondary Business Field</p>
+                                <select
+                                    className='border border-gray-200 text-sm font-semibold mb-2 rounded-[10px] h-10 w-full mb-5'
+                                    value={optionData.businessFieldSecondary}
+                                    onChange={handleFieldChange}
+                                    name='businessFieldSecondary'
+                                    required
                                 >
                                     {categories.map((category, index) => (
                                         <option key={index} value={category}>

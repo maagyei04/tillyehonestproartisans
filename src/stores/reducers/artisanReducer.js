@@ -14,6 +14,7 @@ const initialState = {
     bankAccountNumber: '',
     bankBranch: '',
     businessField: '',
+    businessFieldSecondary: '',
     businessLocation: '',
     passportImage: '',
     ghanaCardImage: '',
@@ -80,6 +81,9 @@ export const artisanSlice = createSlice({
         setArtisanBio: (state, action) => {
             state.bio = action.payload;
         },
+        setBusinessFieldSecondary: (state, action) => {
+            state.businessFieldSecondary = action.payload;
+        }
     },
 });
 
@@ -102,7 +106,8 @@ export const {
     setGhanaCardImage,
     setPassportImage,
     setPoliceReportImage,
-    setArtisanBio
+    setArtisanBio,
+    setBusinessFieldSecondary
 } = artisanSlice.actions;
 
 export default artisanSlice.reducer;
