@@ -129,7 +129,7 @@ const Overview = ({ artisan, bookingsDetails }) => (
             ))}
         </div>
         <div className="mt-2">
-            <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded">{artisan.businessField}</span>
+            <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded">{artisan.businessField} / {artisan?.businessFieldSecondary}</span>
             <span className="ml-2">{artisan.businessLocation}</span>
         </div>
         <p className="mt-4 mb-5">{artisan.bio ? artisan.bio : 'I have excellent customer service skills and work prudently to bring my work to completion. I offer excellent value for low cost.'}</p>
