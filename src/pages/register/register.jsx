@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RegisterPic from '../../assets/images/register1.png';
-import { BriefcaseIcon, PaintBrushIcon } from '@heroicons/react/24/outline';
+import { BriefcaseIcon, PaintBrushIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserType } from '../../stores/reducers/clientReducer';
@@ -23,6 +23,9 @@ const Register = () => {
                 case 'client':
                     navigate('/register/personal_info');
                     break;
+                case 'seller':
+                    navigate('/register/personal_info');
+                    break;
 
                 default:
                     break;
@@ -37,7 +40,7 @@ const Register = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center py-20 px-10">
+        <div className="flex flex-col items-center justify-center py-[100px] px-10">
             <div className="flex flex-col md:flex-row items-start justify-between">
                 <div className='text-center md:text-left md:h-4/4 mt-5 md:w-2/4 flex flex-col md:flex-row items-center'>
                     <img className="md:h-[520px] mb-4 md:mb-0 hidden md:block" src={RegisterPic} alt="content" />
@@ -83,6 +86,23 @@ const Register = () => {
                                         </div>
                                         <div className="text-left mt-4">
                                             <p className="text-sm text-gray-700">Register as a client today and gain access to a vibrant community of creative professionals ready to collaborate, customize, and deliver exceptional artistic experiences tailored just for you</p>
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <label className="flex items-center mt-5 mb-2">
+                                    <div className={`relative rounded-[15px] border border-gray-300 p-4 bg-gray-100 ${selectedCategory === 'seller' ? 'border-violet-500' : ''}`} onClick={() => handleCategoryChange('seller')}>
+                                        <div className="absolute top-1 left-0 p-2">
+                                            {/* Icon */}
+                                            <ShoppingCartIcon className='h-5 w-5 ml-5 mr-5' />
+                                        </div>
+                                        <div className="text-lg ml-10 mr-20 font-semibold">Become a Seller</div>
+                                        <div className="absolute top-1 right-2 p-2">
+                                            {/* Radio button */}
+                                            <input type="radio" name="category" value='seller' className="mr-2" />
+                                        </div>
+                                        <div className="text-left mt-4">
+                                            <p className="text-sm text-gray-700">Get started as a seller and earn profit from selling to clients across the whole country with delivery as well</p>
                                         </div>
                                     </div>
                                 </label>
