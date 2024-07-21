@@ -3,7 +3,6 @@ import Banner from '../../assets/images/exploreframe.png';
 import BookNowButton from '../../components/common/BookNowButton';
 import { fetchAllArtisanDataStatusTrue, fetchBusinessFieldsCategories } from '../../stores/actions';
 import { useNavigate } from 'react-router-dom';
-import ScrollToTop from '../../components/common/ScrollToTop';
 
 const Explore = () => {
     const navigate = useNavigate();
@@ -41,14 +40,46 @@ const Explore = () => {
     };
 
     const filteredArtisans = artisans.filter((artisan) => {
-        const locationMatch = searchQuery && artisan.businessLocation.toLowerCase().includes(searchQuery.toLowerCase());
-        const categoryMatch = selectedCategory && artisan.businessField.toLowerCase() === selectedCategory.toLowerCase();
-        const catMatch = searchQuery && artisan.businessField.toLowerCase().includes(searchQuery.toLowerCase());
-        const catMatch2 = searchQuery && artisan.businessFieldSecondary.toLowerCase().includes(searchQuery.toLowerCase());
+        if (!artisan) {
+            console.log('Encountered null or undefined artisan');
+            return false;
+        }
 
+        console.log('Processing artisan:', artisan);
+
+        let locationMatch = false;
+        let categoryMatch = false;
+        let catMatch = false;
+        let catMatch2 = false;
+
+        try {
+            locationMatch = searchQuery && artisan.businessLocation && artisan.businessLocation.toLowerCase().includes(searchQuery.toLowerCase());
+        } catch (error) {
+            console.error('Error in locationMatch:', error);
+        }
+
+        try {
+            categoryMatch = selectedCategory && artisan.businessField && artisan.businessField.toLowerCase() === selectedCategory.toLowerCase();
+        } catch (error) {
+            console.error('Error in categoryMatch:', error);
+        }
+
+        try {
+            catMatch = searchQuery && artisan.businessField && artisan.businessField.toLowerCase().includes(searchQuery.toLowerCase());
+        } catch (error) {
+            console.error('Error in catMatch:', error);
+        }
+
+        try {
+            catMatch2 = searchQuery && artisan.businessFieldSecondary && artisan.businessFieldSecondary.toLowerCase().includes(searchQuery.toLowerCase());
+        } catch (error) {
+            console.error('Error in catMatch2:', error);
+        }
 
         return (!searchQuery || locationMatch || catMatch || catMatch2) && (!selectedCategory || categoryMatch);
     });
+
+    console.log('Filtered artisans:', filteredArtisans);
 
     const [currentPage, setCurrentPage] = useState(1);
     const servicesPerPage = 8;
@@ -71,7 +102,6 @@ const Explore = () => {
         navigate('/portfolio', { state: { artisan } });
     }
 
-
     return (
         <div className="flex flex-col items-center justify-center py-[100px] px-2">
             <img className="w-full md:w-full" src={Banner} alt="banner" />
@@ -86,7 +116,6 @@ const Explore = () => {
                         className="border border-gray-300 rounded-[10px] px-8 py-2 w-[350px] md:w-[800px] focus:outline-none"
                     />
                 </div>
-
             </div>
 
             <h2 className="font-semibold mb-1 md:text-lg text-[15px]">Categories:</h2>
