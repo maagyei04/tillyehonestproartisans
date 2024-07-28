@@ -1188,6 +1188,31 @@ export const fetchAllProductsByUserId = async (userId) => {
     }
 };
 
+export const fetchAllProducts = async () => {
+    try {
+        const collectionRef = collection(db, 'Products');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const productsData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                // Include the document ID along with the data
+                productsData.push({
+                    id: doc.id,
+                    ...data
+                });
+            });
+            return productsData;
+        } else {
+            throw new Error('No products found');
+        }
+    } catch (error) {
+        console.error('Error fetching products data:', error);
+        throw error;
+    }
+};
+
 export const fetchAllOrdersByUserId = async (userId) => {
     try {
         const collectionRef = collection(db, 'Orders');

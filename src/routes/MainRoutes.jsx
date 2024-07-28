@@ -21,6 +21,7 @@ import BookingPickDate from '../pages/booking/pickDate';
 import BookingReview from '../pages/booking/bookingReview';
 import BookingComplete from '../pages/booking/bookingComplete';
 import RegisterClientComplete from "../pages/register/clientRegister";
+import Shop from '../pages/main/shop';
 import NotFound from '../pages/NotFound';
 
 const MainRoutes = {
@@ -42,6 +43,10 @@ const MainRoutes = {
         {
             path: 'explore',
             element: <Explore />,
+        },
+        {
+            path: 'shop',
+            element: <Shop />,
         },
         {
             path: 'portfolio',
