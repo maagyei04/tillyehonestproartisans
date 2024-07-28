@@ -21,6 +21,7 @@ const initialState = {
     gaurantorNoteImage: '',
     bio: '',
     status: false,
+    seller: false,
 };
 
 export const artisanSlice = createSlice({
@@ -83,6 +84,9 @@ export const artisanSlice = createSlice({
         },
         setBusinessFieldSecondary: (state, action) => {
             state.businessFieldSecondary = action.payload;
+        },
+        setSellerfield: (state, action) => {
+            state.seller = action.payload;
         }
     },
 });
@@ -107,7 +111,8 @@ export const {
     setPassportImage,
     setPoliceReportImage,
     setArtisanBio,
-    setBusinessFieldSecondary
+    setBusinessFieldSecondary,
+    setSellerfield
 } = artisanSlice.actions;
 
 export default artisanSlice.reducer;

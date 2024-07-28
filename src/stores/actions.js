@@ -1072,3 +1072,19 @@ export const sendPasswordResetEmail = async (email) => {
         return { success: false, message: error.message };
     }
 };
+
+export const becomeSeller = (userId) => {
+    return async (dispatch) => {
+        try {
+            const artisanRef = collection(db, 'Artisans');
+            const userRef = doc(artisanRef, userId);
+            await updateDoc(userRef, {
+                seller: true
+            });
+            alert('You are now a seller');
+        } catch (error) {
+            alert('Error becoming a seller:', error);
+            throw error;
+        }
+    }
+}

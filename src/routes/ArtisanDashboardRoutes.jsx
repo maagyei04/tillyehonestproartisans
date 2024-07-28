@@ -8,6 +8,7 @@ const Orders = Loadable(lazy(() => import('../pages/dashboards/artisan_dashboard
 const Finance = Loadable(lazy(() => import('../pages/dashboards/artisan_dashboard/pages/financial')));
 const Profile = Loadable(lazy(() => import('../pages/dashboards/artisan_dashboard/pages/profile')));
 const Appointment = Loadable(lazy(() => import('../pages/dashboards/artisan_dashboard/pages/appointment')));
+const ShopScreen = Loadable(lazy(() => import('../pages/dashboards/artisan_dashboard/pages/shop')));
 
 const ArtisanDashboardRoutes = {
     path: '/artisan_dashboard/',
@@ -32,6 +33,10 @@ const ArtisanDashboardRoutes = {
         {
             path: '/artisan_dashboard/profile',
             element: <Profile />
+        },
+        {
+            path: '/artisan_dashboard/shop',
+            element: <ShopScreen />
         },
         {
             path: 'default',

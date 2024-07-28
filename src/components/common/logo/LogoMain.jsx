@@ -1,6 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import logo from '../../../assets/images/logo.png';
+import logo from '../../../assets/images/tillye_logo.jpg';
 
 
 const Logo = () => {
@@ -8,7 +8,7 @@ const Logo = () => {
 
   return (
 
-    <img src={logo} alt="Mantis" width="50" />
+    <img src={logo} alt="Mantis" width="50" className='rounded-full' />
 
   );
 };

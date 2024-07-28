@@ -12,7 +12,17 @@ export default function NavGroup({ item }) {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
 
-  const navCollapse = item.children?.map((menuItem) => {
+  if (!item || !item.children) {
+    console.warn('NavGroup received invalid item:', item);
+    return null;
+  }
+
+  const navCollapse = item.children.map((menuItem) => {
+    if (!menuItem) {
+      console.warn('Encountered null or undefined child menu item');
+      return null;
+    }
+
     switch (menuItem.type) {
       case 'collapse':
         return (
@@ -23,13 +33,10 @@ export default function NavGroup({ item }) {
       case 'item':
         return <NavItem key={menuItem.id} item={menuItem} level={1} />;
       default:
-        return (
-          <Typography key={menuItem.id} variant="h6" color="error" align="center">
-            Fix - Group Collapse or Items
-          </Typography>
-        );
+        console.warn(`Unknown child menu item type: ${menuItem.type}`);
+        return null;
     }
-  });
+  }).filter(Boolean); // Remove null items
 
   return (
     <List
@@ -51,4 +58,6 @@ export default function NavGroup({ item }) {
   );
 }
 
-NavGroup.propTypes = { item: PropTypes.object };
+NavGroup.propTypes = {
+  item: PropTypes.object
+};

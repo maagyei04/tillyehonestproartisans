@@ -1,12 +1,18 @@
 // project import
 import dashboard from './dashboard';
-import artisanDashboard from './artisan_dashboard';
+import ArtisanDashboard from './artisan_dashboard';
 import adminDashboard from './admin_dashboard';
 
 // ==============================|| MENU ITEMS ||============================== //
 
-const menuItems = {
-  items: [dashboard, artisanDashboard, adminDashboard]
+const getMenuItems = async (userId = null) => {
+  console.log('Current user ID in menu items:', userId);
+
+  const artisanDashboard = await ArtisanDashboard(userId);
+
+  return {
+    items: [dashboard, artisanDashboard, adminDashboard].filter(Boolean)
+  };
 };
 
-export default menuItems;
+export default getMenuItems;

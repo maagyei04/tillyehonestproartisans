@@ -1,5 +1,5 @@
-// assets
-import { DashboardOutlined, UserOutlined, SearchOutlined, CreditCardOutlined, ShoppingOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { DashboardOutlined, UserOutlined, SearchOutlined, CreditCardOutlined, ShoppingOutlined, ShoppingCartOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { fetchArtisanData } from '../stores/actions';
 
 // icons
 const icons = {
@@ -8,16 +8,27 @@ const icons = {
   SearchOutlined,
   CreditCardOutlined,
   ShoppingOutlined,
-  ShoppingCartOutlined
+  ShoppingCartOutlined,
+  MenuFoldOutlined
 };
 
 // ==============================|| MENU ITEMS - ARTISAN DASHBOARD ||============================== //
 
-const artisanDashboard = {
-  id: 'artisan-dashboard',
-  title: 'Navigation',
-  type: 'group2',
-  children: [
+const ArtisanDashboard = async (userId = null) => {
+  console.log('Current user ID:', userId);
+
+  let artisanSellerStatus = null;
+
+  try {
+    const data = await fetchArtisanData(userId);
+    console.log('Artisan data:', data);
+    artisanSellerStatus = data.seller;
+    console.log('Artisan seller status:', artisanSellerStatus);
+  } catch (error) {
+    console.error('Error fetching artisan data:', error);
+  }
+
+  const dashboardItems = [
     {
       id: 'overview',
       title: 'Overview',
@@ -39,7 +50,7 @@ const artisanDashboard = {
       title: 'Orders',
       type: 'item',
       url: '/artisan_dashboard/orders',
-      icon: icons.ShoppingCartOutlined,
+      icon: icons.MenuFoldOutlined,
       breadcrumbs: false
     },
     {
@@ -58,7 +69,27 @@ const artisanDashboard = {
       icon: icons.UserOutlined,
       breadcrumbs: false
     }
-  ]
+  ];
+
+  if (artisanSellerStatus) {
+    dashboardItems.push({
+      id: 'shop',
+      title: 'Shop',
+      type: 'item',
+      url: '/artisan_dashboard/shop',
+      icon: icons.ShoppingCartOutlined,
+      breadcrumbs: false
+    });
+  }
+
+  console.log('Final dashboard items:', dashboardItems);
+
+  return {
+    id: 'artisan-dashboard',
+    title: 'Navigation',
+    type: 'group2',
+    children: dashboardItems
+  };
 };
 
-export default artisanDashboard;
+export default ArtisanDashboard;
