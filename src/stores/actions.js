@@ -1,4 +1,4 @@
-import { RegisterUserWithEmailAndPassword, LoginUserWithEmailAndPassword } from '../services/firebase/auth';
+import { RegisterUserWithEmailAndPassword, LoginUserWithEmailAndPassword, SendPasswordResetEmail as firebaseSendPasswordResetEmail } from '../services/firebase/auth';
 import { doc, setDoc, collection, getDoc, getDocs, query, limit, updateDoc, arrayUnion, arrayRemove, deleteDoc } from 'firebase/firestore';
 import { db, storage, auth } from '../services/firebase/firebase';
 import { setClientData } from './reducers/clientInfoReducer';
@@ -1058,5 +1058,17 @@ export const fetchAllArtisanPortfolios = async () => {
     } catch (error) {
         console.error('Error fetching artisan portfolios data:', error);
         throw error;
+    }
+};
+
+export const sendPasswordResetEmail = async (email) => {
+    try {
+        console.log('Attempting to send reset email to:', email);
+        await firebaseSendPasswordResetEmail(email);
+        console.log('Password reset email sent successfully');
+        return { success: true, message: 'Password reset email sent successfully' };
+    } catch (error) {
+        console.error('Error sending password reset email:', error);
+        return { success: false, message: error.message };
     }
 };

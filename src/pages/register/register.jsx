@@ -90,22 +90,6 @@ const Register = () => {
                                     </div>
                                 </label>
 
-                                <label className="flex items-center mt-5 mb-2">
-                                    <div className={`relative rounded-[15px] border border-gray-300 p-4 bg-gray-100 ${selectedCategory === 'seller' ? 'border-violet-500' : ''}`} onClick={() => handleCategoryChange('seller')}>
-                                        <div className="absolute top-1 left-0 p-2">
-                                            {/* Icon */}
-                                            <ShoppingCartIcon className='h-5 w-5 ml-5 mr-5' />
-                                        </div>
-                                        <div className="text-lg ml-10 mr-20 font-semibold">Become a Seller</div>
-                                        <div className="absolute top-1 right-2 p-2">
-                                            {/* Radio button */}
-                                            <input type="radio" name="category" value='seller' className="mr-2" />
-                                        </div>
-                                        <div className="text-left mt-4">
-                                            <p className="text-sm text-gray-700">Get started as a seller and earn profit from selling to clients across the whole country with delivery as well</p>
-                                        </div>
-                                    </div>
-                                </label>
                             </div>
 
                             <button onClick={handleClick} className="bg-violet-500 text-white py-3 px-4 rounded-[10px] hover:bg-green-600 w-full">Next</button>

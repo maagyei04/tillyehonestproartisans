@@ -93,6 +93,7 @@ const ClientLogin = () => {
                 </div>
                 <button type='submit' disabled={loading} className='bg-violet-500 text-white hover:bg-green-500 w-full p-2 rounded mb-3'>{!loading && 'LOGIN'}{loading && 'PLEASE WAIT...'}</button>
                 <p>Don't have an Account yet? <span className='text-green-600 hover:text-gray-300 italic font-bold'><Link to={'/register'}>Register here!</Link></span></p>
+                <p className="mt-2">Forgot your password? <span className='text-green-600 hover:text-gray-300 italic font-bold'><Link to={'/forgot-password'}>Reset it here</Link></span></p>
             </form>
         </div>
     );

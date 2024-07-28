@@ -93,6 +93,7 @@ const ArtisanLogin = () => {
                     {loading ? 'PLEASE WAIT...' : 'LOGIN'}
                 </button>
                 <p>Don't have an Account yet? <span className='text-green-600 hover:text-gray-300 italic font-bold'><Link to={'/register'}>Register here!</Link></span></p>
+                <p className="mt-2">Forgot your password? <span className='text-green-600 hover:text-gray-300 italic font-bold'><Link to={'/forgot-password'}>Reset it here</Link></span></p>
             </form>
         </div>
     );
