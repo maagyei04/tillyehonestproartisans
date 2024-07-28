@@ -1,5 +1,5 @@
 import { RegisterUserWithEmailAndPassword, LoginUserWithEmailAndPassword, SendPasswordResetEmail as firebaseSendPasswordResetEmail } from '../services/firebase/auth';
-import { doc, setDoc, collection, getDoc, getDocs, query, limit, updateDoc, arrayUnion, arrayRemove, deleteDoc } from 'firebase/firestore';
+import { doc, setDoc, collection, getDoc, getDocs, query, limit, updateDoc, arrayUnion, arrayRemove, deleteDoc, addDoc } from 'firebase/firestore';
 import { db, storage, auth } from '../services/firebase/firebase';
 import { setClientData } from './reducers/clientInfoReducer';
 import { setArtisanData } from './reducers/artisanInfoReducer';
@@ -1088,3 +1088,141 @@ export const becomeSeller = (userId) => {
         }
     }
 }
+
+export const uploadProductImage = async (file, dispatch) => {
+    try {
+        let blob;
+        if (file instanceof Blob) {
+            blob = file;
+        } else {
+            throw new Error('The provided file is not a Blob or File object');
+        }
+
+        const metadata = {
+            contentType: blob.type || 'image/jpeg'
+        };
+
+        // Generate a unique filename or path for each upload
+        const uniqueId = uuidv4(); // Generate a unique identifier (UUID)
+        const imageRef = ref(storage, `products_images/${uniqueId}`);
+
+        const uploadTask = await uploadBytes(imageRef, blob, metadata);
+
+        const imageUrl = await getDownloadURL(uploadTask.ref);
+
+        console.log('Product Image successfully uploaded:', imageUrl);
+
+        return imageUrl;
+    } catch (error) {
+        console.error('Error uploading product image:', error);
+        dispatch({ type: 'UPLOAD_IMAGE_ERROR', payload: error.message });
+        throw error;
+    }
+};
+
+export const addProductToShop = async (product) => {
+    try {
+        const docRef = await addDoc(collection(db, 'Products'), product);
+        console.log('Document written with ID: ', docRef.id);
+    } catch (e) {
+        console.error('Error adding document: ', e);
+    }
+};
+
+export const deleteProductById = async (id) => {
+    try {
+        const productDocRef = doc(db, 'Products', id);
+        await deleteDoc(productDocRef);
+        alert(`Product deleted successfully.`);
+    } catch (error) {
+        console.error('Error deleting product document:', error);
+        throw error;
+    }
+};
+
+export const orderProduct = () => {
+    return async (dispatch, getState) => {
+        try {
+            const collectionRef = collection(db, 'Orders');
+
+            const orderRef = doc(collectionRef);
+
+            const orderData = getState().order;
+
+            await setDoc(orderRef, orderData);
+
+            console.log('Product Successfully Ordered');
+
+        } catch (error) {
+            console.error('Error ordering product:', error);
+            dispatch({ type: 'REGISTER_ERROR', payload: error.message });
+        }
+    };
+};
+
+export const fetchAllProductsByUserId = async (userId) => {
+    try {
+        const collectionRef = collection(db, 'Products');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const productsData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                // Check if status is true
+                if (data.userId === userId) {
+                    // Include the document ID along with the data
+                    productsData.push({
+                        id: doc.id,
+                        ...data
+                    });
+                }
+            });
+            return productsData;
+        } else {
+            throw new Error('No products found');
+        }
+    } catch (error) {
+        console.error('Error fetching products data:', error);
+        throw error;
+    }
+};
+
+export const fetchAllOrdersByUserId = async (userId) => {
+    try {
+        const collectionRef = collection(db, 'Orders');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const ordersData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                // Check if status is true
+                if (data.OrderSellerId === userId) {
+                    // Include the document ID along with the data
+                    ordersData.push({
+                        id: doc.id,
+                        ...data
+                    });
+                }
+            });
+            return ordersData;
+        } else {
+            throw new Error('No orders found');
+        }
+    } catch (error) {
+        console.error('Error fetching orders data:', error);
+        throw error;
+    }
+};
+
+export const deleteOrderById = async (id) => {
+    try {
+        const orderDocRef = doc(db, 'Orders', id);
+        await deleteDoc(orderDocRef);
+        alert(`Order deleted successfully.`);
+    } catch (error) {
+        console.error('Error deleting order document:', error);
+        throw error;
+    }
+};

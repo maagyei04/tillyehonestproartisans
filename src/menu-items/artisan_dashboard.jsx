@@ -68,19 +68,16 @@ const ArtisanDashboard = async (userId = null) => {
       url: '/artisan_dashboard/profile',
       icon: icons.UserOutlined,
       breadcrumbs: false
-    }
-  ];
-
-  if (artisanSellerStatus) {
-    dashboardItems.push({
+    },
+    {
       id: 'shop',
       title: 'Shop',
       type: 'item',
       url: '/artisan_dashboard/shop',
       icon: icons.ShoppingCartOutlined,
       breadcrumbs: false
-    });
-  }
+    }
+  ];
 
   console.log('Final dashboard items:', dashboardItems);
 
