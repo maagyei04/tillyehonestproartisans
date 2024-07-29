@@ -43,12 +43,12 @@ const ShopSummaryTable = () => {
         }
     }, [userId]);
 
-    const totalOrders = orders.length;
+    const totalOrders = orders.reduce((total, order) => total + order.items.length, 0);
     const totalProducts = products.length;
-    const completedOrders = orders.filter(order => order.OrderPaymentStatus === "complete");
+    const completedOrders = orders.filter(order => order.paymentStatus === "paid");
     const completedOrdersCount = completedOrders.length;
     const totalRevenue = completedOrdersCount > 0
-        ? completedOrders.reduce((acc, order) => acc + parseFloat(order.OrderTotalPrice || 0), 0)
+        ? completedOrders.reduce((acc, order) => acc + parseFloat(order.totalAmount || 0), 0)
         : 0;
 
     return (

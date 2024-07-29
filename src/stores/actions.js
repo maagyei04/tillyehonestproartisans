@@ -1250,8 +1250,9 @@ export const fetchAllOrdersByUserId = async (userId) => {
             const ordersData = [];
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                // Check if status is true
-                if (data.OrderSellerId === userId) {
+                const itemsWithUserId = data.items.some(item => item.userId === userId);
+
+                if (itemsWithUserId) {
                     // Include the document ID along with the data
                     ordersData.push({
                         id: doc.id,
@@ -1279,3 +1280,30 @@ export const deleteOrderById = async (id) => {
         throw error;
     }
 };
+
+export const markOrderAsPaid = async (id) => {
+    try {
+        const orderDocRef = doc(db, 'Orders', id);
+        await updateDoc(orderDocRef, {
+            paymentStatus: 'paid'
+        });
+        alert(`Order marked as paid successfully.`);
+    } catch (error) {
+        console.error('Error marking order as paid:', error);
+        throw error;
+    }
+};
+
+export const markOrderAsDelivered = async (id) => {
+    try {
+        const orderDocRef = doc(db, 'Orders', id);
+        await updateDoc(orderDocRef, {
+            orderStatus: 'delivered'
+        });
+        alert(`Order marked as delivered successfully.`);
+    } catch (error) {
+        console.error('Error marking order as delivered:', error);
+        throw error;
+    }
+};
+

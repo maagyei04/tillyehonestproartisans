@@ -20,7 +20,7 @@ const initialState = {
     ],
     totalAmount: 0,
     totalQuantity: 0,
-    paymentStatus: '',
+    paymentStatus: 'Not Paid',
     deliveryOption: '',
     buyerLocation: '',
 };

@@ -77,8 +77,6 @@ const LeftSide = ({ formData, handleChange, errors, handleSubmit }) => (
                     >
                         <option value="" disabled>Select payment method...</option>
                         <option value="cashOnDelivery">Cash on delivery</option>
-                        <option value="mobileMoney">Mobile Money</option>
-                        <option value="bankTransfer">Bank Transfer</option>
                     </select>
                     {errors.paymentMethod && <p className="text-red-500 text-sm mt-1">{errors.paymentMethod}</p>}
                 </div>
