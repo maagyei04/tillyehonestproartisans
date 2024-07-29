@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Bars3BottomRightIcon, XMarkIcon, DevicePhoneMobileIcon, UserIcon } from '@heroicons/react/24/solid';
+import React, { useState, useEffect, useContext } from 'react';
+import { Bars3BottomRightIcon, XMarkIcon, DevicePhoneMobileIcon, UserIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
 import logo from '../../assets/images/tillye_logo.jpg';
 import { useAuth } from '../../contexts/authContext';
+import { CartContext } from '../../contexts/cartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogoutUser } from '../../services/firebase/auth';
 import { useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ import { fetchClientData, fetchArtisanData } from '../../stores/actions';
 const Header = () => {
 
     const navigate = useNavigate();
-
+    const { cart } = useContext(CartContext);
     const { userLoggedIn, currentUser } = useAuth();
 
     const clientData = useSelector((state) => state.clientInfo.clientData) ?? '';
@@ -104,7 +105,7 @@ const Header = () => {
                 {isMobile && <p>Contact Us On<a href='tel:+447385630981' className='font-bold text-black'> +44 7385 630981</a></p>}
             </div>
             <div className='shadow-md w-full fixed top-5 left-0'>
-                <div className='md:flex items-center justify-between bg-white md:px-10 px-7 md:py-0 py-1'>
+                <div className='md:flex items-center justify-between bg-white md:px-10 px-7 md:py-0'>
                     {/* logo section */}
                     <div className='font-bold cursor-pointer flex items-center gap-1'>
                         {/*<BookOpenIcon className='w-7 h-7 text-blue-600' />*/}
@@ -146,13 +147,15 @@ const Header = () => {
                                         <Link to={links.link} className='text-gray-800 hover:text-violet-400 duration-500 text-lg'>{links.name}</Link>
                                     </li>))
                             }
+
                         </ul>
+
                     </div>
                     {/* buttons */}
                     <div className={`md:flex md:items-center items-left md:pb-0 md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'block' : 'hidden'}`}> {/* Adjusted classes */}
-                        <button className='btn bg-gray-200 border-gray-400 border-[1px] text-black md:ml-8 font-bold ml-20 md:ml-0 px-3 py-2 rounded-[10px] duration-500 md:static flex items-center'>
-                            <DevicePhoneMobileIcon className='text-green-600 h-5 w-5 mr-1' />
-                            Download App
+                        <button onClick={() => navigate('/cart')} className='btn bg-gray-200 border-gray-400 border-[1px] text-black md:ml-8 font-bold ml-20 md:ml-0 px-10 py-2 rounded-[10px] duration-500 md:static flex items-center'>
+                            <ShoppingBagIcon className='text-green-600 h-5 w-5 mr-1' />
+                            Cart ({cart.length})
                         </button>
                         {
                             userLoggedIn ?

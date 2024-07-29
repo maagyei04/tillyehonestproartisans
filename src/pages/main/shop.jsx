@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllProducts } from '../../stores/actions';
+import { useNavigate } from 'react-router-dom';
+
 
 const Shop = () => {
+    const navigate = useNavigate();
+
     const [products, setProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -39,6 +43,10 @@ const Shop = () => {
         return acc;
     }, {});
 
+    const handlePortfolio = (product) => {
+        navigate('/shop_info', { state: { product } });
+    }
+
     return (
         <div className="shop">
             <div className='py-[100px]'>
@@ -64,13 +72,13 @@ const Shop = () => {
                         <h2>{category}</h2>
                         <div className="items">
                             {groupedProducts[category].map((item, idx) => (
-                                <div key={idx} className="item shadow-xl">
+                                <div key={idx} className="item shadow-xl truncate" onClick={() => handlePortfolio(item)}>
                                     <img src={item.image} alt={item.productName} />
-                                    <h3>{item.productName}</h3>
+                                    <h3 className='truncate'>{item.productName}</h3>
                                     <p>GHc {item.productPrice}</p>
                                     <div className='flex justify-between'>
-                                        <p>{item.productLocation}</p>
-                                        <p>Q: <span className='text-red-600'>{item.quantity} left...</span> </p>
+                                        <p className='truncate'>{item.productLocation}</p>
+                                        <p>Qty: <span className='text-red-600'>{item.quantity} left...</span> </p>
                                     </div>
                                 </div>
                             ))}

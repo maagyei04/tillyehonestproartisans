@@ -4,6 +4,7 @@ import router from './routes';
 
 import { RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './contexts/authContext';
+import { CartProvider } from './contexts/cartContext';
 import { store } from './stores/store'
 import { Provider } from 'react-redux'
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -15,7 +16,9 @@ function App() {
       <Provider store={store}>
         <AuthProvider>
           <ThemeCustomization>
-            <RouterProvider router={router} />
+            <CartProvider>
+              <RouterProvider router={router} />
+            </CartProvider>
           </ThemeCustomization>
         </AuthProvider>
       </Provider>

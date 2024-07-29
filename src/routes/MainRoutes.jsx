@@ -22,6 +22,12 @@ import BookingReview from '../pages/booking/bookingReview';
 import BookingComplete from '../pages/booking/bookingComplete';
 import RegisterClientComplete from "../pages/register/clientRegister";
 import Shop from '../pages/main/shop';
+import ShopDetail from '../pages/main/shopPreview';
+import ProductDetail from '../pages/main/shopPreview/productDetail';
+import SellerProfile from '../pages/main/shopPreview/sellerProfile';
+import OtherProducts from '../pages/main/shopPreview/otherProducts';
+import Reviews from '../pages/main/shopPreview/reviews';
+import CartScreen from '../pages/main/Cart';
 import NotFound from '../pages/NotFound';
 
 const MainRoutes = {
@@ -47,6 +53,30 @@ const MainRoutes = {
         {
             path: 'shop',
             element: <Shop />,
+        },
+        {
+            path: 'shop_info',
+            element: <ShopDetail />,
+        },
+        {
+            path: 'product/details',
+            element: <ProductDetail />,
+        },
+        {
+            path: 'seller/profile',
+            element: <SellerProfile />,
+        },
+        {
+            path: 'other/products',
+            element: <OtherProducts />,
+        },
+        {
+            path: 'reviews',
+            element: <Reviews />,
+        },
+        {
+            path: 'cart',
+            element: <CartScreen />,
         },
         {
             path: 'portfolio',

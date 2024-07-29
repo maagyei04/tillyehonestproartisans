@@ -80,7 +80,7 @@ const ShopScreen = () => {
             {
                 isSeller &&
                 <div className="w-full p-4">
-                    <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 mb-6">
+                    <div className="flex flex-row space-x-4 mb-6">
                         <Tab label="Purchases" isActive={activeTab === 'Purchases'} onClick={() => setActiveTab('Purchases')} />
                         <Tab label="Products" isActive={activeTab === 'Products'} onClick={() => setActiveTab('Products')} />
                         <Tab label="Summary" isActive={activeTab === 'Summary'} onClick={() => setActiveTab('Summary')} />
