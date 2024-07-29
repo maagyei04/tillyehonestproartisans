@@ -28,6 +28,7 @@ import SellerProfile from '../pages/main/shopPreview/sellerProfile';
 import OtherProducts from '../pages/main/shopPreview/otherProducts';
 import Reviews from '../pages/main/shopPreview/reviews';
 import CartScreen from '../pages/main/Cart';
+import Checkout from '../pages/main/Checkout';
 import NotFound from '../pages/NotFound';
 
 const MainRoutes = {
@@ -77,6 +78,10 @@ const MainRoutes = {
         {
             path: 'cart',
             element: <CartScreen />,
+        },
+        {
+            path: 'checkout',
+            element: <Checkout />,
         },
         {
             path: 'portfolio',

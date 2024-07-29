@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { ShoppingBagIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { CartContext } from '../../contexts/cartContext';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { updateItems, updateTotalAmount, updateTotalQuantity } from '../../stores/reducers/orderReducer';
 
 const CartItem = ({ item, onRemove, onQuantityChange }) => {
     return (
@@ -24,15 +27,42 @@ const CartItem = ({ item, onRemove, onQuantityChange }) => {
 
 const CartScreen = () => {
     const { cart, removeFromCart, updateQuantity, totalPrice } = useContext(CartContext);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     console.log(cart);
 
     const handleRemove = (id) => {
         removeFromCart(id);
+
+        const updatedCart = cart.filter(item => item.id !== id);
+        const newTotalAmount = updatedCart.reduce((total, item) => total + item.productPrice * item.quantity, 0);
+        const newTotalQuantity = updatedCart.reduce((total, item) => total + item.quantity, 0);
+
+        dispatch(updateItems(updatedCart));
+        dispatch(updateTotalAmount(newTotalAmount));
+        dispatch(updateTotalQuantity(newTotalQuantity));
     };
 
     const handleQuantityChange = (id, newQuantity) => {
         updateQuantity(id, newQuantity);
+
+        const updatedCart = cart.map(item => {
+            if (item.id === id) {
+                return { ...item, quantity: newQuantity };
+            }
+            return item;
+        });
+        const newTotalAmount = updatedCart.reduce((total, item) => total + item.productPrice * item.quantity, 0);
+        const newTotalQuantity = updatedCart.reduce((total, item) => total + item.quantity, 0);
+
+        dispatch(updateItems(updatedCart));
+        dispatch(updateTotalAmount(newTotalAmount));
+        dispatch(updateTotalQuantity(newTotalQuantity));
+    };
+
+    const handleCheckout = () => {
+        navigate('/checkout');
     };
 
     return (
@@ -58,7 +88,7 @@ const CartScreen = () => {
                                 <span><p className='font-bold'>Total:</p> GHc {totalPrice}</span>
                             </div>
                             <div className="flex justify-end mt-5">
-                                <button className="bg-violet-500 hover:bg-yellow-500 text-white px-4 py-2 rounded-md">Checkout</button>
+                                <button onClick={handleCheckout} className="bg-violet-500 hover:bg-yellow-500 text-white px-4 py-2 rounded-md">Checkout</button>
                             </div>
                         </div>
                     )}

@@ -1,106 +1,102 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    OrderProductName: '',
-    OrderDate: new Date().toISOString(),
-    OrderQuantity: 0,
-    OrderPrice: 0,
-    OrderTotalPrice: 0,
-    OrderStatus: 'pending',
-    OrderPaymentMethod: '',
-    OrderPaymentStatus: 'pending',
-    OrderPaymentReference: '',
-    OrderPaymentDate: '',
-    OrderBuyerLocationInfo: '',
-    OrderBuyerName: '',
-    OrderBuyerPhoneNumber: '',
-    OrderSellerId: '',
-    OrderReview: '',
-    OrderRate: '',
-    OrderDeliveryOption: '',
-    OrderApproved: false,
+    orderStatus: 'pending',
+    paymentMethod: '',
+    paymentDate: '',
+    sellerId: '',
+    review: '',
+    rate: '',
+    approved: true,
+    buyerName: '',
+    buyerPhone: '',
+    dateOrdered: new Date(),
+    items: [
+        {
+            productName: '',
+            quantity: 0,
+            price: 0,
+        },
+    ],
+    totalAmount: 0,
+    totalQuantity: 0,
+    paymentStatus: '',
+    deliveryOption: '',
+    buyerLocation: '',
 };
 
 export const orderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
-        setOrderProductName: (state, action) => {
-            state.OrderProductName = action.payload;
+        updateOrderStatus: (state, action) => {
+            state.orderStatus = action.payload;
         },
-        setOrderDate: (state, action) => {
-            state.OrderDate = action.payload;
+        updatePaymentMethod: (state, action) => {
+            state.paymentMethod = action.payload;
         },
-        setOrderQuantity: (state, action) => {
-            state.bookingStartTime = action.payload;
+        updatePaymentDate: (state, action) => {
+            state.paymentDate = action.payload;
         },
-        setOrderPrice: (state, action) => {
-            state.OrderPrice = action.payload;
+        updateSellerId: (state, action) => {
+            state.sellerId = action.payload;
         },
-        setOrderTotalPrice: (state, action) => {
-            state.OrderTotalPrice = action.payload;
+        updateReview: (state, action) => {
+            state.review = action.payload;
         },
-        setOrderStatus: (state, action) => {
-            state.OrderStatus = action.payload;
+        updateRate: (state, action) => {
+            state.rate = action.payload;
         },
-        setOrderPaymentMethod: (state, action) => {
-            state.OrderPaymentMethod = action.payload;
+        updateApproved: (state, action) => {
+            state.approved = action.payload;
         },
-        setOrderPaymentStatus: (state, action) => {
-            state.OrderPaymentStatus = action.payload;
+        updateBuyerName: (state, action) => {
+            state.buyerName = action.payload;
         },
-        setOrderPaymentReference: (state, action) => {
-            state.OrderPaymentReference = action.payload;
+        updateBuyerPhone: (state, action) => {
+            state.buyerPhone = action.payload;
         },
-        setOrderPaymentDate: (state, action) => {
-            state.OrderPaymentDate = action.payload;
+        updateDateOrdered: (state, action) => {
+            state.dateOrdered = action.payload;
         },
-        setOrderBuyerLocationInfo: (state, action) => {
-            state.OrderBuyerLocationInfo = action.payload;
+        updateItems: (state, action) => {
+            state.items = action.payload;
         },
-        setOrderBuyerName: (state, action) => {
-            state.OrderBuyerName = action.payload;
+        updateTotalAmount: (state, action) => {
+            state.totalAmount = action.payload;
         },
-        setOrderBuyerPhoneNumber: (state, action) => {
-            state.OrderBuyerPhoneNumber = action.payload;
+        updateTotalQuantity: (state, action) => {
+            state.totalQuantity = action.payload;
         },
-        setOrderSellerId: (state, action) => {
-            state.OrderSellerId = action.payload;
+        updatePaymentStatus: (state, action) => {
+            state.paymentStatus = action.payload;
         },
-        setOrderReview: (state, action) => {
-            state.OrderReview = action.payload;
+        updateDeliveryOption: (state, action) => {
+            state.deliveryOption = action.payload;
         },
-        setOrderRate: (state, action) => {
-            state.OrderRate = action.payload;
-        },
-        setOrderApproved: (state, action) => {
-            state.OrderApproved = action.payload;
-        },
-        setOrderDeliveryOption: (state, action) => {
-            state.OrderDeliveryOption = action.payload;
+        updateBuyerLocation: (state, action) => {
+            state.buyerLocation = action.payload;
         },
     },
 });
 
 export const {
-    setOrderProductName,
-    setOrderDate,
-    setOrderQuantity,
-    setOrderPrice,
-    setOrderTotalPrice,
-    setOrderStatus,
-    setOrderPaymentMethod,
-    setOrderPaymentStatus,
-    setOrderPaymentReference,
-    setOrderPaymentDate,
-    setOrderBuyerLocationInfo,
-    setOrderBuyerName,
-    setOrderBuyerPhoneNumber,
-    setOrderSellerId,
-    setOrderReview,
-    setOrderRate,
-    setOrderApproved,
-    setOrderDeliveryOption,
+    updateOrderStatus,
+    updatePaymentMethod,
+    updatePaymentDate,
+    updateSellerId,
+    updateReview,
+    updateRate,
+    updateApproved,
+    updateBuyerName,
+    updateBuyerPhone,
+    updateDateOrdered,
+    updateItems,
+    updateTotalAmount,
+    updateTotalQuantity,
+    updatePaymentStatus,
+    updateDeliveryOption,
+    updateBuyerLocation,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;
