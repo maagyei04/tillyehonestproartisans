@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../../../contexts/cartContext';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateItems, updateTotalAmount, updateTotalQuantity } from '../../../stores/reducers/orderReducer';
 
 const ProductDetail = ({ product }) => {
-    const { addToCart } = useContext(CartContext);
+    const { addToCart, cart } = useContext(CartContext);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate()
 
@@ -11,6 +14,15 @@ const ProductDetail = ({ product }) => {
 
     const handleAddToCart = () => {
         addToCart(product);
+
+        const updatedCart = [...cart, product];
+        const newTotalAmount = updatedCart.reduce((total, item) => total + item.productPrice * item.quantity, 0);
+        const newTotalQuantity = updatedCart.reduce((total, item) => total + item.quantity, 0);
+
+        dispatch(updateItems(updatedCart));
+        dispatch(updateTotalAmount(newTotalAmount));
+        dispatch(updateTotalQuantity(newTotalQuantity));
+
         navigate('/cart');
     };
 

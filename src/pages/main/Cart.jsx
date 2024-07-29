@@ -26,7 +26,7 @@ const CartItem = ({ item, onRemove, onQuantityChange }) => {
 };
 
 const CartScreen = () => {
-    const { cart, removeFromCart, updateQuantity, totalPrice } = useContext(CartContext);
+    const { cart, removeFromCart, updateQuantity, totalPrice, clearCart, addToCart } = useContext(CartContext);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -65,6 +65,13 @@ const CartScreen = () => {
         navigate('/checkout');
     };
 
+    const handleClearCart = () => {
+        clearCart();
+        dispatch(updateItems([]));
+        dispatch(updateTotalAmount(0));
+        dispatch(updateTotalQuantity(0));
+    };
+
     return (
         <div>
             <div className="flex flex-col md:flex-row p-4 w-full py-[130px]">
@@ -88,7 +95,12 @@ const CartScreen = () => {
                                 <span><p className='font-bold'>Total:</p> GHc {totalPrice}</span>
                             </div>
                             <div className="flex justify-end mt-5">
-                                <button onClick={handleCheckout} className="bg-violet-500 hover:bg-yellow-500 text-white px-4 py-2 rounded-md">Checkout</button>
+                                <button onClick={handleClearCart} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md mr-2">
+                                    Clear Cart
+                                </button>
+                                <button onClick={handleCheckout} className="bg-violet-500 hover:bg-yellow-500 text-white px-4 py-2 rounded-md">
+                                    Checkout
+                                </button>
                             </div>
                         </div>
                     )}

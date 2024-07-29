@@ -29,6 +29,8 @@ import OtherProducts from '../pages/main/shopPreview/otherProducts';
 import Reviews from '../pages/main/shopPreview/reviews';
 import CartScreen from '../pages/main/Cart';
 import Checkout from '../pages/main/Checkout';
+import OrderReview from '../pages/main/OrderReview';
+import OrderComplete from '../pages/main/orderComplete';
 import NotFound from '../pages/NotFound';
 
 const MainRoutes = {
@@ -60,6 +62,10 @@ const MainRoutes = {
             element: <ShopDetail />,
         },
         {
+            path: 'order_complete',
+            element: <OrderComplete />,
+        },
+        {
             path: 'product/details',
             element: <ProductDetail />,
         },
@@ -82,6 +88,10 @@ const MainRoutes = {
         {
             path: 'checkout',
             element: <Checkout />,
+        },
+        {
+            path: 'order_review',
+            element: <OrderReview />,
         },
         {
             path: 'portfolio',

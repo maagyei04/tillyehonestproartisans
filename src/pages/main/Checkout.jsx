@@ -13,17 +13,17 @@ const LeftSide = ({ formData, handleChange, errors, handleSubmit }) => (
         <form>
             <div className='flex flex-col space-y-4'>
                 <div className='flex flex-col mb-4 w-full'>
-                    <label className='mb-2 text-sm text-gray-500' htmlFor="email">Email</label>
+                    <label className='mb-2 text-sm text-gray-500' htmlFor="name">Name</label>
                     <input className='border border-gray-200 rounded-[10px] h-10 p-1'
                         type="text"
-                        id="email"
-                        name="email"
-                        placeholder='Enter email...'
-                        value={formData.email}
+                        id="name"
+                        name="name"
+                        placeholder='Enter name...'
+                        value={formData.name}
                         onChange={handleChange}
                         required
                     />
-                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                 </div>
                 <div className='flex flex-col mb-4 w-full'>
                     <label className='mb-2 text-sm text-gray-500' htmlFor="phoneNumber">Phone Number</label>
@@ -61,7 +61,7 @@ const LeftSide = ({ formData, handleChange, errors, handleSubmit }) => (
                         required
                     >
                         <option value="" disabled>Select delivery option...</option>
-                        <option value="standard">Standard Delivery</option>
+                        <option value="standardDelivery">Standard Delivery</option>
                         <option value="pickup">Pickup</option>
                     </select>
                     {errors.deliveryOption && <p className="text-red-500 text-sm mt-1">{errors.deliveryOption}</p>}
@@ -76,7 +76,7 @@ const LeftSide = ({ formData, handleChange, errors, handleSubmit }) => (
                         required
                     >
                         <option value="" disabled>Select payment method...</option>
-                        <option value="cash">Cash on delivery</option>
+                        <option value="cashOnDelivery">Cash on delivery</option>
                         <option value="mobileMoney">Mobile Money</option>
                         <option value="bankTransfer">Bank Transfer</option>
                     </select>
@@ -85,7 +85,7 @@ const LeftSide = ({ formData, handleChange, errors, handleSubmit }) => (
             </div>
 
             <div className='flex justify-center mt-4'>
-                <button className='bg-violet-600 hover:bg-yellow-500 text-white rounded-[10px] w-full h-10 p-1' onClick={handleSubmit}>Complete</button>
+                <button className='bg-violet-600 hover:bg-yellow-500 text-white rounded-[10px] w-full h-10 p-1' onClick={handleSubmit}>Next</button>
             </div>
         </form>
     </div>
@@ -96,7 +96,7 @@ const CheckoutScreen = () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        email: '',
+        name: '',
         phoneNumber: '',
         location: '',
         deliveryOption: '',
@@ -116,8 +116,8 @@ const CheckoutScreen = () => {
     const validate = () => {
         const newErrors = {};
 
-        if (!formData.email) {
-            newErrors.email = 'Email is required';
+        if (!formData.name) {
+            newErrors.name = 'Name is required';
         }
         if (!formData.phoneNumber) {
             newErrors.phoneNumber = 'Phone number is required';
@@ -143,13 +143,13 @@ const CheckoutScreen = () => {
             return;
         }
 
-        dispatch(updateBuyerName(formData.email));
+        dispatch(updateBuyerName(formData.name));
         dispatch(updateBuyerPhone(formData.phoneNumber));
         dispatch(updateBuyerLocation(formData.location));
         dispatch(updateDeliveryOption(formData.deliveryOption));
         dispatch(updatePaymentMethod(formData.paymentMethod));
 
-        navigate('/confirmation');
+        navigate('/order_review');
 
         console.log(formData);
     };

@@ -1151,10 +1151,10 @@ export const orderProduct = () => {
 
             await setDoc(orderRef, orderData);
 
-            console.log('Product Successfully Ordered');
+            console.log('Products Successfully Ordered');
 
         } catch (error) {
-            console.error('Error ordering product:', error);
+            console.error('Error ordering products:', error);
             dispatch({ type: 'REGISTER_ERROR', payload: error.message });
         }
     };
