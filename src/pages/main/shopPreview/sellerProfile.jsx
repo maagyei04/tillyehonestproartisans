@@ -28,6 +28,7 @@ const SellerProfile = ({ product }) => {
                 <h2 className="text-xl font-semibold">{artisanData?.firstName} {artisanData?.lastName}</h2>
                 <div className="mt-2">
                     <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded">{artisanData?.businessField} / {artisanData?.businessFieldSecondary}</span>
+                    <span className="ml-2">{artisanData?.phoneNumber}</span>
                     <span className="ml-2">{artisanData?.businessLocation}</span>
                 </div>
                 <p className="mt-4 mb-5">{artisanData?.bio ? artisanData?.bio : 'I have excellent customer service skills and work prudently to bring my work to completion. I offer excellent value for low cost.'}</p>
