@@ -57,7 +57,7 @@ const Shop = () => {
                             placeholder="Search for products..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="border border-gray-300 rounded-[10px] px-8 py-2 w-[270px] md:w-[800px] focus:outline-none"
+                            className="border border-gray-300 rounded-[10px] px-8 py-2 w-[250px] md:w-[800px] focus:outline-none"
                         />
                         <button
                             onClick={handleSearch}
