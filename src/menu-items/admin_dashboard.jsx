@@ -66,6 +66,14 @@ const adminDashboard = {
       icon: icons.CreditCardOutlined,
       breadcrumbs: false
     },
+    {
+      id: 'shop_orders',
+      title: 'Shop Orders',
+      type: 'item',
+      url: '/admin_dashboard/shop_orders',
+      icon: icons.CreditCardOutlined,
+      breadcrumbs: false
+    },
   ]
 };
 

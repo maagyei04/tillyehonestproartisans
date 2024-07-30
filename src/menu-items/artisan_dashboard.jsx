@@ -1,5 +1,5 @@
+// assets
 import { DashboardOutlined, UserOutlined, SearchOutlined, CreditCardOutlined, ShoppingOutlined, ShoppingCartOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import { fetchArtisanData } from '../stores/actions';
 
 // icons
 const icons = {
@@ -14,21 +14,11 @@ const icons = {
 
 // ==============================|| MENU ITEMS - ARTISAN DASHBOARD ||============================== //
 
-const ArtisanDashboard = async (userId = null) => {
-  console.log('Current user ID:', userId);
-
-  let artisanSellerStatus = null;
-
-  try {
-    const data = await fetchArtisanData(userId);
-    console.log('Artisan data:', data);
-    artisanSellerStatus = data.seller;
-    console.log('Artisan seller status:', artisanSellerStatus);
-  } catch (error) {
-    console.error('Error fetching artisan data:', error);
-  }
-
-  const dashboardItems = [
+const artisanDashboard = {
+  id: 'artisan-dashboard',
+  title: 'Navigation',
+  type: 'group2',
+  children: [
     {
       id: 'overview',
       title: 'Overview',
@@ -77,16 +67,7 @@ const ArtisanDashboard = async (userId = null) => {
       icon: icons.ShoppingCartOutlined,
       breadcrumbs: false
     }
-  ];
-
-  console.log('Final dashboard items:', dashboardItems);
-
-  return {
-    id: 'artisan-dashboard',
-    title: 'Navigation',
-    type: 'group2',
-    children: dashboardItems
-  };
+  ]
 };
 
-export default ArtisanDashboard;
+export default artisanDashboard;

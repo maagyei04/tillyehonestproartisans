@@ -1241,6 +1241,31 @@ export const fetchAllProducts = async () => {
     }
 };
 
+export const fetchAllOrders = async () => {
+    try {
+        const collectionRef = collection(db, 'Orders');
+        const snapshot = await getDocs(collectionRef);
+
+        if (!snapshot.empty) {
+            const ordersData = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                // Include the document ID along with the data
+                ordersData.push({
+                    id: doc.id,
+                    ...data
+                });
+            });
+            return ordersData;
+        } else {
+            throw new Error('No orders found');
+        }
+    } catch (error) {
+        console.error('Error fetching orders data:', error);
+        throw error;
+    }
+};
+
 export const fetchAllOrdersByUserId = async (userId) => {
     try {
         const collectionRef = collection(db, 'Orders');
