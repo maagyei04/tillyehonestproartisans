@@ -23,7 +23,7 @@ import { fetchAllArtisanData, fetchAllClientBookings, updateArtisanStatus, delet
 import { MagnifyingGlassIcon as EmptyIcon } from '@heroicons/react/24/outline';
 import { CheckCircleIcon, XCircleIcon, BriefcaseIcon } from '@heroicons/react/24/solid';
 
-export default function ArtisanArtisansTable() {
+export default function SuppliersTable() {
     const dispatch = useDispatch();
 
     const [artisanData, setArtisanData] = useState([]);
@@ -244,8 +244,6 @@ export default function ArtisanArtisansTable() {
             return !artisan.status; // Show blocked artisans
         } else if (filterOption === 'Active') {
             return artisan.status; // Show active artisans
-        } else if (filterOption === 'Supplier') {
-            return artisan.businessField === 'Supplier' || artisan.seller === true || artisan?.businessFieldSecondary === 'Supplier';
         }
         return true;
     });
@@ -269,7 +267,6 @@ export default function ArtisanArtisansTable() {
                     <option value="All">All</option>
                     <option value="Blocked">Blocked</option>
                     <option value="Active">Active</option>
-                    <option value='Supplier'>Suppliers</option>
                 </Select>
             </div>
 
