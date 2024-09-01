@@ -261,9 +261,9 @@ const formatDate = (timestamp) => {
     }
 
     if (timestamp instanceof Timestamp) {
-        return new Date(timestamp.seconds * 1000).toLocaleDateString();
+        return new Date(timestamp.toDate()).toLocaleDateString();
     } else {
-        return timestamp.toDate().toLocaleDateString();
+        return new Date(timestamp).toLocaleDateString();
     }
 };
 
